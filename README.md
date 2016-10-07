@@ -4,12 +4,13 @@
 
 * A slide that covers the new idea in really basic terms. 3 sentences that explain what we do now.
 * Slides that show pictures of prototype and explain its workings
-* What technologies we used
+* A slide on what technologies we used
   * Node js
   * Express
   * Mongo
   * Reacjs
-* What is left to do
+  * link to github to show class some code
+* A slide on what is left to do
   * Add log in
   * Allow to order only if logged in (orders will have names associated with them)
   * Add a show offers to be delivered
