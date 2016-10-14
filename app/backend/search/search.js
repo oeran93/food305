@@ -30,6 +30,8 @@ var Search = function () {
 		},
 
 		addOrder: function (req, res) {
+			res.sendStatus(404);
+			return;
 			var order = new Order({
 				_meal: req.body.meal,
 				date: getOrderDate()

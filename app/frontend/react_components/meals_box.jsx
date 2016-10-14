@@ -1,7 +1,7 @@
 var React    = require('react')
 var ReactDom = require('react-dom')
 var $        = require('jquery')
-var Offer    = require('./meal.jsx')
+var Meal    = require('./meal.jsx')
 var _        = require('underscore')
 
 var MealsBox = React.createClass({
@@ -34,7 +34,7 @@ var MealsBox = React.createClass({
 									</h3>
 								</div>
 								{_.map(restaurant.meals, (meal) => {
-									return <Offer
+									return <Meal
 										key = {meal._id}
 										_id = {meal._id}
 										name = {meal.name}

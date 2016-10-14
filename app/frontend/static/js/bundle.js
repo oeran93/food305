@@ -50,6 +50,7 @@
 	'use strict';
 	
 	__webpack_require__(/*! ./frontend/react_components/meals_box.jsx */ 1);
+	__webpack_require__(/*! ./frontend/react_components/log-in.jsx */ 176);
 
 /***/ },
 /* 1 */
@@ -63,7 +64,7 @@
 	var React = __webpack_require__(/*! react */ 2);
 	var ReactDom = __webpack_require__(/*! react-dom */ 35);
 	var $ = __webpack_require__(/*! jquery */ 173);
-	var Offer = __webpack_require__(/*! ./meal.jsx */ 174);
+	var Meal = __webpack_require__(/*! ./meal.jsx */ 174);
 	var _ = __webpack_require__(/*! underscore */ 175);
 	
 	var MealsBox = React.createClass({
@@ -106,7 +107,7 @@
 							)
 						),
 						_.map(restaurant.meals, function (meal) {
-							return React.createElement(Offer, {
+							return React.createElement(Meal, {
 								key: meal._id,
 								_id: meal._id,
 								name: meal.name,
@@ -33959,6 +33960,34 @@
 	  }
 	}.call(this));
 
+
+/***/ },
+/* 176 */
+/*!**************************************************!*\
+  !*** ./app/frontend/react_components/log-in.jsx ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 2);
+	var ReactDom = __webpack_require__(/*! react-dom */ 35);
+	
+	var LogIn = React.createClass({
+		displayName: 'LogIn',
+	
+	
+		render: function render() {
+			return React.createElement(
+				'div',
+				null,
+				'Hello'
+			);
+		}
+	
+	});
+	
+	ReactDom.render(React.createElement(LogIn, null), document.getElementById('login-box'));
 
 /***/ }
 /******/ ]);
