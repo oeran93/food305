@@ -38,3 +38,4 @@ jspm_packages
 
 # All bundle
 bundle.js*
+package.json
