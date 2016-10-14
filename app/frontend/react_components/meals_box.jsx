@@ -49,10 +49,10 @@ var MealsBox = React.createClass({
 
 				})}
 			</div>
-		);
+		)
 	}
 
-});
+})
 
 ReactDom.render(<MealsBox/>,document.getElementById('meals-box'))
 

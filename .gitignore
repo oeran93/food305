@@ -37,4 +37,4 @@ jspm_packages
 .node_repl_history
 
 # All bundle
-./app/frontend/static/js/bundle*
+app/frontend/static/js/bundle*
