@@ -25,13 +25,11 @@ var Search = function () {
 				populate: {path:'orders'}
 			})
 			.exec((err, restaurants) =>{
-				res.send(restaurants);
+				res.send(restaurants)
 			})
 		},
 
 		addOrder: function (req, res) {
-			res.sendStatus(404);
-			return;
 			var order = new Order({
 				_meal: req.body.meal,
 				date: getOrderDate()

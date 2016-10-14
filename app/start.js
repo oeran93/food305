@@ -12,11 +12,11 @@ var db = require('./backend/database/start.js')
 var search = require('./backend/search/router.js')
 
 /*Start DB*/
-db();
+db()
 
 /*Do the routing*/
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({extended: true})); //to support Url-encoded bodies
+app.use(bodyParser.json())       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({extended: true})) //to support Url-encoded bodies
 app.use(express.static(path.join(__dirname,'./frontend/static')))
 search(app)
 

@@ -121,9 +121,9 @@ var Meal = React.createClass({
 		     	 	</div>
 		    	</div>
 		  	</div>
-		);
+		)
 	}
 
 })
 
-module.exports = Meal;
+module.exports = Meal
