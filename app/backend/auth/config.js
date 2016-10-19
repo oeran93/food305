@@ -16,7 +16,7 @@ module.exports = function (passport) {
   passport.use(new FacebookStrategy({
     clientID: env.FB_CLIENT_ID,
     clientSecret: env.FB_CLIENT_SCRT,
-    callbackURL: 'http://localhost/auth/facebook/callback',
+    callbackURL: 'http://nicolapedretti.com/auth/facebook/callback',
     profileFields: ['id', 'name', 'picture', 'gender']
   }, facebookAuth))
 }
