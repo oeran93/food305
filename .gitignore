@@ -40,4 +40,4 @@ jspm_packages
 bundle.js*
 
 # facebook auth config
-backend/auth/config.js
+app/backend/auth/config.js
