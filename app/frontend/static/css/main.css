@@ -1,11 +1,21 @@
-.navbar, .navbar-default {
-	border:0;
-	border-radius:0;
-	background-color: white;
+#nav {
+	margin-top:40px;
 }
 
-.section {
-	margin-top: 20px;
+#nav a {
+	cursor: pointer;
+	cursor: hand;
+}
+
+#profile-info{
+	margin-top:40px;
+	border-bottom: 1px solid #ddd;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
 }
 
 .lateral-space {
@@ -19,8 +29,6 @@
 	border-radius: 10px;
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: inherit;
-    transition: all .5s;
+.food-name {
+	margin-top: 0;
 }

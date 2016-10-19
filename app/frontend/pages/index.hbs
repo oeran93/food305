@@ -1,0 +1,69 @@
+<div id='banner'>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6" id="banner-text">
+				<h1>
+					Get your food delivered.<br/>
+					Pay it less.{{message}}<br/>
+				</h1>
+				<h3>
+					We deliver your food to Lopata Gallery every day.
+					The more people buy it, the less you pay.<br/>
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div id="menu-bar" class='col-md-3'>
+			<div id="menu">
+				{{#if name}}
+					<div id="profile-info">
+						<div class='row'>
+							<div class="col-xs-offset-3 col-xs-6">
+								<img src={{picture}} class='img-circle'>
+							</div>
+						</div>
+						<div class='row'>
+							<div class="col-xs-offset-2 col-xs-8">
+								<p>{{name}}</p>
+							</div>
+						</div>
+					</div>
+				{{/if}}
+				<ul id="nav" class="nav nav-pills nav-stacked full-width">
+				  {{#if name}}
+					  <li role="presentation">
+					  	<a>
+					  		<span class="glyphicon glyphicon-shopping-cart"></span>
+					  		My Orders
+					  	</a>
+					  </li>
+					  <li role="presentation">
+					  	<a href='/logout'>
+					  		<span class="glyphicon glyphicon-log-out"></span>
+					  		Log Out
+					  	</a>
+					  </li>
+				  {{else}}
+				  	<li role="presentation">
+					  	<a href="/auth/facebook">
+					  		<span class="glyphicon glyphicon-log-in"></span>
+					  		Sign up/in with Facebook
+					  	</a>
+					  </li>
+				  {{/if}}	
+				</ul>
+			</div>
+		</div>
+		<div id="page" class='col-md-9'>
+			<div class="container-fluid">
+				<div id='meals-box'>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src='js/bundle.js'></script>
+<script src='js/main.js'></script>
