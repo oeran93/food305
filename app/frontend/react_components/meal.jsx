@@ -53,7 +53,7 @@ var Meal = React.createClass({
     var query = {meal: this.props._id}
     $.ajax({
       method: 'POST',
-      url: '/order',
+      url: '/postOrder',
       data: query,
       error: (data) => {
         this.setState({orders: this.state.orders - 1})

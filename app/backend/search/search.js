@@ -14,7 +14,7 @@ var Search = function () {
   }
 
   return {
-    getAll: function (req, res) {
+    getAllMeals: function (req, res) {
       Restaurant
         .find()
         .populate({
@@ -26,9 +26,25 @@ var Search = function () {
         })
     },
 
+    getMyMeals: function (req, res) {
+      Order
+        .find({_user: req.user.id})
+        .populate({
+          path: '_meal'
+        })
+        .exec((err, orders) => {
+          orders = _.map(orders, (order) => {
+            return order._meal
+          })
+          console.log(orders)
+          res.send(orders)
+        })
+    },
+
     addOrder: function (req, res) {
       var order = new Order({
         _meal: req.body.meal,
+        _user: req.user.id,
         date: getOrderDate()
       })
       order.save((err) => {
@@ -42,7 +58,6 @@ var Search = function () {
         )
       })
     }
-
   }
 }
 

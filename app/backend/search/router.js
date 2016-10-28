@@ -1,8 +1,9 @@
 var Search = require('./search.js')()
 
 module.exports = function (app) {
-  app.get('/meals', Search.getAll)
-  app.post('/order', isLoggedIn, Search.addOrder)
+  app.get('/getAllMeals', Search.getAllMeals)
+  app.get('/getMyMeals', Search.getMyMeals)
+  app.post('/postOrder', isLoggedIn, Search.addOrder)
 }
 
 function isLoggedIn (req, res, next) {
