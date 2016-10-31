@@ -1,7 +1,6 @@
 #banner {
 	height: 300px;
-	background-color: #337ab7;
-	background-repeat: repeat;
+	border-bottom: 1px solid #ddd;
 }
 
 #banner-text {
@@ -9,4 +8,9 @@
 	margin-top: 40px;
 	font-weight: bold;
 }
+
+/*
+main blue color: #337ab7;
+main gray color: #ddd;
+*/
 

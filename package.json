@@ -30,8 +30,8 @@
     "passport-facebook": "^2.1.1",
     "path": "^0.12.7",
     "react": "^15.3.2",
+    "react-bootstrap": "^0.30.6",
     "react-dom": "^15.3.2",
-    "standard-format": "^2.2.3",
     "underscore": "^1.8.3",
     "webpack": "^1.13.2"
   }
