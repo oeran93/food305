@@ -1,13 +1,11 @@
 var React = require('react')
 var _ = require('underscore')
 var $ = require('jquery')
+var Basic = require('./basic.jsx')
+var MoreInfo = require('./moreInfo.jsx')
+var Actions = require('./actions.jsx')
 
 var Meal = React.createClass({
-  getInitialState: function () {
-    return {
-      orders: this.props.orders
-    }
-  },
 
   propTypes: {
     _id: React.PropTypes.string.isRequired,
@@ -15,7 +13,20 @@ var Meal = React.createClass({
     prices: React.PropTypes.array.isRequired,
     people: React.PropTypes.array.isRequired,
     orders: React.PropTypes.number.isRequired,
-    image: React.PropTypes.string.isRequired
+    image: React.PropTypes.string.isRequired,
+    action: React.PropTypes.string
+  },
+
+  getInitialState: function () {
+    return {
+      orders: this.props.orders
+    }
+  },
+
+  getDefaultProps: function () {
+    return {
+      action: 'buy'
+    }
   },
 
   getDefaultPrice: function () {
@@ -49,12 +60,11 @@ var Meal = React.createClass({
     return {people: _.max(people), price: _.min(prices)}
   },
 
-  addOrder: function () {
-    var query = {meal: this.props._id}
+  addMeal: function () {
     $.ajax({
       method: 'POST',
-      url: '/postOrder',
-      data: query,
+      url: '/postMeal',
+      data: {meal: this.props._id},
       error: (data) => {
         this.setState({orders: this.state.orders - 1})
         alert('something went wrong, we could not process your order')
@@ -68,47 +78,25 @@ var Meal = React.createClass({
     var currentPrice = this.getCurrentPrice()
     var bestPricePeople = this.getBestPricePeople()
     var nextPricePeople = this.getNextPricePeople()
+    var {action, image, name} = this.props
     return (
       <div className='col-md-6 col-lg-4 meal'>
         <div className='thumbnail'>
-          <img src={'images/meals/' + this.props.image} alt='Meal Picture' />
+          <img src={'images/meals/' + image} alt='Meal Picture' />
           <div className='caption clearfix'>
-            <h3 className='food-name'>{this.props.name}</h3>
-            <h4>Price {defaultPrice != currentPrice
-              &&
-                <span className='lateral-space'>
-                  <strike>{'$' + defaultPrice}</strike>
-                </span>} 
-                <span className='label-success current-price pull-right'>
-                  {'$' + currentPrice}
-                </span>
-            </h4>
+            <Basic 
+              currentPrice={currentPrice} 
+              defaultPrice={defaultPrice}
+              name={name}
+            />
             <hr/>
-            {currentPrice == bestPricePeople.price
-               ?
-                 <p>
-                   You are getting our best deal!
-                   <br/>
-                   <span className='badge'>{this.state.orders}</span> people bought it
-                 </p>
-               :
-                 <p>
-                   If {nextPricePeople.people - this.state.orders} {" "} 
-                   more people buy it, you will pay $ {nextPricePeople.price}
-                   <br/> Best deal: {bestPricePeople.people} people, {" "}
-                   {'$' + bestPricePeople.price}
-                   <br/>
-                   <span className='badge'>{this.state.orders}</span> people bought it
-                 </p>
-            }
-            <p className='pull-right'>
-              <a 
-                className='btn btn-primary btn-outline' 
-                role='button' 
-                onClick={this.addOrder}>
-                Order
-              </a>
-            </p>
+            <MoreInfo 
+              nextPricePeople={nextPricePeople} 
+              bestPricePeople={bestPricePeople}
+              currentPrice={currentPrice}
+              orders={this.state.orders}
+            />
+            {action && <Actions addMeal={this.addMeal} action={action}/>}
           </div>
         </div>
       </div>

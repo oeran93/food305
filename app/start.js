@@ -15,7 +15,6 @@ var PORT = 80
 var db = require('./backend/database/start.js')
 
 /*Routers*/
-var pages = require('./backend/pages/router.js')
 var search = require('./backend/search/router.js')
 var auth = require('./backend/auth/router.js')
 

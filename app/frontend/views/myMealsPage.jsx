@@ -1,7 +1,8 @@
 var React = require('react')
 var $ = require('jquery')
-var Meal = require('./meal.jsx')
+var Meal = require('./meal/meal.jsx')
 var _ = require('underscore')
+var G = require('../../tools/generic.js')
 
 var MyMealsPage = React.createClass({
   
@@ -25,17 +26,19 @@ var MyMealsPage = React.createClass({
     return (
       <div className='row'>
         <div className='page-header'>
-          <h3>Coming at {Date.now()}</h3>
+          <h3>Coming at {G.getDeliveryDate()}</h3>
         </div>
-        {_.map(this.state.meals, (meal) => {
+        {_.map(this.state.meals, (meal,index) => {
           return <Meal
-                   key={meal._id}
+                   key={index}
                    _id={meal._id}
                    name={meal.name}
                    prices={meal.prices}
                    people={meal.people}
                    orders={_.size(meal.orders)}
-                   image={meal.image} />
+                   image={meal.image} 
+                   action=''
+                   />
          })}
       </div>
     )

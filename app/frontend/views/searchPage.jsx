@@ -1,6 +1,6 @@
 var React = require('react')
 var $ = require('jquery')
-var Meal = require('./meal.jsx')
+var Meal = require('./meal/meal.jsx')
 var _ = require('underscore')
 
 var SearchPage = React.createClass({

@@ -12,6 +12,11 @@
 	border-bottom: 1px solid #ddd;
 }
 
+.btn-primary, .btn-primary:hover {
+	border-color: #337ab7;
+	background-color: #337ab7;
+}
+
 .btn-outline {
     background-color: transparent;
     color: inherit;
@@ -31,8 +36,4 @@
 
 .food-name {
 	margin-top: 0;
-}
-
-.active {
-	background-color: blue;
 }
