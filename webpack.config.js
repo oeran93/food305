@@ -5,8 +5,7 @@ var BUILD_DIR = path.resolve(__dirname, 'app/frontend/static/js')
 
 module.exports = {
   entry: {
-    indexPage: __dirname + '/app/entry_points/indexPage.js',
-    myMealsPage: __dirname + '/app/entry_points/myMealsPage.js'
+    bundle: __dirname + '/app/entry_points/bundle.js'
   },
   output: {
     path: BUILD_DIR,

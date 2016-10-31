@@ -75,33 +75,39 @@ var Meal = React.createClass({
           <div className='caption clearfix'>
             <h3 className='food-name'>{this.props.name}</h3>
             <h4>Price {defaultPrice != currentPrice
-                       &&
-                       <span className='lateral-space'><strike>{'$' + defaultPrice}</strike></span>} <span className='label-success current-price pull-right'>{'$' + currentPrice}</span></h4>
+              &&
+                <span className='lateral-space'>
+                  <strike>{'$' + defaultPrice}</strike>
+                </span>} 
+                <span className='label-success current-price pull-right'>
+                  {'$' + currentPrice}
+                </span>
+            </h4>
             <hr/>
             {currentPrice == bestPricePeople.price
                ?
-               <p>
-                 You are getting our best deal!
-                 <br/>
-                 <span className='badge'>{this.state.orders}</span> people bought it
-               </p>
-             
+                 <p>
+                   You are getting our best deal!
+                   <br/>
+                   <span className='badge'>{this.state.orders}</span> people bought it
+                 </p>
                :
-               <p>
-                 If
-                 {" "}
-                 {nextPricePeople.people - this.state.orders} more people buy it, you will pay $
-                 {nextPricePeople.price}
-                 <br/> Best deal:
-                 {" "}
-                 {bestPricePeople.people} people,
-                 {" "}
-                 {'$' + bestPricePeople.price}
-                 <br/>
-                 <span className='badge'>{this.state.orders}</span> people bought it
-               </p>}
+                 <p>
+                   If {nextPricePeople.people - this.state.orders} {" "} 
+                   more people buy it, you will pay $ {nextPricePeople.price}
+                   <br/> Best deal: {bestPricePeople.people} people, {" "}
+                   {'$' + bestPricePeople.price}
+                   <br/>
+                   <span className='badge'>{this.state.orders}</span> people bought it
+                 </p>
+            }
             <p className='pull-right'>
-              <a className='btn btn-primary btn-outline' role='button' onClick={this.addOrder}>Order</a>
+              <a 
+                className='btn btn-primary btn-outline' 
+                role='button' 
+                onClick={this.addOrder}>
+                Order
+              </a>
             </p>
           </div>
         </div>

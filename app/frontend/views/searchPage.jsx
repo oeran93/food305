@@ -3,23 +3,18 @@ var $ = require('jquery')
 var Meal = require('./meal.jsx')
 var _ = require('underscore')
 
-var MealsBox = React.createClass({
+var SearchPage = React.createClass({
+  
   getInitialState: function () {
     return {
       restaurants: []
     }
   },
 
-  getDefaultProps: function () {
-    return {
-      url: '/getAllMeals'
-    }
-  },
-
   componentWillMount: function () {
     $.ajax({
       method: 'GET',
-      url: this.props.url,
+      url: '/getAllMeals',
       success: (data) => {
         this.setState({restaurants: data})
       }
@@ -54,4 +49,4 @@ var MealsBox = React.createClass({
 
 })
 
-module.exports = MealsBox
+module.exports = SearchPage

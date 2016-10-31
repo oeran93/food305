@@ -14,6 +14,15 @@ var Search = function () {
   }
 
   return {
+    getInitialData: function (req, res) {
+      if (req.user) {
+        var user = req.user.facebook
+        res.send({name: user.name, picture: user.picture})
+      } else {
+        res.send({})
+      }
+    },
+
     getAllMeals: function (req, res) {
       Restaurant
         .find()

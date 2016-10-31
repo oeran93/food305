@@ -6,7 +6,6 @@ var _ = require('underscore')
 var bodyParser = require('body-parser')
 var passport = require('passport')
 var session = require('express-session')
-var hbs = require('express-handlebars')
 var env = process.env
 
 /*Costant values*/
@@ -34,19 +33,11 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.engine('hbs', hbs({
-  extname: 'hbs',
-  defaultLayout: 'layout',
-  layoutsDir: __dirname + '/frontend/layout/'
-}))
-app.set('views', __dirname + '/frontend/pages/')
-app.set('view engine', 'hbs')
 
 /*Do basic routing*/
 app.use(express.static(path.join(__dirname, './frontend/static')))
 search(app)
 auth(app, passport)
-pages(app)
 
 /*Start the server*/
 app.listen(PORT, () => {
