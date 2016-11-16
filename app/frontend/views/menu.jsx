@@ -3,7 +3,7 @@ var React = require('react')
 var Menu = React.createClass({
 
     propTypes: {
-      logged: React.PropTypes.string.isRequired,
+      logged: React.PropTypes.string,
       changePage: React.PropTypes.func.isRequired,
       currentPage: React.PropTypes.string.isRequired
     },

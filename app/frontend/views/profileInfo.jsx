@@ -2,7 +2,7 @@ var React = require('react')
 
 var ProfileInfo = React.createClass({
 
-    propsType: {
+    propTypes: {
       name: React.PropTypes.string.isRequired,
       picture: React.PropTypes.string.isRequired
     },

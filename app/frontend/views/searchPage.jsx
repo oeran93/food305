@@ -4,6 +4,10 @@ var Meal = require('./meal/meal.jsx')
 var _ = require('underscore')
 
 var SearchPage = React.createClass({
+
+  propTypes: {
+    logged: React.PropTypes.string
+  },
   
   getInitialState: function () {
     return {
@@ -38,7 +42,8 @@ var SearchPage = React.createClass({
                            prices={meal.prices}
                            people={meal.people}
                            orders={_.size(meal.orders)}
-                           image={meal.image} />
+                           image={meal.image} 
+                           action={this.props.logged ? 'buy' : 'login'}/>
                 })}
              </div>
            )

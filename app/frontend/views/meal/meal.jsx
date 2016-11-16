@@ -4,6 +4,7 @@ var $ = require('jquery')
 var Basic = require('./basic.jsx')
 var MoreInfo = require('./moreInfo.jsx')
 var Actions = require('./actions.jsx')
+var date = require('../../../tools/date.js')
 
 var Meal = React.createClass({
 
@@ -63,14 +64,20 @@ var Meal = React.createClass({
   addMeal: function () {
     $.ajax({
       method: 'POST',
-      url: '/postMeal',
-      data: {meal: this.props._id},
+      url: '/postOrder',
+      data: {meal: this.props._id, date: date.thisOrder().format('MMM DD YYYY, hh')},
       error: (data) => {
-        this.setState({orders: this.state.orders - 1})
-        alert('something went wrong, we could not process your order')
-      }
+        this.setState((state) => {return {orders: state.orders - 1}})
+        this.toggleConfirmation('failure')
+      },
+      success: () => this.toggleConfirmation('success')
     })
-    this.setState({orders: this.state.orders + 1})
+    this.setState((state) => {return {orders: state.orders + 1}})
+  },
+
+  toggleConfirmation: function (type) {
+    $('.confirmation.'+type).slideToggle('fast')
+    setTimeout(() => $('.confirmation.'+type).slideToggle('fast'),2000)
   },
 
   render: function () {

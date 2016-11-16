@@ -12,7 +12,7 @@ var Root = React.createClass({
       render: false,
       name: null,
       picture: null,
-      page: 'search',
+      page: 'search'
     }
   },
 
@@ -31,21 +31,19 @@ var Root = React.createClass({
   },
 
   changePage: function (pg) {
-  	this.setState({
-  		page: pg
-  	})
+  	this.setState({page: pg})
   },
 
   router: function () {
   	switch(this.state.page) {
   		case 'search':
-  			return <SearchPage />
+  			return <SearchPage logged={this.state.name}/>
   			break
   		case 'myMeals':
-  			return <MyMealsPage />
+  			return <MyMealsPage logged={this.state.name}/>
   			break
   		default:
-  			return <SearchPage /> 
+  			return <SearchPage logged={this.state.name}/> 
   	}
   },
 
