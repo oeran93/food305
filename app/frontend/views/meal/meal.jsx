@@ -65,7 +65,7 @@ var Meal = React.createClass({
     $.ajax({
       method: 'POST',
       url: '/postOrder',
-      data: {meal: this.props._id, date: date.thisOrder().format('MMM DD YYYY, hh')},
+      data: {meal: this.props._id, date: date.thisOrderDelivery().format('MMM DD YYYY, hh')},
       error: (data) => {
         this.setState((state) => {return {orders: state.orders - 1}})
         this.toggleConfirmation('failure')

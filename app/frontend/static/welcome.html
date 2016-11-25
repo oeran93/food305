@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Food 305</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/welcome.css" />
+</head>
+<body>
+	<div class='container-fluid'>
+		<div class='row'>
+			<div class='col-xs-12 col-md-6' id='left-side'>
+			</div>
+			<div class='col-xs-12 col-md-6' id='right-side'>
+				<section id='first-selection'>
+					<div id='text'>
+						<h1>
+							Food 305
+						<h1>
+						<h2>
+			        Get your food delivered<br/>
+			        Pay less
+			      </h2>
+			    </div>
+					<div class="btn-group">
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Select Your University <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu">
+					    <li><a href='#'>Washington University in St. Louis</a></li>
+					    <li class="dropdown-header"> Coming Soon</li>
+					    <li class='disabled'><a href='#'>Saint Louis Universsity</a></li>
+					    <li class='disabled'><a href='#'>Missouri State University</a></li>
+					  </ul>
+					</div>
+				</section>
+				<section id='second-selection'>
+					<div id='text'>
+						<h2>
+			        We deliver to <u>Lopata</u> every day at <u>noon</u><br/>
+			        You can order your food anytime before <u>10 am</u>
+			      </h2>
+			    </div>
+					<div class='btn-group'>
+						<button type="button" class="btn btn-default" onclick="start()">
+						    Start
+						</button>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<script src='js/sS.js'></script>
+	<script>
+
+		$(".dropdown-menu li a").click(function(){
+			$('#first-selection').slideUp()
+		});
+
+		$('#left-side').sS({
+			path: './images/welcome/',
+			images: [
+				'1.jpg',
+				'2.jpg',
+				'3.jpg',
+			]
+		})
+
+		function setCookie (cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+		function start () {
+			setCookie('newUser','no',2)
+			window.location.href = '/index.html'
+		}
+
+	</script>
+</body>
+</html>

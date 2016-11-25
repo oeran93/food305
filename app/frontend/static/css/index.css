@@ -1,12 +1,56 @@
 #banner {
-	height: 300px;
-	border-bottom: 1px solid #ddd;
+  width: 100%;
+  height: 500px;
+  background-color: #337ab7;
+  background-image: url("../images/banner1.jpg");
+  background-size: cover;
 }
 
-#banner-text {
-	color: white;
-	margin-top: 40px;
-	font-weight: bold;
+.countdown{
+  text-align: center;
+  font-weight: 100;
+  margin-top: 250px;
+}
+
+.countdown > h1 {
+  color: #932C15;
+  font-weight: 100;
+  font-size: 35px;
+}
+
+.countdown > h5 {
+  font-weight: bold;
+}
+
+#clockdiv{
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  color: #E8AB6B;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+}
+
+#clockdiv > div{
+	margin: 5px;
+  padding: 10px;
+  border-radius: 3px;
+  background: #F4F3F2;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+  padding: 15px;
+  border-radius: 3px;
+  background: #EAEAE9;
+  display: inline-block;
+}
+
+.smalltext{
+  padding-top: 5px;
+  font-size: 12px;
+  color: black;
+  font-weight: bold;
 }
 
 /*

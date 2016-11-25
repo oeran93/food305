@@ -18,7 +18,7 @@ var Search = function () {
   }
 
   public.getAllMeals = function (req, res) {
-    var thisOrder = date.thisOrder().format('MMM DD YYYY, hh')
+    var thisOrder = date.thisOrderDelivery().format('MMM DD YYYY, hh')
     Restaurant
       .find()
       .populate({
