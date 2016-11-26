@@ -1,10 +1,10 @@
 var React = require('react')
 var _ = require('underscore')
 var $ = require('jquery')
-var Basic = require('./basic.jsx')
-var MoreInfo = require('./moreInfo.jsx')
+var Price = require('./price.jsx')
 var Actions = require('./actions.jsx')
 var date = require('../../../tools/date.js')
+var pricePeople = require('../../../tools/pricePeople.js')
 
 var Meal = React.createClass({
 
@@ -13,14 +13,14 @@ var Meal = React.createClass({
     name: React.PropTypes.string.isRequired,
     prices: React.PropTypes.array.isRequired,
     people: React.PropTypes.array.isRequired,
-    orders: React.PropTypes.number.isRequired,
+    nOrders: React.PropTypes.number.isRequired,
     image: React.PropTypes.string.isRequired,
     action: React.PropTypes.string
   },
 
   getInitialState: function () {
     return {
-      orders: this.props.orders
+      nOrders: this.props.nOrders
     }
   },
 
@@ -30,79 +30,43 @@ var Meal = React.createClass({
     }
   },
 
-  getDefaultPrice: function () {
-    return this.props.prices[0]
-  },
-
-  getCurrentPrice: function () {
-    var people = this.props.people
-    for (var i = 0; i < _.size(people); i++) {
-      if (people[i] > this.state.orders) {
-        return this.props.prices[--i]
-      }
-    }
-    return _.min(this.props.prices)
-  },
-
-  getNextPricePeople: function () {
-    var people = this.props.people
-    var prices = this.props.prices
-    for (var i = 0; i < _.size(people); i++) {
-      if (people[i] > this.state.orders) {
-        return {people: people[i],price: prices[i]}
-      }
-    }
-    return this.getBestPricePeople()
-  },
-
-  getBestPricePeople: function () {
-    var people = this.props.people
-    var prices = this.props.prices
-    return {people: _.max(people), price: _.min(prices)}
-  },
-
   addMeal: function () {
     $.ajax({
       method: 'POST',
       url: '/postOrder',
       data: {meal: this.props._id, date: date.thisOrderDelivery().format('MMM DD YYYY, hh')},
       error: (data) => {
-        this.setState((state) => {return {orders: state.orders - 1}})
-        this.toggleConfirmation('failure')
+        this.setState((state) => {return {nOrders: state.nOrders - 1}})
+        this.confirmation('failure')
       },
-      success: () => this.toggleConfirmation('success')
+      success: () => this.confirmation('success')
     })
-    this.setState((state) => {return {orders: state.orders + 1}})
+    this.setState((state) => {return {nOrders: state.nOrders + 1}})
   },
 
-  toggleConfirmation: function (type) {
+  confirmation: function (type) {
     $('.confirmation.'+type).slideToggle('fast')
-    setTimeout(() => $('.confirmation.'+type).slideToggle('fast'),2000)
+    setTimeout(() => $('.confirmation.'+type).slideToggle('fast'),5000)
   },
 
   render: function () {
-    var defaultPrice = this.getDefaultPrice()
-    var currentPrice = this.getCurrentPrice()
-    var bestPricePeople = this.getBestPricePeople()
-    var nextPricePeople = this.getNextPricePeople()
-    var {action, image, name} = this.props
+    var {action, image, name, people, prices, nOrders} = this.props
+    var {nOrders} = this.state
+    var peopleToNextDeal = pricePeople.nextPeople(people,prices,nOrders) - nOrders
     return (
       <div className='col-md-6 col-lg-4 meal'>
         <div className='thumbnail'>
           <img src={'images/meals/' + image} alt='Meal Picture' />
           <div className='caption clearfix'>
-            <Basic 
-              currentPrice={currentPrice} 
-              defaultPrice={defaultPrice}
-              name={name}
+            <h3 className='food-name'>{name}</h3>
+            <Price 
+              people={people} 
+              prices={prices}
+              nOrders={nOrders}
             />
-            <hr/>
-            <MoreInfo 
-              nextPricePeople={nextPricePeople} 
-              bestPricePeople={bestPricePeople}
-              currentPrice={currentPrice}
-              orders={this.state.orders}
-            />
+            <br/><hr/>
+            <span className='badge'>{peopleToNextDeal}</span> people to next deal
+            <br/><hr/>
             {action && <Actions addMeal={this.addMeal} action={action}/>}
           </div>
         </div>

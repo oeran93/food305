@@ -18,14 +18,13 @@ var Search = function () {
   }
 
   public.getAllMeals = function (req, res) {
-    var thisOrder = date.thisOrderDelivery().format('MMM DD YYYY, hh')
     Restaurant
       .find()
       .populate({
         path: 'meals',
         populate: {
           path: 'orders',
-          match: {date: {'$eq':thisOrder}}
+          match: {date: {'$eq':req.query.date}}
         }
       })
       .exec((err, restaurants) => {

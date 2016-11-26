@@ -1,7 +1,8 @@
 var React = require('react')
-var $ = require('jquery')
-var Meal = require('./meal/meal.jsx')
-var _ = require('underscore')
+var $     = require('jquery')
+var Meal  = require('./meal/meal.jsx')
+var _     = require('underscore')
+var date  = require('../../tools/date.js')
 
 var SearchPage = React.createClass({
 
@@ -17,8 +18,9 @@ var SearchPage = React.createClass({
 
   componentWillMount: function () {
     $.ajax({
-      method: 'GET',
-      url: '/getAllMeals',
+      method : 'GET',
+      url    : '/getAllMeals',
+      data   : {date: date.thisOrderDelivery().format('MMM DD YYYY, hh')},
       success: (data) => {
         this.setState({restaurants: data})
       }
@@ -41,7 +43,7 @@ var SearchPage = React.createClass({
                            name={meal.name}
                            prices={meal.prices}
                            people={meal.people}
-                           orders={_.size(meal.orders)}
+                           nOrders={_.size(meal.orders)}
                            image={meal.image} 
                            action={this.props.logged ? 'buy' : 'login'}/>
                 })}

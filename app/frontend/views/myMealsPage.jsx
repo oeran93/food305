@@ -10,8 +10,8 @@ var MyMealsPage = React.createClass({
     return {
       thisMeals: [],
       nextMeals: [],
-      thisDate: date.thisDelivery().format('dddd')+' at '+date.thisDelivery().format('hh'),
-      nextDate: date.nextDelivery().format('dddd')+' at '+date.thisDelivery().format('hh'),
+      thisDate: date.thisDelivery().format('dddd')+' at '+date.thisDelivery().format('hh:mm a'),
+      nextDate: date.nextDelivery().format('dddd')+' at '+date.thisDelivery().format('hh:mm a'),
     }
   },
 
@@ -41,7 +41,7 @@ var MyMealsPage = React.createClass({
                      name={meal.name}
                      prices={meal.prices}
                      people={meal.people}
-                     orders={_.size(meal.orders)}
+                     nOrders={_.size(meal.orders)}
                      image={meal.image} 
                      action=''
                      />
@@ -58,7 +58,7 @@ var MyMealsPage = React.createClass({
                      name={meal.name}
                      prices={meal.prices}
                      people={meal.people}
-                     orders={_.size(meal.orders)}
+                     nOrders={_.size(meal.orders)}
                      image={meal.image} 
                      action=''
                      />

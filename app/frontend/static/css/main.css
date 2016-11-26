@@ -5,23 +5,39 @@
 #nav a {
 	cursor: pointer;
 	cursor: hand;
+	color: inherit;
+	transition: all 1s;
+}
+
+#nav a:hover {
+	background-color: transparent;
+	color: #932C15;
+}
+
+#nav li.active a {
+	background-color: transparent;
+	color: #932C15;
 }
 
 #profile-info{
 	margin-top:40px;
-	border-bottom: 1px solid #ddd;
 }
 
 .btn-primary, .btn-primary:hover {
-	border-color: #337ab7;
-	background-color: #337ab7;
+	border-color: #932C15;
+	background-color: #932C15;
 }
 
 .btn-outline {
+		border-color: #ddd;
     background-color: transparent;
     color: inherit;
     transition: all .5s;
 }
+
+.label-default {
+	background-color: #ddd;
+}	
 
 .confirmation {
 	display: none;
@@ -47,9 +63,10 @@
 	padding: 0 20px 0 20px;
 }
 
-.current-price {
+.price {
 	color: white;
 	font-size:110%;
+	margin: 4px;
 	padding: 4px;
 	border-radius: 10px;
 }

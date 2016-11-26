@@ -2,7 +2,6 @@ var React = require('react')
 var Modal = require('react-bootstrap').Modal
 var $ = require('jquery')
 
-// tell the user when the meal will be delivered
 var Actions = React.createClass({
 
 	propTypes: {
@@ -62,8 +61,9 @@ var Actions = React.createClass({
 	  				<Modal.Title>Do you want to buy this meal?</Modal.Title>
 	  			</Modal.Header>
 	  			<Modal.Body>
-	          <p>This meal will not be charged to you card untill 10am. It will be 
-	          	delievered tomorrow at noon.
+	          <p>
+	          	This meal will <b>not be charged</b> to your card <b>untill 10am</b>. 
+	          	It will be <b>delievered at 12:00 pm</b>.
 	          	If more people buy it, you will pay less than its current price.
 	          	Invite other people to get a bigger discount.
 	          </p>
