@@ -1,3 +1,7 @@
+html, body {
+	font-family: 'Open Sans', sans-serif;
+}
+
 #nav {
 	margin-top:40px;
 }
@@ -21,6 +25,10 @@
 
 #profile-info{
 	margin-top:40px;
+}
+
+.page-header {
+	border: none;
 }
 
 .btn-primary, .btn-primary:hover {
@@ -63,6 +71,18 @@
 	padding: 0 20px 0 20px;
 }
 
+.food-name {
+	margin-top: 0;
+	font-weight: 600;
+	font-size: 130%;
+	cursor: hand;
+	cursor: pointer;
+}
+
+.prices {
+	padding: 5px;
+}
+
 .price {
 	color: white;
 	font-size:110%;
@@ -71,6 +91,6 @@
 	border-radius: 10px;
 }
 
-.food-name {
-	margin-top: 0;
+.more-info {
+	padding:5px;
 }

@@ -1,83 +1,78 @@
-var React = require('react')
-var Modal = require('react-bootstrap').Modal
-var $ = require('jquery')
+const React = require('react')
+const Modal = require('../modal.jsx')
+const $     = require('jquery')
+const ShareLinks = require('../shareLinks.jsx')
+const date = require('../../../tools/date.js')
 
-var Actions = React.createClass({
+const Actions = React.createClass({
 
 	propTypes: {
-		action: React.PropTypes.string.isRequired,
+		_id: React.PropTypes.string.isRequired,
+		action: React.PropTypes.string.isRequired, //use hidden to not show any action button
 		addMeal: React.PropTypes.func
 	},
 
-	getDefaultProps: function () {	
-		return {
-			addMeal: () => {console.log('pass in a function')}
-		}
-	},
-
 	getInitialState: function () {
-		return {
-			open: false
+    return {
+      open: false
+    }
+  },
+
+  openDialog: function () {
+    this.setState({open: true})
+  },
+
+  closeDialog: function () {
+    this.setState({open: false})
+  },
+
+  chooseAction: function (action) {
+  	let settings = []
+  	switch (action) {
+			case 'buy':
+				settings = [this.openDialog, "Buy"]
+				break
+			case 'login':
+				settings = [() => window.location.href = '/auth/facebook', "Sign up/in to buy"]
+				break
 		}
-	},
-
-	openDialog: function () {
-		this.setState({open: true})
-	},
-
-	closeDialog: function () {
-		this.setState({open: false})
-	},
+		return settings
+  },
 
 	render: function() {
-		var {action, addMeal} = this.props
-		if (action === 'none') return
+		let {action, addMeal, _id} = this.props
+		let [clickAction, linkText] = this.chooseAction(action)
+		let time = date.timeUntilOrderClosed()
+		let day = Math.trunc(time.asHours()) >= 10 ? 'tomorrow' : 'today'
 		return (
 			<div>
 				<p className='pull-right'>
-	        {action === 'buy'
-	        	&&
-		        	<a 
-				        className='btn btn-primary btn-outline' 
-				        role='button' 
-				        onClick={this.openDialog}>
-				        Buy
-				      </a>
-	        }
-	        {action === 'login'
-	        	&&
-	        		<a className='btn btn-primary btn-outline'
-	        				role='button'
-	        				onClick={() => window.location.href = '/auth/facebook'}>
-	        				Sign up/in to buy
-	        		</a>
-	        }
+	        <a 
+		        className={action +' btn btn-primary btn-outline'}
+		        role='button' 
+		        onClick={clickAction}>
+		        {linkText}
+		      </a>
 	      </p>
 	      <Modal
-	  			show={this.state.open}
-	  			onHide={this.closeDialog}
-	  		>
-	  			<Modal.Header closeButton>
-	  				<Modal.Title>Do you want to buy this meal?</Modal.Title>
-	  			</Modal.Header>
-	  			<Modal.Body>
-	          <p>
-	          	This meal will <b>not be charged</b> to your card <b>untill 10am</b>. 
-	          	It will be <b>delievered at 12:00 pm</b>.
-	          	If more people buy it, you will pay less than its current price.
-	          	Invite other people to get a bigger discount.
-	          </p>
-	        </Modal.Body>
-	        <Modal.Footer>
-	          <button className='btn btn-primary btn-outline' onClick={() => {
-		          	addMeal() 
-		          	this.closeDialog()
-		          }}
-	          >
-	            Buy meal
-	          </button>
-	        </Modal.Footer>
-	  		</Modal>
+	      	open={this.state.open}
+	      	close={this.closeDialog}
+	      	action={addMeal}
+	      	actionName="Buy Meal"
+	      	title="Do you want to buy this meal?">
+	      	<h4> 
+	      		<span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery
+	      	</h4>
+        	<h4>
+        		<span className='glyphicon glyphicon-road'></span> Food will be <b> delievered at 12:00 pm {day} in Lopata </b>
+        	</h4>
+        	<h4> 
+        		<span className='glyphicon glyphicon-fire'></span> As more people buy food, we keep lowering your price
+        	</h4>
+        	<h4>
+        		<span className='glyphicon glyphicon-envelope'></span> Click <ShareLinks include={['facebook']} /> and invite your friends
+        	</h4>
+	      </Modal>
 	  	</div>
 		)
 	}

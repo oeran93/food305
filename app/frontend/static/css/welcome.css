@@ -5,14 +5,6 @@ html,body,.container-fluid,.row,#right-side,#left-side {
 	overflow-y: hidden;
 }
 
-#text {
-	position: absolute;
-	top: 25%;
-	right:15px;
-	left:15px;
-	padding: 10px;
-}
-
 #left-side {
 	background-size: cover;
 }
@@ -26,10 +18,24 @@ html,body,.container-fluid,.row,#right-side,#left-side {
   position: relative;
 	height:100%;
 	width:100%;
+}
+
+.content {
+	position: relative;
+	width: 80%;
+	height: 40%;
+	margin: 30% auto;
 	text-align: center;
 }
 
-#first-selection .btn-group, #second-selection .btn-group{
-	display: inline-block;
-	top: 50%;
+.text {
+	float: left;
+	width:100%;
+}
+
+.choice {
+	float:left;
+	width:100%;
+	margin-top: 20px;
+	text-align:center;
 }

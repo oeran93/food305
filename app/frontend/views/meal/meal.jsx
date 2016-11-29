@@ -5,6 +5,7 @@ var Price = require('./price.jsx')
 var Actions = require('./actions.jsx')
 var date = require('../../../tools/date.js')
 var pricePeople = require('../../../tools/pricePeople.js')
+var format = require('../../../tools/format.js')
 
 var Meal = React.createClass({
 
@@ -50,24 +51,24 @@ var Meal = React.createClass({
   },
 
   render: function () {
-    var {action, image, name, people, prices, nOrders} = this.props
+    var {action, image, name, people, prices, nOrders, _id} = this.props
     var {nOrders} = this.state
     var peopleToNextDeal = pricePeople.nextPeople(people,prices,nOrders) - nOrders
     return (
-      <div className='col-md-6 col-lg-4 meal'>
+      <div name={_id} className='col-md-6 col-lg-4 meal'>
         <div className='thumbnail'>
           <img src={'images/meals/' + image} alt='Meal Picture' />
           <div className='caption clearfix'>
-            <h3 className='food-name'>{name}</h3>
+            <h4 title={name} className='food-name'>{format.dotdotdot(name,20)}</h4>
             <Price 
               people={people} 
               prices={prices}
               nOrders={nOrders}
             />
-            <br/><hr/>
-            <span className='badge'>{peopleToNextDeal}</span> people to next deal
-            <br/><hr/>
-            {action && <Actions addMeal={this.addMeal} action={action}/>}
+            <div className='more-info'>
+              <span className='badge'>{peopleToNextDeal}</span> people to next deal
+            </div>
+            {action && <Actions addMeal={this.addMeal} action={action} _id={_id} />}
           </div>
         </div>
       </div>

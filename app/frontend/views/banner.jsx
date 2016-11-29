@@ -26,7 +26,7 @@ var Banner = React.createClass({
 
 	render: function() {
 		var {hours,minutes,seconds} = this.state
-    var day = hours > 12 ? 'tomorrow' : 'today'
+    var day = hours > 10 ? 'tomorrow' : 'today'
 		return (
 			<div id='banner'>
         <div className="container-fluid">

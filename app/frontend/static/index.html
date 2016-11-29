@@ -2,21 +2,43 @@
 <html>
 <head>
 	<title>Food 305</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600" rel="stylesheet">
+
+	<!-- Style sheets -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel='stylesheet' href='css/main.css'>
 	<link rel='stylesheet' href='css/index.css'>
+
+	<!-- Meta Facebook tags -->
+	<meta property="og:url"           content="http://nicolapedretti.com" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Food 305" />
+	<meta property="og:description"   content="Group food delivery at your university" />
+	<meta property="og:image"         content="http://nicolapedretti.com/images/banner1.jpg" />
+
+	<!-- Meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
+	
 	<div class='col-xs-12 confirmation success'>
     Sit back and relax, your meal will be deliverd at 12:00 pm
   </div>
   <div class='col-xs-12 confirmation failure'>
     Something went wrong :(
   </div>
+
+  <div id="fb-root"></div> <!-- Facebook sdk root -->
 	<div id='root'></div> <!-- Here goes root node -->
+
+	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src='js/facebook.js'></script>
 	<script src='js/bundle.js'></script>
+
 </body>
 </html>

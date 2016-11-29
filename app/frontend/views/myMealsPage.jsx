@@ -43,7 +43,7 @@ var MyMealsPage = React.createClass({
                      people={meal.people}
                      nOrders={_.size(meal.orders)}
                      image={meal.image} 
-                     action=''
+                     action='hidden'
                      />
            })}
         </div>

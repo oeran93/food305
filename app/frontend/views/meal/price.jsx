@@ -14,7 +14,7 @@ var Price = React.createClass({
 		var {people, prices, nOrders} = this.props
 		var currentPrice = pricePeople.currentPrice(people, prices,nOrders)
 		return (
-			<div>
+			<div className='prices clearfix'>
 				{prices.map((price,i) => {
 					if (price === currentPrice) {var label = 'label-success'}
 					else {var label ='label-default'}
