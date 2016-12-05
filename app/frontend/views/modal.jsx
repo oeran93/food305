@@ -11,16 +11,16 @@ var MyModal = React.createClass({
     title: React.PropTypes.string.isRequired,
   },
 
-	render: function() {
+  render: function() {
     let {close, open, action, children, title, actionName} = this.props
-		return (
-			<Modal
-  			show={open}
-  			onHide={close}>
-  			<Modal.Header closeButton>
-  				<Modal.Title>{title}</Modal.Title>
-  			</Modal.Header>
-  			<Modal.Body>
+    return (
+      <Modal
+        show={open}
+        onHide={close}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           {children}
         </Modal.Body>
         <Modal.Footer>
@@ -28,10 +28,9 @@ var MyModal = React.createClass({
             {actionName}
           </button>
         </Modal.Footer>
-  		</Modal>
-		);
-	}
-
+      </Modal>
+    );
+  }
 });
 
 module.exports = MyModal;
