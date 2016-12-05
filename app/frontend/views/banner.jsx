@@ -3,19 +3,19 @@ var date = require('../../tools/date.js')
 
 var Banner = React.createClass({
 
-	getInitialState: function () {
-		return {
-			hours: 0,
+  getInitialState: function () {
+    return {
+      hours: 0,
       minutes: 0,
       seconds: 0
-		}
-	},
+    }
+  },
 
-	componentWillMount: function () {
-		setInterval(this.endOfThisOrder,1000)
-	},
+  componentWillMount: function () {
+    setInterval(this.endOfThisOrder,1000)
+  },
 
-	endOfThisOrder: function () {
+  endOfThisOrder: function () {
     var time = date.timeUntilOrderClosed()
     this.setState({
       hours: Math.trunc(time.asHours()),
@@ -24,11 +24,11 @@ var Banner = React.createClass({
     })
   },
 
-	render: function() {
-		var {hours,minutes,seconds} = this.state
+  render: function() {
+    var {hours,minutes,seconds} = this.state
     var day = hours > 10 ? 'tomorrow' : 'today'
-		return (
-			<div id='banner'>
+    return (
+      <div id='banner'>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
@@ -54,8 +54,8 @@ var Banner = React.createClass({
           </div>
         </div>
       </div>
-		)
-	}
+    )
+  }
 
 })
 
