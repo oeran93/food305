@@ -6,17 +6,17 @@
 var _ = require('underscore')
 
 module.exports = {
-	/*
-	* calculates the current price of an item
-	* @param people {array} people cutoffs. e.g. [5, 10, 15] means
-	*				price changes at 5 people, 10 people and 15 people
-	* @param prices {array} prices cutoffs. e.g [8.25, 7, 6, 5] price is 8.25
-	*				if people less than people[0], 7 if people between people[0] and
-	*				people[1], 6 if people between people[1] and peoplel[2] etc.
-	*	@param nOrders {number} current number of orders for a meal
-	*	@return {number} current price of the meal
-	*/
-	currentPrice: function (people, prices, nOrders) {
+  /*
+  * calculates the current price of an item
+  * @param people {array} people cutoffs. e.g. [5, 10, 15] means
+  *	  price changes at 5 people, 10 people and 15 people
+  * @param prices {array} prices cutoffs. e.g [8.25, 7, 6, 5] price is 8.25
+  *	  if people less than people[0], 7 if people between people[0] and
+  *	  people[1], 6 if people between people[1] and peoplel[2] etc.
+  *	@param nOrders {number} current number of orders for a meal
+  *	@return {number} current price of the meal
+  */
+  currentPrice: function (people, prices, nOrders) {
     for (var i = 0; i < _.size(people); i++) {
       if (people[i] > nOrders) return prices[--i]
     }
