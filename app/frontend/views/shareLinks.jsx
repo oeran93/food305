@@ -4,7 +4,7 @@ var ShareLinks = React.createClass({
 
 	componentDidMount: function () {
 		if (window.FB) {
-  		window.FB.XFBML.parse();
+			window.FB.XFBML.parse();
 		}
 	},
 
