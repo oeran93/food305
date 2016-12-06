@@ -65,9 +65,14 @@ var Meal = React.createClass({
               prices={prices}
               nOrders={nOrders}
             />
-            <div className='more-info'>
-              <span className='badge'>{peopleToNextDeal}</span> people to next deal
-            </div>
+              <div className='more-info'>
+                { peopleToNextDeal > 0 
+                  ?
+                    <p><span className='badge'>{peopleToNextDeal}</span> people to next deal</p>
+                  :
+                    <p>You are getting our best deal</p>
+                }
+              </div>
             {action && <Actions addMeal={this.addMeal} action={action} _id={_id} />}
           </div>
         </div>
