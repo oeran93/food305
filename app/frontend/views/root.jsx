@@ -37,16 +37,14 @@ var Root = React.createClass({
   },
 
   router: function () {
-  	switch(this.state.page) {
-  		case 'search':
-  			return <SearchPage logged={this.state.name}/>
-  			break
-  		case 'myMeals':
-  			return <MyMealsPage logged={this.state.name}/>
-  			break
-  		default:
-  			return <SearchPage logged={this.state.name}/> 
-  	}
+    switch(this.state.page) {
+      case 'search':
+        return <SearchPage logged={this.state.name}/>
+      case 'myMeals':
+        return <MyMealsPage logged={this.state.name}/>
+      default:
+        return <SearchPage logged={this.state.name}/> 
+    }
   },
 
   render: function () {
@@ -59,29 +57,29 @@ var Root = React.createClass({
       <div>
         <Banner />
         <div className='container'>
-             <div className='row'>
-               <div id='menu-bar' className='col-sm-5 col-md-3'>
-                 <div id='menu'>
-                   {this.state.name
-                    	&&
-  	                    <ProfileInfo 
-  	                    	name={this.state.name} 
-  	                    	picture={this.state.picture}
-  	                    />
-                  	}
-                  	<Menu 
-                  		logged={this.state.name}
-                  		changePage={this.changePage}
-                      currentPage={this.state.page}
-                  	/>
-                 </div>
-               </div>
-               <div id="page" className='col-sm-7 col-md-9'>
-               	<div className='container-fluid'>
-               	  {this.router()}
-               	 </div>
-               </div>
+          <div className='row'>
+           <div id='menu-bar' className='col-sm-5 col-md-3'>
+             <div id='menu'>
+             {this.state.name
+                &&
+                  <ProfileInfo 
+                    name={this.state.name} 
+                    picture={this.state.picture}
+                />
+            	}
+              <Menu 
+                logged={this.state.name}
+                changePage={this.changePage}
+                currentPage={this.state.page}
+              />
              </div>
+           </div>
+           <div id="page" className='col-sm-7 col-md-9'>
+           	<div className='container-fluid'>
+           	  {this.router()}
+           	 </div>
+           </div>
+          </div>
         </div>
       </div>
     )
