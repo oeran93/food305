@@ -1,4 +1,4 @@
-var Search = require('./search.js')()
+var Search = require('../business_logic/search.js')()
 
 module.exports = function (app) {
   app.get('/getInitialData', Search.getInitialData)

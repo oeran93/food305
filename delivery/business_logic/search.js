@@ -1,6 +1,6 @@
-var Restaurant = require('../database/restaurant.js')
-var Meal = require('../database/meal.js')
-var Order = require('../database/order.js')
+var Restaurant = require('../../database/restaurant.js')
+var Meal = require('../../database/meal.js')
+var Order = require('../../database/order.js')
 var _ = require('underscore')
 var date = require('../../tools/date.js')
 

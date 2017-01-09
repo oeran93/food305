@@ -1,14 +1,11 @@
-var webpack = require('webpack')
-var path = require('path')
-
-var BUILD_DIR = path.resolve(__dirname, 'app/frontend/static/js')
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    bundle: __dirname + '/app/entry_points/bundle.js'
+    bundle: __dirname + '/delivery/views/entry.js',
   },
   output: {
-    path: BUILD_DIR,
+    path: __dirname + '/delivery/views/static/js',
     filename: '[name].js'
   },
   module: {
@@ -23,4 +20,4 @@ module.exports = {
       }
     ]
   }
-}
+};
