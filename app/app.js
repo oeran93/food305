@@ -1,15 +1,13 @@
-// Npm modules
-var express = require('express')
-var app = express()
-var path = require('path')
-var bodyParser = require('body-parser')
-var passport = require('passport')
-var session = require('express-session')
-var env = process.env
+const express    = require('express')
+const app        = express()
+const path       = require('path')
+const bodyParser = require('body-parser')
+const passport   = require('passport')
+const session    = require('express-session')
+const env        = process.env
 
-// Routers
-var search = require('./backend/search/router.js')
-var auth = require('./backend/auth/router.js')
+const searchRouter = require('./backend/search/router.js')
+const authRouter   = require('./backend/auth/router.js')
 
 module.exports = function (db) {
   // Start DB
@@ -25,11 +23,10 @@ module.exports = function (db) {
   }))
   app.use(passport.initialize())
   app.use(passport.session())
-  // Do basic routing
   app.use(express.static(path.join(__dirname, './frontend/static')))
-  search(app)
-  auth(app, passport)
-  return app;
+  searchRouter(app)
+  authRouter(app, passport)
+  return app
 }
 
 
