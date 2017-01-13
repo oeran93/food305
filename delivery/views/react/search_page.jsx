@@ -41,9 +41,7 @@ module.exports = React.createClass({
                            key={meal._id}
                            _id={meal._id}
                            name={meal.name}
-                           prices={meal.prices}
-                           people={meal.people}
-                           nOrders={_.size(meal.orders)}
+                           price={meal.price}
                            image={meal.image} 
                            action={this.props.logged ? 'buy' : 'login'}/>
                 })}

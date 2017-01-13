@@ -46,14 +46,14 @@ module.exports = React.createClass({
 		let day = Math.trunc(time.asHours()) >= 10 ? 'tomorrow' : 'today'
 		return (
 			<div>
-				<p className='pull-right'>
+				<span className='pull-left'>
 	        <a 
 		        className={action +' btn btn-primary btn-outline'}
 		        role='button' 
 		        onClick={click_action}>
 		        {link_text}
 		      </a>
-	      </p>
+	      </span>
 	      <Modal
 	      	open={this.state.open}
 	      	close={this.close_dialog}
@@ -65,9 +65,6 @@ module.exports = React.createClass({
 	      	</h4>
         	<h4>
         		<span className='glyphicon glyphicon-road'></span> Food will be <b> delievered at 12:00 pm {day} in Lopata </b>
-        	</h4>
-        	<h4> 
-        		<span className='glyphicon glyphicon-fire'></span> As more people buy food, we keep lowering your price
         	</h4>
         	<h4>
         		<span className='glyphicon glyphicon-envelope'></span> Click <Share_Links include={['facebook']} /> and invite your friends

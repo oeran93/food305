@@ -4,7 +4,10 @@ var Schema = mongoose.Schema
 var Restaurant = new Schema({
   name: String,
   location: {'lat': Number, 'lng': Number},
-  phone: Number,
+  phone: String,
+  prices: [Number],
+  people: [Number],
+  max_meals: Number,
   meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}]
 })
 

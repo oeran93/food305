@@ -39,9 +39,7 @@ module.exports = React.createClass({
                      key={index}
                      _id={meal._id}
                      name={meal.name}
-                     prices={meal.prices}
-                     people={meal.people}
-                     nOrders={_.size(meal.orders)}
+                     price={meal.price}
                      image={meal.image} 
                      action='hidden'
                      />
@@ -57,8 +55,6 @@ module.exports = React.createClass({
                      _id={meal._id}
                      name={meal.name}
                      prices={meal.prices}
-                     people={meal.people}
-                     nOrders={_.size(meal.orders)}
                      image={meal.image} 
                      action=''
                      />
