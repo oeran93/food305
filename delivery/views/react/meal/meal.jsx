@@ -1,13 +1,13 @@
-var React = require('react')
-var _ = require('underscore')
-var $ = require('jquery')
-var Price = require('./price.jsx')
-var Actions = require('./actions.jsx')
-var date = require('../../../tools/date.js')
-var pricePeople = require('../../../tools/pricePeople.js')
-var format = require('../../../tools/format.js')
+const React        = require('react')
+const _            = require('underscore')
+const $            = require('jquery')
+const Price        = require('./price.jsx')
+const Actions      = require('./actions.jsx')
+const date         = require('../../../../tools/date.js')
+const price_people = require('../../../../tools/price_people.js')
+const format       = require('../../../../tools/format.js')
 
-var Meal = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     _id: React.PropTypes.string.isRequired,
@@ -31,11 +31,11 @@ var Meal = React.createClass({
     }
   },
 
-  addMeal: function () {
+  add_meal: function () {
     $.ajax({
       method: 'POST',
-      url: '/postOrder',
-      data: {meal: this.props._id, date: date.thisOrderDelivery().format('MMM DD YYYY, hh')},
+      url: '/post_order',
+      data: {meal: this.props._id, date: date.this_order_delivery().format('MMM DD YYYY, hh')},
       error: (data) => {
         this.setState((state) => {return {nOrders: state.nOrders - 1}})
         this.confirmation('failure')
@@ -51,9 +51,9 @@ var Meal = React.createClass({
   },
 
   render: function () {
-    var {action, image, name, people, prices, nOrders, _id} = this.props
-    var {nOrders} = this.state
-    var peopleToNextDeal = pricePeople.nextPeople(people,prices,nOrders) - nOrders
+    let {action, image, name, people, prices, _id} = this.props
+    let {nOrders} = this.state
+    let people_to_next_deal = price_people.next_people(people,prices,nOrders) - nOrders
     return (
       <div name={_id} className='col-md-6 col-lg-4 meal'>
         <div className='thumbnail'>
@@ -66,14 +66,14 @@ var Meal = React.createClass({
               nOrders={nOrders}
             />
               <div className='more-info'>
-                { peopleToNextDeal > 0 
+                { people_to_next_deal > 0 
                   ?
-                    <p><span className='badge'>{peopleToNextDeal}</span> people to next deal</p>
+                    <p><span className='badge'>{people_to_next_deal}</span> people to next deal</p>
                   :
                     <p>You are getting our best deal</p>
                 }
               </div>
-            {action && <Actions addMeal={this.addMeal} action={action} _id={_id} />}
+            {action && <Actions add_meal={this.add_meal} action={action} _id={_id} />}
           </div>
         </div>
       </div>
@@ -81,5 +81,3 @@ var Meal = React.createClass({
   }
 
 })
-
-module.exports = Meal

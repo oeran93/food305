@@ -1,6 +1,6 @@
-var React = require('react')
+const React = require('react')
 
-var ShareLinks = React.createClass({
+module.exports = React.createClass({
 
   componentDidMount: function () {
     if (window.FB) {
@@ -15,5 +15,3 @@ var ShareLinks = React.createClass({
   }
 
 })
-
-module.exports = ShareLinks

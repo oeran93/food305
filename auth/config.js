@@ -1,4 +1,4 @@
-var FacebookStrategy = require('passport-facebook').Strategy
+var Facebook_Strategy = require('passport-facebook').Strategy
 var User = require('../database/user.js')
 var env = process.env
 
@@ -13,15 +13,15 @@ module.exports = function (passport) {
     })
   })
 
-  passport.use(new FacebookStrategy({
+  passport.use(new Facebook_Strategy({
     clientID: env.FB_CLIENT_ID,
     clientSecret: env.FB_CLIENT_SCRT,
     callbackURL: env.FB_CALLBACK,
     profileFields: ['id', 'name', 'picture', 'gender']
-  }, facebookAuth))
+  }, facebook_auth))
 }
 
-function facebookAuth (token, refreshToken, profile, done) {
+function facebook_auth (token, refreshToken, profile, done) {
   User.findOne({'facebook.id': profile.id}, (err, user) => {
     if (err) return done(err)
     if (user) {

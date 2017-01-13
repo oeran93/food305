@@ -16,7 +16,7 @@ module.exports = {
   * @param nOrders {number} current number of orders for a meal
   * @return {number} current price of the meal
   */
-  currentPrice: function (people, prices, nOrders) {
+  current_price: function (people, prices, nOrders) {
     for (var i = 0; i < _.size(people); i++) {
       if (people[i] > nOrders) return prices[--i]
     }
@@ -29,7 +29,7 @@ module.exports = {
   * @param prices {array} prices cutoff
   *  @return {number} default price
   */
-  defaultPrice: function (prices) {
+  default_price: function (prices) {
     return prices[0]
   },
   /*
@@ -42,7 +42,7 @@ module.exports = {
   * @param nOrders {number} current number of orders for a meal
   * @return {number} price next deal
   */
-  nextPrice: function (people, prices, nOrders) {
+  next_price: function (people, prices, nOrders) {
     for (var i = 0; i < _.size(people); i++) {
       if (people[i] > nOrders) return prices[i]
     }
@@ -58,7 +58,7 @@ module.exports = {
   * @param nOrders {number} current number of orders for a meal
   * @return {number} number people for next deal
   */
-  nextPeople: function (people,prices,nOrders) {
+  next_people: function (people,prices,nOrders) {
   	for (var i = 0; i < _.size(people); i++) {
       if (people[i] > nOrders) return people[i]
     }
@@ -69,7 +69,7 @@ module.exports = {
   * @param prices {array}
   * @return {number} best price
   */
-  bestPrice: function (prices) {
+  best_price: function (prices) {
   	return _.max(prices)
   },
   /*
@@ -77,7 +77,7 @@ module.exports = {
   * @param people {array}
   * @return {number} number of people to get best price of a meal
   */
-  bestPeople: function (people) {
+  best_people: function (people) {
   	return _.max(people)
   }
 }

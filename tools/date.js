@@ -10,7 +10,7 @@ module.exports = {
 	* When will this delivery (closest in time) happen?
 	* @return {moment}
 	*/
-	thisDelivery: function () {
+	this_delivery: function () {
 		var delivery = moment()
 		if (delivery.hours() >= 12) {
 			delivery.add(1,'days')
@@ -25,7 +25,7 @@ module.exports = {
 	* When will the next delivery happen?
 	* @return {moment}
 	*/
-	nextDelivery: function () {
+	next_delivery: function () {
 		var delivery = moment()
 		if (delivery.hours() >= 12) {
 			delivery.add(1,'days')
@@ -41,7 +41,7 @@ module.exports = {
 	* If I ordered now, when will it be delivered?
 	* @return {moment}
 	*/
-	thisOrderDelivery: function () {
+	this_order_delivery: function () {
 		var delivery = moment()
 		if (delivery.hours() >= 10) {
 			delivery.add(1,'days')
@@ -56,7 +56,7 @@ module.exports = {
 	* When will this order close?
 	* @return {moment}
 	*/
-	thisOrderEnd: function () {
+	this_order_end: function () {
 		var delivery = moment()
 		if (delivery.hours() >= 10) {
 			delivery.add(1,'days')
@@ -79,8 +79,8 @@ module.exports = {
 	* How much time until this order closes?
 	* @return {moment duration}
 	*/
-	timeUntilOrderClosed: function () {
-		return moment.duration(this.thisOrderEnd().diff(this.now()))
+	time_until_order_closed: function () {
+		return moment.duration(this.this_order_end().diff(this.now()))
 	}
 
 }

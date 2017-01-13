@@ -1,10 +1,10 @@
-var React = require('react')
-var $     = require('jquery')
-var Meal  = require('./meal/meal.jsx')
-var _     = require('underscore')
-var date  = require('../../tools/date.js')
+const React = require('react')
+const $     = require('jquery')
+const Meal  = require('./meal/meal.jsx')
+const _     = require('underscore')
+const date  = require('../../../tools/date.js')
 
-var SearchPage = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     logged: React.PropTypes.string
@@ -19,8 +19,8 @@ var SearchPage = React.createClass({
   componentWillMount: function () {
     $.ajax({
       method : 'GET',
-      url    : '/getAllMeals',
-      data   : {date: date.thisOrderDelivery().format('MMM DD YYYY, hh')},
+      url    : '/get_all_meals',
+      data   : {date: date.this_order_delivery().format('MMM DD YYYY, hh')},
       success: (data) => {
         this.setState({restaurants: data})
       }
@@ -55,5 +55,3 @@ var SearchPage = React.createClass({
   }
 
 })
-
-module.exports = SearchPage

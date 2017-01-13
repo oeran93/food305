@@ -1,18 +1,18 @@
-var React = require('react');
+const React   = require('react')
 const Modal = require('react-bootstrap').Modal
 
-var MyModal = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     open: React.PropTypes.bool.isRequired,
     close: React.PropTypes.func.isRequired,
     action: React.PropTypes.func.isRequired,
-    actionName: React.PropTypes.string.isRequired,
+    action_name: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,
   },
 
   render: function() {
-    let {close, open, action, children, title, actionName} = this.props
+    let {close, open, action, children, title, action_name} = this.props
     return (
       <Modal
         show={open}
@@ -25,12 +25,10 @@ var MyModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <button className='btn btn-primary btn-outline' onClick={() => {action();close()}}>
-            {actionName}
+            {action_name}
           </button>
         </Modal.Footer>
       </Modal>
-    );
+    )
   }
-});
-
-module.exports = MyModal;
+})

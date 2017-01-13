@@ -1,13 +1,13 @@
-var React = require('react')
-var $ = require('jquery')
-var ProfileInfo = require('./profileInfo.jsx')
-var Menu = require('./menu.jsx')
-var SearchPage = require('./searchPage.jsx')
-var MyMealsPage = require('./myMealsPage.jsx')
-var Banner = require('./banner.jsx')
-var cookies = require('../../tools/cookies.js')
+const React         = require('react')
+const $             = require('jquery')
+const Profile_Info  = require('./profile_info.jsx')
+const Menu          = require('./menu.jsx')
+const Search_Page   = require('./search_page.jsx')
+const My_Meals_Page = require('./my_meals_page.jsx')
+const Banner        = require('./banner.jsx')
+const cookies       = require('../../../tools/cookies.js')
 
-var Root = React.createClass({
+module.exports = React.createClass({
 
   getInitialState: function () {
     return {
@@ -21,7 +21,7 @@ var Root = React.createClass({
   componentWillMount: function () {
     $.ajax({
       method: 'GET',
-      url: '/getInitialData',
+      url: '/get_user_basics',
       success: (data) => {
         this.setState({
           render: true,
@@ -32,24 +32,24 @@ var Root = React.createClass({
     })
   },
 
-  changePage: function (pg) {
+  change_page: function (pg) {
   	this.setState({page: pg})
   },
 
   router: function () {
     switch(this.state.page) {
       case 'search':
-        return <SearchPage logged={this.state.name}/>
+        return <Search_Page logged={this.state.name}/>
       case 'myMeals':
-        return <MyMealsPage logged={this.state.name}/>
+        return <My_Meals_Page logged={this.state.name}/>
       default:
-        return <SearchPage logged={this.state.name}/> 
+        return <Search_Page logged={this.state.name}/> 
     }
   },
 
   render: function () {
     if (!this.state.render) return null
-    if (!this.state.name && !cookies.getCookie('newUser')) {
+    if (!this.state.name && !cookies.get_cookie('new_user')) {
       window.location.href = '/welcome.html'
       return null
     }
@@ -62,15 +62,15 @@ var Root = React.createClass({
              <div id='menu'>
              {this.state.name
                 &&
-                  <ProfileInfo 
+                  <Profile_Info 
                     name={this.state.name} 
                     picture={this.state.picture}
                 />
             	}
               <Menu 
                 logged={this.state.name}
-                changePage={this.changePage}
-                currentPage={this.state.page}
+                change_page={this.change_page}
+                current_page={this.state.page}
               />
              </div>
            </div>
@@ -86,5 +86,3 @@ var Root = React.createClass({
   }
 
 })
-
-module.exports = Root

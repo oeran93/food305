@@ -1,40 +1,40 @@
-var React = require('react')
-var $ = require('jquery')
-var Meal = require('./meal/meal.jsx')
-var _ = require('underscore')
-var date = require('../../tools/date.js')
+const React = require('react')
+const $     = require('jquery')
+const Meal  = require('./meal/meal.jsx')
+const _     = require('underscore')
+const date  = require('../../../tools/date.js')
 
-var MyMealsPage = React.createClass({
+module.exports = React.createClass({
   
   getInitialState: function () {
     return {
-      thisMeals: [],
-      nextMeals: [],
-      thisDate: date.thisDelivery().format('dddd')+' at '+date.thisDelivery().format('hh:mm a'),
-      nextDate: date.nextDelivery().format('dddd')+' at '+date.thisDelivery().format('hh:mm a'),
+      this_meals: [],
+      next_meals: [],
+      this_date: date.this_delivery().format('dddd')+' at '+date.this_delivery().format('hh:mm a'),
+      next_date: date.next_delivery().format('dddd')+' at '+date.this_delivery().format('hh:mm a'),
     }
   },
 
   componentWillMount: function () {
-    $.get('/getMyMeals',
-          {date: date.thisDelivery().format('MMM DD YYYY, hh')},
-          (data) => {this.setState({thisMeals: data})}
+    $.get('/get_my_meals',
+          {date: date.this_delivery().format('MMM DD YYYY, hh')},
+          (data) => {this.setState({this_meals: data})}
     )
-    $.get('/getMyMeals',
-          {date: date.nextDelivery().format('MMM DD YYYY, hh')},
-          (data) => {this.setState({nextMeals: data})}
+    $.get('/get_my_meals',
+          {date: date.next_delivery().format('MMM DD YYYY, hh')},
+          (data) => {this.setState({next_meals: data})}
     )
   },
 
   render: function () {
-    var {thisDate, nextDate, thisMeals, nextMeals} = this.state
+    let {this_date, next_date, this_meals, next_meals} = this.state
     return (
       <div>
         <div className='row'>
           <div className='page-header'>
-            <h3>These meals will be delivered on {thisDate}</h3>
+            <h3>These meals will be delivered on {this_date}</h3>
           </div>
-          {_.map(thisMeals, (meal,index) => {
+          {_.map(this_meals, (meal,index) => {
             return <Meal
                      key={index}
                      _id={meal._id}
@@ -49,9 +49,9 @@ var MyMealsPage = React.createClass({
         </div>
         <div className='row'>
           <div className='page-header'>
-            <h3>These meals will be delivered on {nextDate}</h3>
+            <h3>These meals will be delivered on {next_date}</h3>
           </div>
-          {_.map(nextMeals, (meal,index) => {
+          {_.map(next_meals, (meal,index) => {
             return <Meal
                      key={index}
                      _id={meal._id}
@@ -69,5 +69,3 @@ var MyMealsPage = React.createClass({
   }
 
 })
-
-module.exports = MyMealsPage

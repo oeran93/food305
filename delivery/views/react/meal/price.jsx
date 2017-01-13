@@ -1,8 +1,8 @@
-var React = require('react')
-var _ = require('underscore')
-var pricePeople = require('../../../tools/pricePeople.js')
+const React        = require('react')
+const _            = require('underscore')
+const price_people = require('../../../../tools/price_people.js')
 
-var Price = React.createClass({
+module.exports = React.createClass({
 
 	propTypes: {
 		people: React.PropTypes.array.isRequired,
@@ -11,12 +11,12 @@ var Price = React.createClass({
 	},
 
 	render: function() {
-		var {people, prices, nOrders} = this.props
-		var currentPrice = pricePeople.currentPrice(people, prices,nOrders)
+		let {people, prices, nOrders} = this.props
+		let current_price = price_people.current_price(people, prices,nOrders)
 		return (
 			<div className='prices clearfix'>
 				{prices.map((price,i) => {
-					if (price === currentPrice) {var label = 'label-success'}
+					if (price === current_price) {var label = 'label-success'}
 					else {var label ='label-default'}
 					return (<span key={i} className={label+' price pull-left'}>
 	          {'$ ' + price}
@@ -27,5 +27,3 @@ var Price = React.createClass({
 	}
 
 })
-
-module.exports = Price

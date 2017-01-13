@@ -1,6 +1,6 @@
-var React = require('react')
+const React = require('react')
 
-var ProfileInfo = React.createClass({
+module.exports = React.createClass({
 
     propTypes: {
       name: React.PropTypes.string.isRequired,
@@ -27,5 +27,3 @@ var ProfileInfo = React.createClass({
     }
   
 })
-
-module.exports = ProfileInfo

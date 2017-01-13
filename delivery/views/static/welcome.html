@@ -79,15 +79,15 @@
 			]
 		})
 
-		function setCookie (cname, cvalue, exdays) {
-        var d = new Date();
+		function set_cookie (cname, cvalue, exdays) {
+				let d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+d.toUTCString();
+        let expires = "expires="+d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
 		function start () {
-			setCookie('newUser','no',2)
+			set_cookie('new_user','no',2)
 			window.location.href = '/index.html'
 		}
 

@@ -1,15 +1,15 @@
-const React = require('react')
-const Modal = require('../modal.jsx')
-const $     = require('jquery')
-const ShareLinks = require('../shareLinks.jsx')
-const date = require('../../../tools/date.js')
+const React       = require('react')
+const Modal       = require('../modal.jsx')
+const $           = require('jquery')
+const Share_Links = require('../share_links.jsx')
+const date        = require('../../../../tools/date.js')
 
-const Actions = React.createClass({
+module.exports = React.createClass({
 
 	propTypes: {
 		_id: React.PropTypes.string.isRequired,
 		action: React.PropTypes.string.isRequired, //use hidden to not show any action button
-		addMeal: React.PropTypes.func
+		add_meal: React.PropTypes.func
 	},
 
 	getInitialState: function () {
@@ -18,19 +18,19 @@ const Actions = React.createClass({
     }
   },
 
-  openDialog: function () {
+  open_dialog: function () {
     this.setState({open: true})
   },
 
-  closeDialog: function () {
+  close_dialog: function () {
     this.setState({open: false})
   },
 
-  chooseAction: function (action) {
+  choose_action: function (action) {
   	let settings = []
   	switch (action) {
 			case 'buy':
-				settings = [this.openDialog, "Buy"]
+				settings = [this.open_dialog, "Buy"]
 				break
 			case 'login':
 				settings = [() => window.location.href = '/auth/facebook', "Sign up/in to buy"]
@@ -40,9 +40,9 @@ const Actions = React.createClass({
   },
 
 	render: function() {
-		let {action, addMeal, _id} = this.props
-		let [clickAction, linkText] = this.chooseAction(action)
-		let time = date.timeUntilOrderClosed()
+		let {action, add_meal, _id} = this.props
+		let [click_action, link_text] = this.choose_action(action)
+		let time = date.time_until_order_closed()
 		let day = Math.trunc(time.asHours()) >= 10 ? 'tomorrow' : 'today'
 		return (
 			<div>
@@ -50,17 +50,17 @@ const Actions = React.createClass({
 	        <a 
 		        className={action +' btn btn-primary btn-outline'}
 		        role='button' 
-		        onClick={clickAction}>
-		        {linkText}
+		        onClick={click_action}>
+		        {link_text}
 		      </a>
 	      </p>
 	      <Modal
 	      	open={this.state.open}
-	      	close={this.closeDialog}
-	      	action={addMeal}
-	      	actionName="Buy Meal"
+	      	close={this.close_dialog}
+	      	action={add_meal}
+	      	action_name="Buy Meal"
 	      	title="Do you want to buy this meal?">
-	      	<h4> 
+	      	<h4>
 	      		<span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery
 	      	</h4>
         	<h4>
@@ -70,7 +70,7 @@ const Actions = React.createClass({
         		<span className='glyphicon glyphicon-fire'></span> As more people buy food, we keep lowering your price
         	</h4>
         	<h4>
-        		<span className='glyphicon glyphicon-envelope'></span> Click <ShareLinks include={['facebook']} /> and invite your friends
+        		<span className='glyphicon glyphicon-envelope'></span> Click <Share_Links include={['facebook']} /> and invite your friends
         	</h4>
 	      </Modal>
 	  	</div>
@@ -78,5 +78,3 @@ const Actions = React.createClass({
 	}
 
 })
-
-module.exports = Actions
