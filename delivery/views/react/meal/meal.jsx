@@ -40,7 +40,7 @@ module.exports = React.createClass({
   render: function () {
     let {action, image, name, price, _id} = this.props
     return (
-      <div name={_id} className='col-md-6 col-lg-4 meal'>
+      <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
         <div className='thumbnail'>
           <img src={'images/meals/' + image} alt='Meal Picture' />
           <div className='caption clearfix'>

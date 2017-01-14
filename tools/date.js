@@ -1,4 +1,4 @@
-/*
+	/*
 * Functions to calculate delivery and order dates
 */
 var moment = require('moment')
@@ -12,10 +12,10 @@ module.exports = {
 	*/
 	this_delivery: function () {
 		var delivery = moment()
-		if (delivery.hours() >= 12) {
+		if (delivery.hours() >= 2) {
 			delivery.add(1,'days')
 		}
-		delivery.hours(12)
+		delivery.hours(14)
 		delivery.minutes(0)
 		delivery.seconds(0)
 		return delivery
@@ -27,11 +27,11 @@ module.exports = {
 	*/
 	next_delivery: function () {
 		var delivery = moment()
-		if (delivery.hours() >= 12) {
+		if (delivery.hours() >= 2) {
 			delivery.add(1,'days')
 		}
 		delivery.add(1,'days')
-		delivery.hours(12)
+		delivery.hours(14)
 		delivery.minutes(0)
 		delivery.seconds(0)
 		return delivery
@@ -43,10 +43,10 @@ module.exports = {
 	*/
 	this_order_delivery: function () {
 		var delivery = moment()
-		if (delivery.hours() >= 10) {
+		if (delivery.hours() >= 12) {
 			delivery.add(1,'days')
 		}
-		delivery.hours(12)
+		delivery.hours(2)
 		delivery.minutes(0)
 		delivery.seconds(0)
 		return delivery
@@ -58,10 +58,10 @@ module.exports = {
 	*/
 	this_order_end: function () {
 		var delivery = moment()
-		if (delivery.hours() >= 10) {
+		if (delivery.hours() >= 12) {
 			delivery.add(1,'days')
 		}
-		delivery.hours(10)
+		delivery.hours(2)
 		delivery.minutes(0)
 		delivery.seconds(0)
 		return delivery

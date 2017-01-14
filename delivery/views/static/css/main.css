@@ -2,45 +2,43 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-#nav {
-	margin-top:40px;
-}
-
-#nav a {
-	cursor: pointer;
-	cursor: hand;
-	color: inherit;
-	transition: all 1s;
-}
-
-#nav a:hover {
-	background-color: transparent;
-	color: #932C15;
-}
-
-#nav li.active a {
-	background-color: transparent;
-	color: #932C15;
-}
-
-#profile-info{
-	margin-top:40px;
-}
+/*GENERAL*/
 
 .page-header {
 	border: none;
 }
 
-.btn-primary, .btn-primary:hover {
-	border-color: #932C15;
-	background-color: #932C15;
+.default-btn {
+	color: white;
+	border-color: transparent;
+	background-color: #c0392b;
+	transition: all .5s;
 }
 
-.btn-outline {
-		border-color: #ddd;
-    background-color: transparent;
-    color: inherit;
-    transition: all .5s;
+.default-btn:hover {
+	color: #c0392b;
+	background-color: white;
+	border-color: #c0392b;
+}
+
+.default-btn:focus {
+	color: white;
+	border-color: transparent;
+	background-color: #c0392b;
+	outline: none;
+}
+
+.default-btn-inv {
+	color: #c0392b;
+	background-color: white;
+	border-color: #c0392b;
+	transition: all .5s;
+}
+
+.default-btn-inv:hover {
+	color: white;
+	border-color: transparent;
+	background-color: #c0392b;
 }
 
 .label-default {
@@ -55,21 +53,92 @@ html, body {
 	line-height: 70px;
 	text-align: center;
 	font-size: 18px;
-	border-bottom: 1px solid #ddd;
 	z-index:100;
 }
 
 .failure {
-	background-color: #ff4444 !important;
+	background-color: #e74c3c !important;
 }
 
 .success {
-	background-color: #00C851;
+	background-color: #2ecc71;
 }
 
 .lateral-space {
-	padding: 0 20px 0 20px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
+
+
+/*NAVBAR*/
+
+.navbar-default .navbar-brand {
+	color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+	color: white;
+	text-decoration: underline;
+}
+
+.navbar {
+	margin: 0;
+	background-color: transparent;
+	border: none;
+}
+
+/*BANNER*/
+#banner {
+  width: 100%;
+  height: 340px;
+  margin-top:-50px;
+  margin-bottom: 100px;
+  background-color: #c0392b;
+  background-image: url("../images/banner1.jpg");
+  background-size: cover;
+}
+
+.countdown{
+  text-align: center;
+  font-weight: 100;
+  margin-top: 160px;
+}
+
+.countdown > h1 {
+  color: #c0392b;
+  font-weight: 100;
+  font-size: 35px;
+  text-shadow: -1px 0 #F4F3F2, 0 1px #F4F3F2, 1px 0 #F4F3F2, 0 -1px #F4F3F2;
+}
+
+.countdown > h5 {
+  font-weight: bold;
+}
+
+#clockdiv{
+  color: #c0392b;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+}
+
+#clockdiv > div{
+	margin: 5px;
+  padding: 10px;
+  border-radius: 3px;
+  background: #F4F3F2;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+  padding: 15px;
+  border-radius: 3px;
+  background: #EAEAE9;
+  display: inline-block;
+}
+
+/*MEALS*/
 
 .food-name {
 	margin-top: 0;
@@ -94,3 +163,36 @@ html, body {
 .more-info {
 	padding:5px;
 }
+
+/*FOOTER*/
+footer{
+  margin-top: 50px;
+  background-color:rgba(128,128,128,.2);
+  width: 100%;
+  border-top:1px solid rgba(128,128,128,.5);
+  padding: 100px 0 100px 0;
+}
+
+footer h3{
+  margin-bottom: 15px;
+  margin-top: 7px;
+}
+
+footer span{
+  padding: 0 10px 0 0;
+}
+
+footer p{
+  margin: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/*
+main red color: #c0392b;
+main orange color: #E8AB6B;
+main blue color: #337ab7;
+main gray color: #ddd;
+success color: #2ecc71;
+failure color: #e74c3c;
+*/

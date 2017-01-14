@@ -1,11 +1,10 @@
 const React         = require('react')
 const $             = require('jquery')
-const Profile_Info  = require('./profile_info.jsx')
-const Menu          = require('./menu.jsx')
 const Search_Page   = require('./search_page.jsx')
 const My_Meals_Page = require('./my_meals_page.jsx')
 const Banner        = require('./banner.jsx')
 const cookies       = require('../../../tools/cookies.js')
+const Nav_Bar       = require('./nav_bar.jsx')
 
 module.exports = React.createClass({
 
@@ -48,33 +47,23 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    if (!this.state.render) return null
-    if (!this.state.name && !cookies.get_cookie('new_user')) {
+    let {render, name, picture, page} = this.state
+    if (!name && !cookies.get_cookie('new_user')) {
       window.location.href = '/welcome.html'
       return null
     }
     return (
       <div>
+        <Nav_Bar 
+         name={name} 
+         picture={picture}
+         change_page={this.change_page}
+         current_page={page}
+        />
         <Banner />
         <div className='container'>
           <div className='row'>
-           <div id='menu-bar' className='col-sm-5 col-md-3'>
-             <div id='menu'>
-             {this.state.name
-                &&
-                  <Profile_Info 
-                    name={this.state.name} 
-                    picture={this.state.picture}
-                />
-            	}
-              <Menu 
-                logged={this.state.name}
-                change_page={this.change_page}
-                current_page={this.state.page}
-              />
-             </div>
-           </div>
-           <div id="page" className='col-sm-7 col-md-9'>
+           <div id="page" className='col-xs-12'>
            	<div className='container-fluid'>
            	  {this.router()}
            	 </div>

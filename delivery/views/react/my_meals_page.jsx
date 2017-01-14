@@ -1,7 +1,6 @@
 const React = require('react')
 const $     = require('jquery')
 const Meal  = require('./meal/meal.jsx')
-const _     = require('underscore')
 const date  = require('../../../tools/date.js')
 
 module.exports = React.createClass({
@@ -18,7 +17,7 @@ module.exports = React.createClass({
   componentWillMount: function () {
     $.get('/get_my_meals',
           {date: date.this_delivery().format('MMM DD YYYY, hh')},
-          (data) => {this.setState({this_meals: data})}
+          (data) => {console.log(data);this.setState({this_meals: data})}
     )
     $.get('/get_my_meals',
           {date: date.next_delivery().format('MMM DD YYYY, hh')},
@@ -31,34 +30,28 @@ module.exports = React.createClass({
     return (
       <div>
         <div className='row'>
-          <div className='page-header'>
-            <h3>These meals will be delivered on {this_date}</h3>
-          </div>
-          {_.map(this_meals, (meal,index) => {
+          {this_meals.map(meal => {
             return <Meal
-                     key={index}
+                     key={meal._id}
                      _id={meal._id}
                      name={meal.name}
                      price={meal.price}
                      image={meal.image} 
                      action='hidden'
+                     description={'will be delivered on'+this_date}
                      />
            })}
-        </div>
-        <div className='row'>
-          <div className='page-header'>
-            <h3>These meals will be delivered on {next_date}</h3>
-          </div>
-          {_.map(next_meals, (meal,index) => {
-            return <Meal
-                     key={index}
-                     _id={meal._id}
-                     name={meal.name}
-                     prices={meal.prices}
-                     image={meal.image} 
-                     action=''
-                     />
-           })}
+          {next_meals.map(meal => {
+              return <Meal
+                       key={meal._id}
+                       _id={meal._id}
+                       name={meal.name}
+                       prices={meal.prices}
+                       image={meal.image} 
+                       action=''
+                       description={'will be delivered on'+next_date}
+                       />
+          })}
         </div>
       </div>
     )

@@ -38,15 +38,12 @@ module.exports = React.createClass({
                 <div id="clockdiv">
                   <div>
                     <span className="hours">{hours}</span>
-                    <div className="smalltext">Hours</div>
                   </div>
                   <div>
                     <span className="minutes">{minutes}</span>
-                    <div className="smalltext">Minutes</div>
                   </div>
                   <div>
                     <span className="seconds">{seconds}</span>
-                    <div className="smalltext">Seconds</div>
                   </div>
                 </div>
               </div>

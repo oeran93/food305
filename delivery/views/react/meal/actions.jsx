@@ -48,7 +48,7 @@ module.exports = React.createClass({
 			<div>
 				<span className='pull-left'>
 	        <a 
-		        className={action +' btn btn-primary btn-outline'}
+		        className={action +' btn default-btn-inv btn-outline'}
 		        role='button' 
 		        onClick={click_action}>
 		        {link_text}

@@ -11,73 +11,54 @@
 <body>
 	<div class='container-fluid'>
 		<div class='row'>
-			<div class='hidden-xs hidden-sm col-md-6' id='left-side'>
-			</div>
-			<div class='col-xs-12 col-md-6' id='right-side'>
-				<section id='first-selection'>
-					<div class='content'>
-						<div class='text'>
-							<h1>
-								Food 305
-							</h1>
-							<h2>
-				        Get your food delivered<br/>
-				        Pay less
-				      </h2>
-				    </div>
-				    <div class="choice">
-				    	<div class="btn-group">
-							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    Select Your University <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu">
-							    <li><a href='#'>Washington University in St. Louis</a></li>
-							    <li class="dropdown-header"> Coming Soon</li>
-							    <li class='disabled'><a href='#'>Saint Louis Universsity</a></li>
-							    <li class='disabled'><a href='#'>Missouri State University</a></li>
-							  </ul>
-							</div>
-				    </div>
-					</div>
-				</section>
-				<section id='second-selection'>
-					<div class='content'>
-						<div class='text'>
-							<h1>
-								Food 305
-							</h1>
-							<h2>
-				        We deliver to <b>Lopata</b> every day at <b>12:00 pm</b><br/>
-				        You can order your food anytime before <b>10:00 am</b>
-				      </h2>
-				    </div>
-					  <div class="choice">
-					  	<div class='btn-group'>
-								<button type="button" class="btn btn-default" onclick="start()">
-								    Start
-								</button>
-							</div>
-					  </div>
+			<div class='col-xs-12' id='content-box'>
+				<div class='content' id='first-section'>
+					<div class='text'>
+						<h1>
+							Food 305
+						</h1>
+						<h2>
+			        Get your food delivered <b>for free</b>
+			      </h2>
+			    </div>
+			    <div class="choice">
+			    	<div class="btn-group">
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Select Your University <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a href='#'>Washington University in St. Louis</a></li>
+						    <li class="dropdown-header"> More coming soon</li>
+						  </ul>
+						</div>
+			    </div>
+				</div>
+				<div class='content' id='second-section'>
+					<div class='text'>
+						<h1>
+							Food 305
+						</h1>
+						<h2>
+			        We deliver to <b>Lopata</b> Saturday and Sunday at <b>2:00 pm</b><br/>
+			        You can order your food anytime before <b>12:00 pm</b>
+			      </h2>
+			    </div>
+				  <div class="choice">
+				  	<div class='btn-group'>
+							<button type="button" class="btn btn-default" onclick="start()">
+							    Start
+							</button>
+						</div>
 				  </div>
-				</section>
+			  </div>
 			</div>
 		</div>
 	</div>
-	<script src='js/sS.js'></script>
 	<script>
 
 		$(".dropdown-menu li a").click(function(){
-			$('#first-selection').slideUp()
+			$('#first-section').slideUp()
 		});
-
-		$('#left-side').sS({
-			path: './images/welcome/',
-			images: [
-				'1.jpg',
-				'2.jpg',
-				'3.jpg',
-			]
-		})
 
 		function set_cookie (cname, cvalue, exdays) {
 				let d = new Date();
