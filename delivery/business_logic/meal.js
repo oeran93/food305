@@ -9,11 +9,7 @@ module.exports = function () {
     Restaurant
       .find()
       .populate({
-        path: 'meals',
-        populate: {
-          path: 'orders',
-          match: {date: {'$eq':req.query.date}}
-        }
+        path: 'meals'
       })
       .exec((err, restaurants) => {
         res.send(restaurants)

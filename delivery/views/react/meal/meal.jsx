@@ -2,7 +2,7 @@ const React        = require('react')
 const _            = require('underscore')
 const $            = require('jquery')
 const Actions      = require('./actions.jsx')
-const date         = require('../../../../tools/date.js')
+const date         = require('../../../../tools/date.js')()
 const price_people = require('../../../../tools/price_people.js')
 const format       = require('../../../../tools/format.js')
 
@@ -13,13 +13,8 @@ module.exports = React.createClass({
     name: React.PropTypes.string.isRequired,
     price: React.PropTypes.number.isRequired,
     image: React.PropTypes.string.isRequired,
+    delivery: React.PropTypes.object,
     action: React.PropTypes.string
-  },
-
-  getDefaultProps: function () {
-    return {
-      action: 'buy'
-    }
   },
 
   add_meal: function () {
@@ -38,21 +33,24 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    let {action, image, name, price, _id} = this.props
+    let {action, image, name, price, delivery, _id} = this.props
     return (
       <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
         <div className='thumbnail'>
           <img src={'images/meals/' + image} alt='Meal Picture' />
           <div className='caption clearfix'>
-            <h4 title={name} className='food-name'>
+            <h4 title={name} className='meal-name'>
               {format.dotdotdot(name,20)}
             </h4>
-            <div className='prices'>
-              <span className='label-success price pull-right'>
-                {'$ '+price}
-              </span>
+            <div className='clearfix'>
+              <div className='prices'>
+                <span className='label-success price pull-right'>
+                  {'$ '+price}
+                </span>
+              </div>
+              {action && <Actions add_meal={this.add_meal} action={action} _id={_id} />}
             </div>
-            {action && <Actions add_meal={this.add_meal} action={action} _id={_id} />}
+            {delivery && <span className='meal-delivery label'>Delivery: {delivery.format('dddd Do')}</span>}
           </div>
         </div>
       </div>

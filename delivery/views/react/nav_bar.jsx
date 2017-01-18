@@ -13,37 +13,43 @@ var Nav_Bar = React.createClass({
     let {name, picture, current_page, change_page} = this.props
     return (
       <nav className="navbar navbar-default">
-        <div className="container-fluid">
+        <div className="container-fluid" id=' navbar-container'>
           <div className="navbar-header">
             <a className="navbar-brand" href="/">Food 305</a>
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+            </button>
           </div>
-          <div className="collapse navbar-collapse pull-right">
+          <div className="collapse navbar-collapse pull-right" id="navbar-collapse">
             <ul className="nav navbar-nav">
-              <button onClick={() => change_page('search')} 
+              <li onClick={() => change_page('search')} 
                       type="button" 
-                      className="btn default-btn navbar-btn lateral-space">
+                      className="btn red-btn navbar-btn lateral-space">
                 HOME
-              </button>
+              </li>
               {name &&
-                <button onClick={() => change_page('myMeals')} 
+                <li onClick={() => change_page('myMeals')} 
                         type="button" 
-                        className="btn default-btn navbar-btn lateral-space">
+                        className="btn red-btn navbar-btn lateral-space">
                   MY MEALS
-                </button>
+                </li>
               }
               {name &&
-               <button onClick={() => window.location.href = '/logout'} 
+               <li onClick={() => window.location.href = '/logout'} 
                         type="button" 
-                        className="btn default-btn navbar-btn lateral-space">
+                        className="btn red-btn navbar-btn lateral-space">
                   LOG OUT
-                </button>
+                </li>
               }
               {!name &&
-                <button onClick={() => window.location.href = '/auth/facebook'} 
+                <li onClick={() => window.location.href = '/auth/facebook'} 
                         type="button" 
-                        className="btn default-btn navbar-btn lateral-space">
+                        className="btn red-btn navbar-btn lateral-space">
                   SIGN IN
-                </button>
+                </li>
               }
             </ul>
           </div>

@@ -8,37 +8,50 @@ html, body {
 	border: none;
 }
 
-.default-btn {
+.red-btn {
 	color: white;
 	border-color: transparent;
 	background-color: #c0392b;
 	transition: all .5s;
 }
 
-.default-btn:hover {
+.red-btn:hover {
 	color: #c0392b;
 	background-color: white;
 	border-color: #c0392b;
 }
 
-.default-btn:focus {
+.red-btn:focus {
 	color: white;
 	border-color: transparent;
 	background-color: #c0392b;
 	outline: none;
 }
 
-.default-btn-inv {
+.red-btn-inv {
 	color: #c0392b;
 	background-color: white;
 	border-color: #c0392b;
 	transition: all .5s;
 }
 
-.default-btn-inv:hover {
+.red-btn-inv:hover {
 	color: white;
 	border-color: transparent;
 	background-color: #c0392b;
+}
+
+.orange-btn {
+  color: white;
+  border-color: transparent;
+  background-color: #d35400;
+  transition: all .5s;
+}
+
+.orange-btn:hover {
+  color: #d35400;
+  background-color: white;
+  border-color: #d35400;
 }
 
 .label-default {
@@ -85,6 +98,31 @@ html, body {
 	margin: 0;
 	background-color: transparent;
 	border: none;
+}
+
+@media (max-width: 480px) {
+    .nav, .navbar-nav{
+      width: 100%;
+      margin: 0 !important;
+    }
+
+    .navbar-collapse {
+      width:100%;
+      padding: 0;
+      margin: 0 !important;
+    }
+
+    .nav li {
+      margin: 0;
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      border-radius: 0;
+    }
+
+    #navbar-container{
+      margin-bottom: 60px;
+    }
 }
 
 /*BANNER*/
@@ -140,12 +178,16 @@ html, body {
 
 /*MEALS*/
 
-.food-name {
+.meal-name {
 	margin-top: 0;
 	font-weight: 600;
 	font-size: 130%;
 	cursor: hand;
 	cursor: pointer;
+}
+
+.meal-delivery {
+  background-color: #337ab7;
 }
 
 .prices {
@@ -170,27 +212,22 @@ footer{
   background-color:rgba(128,128,128,.2);
   width: 100%;
   border-top:1px solid rgba(128,128,128,.5);
-  padding: 100px 0 100px 0;
+  padding: 20px 0 20px 0;
+  text-align: center;
 }
 
-footer h3{
-  margin-bottom: 15px;
-  margin-top: 7px;
+footer h5{
+  margin:0;
 }
 
 footer span{
-  padding: 0 10px 0 0;
-}
-
-footer p{
-  margin: 0;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  margin: 0 10px 0 0;
+  color: #c0392b;
 }
 
 /*
 main red color: #c0392b;
-main orange color: #E8AB6B;
+main orange color: #d35400;
 main blue color: #337ab7;
 main gray color: #ddd;
 success color: #2ecc71;

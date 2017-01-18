@@ -2,7 +2,7 @@ const React       = require('react')
 const Modal       = require('../modal.jsx')
 const $           = require('jquery')
 const Share_Links = require('../share_links.jsx')
-const date        = require('../../../../tools/date.js')
+const date        = require('../../../../tools/date.js')()
 
 module.exports = React.createClass({
 
@@ -42,13 +42,12 @@ module.exports = React.createClass({
 	render: function() {
 		let {action, add_meal, _id} = this.props
 		let [click_action, link_text] = this.choose_action(action)
-		let time = date.time_until_order_closed()
-		let day = Math.trunc(time.asHours()) >= 10 ? 'tomorrow' : 'today'
+    let delivery = date.this_order_delivery()
 		return (
 			<div>
 				<span className='pull-left'>
 	        <a 
-		        className={action +' btn default-btn-inv btn-outline'}
+		        className={action +' btn orange-btn'}
 		        role='button' 
 		        onClick={click_action}>
 		        {link_text}
@@ -64,7 +63,7 @@ module.exports = React.createClass({
 	      		<span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery
 	      	</h4>
         	<h4>
-        		<span className='glyphicon glyphicon-road'></span> Food will be <b> delievered at 12:00 pm {day} in Lopata </b>
+        		<span className='glyphicon glyphicon-road'></span> Food will be <b> delievered on {delivery.format('dddd Do, hh:mm a')} in Lopata </b>
         	</h4>
         	<h4>
         		<span className='glyphicon glyphicon-envelope'></span> Click <Share_Links include={['facebook']} /> and invite your friends

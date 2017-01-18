@@ -5,6 +5,7 @@ const My_Meals_Page = require('./my_meals_page.jsx')
 const Banner        = require('./banner.jsx')
 const cookies       = require('../../../tools/cookies.js')
 const Nav_Bar       = require('./nav_bar.jsx')
+const Footer        = require('./footer.jsx')
 
 module.exports = React.createClass({
 
@@ -70,6 +71,7 @@ module.exports = React.createClass({
            </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

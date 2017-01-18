@@ -20,7 +20,6 @@ module.exports = React.createClass({
     $.ajax({
       method : 'GET',
       url    : '/get_all_meals',
-      data   : {date: date.this_order_delivery().format('MMM DD YYYY, hh')},
       success: (data) => {
         this.setState({restaurants: data})
       }
