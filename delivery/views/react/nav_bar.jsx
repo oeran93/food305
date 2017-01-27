@@ -1,19 +1,18 @@
 var React = require('react')
 
-var Nav_Bar = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
-    name: React.PropTypes.string,
-    picture: React.PropTypes.string,
+    user: React.PropTypes.object,
     current_page: React.PropTypes.string.isRequired,
     change_page: React.PropTypes.func.isRequired,
   },
 
   render: function() {
-    let {name, picture, current_page, change_page} = this.props
+    let {user, current_page, change_page} = this.props
     return (
       <nav className="navbar navbar-default">
-        <div className="container-fluid" id=' navbar-container'>
+        <div className="container-fluid" id='navbar-container'>
           <div className="navbar-header">
             <a className="navbar-brand" href="/">Food 305</a>
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -30,21 +29,21 @@ var Nav_Bar = React.createClass({
                       className="btn red-btn navbar-btn lateral-space">
                 HOME
               </li>
-              {name &&
+              {user &&
                 <li onClick={() => change_page('myMeals')} 
                         type="button" 
                         className="btn red-btn navbar-btn lateral-space">
                   MY MEALS
                 </li>
               }
-              {name &&
+              {user &&
                <li onClick={() => window.location.href = '/logout'} 
                         type="button" 
                         className="btn red-btn navbar-btn lateral-space">
                   LOG OUT
                 </li>
               }
-              {!name &&
+              {!user &&
                 <li onClick={() => window.location.href = '/auth/facebook'} 
                         type="button" 
                         className="btn red-btn navbar-btn lateral-space">
@@ -59,5 +58,3 @@ var Nav_Bar = React.createClass({
   }
 
 })
-
-module.exports = Nav_Bar

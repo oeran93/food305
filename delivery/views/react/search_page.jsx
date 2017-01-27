@@ -4,10 +4,11 @@ const Meal  = require('./meal/meal.jsx')
 const _     = require('underscore')
 const date  = require('../../../tools/date.js')
 
+
 module.exports = React.createClass({
 
   propTypes: {
-    logged: React.PropTypes.string
+    user: React.PropTypes.object
   },
   
   getInitialState: function () {
@@ -16,7 +17,15 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillMount: function () {
+  childContextTypes: {
+    user: React.PropTypes.object
+  },
+
+  getChildContext: function () {
+    return {user: this.props.user}
+  },
+
+  componentDidMount: function () {
     $.ajax({
       method : 'GET',
       url    : '/get_all_meals',
@@ -27,9 +36,11 @@ module.exports = React.createClass({
   },
 
   render: function () {
+    let {restaurants} = this.state
+    let {user} = this.props
     return (
       <div>
-        {_.map(this.state.restaurants, (restaurant) => {
+        {_.map(restaurants, (restaurant) => {
            return (
              <div className='row' key={restaurant._id}>
                <div className='page-header'>
@@ -41,8 +52,8 @@ module.exports = React.createClass({
                            _id={meal._id}
                            name={meal.name}
                            price={meal.price}
-                           image={meal.image} 
-                           action={this.props.logged ? 'buy' : 'login'}/>
+                           image={meal.image}
+                           action={user ? 'buy' : 'login'}/>
                 })}
              </div>
            )

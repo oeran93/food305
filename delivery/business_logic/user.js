@@ -1,18 +1,38 @@
+const User  = require('../../database/user.js')
+const error = require('../../tools/form.js')().error
 
 module.exports = function () {
 
-  var public = {}
+  let pub = {}
 
-  public.get_basics = function (req, res) {
+  pub.get_basics = function (req, res) {
     if (req.user) {
-      var user = req.user.facebook
-      res.send({name: user.name, picture: user.picture})
+      let fb = req.user.facebook
+      let user = req.user
+      res.send({
+        email: user.email, 
+        name: fb.name, 
+        picture: fb.picture
+      })
     } else {
-      res.send({})
+      res.send(false)
     }
   }
 
-  return public
+  pub.update_user = function (req, res) {
+    if (error.invalid_email(req.body.email)) {
+      res.send({error: 'invalid email'})
+      return
+    }
+    User.update(
+      {_id: req.user._id},
+      {email: req.body.email},
+      {},
+      () => res.sendStatus(200) 
+    )
+  }
+
+  return pub
   
 
 }

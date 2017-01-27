@@ -12,7 +12,7 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
     setInterval(this.end_of_this_order,1000)
   },
 

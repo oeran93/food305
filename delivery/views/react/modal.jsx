@@ -18,13 +18,13 @@ module.exports = React.createClass({
         show={open}
         onHide={close}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title><b>{title}</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {children}
         </Modal.Body>
         <Modal.Footer>
-          <button className='btn btn-primary btn-outline' onClick={() => {action();close()}}>
+          <button className='btn btn-primary btn-outline' onClick={() => {action()}}>
             {action_name}
           </button>
         </Modal.Footer>

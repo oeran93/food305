@@ -17,8 +17,7 @@ module.exports = function () {
         {_id: req.body.meal},
         {$push: {'orders': order._id}},
         {},
-        () => {
-          res.sendStatus(200)}
+        () => res.sendStatus(200)
       )
     })
   }

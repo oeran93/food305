@@ -6,14 +6,15 @@ const Banner        = require('./banner.jsx')
 const cookies       = require('../../../tools/cookies.js')
 const Nav_Bar       = require('./nav_bar.jsx')
 const Footer        = require('./footer.jsx')
+const Sign_Up       = require('./sign_up.jsx')
+const Welcome_Page  = require('./welcome_page.jsx')
 
 module.exports = React.createClass({
 
   getInitialState: function () {
     return {
       render: false,
-      name: null,
-      picture: null,
+      user: null,
       page: 'search',
     }
   },
@@ -22,11 +23,10 @@ module.exports = React.createClass({
     $.ajax({
       method: 'GET',
       url: '/get_user_basics',
-      success: (data) => {
+      success: (user) => {
         this.setState({
-          render: true,
-          name: data.name,
-          picture: data.picture
+          user,
+          render: true
         })
       }
     })
@@ -37,43 +37,48 @@ module.exports = React.createClass({
   },
 
   router: function () {
+    let {user} = this.state
     switch(this.state.page) {
       case 'search':
-        return <Search_Page logged={this.state.name}/>
+        return <Search_Page user={user}/>
       case 'myMeals':
-        return <My_Meals_Page logged={this.state.name}/>
+        return <My_Meals_Page user={user}/>
       default:
-        return <Search_Page logged={this.state.name}/> 
+        return <Search_Page user={user}/> 
     }
   },
 
   render: function () {
-    let {render, name, picture, page} = this.state
-    if (!name && !cookies.get_cookie('new_user')) {
-      window.location.href = '/welcome.html'
-      return null
+    let {render, user, page} = this.state
+    if (!render) return null
+    else if (!user && !cookies.get_cookie('new_user')) {
+      return <Welcome_Page />
+    } 
+    else if (user && !user.email) {
+      return <Sign_Up />
     }
-    return (
-      <div>
-        <Nav_Bar 
-         name={name} 
-         picture={picture}
-         change_page={this.change_page}
-         current_page={page}
-        />
-        <Banner />
-        <div className='container'>
-          <div className='row'>
-           <div id="page" className='col-xs-12'>
-           	<div className='container-fluid'>
-           	  {this.router()}
-           	 </div>
-           </div>
+    else {
+      return (
+        <div>
+          <Nav_Bar
+           user={user}
+           change_page={this.change_page}
+           current_page={page}
+          />
+          <Banner />
+          <div className='container'>
+            <div className='row'>
+             <div id="page" className='col-xs-12'>
+              <div className='container-fluid'>
+                {this.router()}
+               </div>
+             </div>
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    )
+      )
+    }
   }
 
 })

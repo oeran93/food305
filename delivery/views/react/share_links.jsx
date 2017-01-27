@@ -10,7 +10,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-     <div className="fb-send" data-href="http://nicolapedretti.com"></div>
+     <div className="fb-send" data-href="http://food305.org"></div>
     )
   }
 
