@@ -51,7 +51,7 @@ module.exports = React.createClass({
     let delivery = date.this_order_delivery()
 		return (
 			<div>
-				<span className='pull-left'>
+				<span className='pull-right'>
 	        <a 
 		        className='btn red-btn'
 		        role='button' 

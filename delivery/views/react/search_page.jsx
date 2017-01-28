@@ -43,17 +43,15 @@ module.exports = React.createClass({
         {_.map(restaurants, (restaurant) => {
            return (
              <div className='row' key={restaurant._id}>
-               <div className='page-header'>
+               <div className='page-header text-uppercase text-center'>
                  <h3>{restaurant.name}</h3>
                </div>
                {_.map(restaurant.meals, (meal) => {
                   return <Meal
                            key={meal._id}
-                           _id={meal._id}
-                           name={meal.name}
-                           price={meal.price}
-                           image={meal.image}
-                           action={user ? 'buy' : 'login'}/>
+                           meal={meal}
+                           action={user ? 'buy' : 'login'}
+                        />
                 })}
              </div>
            )

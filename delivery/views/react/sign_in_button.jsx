@@ -5,7 +5,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <span className='pull-left'>
+        <span className='pull-right'>
           <a 
             className='btn red-btn'
             role='button' 

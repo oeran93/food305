@@ -1,5 +1,5 @@
 const Restaurant = require('../../database/restaurant.js')
-const Order      = require('../../database/order.js')
+const Meal       = require('../../database/meal.js')
 const date       = require('../../tools/date.js')()
 const _          = require('underscore')
 
@@ -14,7 +14,7 @@ module.exports = function () {
     Restaurant
       .find()
       .populate({
-        path: 'meals'
+        path:'meals'
       })
       .exec((err, restaurants) => {
         restaurants = restaurants.filter(r => !_.contains(r.closed,date.week_day()))
@@ -23,22 +23,16 @@ module.exports = function () {
   }
 
   pub.get_my_meals = function (req, res) {
-    Order
-      .find({
-        _user: req.user.id,
-        date: {'$eq': req.query.date}
-      })
-      .populate({
-        path: '_meal',
-        populate: {
-          path: 'orders',
-          match: {date: {'$eq': req.query.date}}
-        }
-      }).exec((err, orders) => {
-        res.send(orders.map(order => {
-          return order._meal
-        }))
-      })
+    Meal
+    .find()
+    .populate({
+      path: 'orders',
+      match: {date: {'$eq': req.query.date}, _user: {'$eq': req.user.id}}
+    })
+    .exec((err, meals) => {
+      meals = meals.filter( m => _.size(m.orders))
+      res.send(meals)
+    })
   }
 
   return pub

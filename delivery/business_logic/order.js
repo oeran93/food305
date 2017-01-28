@@ -1,4 +1,4 @@
-var Meal = require('../../database/meal.js')
+var Meal  = require('../../database/meal.js')
 var Order = require('../../database/order.js')
 
 module.exports = function () {

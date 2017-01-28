@@ -1,5 +1,7 @@
 html, body {
 	font-family: 'Open Sans', sans-serif;
+  color: #504f4f;
+  background-color: #ecf0f1;
 }
 
 /*GENERAL*/
@@ -11,51 +13,38 @@ html, body {
 .red-btn {
 	color: white;
 	border-color: transparent;
-	background-color: #c0392b;
+	background-color: #c22414;
 	transition: all .5s;
 }
 
 .red-btn:hover {
-	color: #c0392b;
-	background-color: white;
-	border-color: #c0392b;
+	color: #c22414;
+	background-color: #f39c12;
+	border-color: #c22414;
 }
 
 .red-btn:focus {
 	color: white;
 	border-color: transparent;
-	background-color: #c0392b;
+	background-color: #c22414;
 	outline: none;
 }
 
 .red-btn-inv {
-	color: #c0392b;
-	background-color: white;
-	border-color: #c0392b;
+	color: #c22414;
+	background-color: #f39c12;
+	border-color: #c22414;
 	transition: all .5s;
 }
 
 .red-btn-inv:hover {
-	color: white;
+	color: #f39c12;
 	border-color: transparent;
-	background-color: #c0392b;
-}
-
-.orange-btn {
-  color: white;
-  border-color: transparent;
-  background-color: #d35400;
-  transition: all .5s;
-}
-
-.orange-btn:hover {
-  color: #d35400;
-  background-color: white;
-  border-color: #d35400;
+	background-color: #c22414;
 }
 
 .label-default {
-	background-color: #ddd;
+	background-color: #ecf0f1;
 }	
 
 .confirmation {
@@ -94,7 +83,7 @@ html, body {
 }
 
 .red-text {
-  color: #c0392b;
+  color: #c22414;
 }
 
 .info-box {
@@ -164,29 +153,26 @@ html, body {
   height: 340px;
   margin-top:-50px;
   margin-bottom: 100px;
-  background-image: url("../images/banner1.jpg");
+  background-image: url("../images/bg.jpg");
   background-size: cover;
 }
 
 .countdown{
   text-align: center;
   font-weight: 100;
-  margin-top: 160px;
+  margin-top: 80px;
 }
 
-.countdown > h1 {
-  color: #c0392b;
-  font-weight: 100;
-  font-size: 35px;
-  text-shadow: -1px 0 #F4F3F2, 0 1px #F4F3F2, 1px 0 #F4F3F2, 0 -1px #F4F3F2;
+.adv {
+  color: #fff;
 }
 
-.countdown > h5 {
-  font-weight: bold;
+.free-delivery {
+  font-size: 55px;
 }
 
 #clockdiv{
-  color: #c0392b;
+  color: #fff;
   display: inline-block;
   font-weight: 100;
   text-align: center;
@@ -197,14 +183,14 @@ html, body {
 	margin: 5px;
   padding: 10px;
   border-radius: 3px;
-  background: #f4f3f2;
+  background: #f39c12;
   display: inline-block;
 }
 
 #clockdiv div > span{
   padding: 15px;
   border-radius: 3px;
-  background: #eaeae9;
+  background: #f39c12;
   display: inline-block;
 }
 
@@ -214,38 +200,60 @@ html, body {
     }
 
     .countdown {
-      margin-top: 50px;
+      margin-top: 10px;
     }
 }
 
 /*MEALS*/
 
+.thumbnail {
+  padding: 0;
+  background-color: #fff;
+  border: 0;
+}
+
+.meal-picture {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
 .meal-name {
 	margin-top: 0;
-	font-weight: 600;
-	font-size: 130%;
+  margin-bottom: 15px;
+	font-size: 15px;
 	cursor: hand;
 	cursor: pointer;
 }
 
 .meal-delivery {
-  background-color: #337ab7;
+  padding: 5px;
+  background-color: #f39c12;
+  color: #c22414;
 }
 
-.prices {
-	padding: 5px;
+.meal-orders {
+  position: absolute;
+  top: -10px;
+  right: 5px;
+  padding:5px 11px 5px 11px;
+  border-radius: 20px;
+  border: 3px solid #ecf0f1;
+  color: white;
+  font-weight: bold;
+  font: 18px;
+  background-color: #c22414;
 }
 
 .price {
+  position: absolute;
+  top : 5px;
+  left : 20px;
 	color: white;
 	font-size:110%;
 	margin: 4px;
 	padding: 4px;
 	border-radius: 10px;
-}
-
-.more-info {
-	padding:5px;
+  border: 1px solid white;
 }
 
 /*FOOTER*/
@@ -264,14 +272,13 @@ footer h5{
 
 footer span{
   margin: 0 10px 0 0;
-  color: #c0392b;
+  color: #c22414;
 }
 
 /*
-main red color: #c0392b;
-main orange color: #d35400;
-main blue color: #337ab7;
-main gray color: #ddd;
+main red color: #c22414;
+main gray color: #ecf0f1;
+main yellow color: #f39c12;
 success color: #2ecc71;
 failure color: #e74c3c;
 */

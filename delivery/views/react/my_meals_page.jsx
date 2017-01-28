@@ -31,22 +31,18 @@ module.exports = React.createClass({
           {this_meals.map(meal => {
             return <Meal
                      key={meal._id}
-                     _id={meal._id}
-                     name={meal.name}
-                     price={meal.price}
-                     image={meal.image}
+                     meal={meal}
                      delivery={date.this_delivery()}
+                     orders={meal.orders.length}
                      />
            })}
           {next_meals.map(meal => {
-              return <Meal
-                       key={meal._id}
-                       _id={meal._id}
-                       name={meal.name}
-                       prices={meal.prices}
-                       image={meal.image}
-                       delivery={date.next_delivery()}
-                       />
+            return <Meal
+                     key={meal._id}
+                     meal={meal}
+                     delivery={date.next_delivery()}
+                     orders={meal.orders.length}
+                     />
           })}
         </div>
       </div>

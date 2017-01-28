@@ -33,8 +33,9 @@ module.exports = React.createClass({
           <div className="row">
             <div className="col-md-12">
               <div className="countdown">
-                <h1>Buy now for {date.format('dddd')}'s lunch</h1>
-                <h5>Sale ends in</h5>
+                <h1 className='adv free-delivery text-uppercase'>Free Delivery</h1>
+                <h2 className='adv buy-now-for text-uppercase'>Buy now for {date.format('dddd')}'s lunch</h2>
+                <h5 className='adv sale-ends text-uppercase'>Sale ends in</h5>
                 <div id="clockdiv">
                   <div>
                     <span className="hours">{hours}</span>

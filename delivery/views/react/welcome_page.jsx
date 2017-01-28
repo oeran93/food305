@@ -24,7 +24,7 @@ module.exports = React.createClass({
           <h2 className='red-text big-bottom-space'>
             Get your food delivered <b> FOR FREE </b> 
           </h2>
-          <button type="button" className="btn btn-default" onClick={() => this.setState({section: 2})}>
+          <button type="button" className="btn red-btn" onClick={() => this.setState({section: 2})}>
               Next
           </button>
         </div>
@@ -36,7 +36,7 @@ module.exports = React.createClass({
           <h2 className='red-text big-bottom-space'>
             Washington University in St Louis. Lopata Gallery 
           </h2>
-          <button type="button" className="btn btn-default" onClick={() => this.setState({section: 3})}>
+          <button type="button" className="btn red-btn" onClick={() => this.setState({section: 3})}>
               Next
           </button>
         </div>
@@ -48,7 +48,7 @@ module.exports = React.createClass({
           <h2 className='red-text big-bottom-space'>
             Every Saturday and Sunday at 2:00 pm 
           </h2>
-          <button type="button" className="btn btn-default" onClick={this.start}>
+          <button type="button" className="btn red-btn" onClick={this.start}>
               Start
           </button>
         </div>

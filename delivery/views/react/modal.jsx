@@ -24,7 +24,7 @@ module.exports = React.createClass({
           {children}
         </Modal.Body>
         <Modal.Footer>
-          <button className='btn btn-primary btn-outline' onClick={() => {action()}}>
+          <button className='btn red-btn' onClick={() => {action()}}>
             {action_name}
           </button>
         </Modal.Footer>
