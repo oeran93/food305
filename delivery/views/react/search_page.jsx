@@ -28,7 +28,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     $.ajax({
       method : 'GET',
-      url    : '/get_all_meals',
+      url    : '/get_available_meals',
       success: (data) => {
         this.setState({restaurants: data})
       }

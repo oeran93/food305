@@ -7,6 +7,7 @@ var Restaurant = new Schema({
   phone: String,
   prices: [Number],
   people: [Number],
+  closed: [String],
   max_meals: Number,
   meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}]
 })

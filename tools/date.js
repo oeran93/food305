@@ -78,6 +78,13 @@ module.exports = function () {
 		return moment.duration(this.this_delivery().diff(moment()))
 	}
 
+	/*
+	* Return today's week day.
+	*/
+	pub.week_day = function () {
+		return moment().format('dddd').toLowerCase()
+	}
+
 	return pub
 
 }

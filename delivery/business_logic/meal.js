@@ -1,22 +1,28 @@
-var Restaurant = require('../../database/restaurant.js')
-var Order = require('../../database/order.js')
+const Restaurant = require('../../database/restaurant.js')
+const Order      = require('../../database/order.js')
+const date       = require('../../tools/date.js')()
+const _          = require('underscore')
 
 module.exports = function () {
 
-  var public = {}
+  let pub = {}
 
-  public.get_all_meals = function (req, res) {
+  /*
+  * Returns all meals of restaurants opened today
+  */
+  pub.get_available_meals = function (req, res) {
     Restaurant
       .find()
       .populate({
         path: 'meals'
       })
       .exec((err, restaurants) => {
+        restaurants = restaurants.filter(r => !_.contains(r.closed,date.week_day()))
         res.send(restaurants)
       })
   }
 
-  public.get_my_meals = function (req, res) {
+  pub.get_my_meals = function (req, res) {
     Order
       .find({
         _user: req.user.id,
@@ -35,7 +41,7 @@ module.exports = function () {
       })
   }
 
-  return public
+  return pub
   
 
 }

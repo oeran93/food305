@@ -2,6 +2,7 @@ const React          = require('react')
 const Buy_Button     = require('./buy_button.jsx')
 const Sign_In_Button = require('../sign_in_button.jsx')
 const format         = require('../../../../tools/format.js')
+const globals        = require('../../../../tools/globals.js')
 
 module.exports = React.createClass({
 
@@ -33,7 +34,7 @@ module.exports = React.createClass({
             <div className='clearfix'>
               <div className='prices'>
                 <span className='label-success price pull-right'>
-                  {'$ '+price}
+                  {'$ '+(price+price*globals.sale_tax).toFixed(2)}
                 </span>
               </div>
               {action_component}
