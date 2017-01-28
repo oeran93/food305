@@ -66,7 +66,7 @@ module.exports = React.createClass({
 	      	title={"Food will be delievered on " + delivery.format('dddd Do, hh a') + " in Lopata"}  
         >
           <h3>
-            <span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery
+            <span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery, we accept <b>Venmo</b> or <b>cash</b>.
           </h3>
           <h5 style={error_checked ? {color: 'red'} : {}}>
             <input 
