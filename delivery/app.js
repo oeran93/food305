@@ -5,8 +5,8 @@ const passport    = require('passport')
 const session     = require('express-session')
 const env         = process.env
 
-const sharer_router = require('./delivery/routing/router.js')
-const auth_router   = require('./auth/router.js')
+const sharer_router = require('./routing/router.js')
+const auth_router   = require('../auth/router.js')
 
 module.exports = function (db) {
   //start DB
@@ -22,7 +22,7 @@ module.exports = function (db) {
   }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use(express.static(__dirname + '/delivery/views/static'))
+  app.use(express.static(__dirname + '/views/static'))
   sharer_router(app)
   auth_router(app,passport)
   return app

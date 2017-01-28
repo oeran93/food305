@@ -1,4 +1,4 @@
-const database = require('./database/start.js')
+const database = require('../database/start.js')
 const app      = require('./app.js')(database)
 const port     = 80
 
