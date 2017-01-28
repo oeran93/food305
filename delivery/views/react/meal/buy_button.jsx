@@ -30,6 +30,7 @@ module.exports = React.createClass({
   },  
 
   buy_meal: function () {
+    let delivery = date.this_order_delivery()
     if (!this.state.checked) {
       this.setState({error_checked: true})
       return
@@ -37,8 +38,8 @@ module.exports = React.createClass({
     $.ajax({
       method: 'POST',
       url: '/post_order',
-      data: {meal: this.props._id, date: date.this_order_delivery().format('MMM DD YYYY, hh')},
-      success: () => confirmation.success('Sit back and relax, your meal will be delivered at 12:00 pm'),
+      data: {meal: this.props._id, date: delivery.format('MMM DD YYYY, hh')},
+      success: () => confirmation.success('Sit back and relax, your meal will be delivered on '+delivery.format('dddd Do, hh a')),
       error: () => confirmation.failure('Something went wrong :(')
     })
     this.close_dialog()
