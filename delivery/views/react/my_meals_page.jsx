@@ -15,16 +15,23 @@ module.exports = React.createClass({
   componentWillMount: function () {
     $.get('/get_my_meals',
           {date: date.this_delivery().format('MMM DD YYYY, hh')},
-          (data) => {this.setState({this_meals: data})}
+          data => this.setState({this_meals: data})
     )
     $.get('/get_my_meals',
           {date: date.next_delivery().format('MMM DD YYYY, hh')},
-          (data) => {this.setState({next_meals: data})}
+          data => this.setState({next_meals: data})
     )
   },
 
   render: function () {
     let {this_meals, next_meals} = this.state
+    if (this_meals.length == 0 && next_meals.length == 0) {
+      return (
+        <div className='text-center text-uppercase red-text no-meals'>
+          Hungry ? Check out <a href='/'> our meals </a>
+        </div>
+      )
+    }
     return (
       <div>
         <div className='row'>

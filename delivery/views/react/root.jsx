@@ -66,12 +66,10 @@ module.exports = React.createClass({
            current_page={page}
           />
           <Banner />
-          <div className='container'>
-            <div className='row'>
-             <div id="page" className='col-xs-12'>
-              <div className='container-fluid'>
+          <div className='container page-container'>
+            <div className='row page-row'>
+             <div className='col-xs-12 page'>
                 {this.router()}
-               </div>
              </div>
             </div>
           </div>
