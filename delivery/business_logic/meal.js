@@ -17,7 +17,7 @@ module.exports = function () {
         path:'meals'
       })
       .exec((err, restaurants) => {
-        restaurants = restaurants.filter(r => !_.contains(r.closed,date.week_day()))
+        restaurants = restaurants.filter(r => !_.contains(r.closed,date.this_order_delivery().format('dddd').toLowerCase()))
         res.send(restaurants)
       })
   }
