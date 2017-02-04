@@ -1,66 +1,99 @@
-var React     = require('react')
+const React     = require('react')
 const cookies = require('../../../tools/cookies.js')
+const Info_Layer = require('./info_layer.jsx')
 
 module.exports = React.createClass({
 
   getInitialState: function () {
     return {
-      section: 1
+      section: 1,
+      phone: ''
     }
   },
 
   start: function () {
     cookies.set_cookie("new_user", "no", 30)
-    window.location.href = '/'
   },
 
   render: function() {
-    let {section} = this.state
+    let {section, phone} = this.state
     let content = null
-    if (section === 1) {
-      content = (
-        <div>
-          <h1 className='red-text'> Food 305 </h1>
-          <h2 className='red-text big-bottom-space'>
-            Get your food delivered <b> FOR FREE </b> 
-          </h2>
-          <button type="button" className="btn red-btn" onClick={() => this.setState({section: 2})}>
-              Next
-          </button>
-        </div>
-      )
-    } else if (section === 2) {
-      content = (
-        <div>
-          <h1 className='red-text'> Where </h1>
-          <h2 className='red-text big-bottom-space'>
-            Washington University in St Louis. Lopata Gallery 
-          </h2>
-          <button type="button" className="btn red-btn" onClick={() => this.setState({section: 3})}>
-              Next
-          </button>
-        </div>
-      )
-    } else if (section === 3) {
-      content = (
-        <div>
-          <h1 className='red-text'> When </h1>
-          <h2 className='red-text big-bottom-space'>
-            Every Saturday and Sunday at 2:00 pm 
-          </h2>
-          <button type="button" className="btn red-btn" onClick={this.start}>
-              Start
-          </button>
-        </div>
-      )
-    }
     return (
-      <div className='container'>
-        <div className='info-box'>
-          {content}
-        </div>
+      <div>
+        { section === 1 &&
+          <Info_Layer
+            title = "Food 305"
+            body = "We bring your favorite restaurants to campus"
+            action = {() => this.setState({section: 2})}
+            action_name = "Next 1/5"
+          >
+          </Info_Layer>
+        }
+        {section === 2 &&
+          <Info_Layer
+            title = "How"
+            body = {[<div className="bottom-space"> We sell food from local resturants directly on campus</div>,
+                     <div className="bottom-space"> Don't walk, and don't pay delivery fees</div> ]}
+            action = {() => this.setState({section: 3})}
+            action_name = "Next 2/5"
+          />
+        }
+        {section === 3 &&
+          <Info_Layer
+            title = "When"
+            body = "Every day from 1 pm to 2 pm"
+            action = {() => this.setState({section: 4})}
+            action_name = "Next 3/5"
+          />
+        }
+        {section === 4 &&
+          <Info_Layer
+            title = "Where"
+            body = "in the DUC lounge"
+            action = {() => this.setState({section: 5})}
+            action_name = "Next 4/5"
+          />
+        }
+        {section === 5 &&
+          <Info_Layer
+            title = "Ready"
+            body = {[<div className="bottom-space"> Try us for 1 month </div>,
+                     <div className="bottom-space"> If you decide we are worth $10/month, subscribe</div> ]}
+            action = {() => {this.setState({section: 6}); this.start()}}
+            action_name = "Got it"
+          />
+        }
+        {section === 6 &&
+          <Info_Layer
+            title = "Ready"
+            body = {[<div className="bottom-space"> We will contact you when your free month starts </div>,
+                     <div className="bottom-space"> You will hear from us soon </div> ]}
+          />
+        }
       </div>
     )
   }
 
 })
+
+// <div className='input-group top-space info-box-input'>
+//               <input id='phone' type="text" className="form-control" placeholder="phone" value={phone} onChange={this.handle_change}/>
+//               <span className="input-group-btn">
+//                 <button className="btn red-btn" type="button" onClick={() => {this.submit({phone});this.setState({section: 2})}}> Next 1/5 </button>
+//               </span>
+//             </div>
+
+// submit: function (data) {
+//     this.setState({data})
+//     $.ajax({
+//       url: '/update_user/set_phone',
+//       type: "POST",
+//       data: data
+//     })
+//   },
+
+//   handle_change: function (event) {
+//     let state = this.state
+//     state[event.target.id] = event.target.value
+//     this.setState(state)
+//   },

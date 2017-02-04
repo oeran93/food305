@@ -51,15 +51,13 @@ module.exports = React.createClass({
   render: function () {
     let {render, user, page} = this.state
     if (!render) return null
-    else if (!user && !cookies.get_cookie('new_user')) {
-      return <Welcome_Page />
-    } 
     else if (user && !user.email) {
       return <Sign_Up />
     }
     else {
       return (
         <div>
+          <Welcome_Page />
           <Nav_Bar
            user={user}
            change_page={this.change_page}

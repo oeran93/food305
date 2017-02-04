@@ -8,13 +8,13 @@ module.exports = function () {
 	const pub = {}
 
 	const delivery_hours = {
-		'monday': [],
-		'tuesday': [],
-		'wednesday': [],
-		'thursday': [],
-		'friday': [],
-		'saturday': [14],
-		'sunday': [14]
+		'monday': [13],
+		'tuesday': [13],
+		'wednesday': [13],
+		'thursday': [13],
+		'friday': [13],
+		'saturday': [13],
+		'sunday': [13]
 	}
 
 	const time_to_deliver = 2
