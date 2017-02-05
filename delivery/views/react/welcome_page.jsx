@@ -1,6 +1,7 @@
-const React     = require('react')
-const cookies = require('../../../tools/cookies.js')
+const React      = require('react')
+const cookies    = require('../../../tools/cookies.js')
 const Info_Layer = require('./info_layer.jsx')
+const config     = require('../../../tools/config.js')
 
 module.exports = React.createClass({
 
@@ -22,7 +23,7 @@ module.exports = React.createClass({
       <div>
         { section === 1 &&
           <Info_Layer
-            title = "Food 305"
+            title = {[<span className='text-uppercase'>{config.app_name}</span>]}
             body = "We bring your favorite restaurants to campus"
             action = {() => this.setState({section: 2})}
             action_name = "Next 1/5"
@@ -33,7 +34,7 @@ module.exports = React.createClass({
           <Info_Layer
             title = "How"
             body = {[<div className="bottom-space"> We sell food from local resturants directly on campus</div>,
-                     <div className="bottom-space"> Don't walk, and don't pay delivery fees</div> ]}
+                     <div className="bottom-space"><b>Don't pay delivery fees</b></div> ]}
             action = {() => this.setState({section: 3})}
             action_name = "Next 2/5"
           />
@@ -56,7 +57,7 @@ module.exports = React.createClass({
         }
         {section === 5 &&
           <Info_Layer
-            title = "Ready"
+            title = "Ready?"
             body = {[<div className="bottom-space"> Try us for 1 month </div>,
                      <div className="bottom-space"> If you decide we are worth $10/month, subscribe</div> ]}
             action = {() => {this.setState({section: 6}); this.start()}}
@@ -65,9 +66,8 @@ module.exports = React.createClass({
         }
         {section === 6 &&
           <Info_Layer
-            title = "Ready"
-            body = {[<div className="bottom-space"> We will contact you when your free month starts </div>,
-                     <div className="bottom-space"> You will hear from us soon </div> ]}
+            title = "See you soon"
+            body = {[<div className="bottom-space"> We will contact you when your free month starts </div>]}
           />
         }
       </div>

@@ -115,9 +115,9 @@ html, body, #root {
 
 .info-box {
   position: absolute;
-  margin: 15% auto;
+  margin: auto;
   width: 80%;
-  height: 80%;
+  height: 40%;
   text-align: center;
   top: 0; left: 0; bottom: 0; right: 0;
 }

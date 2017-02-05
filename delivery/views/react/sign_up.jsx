@@ -1,6 +1,7 @@
-var React          = require('react')
-var _              = require('underscore')
+const React        = require('react')
+const _            = require('underscore')
 const confirmation = require('../../../tools/confirmation.js')()
+const config       = require('../../../tools/config.js')
 
 module.exports = React.createClass({
 
@@ -41,7 +42,7 @@ module.exports = React.createClass({
     return (
       <div className='container'>
         <div className='info-box'>
-          <h1 className='red-text'> Food 305 </h1>
+          <h1 className='red-text text-uppercase'> {config.app_name} </h1>
           <h2 className='red-text big-bottom-space'>Tell us your email. <br /> We will alert you when your food arrives!</h2>
           <div className='input-group top-space info-box-input'>
             <input id='email' type="text" className="form-control" placeholder="email" value={email} onChange={this.handle_change}/>

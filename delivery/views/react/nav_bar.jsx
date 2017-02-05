@@ -1,4 +1,5 @@
-var React = require('react')
+const React  = require('react')
+const config = require('../../../tools/config.js')
 
 module.exports = React.createClass({
 
@@ -14,7 +15,7 @@ module.exports = React.createClass({
       <nav className="navbar navbar-default">
         <div className="container-fluid" id='navbar-container'>
           <div className="navbar-header">
-            <a className="navbar-brand" href="/">Food 305</a>
+            <a className="navbar-brand text-uppercase" href="/">{config.app_name}</a>
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
