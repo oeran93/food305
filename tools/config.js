@@ -2,6 +2,6 @@
 
 module.exports = {
 
-  app_name: "xinco"
+  app_name: "Vimi"
 
 }
