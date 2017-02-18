@@ -15,7 +15,7 @@ module.exports = function (db) {
   app.use(body_parser.json())
   app.use(body_parser.urlencoded({extended: true}))
   app.use(session({
-    secret: env.SESSION_SCRT,
+    secret: env.VIMI_SESSION_SCRT,
     name: 'session',
     resave: true,
     saveUninitialized: true
