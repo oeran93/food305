@@ -14,9 +14,9 @@ module.exports = function (passport) {
   })
 
   passport.use(new Facebook_Strategy({
-    clientID: env.FB_CLIENT_ID,
-    clientSecret: env.FB_CLIENT_SCRT,
-    callbackURL: env.FB_CALLBACK,
+    clientID: env.VIMI_FB_CLIENT_ID,
+    clientSecret: env.VIMI_FB_CLIENT_SCRT,
+    callbackURL: env.VIMI_FB_CALLBACK,
     profileFields: ['id', 'name', 'picture', 'gender']
   }, facebook_auth))
 }

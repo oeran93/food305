@@ -3,7 +3,7 @@ let Order = require('../business_logic/order.js')()
 let User  = require('../business_logic/user.js')()
 
 module.exports = function (app) {
-  app.get('/get_user_basics', User.get_basics)
+  app.get('/profile', User.profile)
   app.get('/get_available_meals', Meal.get_available_meals)
   app.get('/get_my_meals', is_logged_in, Meal.get_my_meals)
   app.post('/post_order', is_logged_in, Order.add_order)

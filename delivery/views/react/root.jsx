@@ -22,7 +22,7 @@ module.exports = React.createClass({
   componentWillMount: function () {
     $.ajax({
       method: 'GET',
-      url: '/get_user_basics',
+      url: '/profile',
       success: (user) => {
         this.setState({
           user,

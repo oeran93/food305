@@ -5,18 +5,8 @@ module.exports = function () {
 
   let pub = {}
 
-  pub.get_basics = function (req, res) {
-    if (req.user) {
-      let fb = req.user.facebook
-      let user = req.user
-      res.send({
-        email: user.email, 
-        name: fb.name, 
-        picture: fb.picture
-      })
-    } else {
-      res.send(false)
-    }
+  pub.profile = function (req, res) {
+    res.send({user: req.user})
   }
 
   pub.update_user = function (req, res) {
