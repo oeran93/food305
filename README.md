@@ -13,8 +13,8 @@ Group food delivery
 * underscore naming convention for variables
 * one line blocks on the same line as if/else/while
   * good:
-    * if (boolean expression) do this;
+    * if (boolean expression) do this
   * bad:
     * if (boolean expression)
-        do this
+      * do this
 * [airbnb javascript style guide](https://github.com/airbnb/javascript)
