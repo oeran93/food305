@@ -10,15 +10,27 @@ Group food delivery
 
 ## Coding Style Guide
 
-### underscore naming convention for variables
-### one line blocks on the same line as if/else/while
+### 1 underscore naming convention for variables
+### 2 one line blocks on the same line
 ```javascript
 //good
-if (boolean expression) do this
+if (true) console.log("yes")
 
 //bad
-if (boolean expression)
-  do this
+if (true)
+  console.log("yes")
 ```
+### 3 only use brackets for multi line statements
+```javascript
+\\good
+if (true) console.log("yes")
 
+if (true) {
+  console.log("yes")
+  console.log("no")
+}
+
+\\bad
+if (true) {console.log("yes")}
+```
 ### [airbnb javascript style guide](https://github.com/airbnb/javascript)
