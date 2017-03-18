@@ -59,7 +59,8 @@ html, body, #root {
 	width: 100%;
 	text-align: center;
 	font-size: 18px;
-	z-index:11;
+	z-index:10000;
+  color: white;
 }
 
 .failure {
@@ -79,6 +80,10 @@ html, body, #root {
   margin-top: 10px;
 }
 
+.big-top-space {
+  margin-top: 20px;
+}
+
 .bottom-space {
   margin-bottom: 10px;
 }
@@ -91,56 +96,21 @@ html, body, #root {
   color: #c22414;
 }
 
-/*INFO LAYER*/
+/*MODAL*/
 
-.black-layer {
-  position: fixed;
-  left:0;
-  top:0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.7);
-  z-index: 100;
-}
-
-.white-layer {
-  position: absolute;
-  border-radius: 4px;
-  width: 90%;
-  height: 90%;
-  margin: auto;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background-color: #ecf0f1;
-}
-
-.info-box {
-  position: absolute;
-  margin: auto;
-  width: 80%;
-  height: 40%;
-  text-align: center;
-  top: 0; left: 0; bottom: 0; right: 0;
-}
-
-.info-box-input {
-  margin:0 auto;
-  width: 30%;
-}
-
-@media (max-width: 480px) {
-  .info-box-input {
-    width: 100%;
-  }
+.modal-header, .modal-footer{
+  border: 0;
 }
 
 /*NAVBAR*/
 
 .navbar-default .navbar-brand {
-	color: white;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: #c22414;
 }
 
 .navbar-default .navbar-brand:hover {
-	color: white;
+  color: #c22414;
 	text-decoration: underline;
 }
 
@@ -183,10 +153,10 @@ html, body, #root {
 
 #banner {
   width: 100%;
-  height: 340px;
+  height: 400px;
   margin-top:-50px;
   margin-bottom: 100px;
-  background-image: url("../images/bg.jpg");
+  background-image: url("../images/bg4.jpg");
   background-size: cover;
 }
 
@@ -197,34 +167,12 @@ html, body, #root {
 }
 
 .adv {
-  color: #fff;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: #c22414;
 }
 
 .free-delivery {
   font-size: 55px;
-}
-
-#clockdiv{
-  color: #fff;
-  display: inline-block;
-  font-weight: 100;
-  text-align: center;
-  font-size: 30px;
-}
-
-#clockdiv > div{
-	margin: 5px;
-  padding: 10px;
-  border-radius: 3px;
-  background: #f39c12;
-  display: inline-block;
-}
-
-#clockdiv div > span{
-  padding: 15px;
-  border-radius: 3px;
-  background: #f39c12;
-  display: inline-block;
 }
 
 @media (max-width: 480px) {
@@ -234,6 +182,12 @@ html, body, #root {
 
     .countdown {
       margin-top: 10px;
+    }
+}
+
+@media (min-width: 1500px) {
+    #banner {
+      height: 500px;
     }
 }
 

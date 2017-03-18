@@ -6,8 +6,7 @@ const Banner        = require('./banner.jsx')
 const cookies       = require('../../../tools/cookies.js')
 const Nav_Bar       = require('./nav_bar.jsx')
 const Footer        = require('./footer.jsx')
-const Sign_Up       = require('./sign_up.jsx')
-const Welcome_Page  = require('./welcome_page.jsx')
+const Access        = require('./access/access.jsx')
 
 module.exports = React.createClass({
 
@@ -16,24 +15,30 @@ module.exports = React.createClass({
       render: false,
       user: null,
       page: 'search',
+      access: false
     }
   },
 
   componentWillMount: function () {
     $.ajax({
       method: 'GET',
-      url: '/get_user_basics',
-      success: (user) => {
+      url: '/profile',
+      success: (data) => {
         this.setState({
-          user,
+          user: data.user,
           render: true
         })
       }
     })
   },
 
-  change_page: function (pg) {
+  change_page: function (pg, access) {
   	this.setState({page: pg})
+    if (access) this.setState({access: true})
+  },
+
+  close_access: function () {
+    this.setState({access: false})
   },
 
   router: function () {
@@ -49,15 +54,12 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    let {render, user, page} = this.state
+    let {render, user, page, access} = this.state
     if (!render) return null
-    else if (user && !user.email) {
-      return <Sign_Up />
-    }
     else {
       return (
         <div>
-          <Welcome_Page />
+          {access && <Access close={this.close_access}/>}
           <Nav_Bar
            user={user}
            change_page={this.change_page}

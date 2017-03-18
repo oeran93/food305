@@ -3,14 +3,18 @@ Group food delivery
 
 ## Environment
 
-* VIMI_FB_CLIENT_ID
-* VIMI_FB_CLIENT_SCRT
-* VIMI_FB_CALLBACK
 * VIMI_DB_NAME
 * VIMI_DB_PASSWORD
 * VIMI_DB_USERNAME
+* VIMI_SESSION_SCRT
 
 ## Coding Style Guide
 
-* undersore naming convention for variables
+* underscore naming convention for variables
+* one line blocks on the same line as if/else/while
+  * good:
+    * if (boolean expression) do this;
+  * bad:
+    * if (boolean expression)
+        do this
 * [airbnb javascript style guide](https://github.com/airbnb/javascript)

@@ -17,14 +17,6 @@ module.exports = React.createClass({
     }
   },
 
-  childContextTypes: {
-    user: React.PropTypes.object
-  },
-
-  getChildContext: function () {
-    return {user: this.props.user}
-  },
-
   componentDidMount: function () {
     $.ajax({
       method : 'GET',
