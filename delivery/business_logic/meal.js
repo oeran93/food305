@@ -27,7 +27,7 @@ module.exports = function () {
     .find()
     .populate({
       path: 'orders',
-      match: {date: {'$eq': req.query.date}, _user: {'$eq': req.user.id}}
+      match: {date: {'$eq': req.query.date}, _user: {'$eq': req.session.user._id}}
     })
     .exec((err, meals) => {
       meals = meals.filter( m => _.size(m.orders))

@@ -1,18 +1,12 @@
+const model = require('./model.js')
 
+module.exports = function (app) {
 
-module.exports = function (app, passport) {
-
-  app.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
-  })
-
-  app.get('/failed_login', (req, res) => {
-    res.send({error: true})
-  })
-
-  app.post('/login', passport.authenticate('local', { failureRedirect: '/failed_login' }), (req, res) => {
-    res.redirect('/')
-  })
+  app.use(model.session)
+  app.post('/create_user', model.create_user)
+  app.post('/check_phone_code', model.check_phone_code)
+  app.post('/create_password', model.create_password)
+  app.get('/logout', model.logout)
+  app.post('/login', model.login)
 
 }

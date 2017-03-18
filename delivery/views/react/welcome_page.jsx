@@ -1,7 +1,7 @@
 const React      = require('react')
 const cookies    = require('../../../tools/cookies.js')
 const Info_Layer = require('./info_layer.jsx')
-const config     = require('../../../tools/config.js')
+const globals     = require('../../../tools/globals.js')
 
 module.exports = React.createClass({
 
@@ -23,7 +23,7 @@ module.exports = React.createClass({
       <div>
         { section === 1 &&
           <Info_Layer
-            title = {[<span className='text-uppercase'>{config.app_name}</span>]}
+            title = {[<span className='text-uppercase'>{globals.app_name}</span>]}
             body = "We bring your favorite restaurants to campus"
             action = {() => this.setState({section: 2})}
             action_name = "Next 1/4"

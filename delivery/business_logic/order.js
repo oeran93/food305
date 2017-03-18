@@ -8,7 +8,7 @@ module.exports = function () {
   public.add_order = function (req,res) {
     var order = new Order({
       _meal: req.body.meal,
-      _user: req.user.id,
+      _user: req.session.user._id,
       date: req.body.date
     })
     order.save((err) => {
