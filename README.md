@@ -12,7 +12,7 @@ Group food delivery
 
 ### underscore naming convention for variables
 ### one line blocks on the same line as if/else/while
-```
+```javascript
 //good
 if (boolean expression) do this
 
