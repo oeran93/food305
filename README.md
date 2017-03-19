@@ -22,7 +22,7 @@ if (true)
 ```
 ### 3 only use brackets for multi line statements
 ```javascript
-\\good
+//good
 if (true) console.log("yes")
 
 if (true) {
@@ -30,7 +30,21 @@ if (true) {
   console.log("no")
 }
 
-\\bad
+//bad
 if (true) {console.log("yes")}
+```
+### 4 using anonymous functions
+```javascript
+//don't use parenthesis if only 1 argument is passed
+// good
+x => console.log()
+// bad
+(x) => console.log(x)
+
+//don't use braces if only one statement.
+// good
+x => console.log(x)
+//bad
+x => {console.log(x)}
 ```
 ### [airbnb javascript style guide](https://github.com/airbnb/javascript)
