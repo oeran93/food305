@@ -47,4 +47,6 @@ x => console.log(x)
 //bad
 x => {console.log(x)}
 ```
+### 5 use destructuring when possible
+[learn more](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 ### [airbnb javascript style guide](https://github.com/airbnb/javascript)
