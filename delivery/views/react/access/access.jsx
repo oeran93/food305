@@ -35,14 +35,14 @@ module.exports = React.createClass({
     let {close} = this.props
     var module = null
     switch (step) {
-      case 0: 
-          module = <Sign_In_Phone Sign_In change_step={this.change_step} close={close}/>
+      case 0:
+          module = <Sign_In_Phone change_step={this.change_step} close={close}/>
           break
       case 1:
-          module = <Sign_In_Code phone={phone} Sign_In change_step={this.change_step} close={close}/>
+          module = <Sign_In_Code phone={phone} change_step={this.change_step} close={close}/>
           break
       case 2:
-          module = <Sign_In_Password phone={phone} Sign_In change_step={this.change_step} close={close}/>
+          module = <Sign_In_Password phone={phone} change_step={this.change_step} close={close}/>
           break
       case 3:
           module = <Sign_In change_step={this.change_step} close={close}/>

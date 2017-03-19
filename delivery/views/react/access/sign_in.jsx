@@ -27,15 +27,15 @@ module.exports = React.createClass({
 
   login: function () {
     let {change_step} = this.props
-    let {phone,pwd} = this.state
+    let {phone, pwd} = this.state
     $.ajax({
       method: 'POST',
       url: '/login',
       data :{phone, pwd},
       success: (res) => {
-        if (res.error && res.error.number == errors.user_not_active.number) change_step(1)
-        else if (res.error) confirmation.failure(res.error.message)
-        else window.location.href = '/'
+        if (res.success) window.location.href = '/'
+        else if (res.error.number == errors.user_not_active.number) change_step(1)
+        else confirmation.failure(res.error.message)
       }
     })
   },

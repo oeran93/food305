@@ -2,6 +2,7 @@ const React = require('react')
 const Modal = require('../modal.jsx')
 const $ = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
+const errors = require('../../../../tools/errors.js')
 
 module.exports = React.createClass({
 
@@ -31,9 +32,9 @@ module.exports = React.createClass({
       url: '/create_user',
       data :{phone},
       success: (res) => {
-        if (res.error) {
-          confirmation.failure('Invalid phone number')
-        } else if(res.success) change_step(1,phone)
+        if(res.success) change_step(1,phone)
+        else if (res.error.number == errors.user_exists.number) confirmation.failure(res.error.message)
+        else if (res.error.number == errors.invalid_phone.number) confirmation.failure(res.error.message)
       }
     })
   },

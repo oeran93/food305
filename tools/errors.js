@@ -5,6 +5,11 @@ module.exports = {
     message: "Something went wrong, please try again"
   },
 
+  invalid_phone: {
+    number: 8,
+    message: "Invalid phone number"
+  },
+
   user_exists: {
     number: 2,
     message: "This account already exists"
@@ -20,19 +25,24 @@ module.exports = {
     message: "User does not exist"
   },
 
-  wrong_code: {
+  invalid_code: {
     number: 5,
-    message: "Wrong code"
+    message: "Invalid code, please try again or click send again"
   },
 
-  wrong_old_pwd: {
+  invalid_old_pwd: {
     number: 6,
-    message: "Wrong password"
+    message: "Invalid password"
   },
 
   short_pwd: {
     number: 7,
     message: "Password must be at least 8 characters long"
+  },
+
+  pwd_no_match: {
+    number: 9,
+    message: "Password do not match"
   }
 
 }
