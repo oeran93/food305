@@ -16,6 +16,9 @@ Group food delivery
 
 ## Coding Style Guide
 
+### 0 Understand every single char you write
+Be prepared to justify your approach.
+In other words, always think about your solutions and why you chose them.
 ### 1 underscore naming convention for variables
 ### 2 one line blocks on the same line
 ```javascript

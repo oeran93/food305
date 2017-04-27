@@ -2,39 +2,27 @@ const React        = require('react')
 const date         = require('../../../../tools/date.js')()
 const confirmation = require('../../../../tools/confirmation.js')()
 const Modal        = require('../modal.jsx')
+const PropTypes    = require('prop-types')
 
-module.exports = React.createClass({
+class Buy_Button extends React.Component {
 
-	propTypes: {
-		_id: React.PropTypes.string.isRequired
-	},
-
-	getInitialState: function () {
-    return {
-      open: false,
-      checked: false,
-      error_checked: false
+	constructor (props) {
+		super(props)
+		this.state = {
+      open: false
     }
-  },
+	}
 
-  open_dialog: function () {
+	open_dialog () {
     this.setState({open: true})
-  },
+  }
 
-  close_dialog: function () {
+  close_dialog () {
     this.setState({open: false})
-  },
+  }
 
-  check: function () {
-    this.setState((state) => ({checked: !state.checked}))
-  },  
-
-  buy_meal: function () {
+  buy_meal () {
     let delivery = date.this_order_delivery()
-    if (!this.state.checked) {
-      this.setState({error_checked: true})
-      return
-    }
     $.ajax({
       method: 'POST',
       url: '/post_order',
@@ -43,43 +31,38 @@ module.exports = React.createClass({
       error: () => confirmation.failure('Something went wrong :(')
     })
     this.close_dialog()
-  },
+  }
 
-	render: function() {
+	render () {
 		let {_id} = this.props
-    let {open, checked, error_checked} = this.state
+    let {open} = this.state
     let delivery = date.this_order_delivery()
 		return (
 			<div>
 				<span className='pull-right'>
-	        <a 
+	        <a
 		        className='btn red-btn'
-		        role='button' 
-		        onClick={this.open_dialog}>
+		        role='button'
+		        onClick={this.open_dialog.bind(this)}>
 		        Buy
 		      </a>
 	      </span>
 	      <Modal
 	      	open={open}
-	      	close={this.close_dialog}
-	      	action={this.buy_meal}
+	      	close={this.close_dialog.bind(this)}
+	      	action={this.buy_meal.bind(this)}
 	      	action_name="Buy Meal"
-	      	title={"Food will be delievered on " + delivery.format('dddd Do, hh a') + " in Lopata"}  
+	      	title={"Food will be delievered on " + delivery.format('dddd Do, hh a') + " in Lopata"}
         >
-          <h3>
-            <span className='glyphicon glyphicon-credit-card'></span> Pay upon delivery, we accept <b>Venmo</b> or <b>cash</b>.
-          </h3>
-          <h5 style={error_checked ? {color: 'red'} : {}}>
-            <input 
-              type="radio" 
-              name="address"   
-              checked={checked} 
-              onChange={this.check} 
-            /> By pressing "Buy Meal" you are purchasing the selected meal. <b> You will not be able to cancel your order </b>
-          </h5>
 	      </Modal>
 	  	</div>
 		)
 	}
 
-})
+}
+
+Buy_Button.propTypes = {
+	_id: PropTypes.string.isRequired
+}
+
+module.exports = Buy_Button

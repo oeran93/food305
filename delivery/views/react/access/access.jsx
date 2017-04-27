@@ -1,57 +1,44 @@
-const React        = require('react')
-const confirmation = require('../../../../tools/confirmation.js')()
-const Sign_In_Phone = require('./sign_in_phone.jsx')
-const Sign_In_Code = require('./sign_in_code.jsx')
+const React            = require('react')
+const Sign_In_Phone    = require('./sign_in_phone.jsx')
+const Sign_In_Code     = require('./sign_in_code.jsx')
 const Sign_In_Password = require('./sign_in_password.jsx')
-const Sign_In = require('./sign_in.jsx')
+const Sign_In          = require('./sign_in.jsx')
+const _                = require('underscore')
+const PropTypes        = require('prop-types')
 
-module.exports = React.createClass({
+class Access extends React.Component {
 
-  propTypes: {
-    step: React.PropTypes.number,
-    close: React.PropTypes.func.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      step: 3
-    }
-  },
-
-  getInitialState: function () {
-    return {
-      step: this.props.step,
+  constructor (props) {
+    super(props)
+    this.state = {
+      step: props.step,
       phone: ""
     }
-  },
-
-  change_step: function (step, phone) {
-    this.setState({step})
-    if (phone) this.setState({phone})
-  },
-
-  render: function() {
-    let {phone, step} = this.state
-    let {close} = this.props
-    var module = null
-    switch (step) {
-      case 0:
-          module = <Sign_In_Phone change_step={this.change_step} close={close}/>
-          break
-      case 1:
-          module = <Sign_In_Code phone={phone} change_step={this.change_step} close={close}/>
-          break
-      case 2:
-          module = <Sign_In_Password phone={phone} change_step={this.change_step} close={close}/>
-          break
-      case 3:
-          module = <Sign_In change_step={this.change_step} close={close}/>
-    }
-    return (
-      <div>
-        {module}
-      </div>
-    )
   }
 
-})
+  change_step (step, phone) {
+    this.setState({step})
+    if (phone) this.setState({phone})
+  }
+
+  render () {
+    let {phone, step} = this.state
+    let {close} = this.props
+    if (step == 0) return <Sign_In_Phone change_step={this.change_step.bind(this)} close={close}/>
+    else if (step == 1) return <Sign_In_Code phone={phone} change_step={this.change_step.bind(this)} close={close}/>
+    else if (step == 2) return <Sign_In_Password phone={phone} change_step={this.change_step.bind(this)} close={close}/>
+    else if (step == 3) return <Sign_In change_step={this.change_step.bind(this)} close={close}/>
+  }
+
+}
+
+Access.propTypes = {
+  step: PropTypes.number,
+  close: PropTypes.func.isRequired
+}
+
+Access.defaultProps = {
+  step: 3
+}
+
+module.exports = Access

@@ -1,33 +1,36 @@
 const React = require('react')
 const Access  = require('./access/access.jsx')
 
-module.exports = React.createClass({
+class Sign_In_Button extends React.Component {
 
-  getInitialState: function () {
-    return {
+  constructor (props) {
+    super(props)
+    this.state = {
       show_access: false
     }
-  },
+  }
 
-  close: function () {
+  close () {
     this.setState({show_access: false})
-  },
+  }
 
-  render: function() {
+  render () {
     let {show_access} = this.state
     return (
       <div>
         <span className='pull-right'>
-          <a 
+          <a
             className='btn red-btn'
-            role='button' 
+            role='button'
             onClick={() => this.setState({show_access: true})}>
             Sign in to buy
           </a>
         </span>
-        {show_access && <Access close={this.close}/>}
+        {show_access && <Access close={this.close.bind(this)}/>}
       </div>
     )
   }
 
-})
+}
+
+module.exports = Sign_In_Button

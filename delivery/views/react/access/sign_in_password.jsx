@@ -1,36 +1,32 @@
-const React = require('react')
-const Modal = require('../modal.jsx')
-const $ = require('jquery')
+const React        = require('react')
+const Modal        = require('../modal.jsx')
+const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
-const errors = require('../../../../tools/errors.js')
+const errors       = require('../../../../tools/errors.js')
+const PropTypes    = require('prop-types')
 
-module.exports = React.createClass({
+class Sign_In_Password extends React.Component {
 
-  propTypes: {
-    change_step: React.PropTypes.func.isRequired,
-    phone: React.PropTypes.string.isRequired,
-    close: React.PropTypes.func.isRequired
-  },
-
-  getInitialState: function () {
-    return {
+  constructor (props) {
+    super(props)
+    this.state = {
       open: true,
       pwd: "",
       confirmation_pwd: ""
     }
-  },
+  }
 
-  close: function () {
+  close () {
     this.setState({open: false})
-  },
+  }
 
-  handle_change: function (event) {
+  handle_change (event) {
     let state = this.state
     state[event.target.id] = event.target.value
     this.setState(state)
-  },
+  }
 
-  check_pwd: function () {
+  check_pwd () {
     let {change_step, phone} = this.props
     let {pwd, confirmation_pwd} = this.state
     if (pwd.length < 8) confirmation.failure(errors.short_pwd.message)
@@ -46,9 +42,9 @@ module.exports = React.createClass({
         }
       })
     }
-  },
+  }
 
-  render: function() {
+  render () {
     let {pwd, confirmation_pwd, open} = this.state
     let {close} = this.props
     return (
@@ -56,18 +52,18 @@ module.exports = React.createClass({
         open = {open}
         close = {close}
         title = "Create a password"
-        action = {this.check_pwd}
+        action = {this.check_pwd.bind(this)}
         action_name = "Done"
       >
         <div className='row'>
         <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
           <div className="input-group input-group-lg">
             <span className="input-group-addon">Password</span>
-            <input id="pwd" type="password" className="form-control" value={pwd} onChange={this.handle_change} />
+            <input id="pwd" type="password" className="form-control" value={pwd} onChange={this.handle_change.bind(this)} />
           </div>
           <div className="input-group input-group-lg big-top-space">
             <span className="input-group-addon">Confirmation</span>
-            <input id="confirmation_pwd" type="password" className="form-control" value={confirmation_pwd} onChange={this.handle_change} />
+            <input id="confirmation_pwd" type="password" className="form-control" value={confirmation_pwd} onChange={this.handle_change.bind(this)} />
           </div>
         </div>
         </div>
@@ -75,4 +71,13 @@ module.exports = React.createClass({
     )
   }
 
-})
+
+}
+
+Sign_In_Password.propTypes = {
+  change_step: PropTypes.func.isRequired,
+  phone: PropTypes.string.isRequired,
+  close: PropTypes.func.isRequired
+}
+
+module.exports = Sign_In_Password
