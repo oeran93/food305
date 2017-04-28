@@ -1,5 +1,4 @@
 # vimi
-Group food delivery
 
 ## Environment
 
