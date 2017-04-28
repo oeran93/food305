@@ -1,4 +1,4 @@
-# vimi
+# VIMI
 
 ## Environment
 
