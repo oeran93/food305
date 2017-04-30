@@ -12,7 +12,7 @@ class Nav_Bar extends React.Component {
     let {user, current_page, change_page} = this.props
     return (
       <div className="navigation-bar">
-        <div className="pull-left">
+        <div className="logo pull-left">
             <a className="text-uppercase" href="/">{globals.app_name}</a>
         </div>
         <div className="pull-right">

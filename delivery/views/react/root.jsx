@@ -61,12 +61,12 @@ class Root extends React.Component {
       return (
         <div>
           {access && <Access close={this.close_access.bind(this)}/>}
+          <Nav_Bar
+           user={user}
+           change_page={this.change_page.bind(this)}
+           current_page={page}
+          />
           <Slider name="root_slider">
-            <Nav_Bar
-             user={user}
-             change_page={this.change_page.bind(this)}
-             current_page={page}
-            />
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
