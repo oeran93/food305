@@ -2,10 +2,10 @@ const React     = require('react')
 const $         = require('jquery')
 const Meal      = require('./meal/meal.jsx')
 const _         = require('underscore')
-const date      = require('../../../tools/date.js')
 const PropTypes = require('prop-types')
+const globals = require('../../../tools/globals.js')
 
-class Search_Page extends React.Component {
+class Menu extends React.Component {
 
   constructor (props) {
     super(props)
@@ -26,7 +26,8 @@ class Search_Page extends React.Component {
     let {restaurants} = this.state
     let {user} = this.props
     return (
-      <div>
+      <div className="row menu-page">
+        <div className="col-xs-12 col-md-9 col-md-offset-1">
         {restaurants.map(restaurant => {
             return (
               <div className='row' key={restaurant._id}>
@@ -44,14 +45,15 @@ class Search_Page extends React.Component {
             )
           })
         }
+        </div>
       </div>
     )
   }
 
 }
 
-Search_Page.propTypes = {
+Menu.propTypes = {
   user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
 }
 
-module.exports = Search_Page
+module.exports = Menu

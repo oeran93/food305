@@ -1,5 +1,4 @@
 const React        = require('react')
-const Modal        = require('../modal.jsx')
 const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
@@ -10,7 +9,6 @@ class Sign_In_Phone extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
       phone: ""
     }
   }
@@ -37,33 +35,37 @@ class Sign_In_Phone extends React.Component {
   }
 
   render () {
-    let {phone, open} = this.state
-    let {close} = this.props
+    let {phone} = this.state
     return (
-      <Modal
-        open = {open}
-        close = {close}
-        title = "Welcome to our community"
-        action = {this.send_phone.bind(this)}
-        action_name = "Next"
-      >
-        <div className='row'>
-        <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
-          <div className="input-group input-group-lg">
-            <span className="input-group-addon">Phone</span>
-            <input id="phone" type="text" className="form-control" value={phone} onChange={this.handle_change.bind(this)} />
-          </div>
+      <div className='row access'>
+        <div className='col-xs-12 text-center text-uppercase'>
+          <h2>Welcome to our community</h2>
         </div>
+        <div className='col-xs-12 input'>
+          <input
+            autoFocus
+            id="phone"
+            type="text"
+            className="basic-input"
+            value={phone}
+            placeholder="Phone"
+            onChange={this.handle_change.bind(this)}
+            onKeyPress={(t) => {if (t.charCode === 13) this.send_phone.bind(this)()}}
+          />
         </div>
-      </Modal>
+        <div className='col-xs-12'>
+          <button className='btn red-btn pull-right' onClick={this.send_phone.bind(this)}>
+            Next
+          </button>
+        </div>
+      </div>
     )
   }
 
 }
 
 Sign_In_Phone.propTypes = {
-  change_step: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired
+  change_step: PropTypes.func.isRequired
 }
 
 module.exports = Sign_In_Phone

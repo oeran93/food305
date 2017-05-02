@@ -22,12 +22,12 @@ module.exports = function () {
       })
   }
 
-  pub.get_my_meals = function (req, res) {
+  pub.get_future_meals = function (req, res) {
     Meal
     .find()
     .populate({
       path: 'orders',
-      match: {date: {'$eq': req.query.date}, _user: {'$eq': req.session.user._id}}
+      match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
     })
     .exec((err, meals) => {
       meals = meals.filter( m => _.size(m.orders))

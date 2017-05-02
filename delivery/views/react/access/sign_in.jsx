@@ -10,7 +10,6 @@ class Sign_In extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
       phone: "",
       pwd: ""
     }
@@ -38,37 +37,50 @@ class Sign_In extends React.Component {
   }
 
   render () {
-    let {phone, pwd, open} = this.state
-    let {change_step, close} = this.props
+    let {phone, pwd} = this.state
+    let {change_step} = this.props
     return (
-      <Modal
-        open = {open}
-        close = {close}
-        title = "Login"
-        action = {this.login.bind(this)}
-        action_name = "Login"
-      >
-        <div className='row'>
-        <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
-          <div className="input-group input-group-lg">
-            <span className="input-group-addon">Phone</span>
-            <input id="phone" type="text" className="form-control" value={phone} onChange={this.handle_change.bind(this)} />
-          </div>
-          <div className="input-group input-group-lg big-top-space big-bottom-space">
-            <span className="input-group-addon">Password</span>
-            <input id="pwd" type="password" className="form-control" value={pwd} onChange={this.handle_change.bind(this)} />
-          </div>
-          <a href='#' className='red-text text-centered' onClick={() => change_step(0)}> Create an account </a>
+      <div className='row access'>
+        <div className='col-xs-12 text-center text-uppercase'>
+          <h2>SIGN IN</h2>
         </div>
+        <div className='col-xs-12 input'>
+          <input
+            autoFocus
+            id="phone" type="text"
+            className="basic-input"
+            placeholder="Phone"
+            value={phone}
+            onChange={this.handle_change.bind(this)}
+            onKeyPress={(t) => {if (t.charCode === 13) this.login.bind(this)()}}
+          />
         </div>
-      </Modal>
+        <div className="col-xs-12 input">
+          <input
+            id="pwd"
+            type="password"
+            className="basic-input"
+            placeholder="Password"
+            value={pwd}
+            onChange={this.handle_change.bind(this)}
+            onKeyPress={(t) => {if (t.charCode === 13) this.login.bind(this)()}}
+          />
+        </div>
+        <div className="col-xs-12">
+          <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
+            Create an account
+          </button>
+          <button className='btn red-btn pull-right' onClick={this.login.bind(this)}>
+            Login
+          </button>
+        </div>
+      </div>
     )
   }
 
 }
 
 Sign_In.propTypes = {
-  change_step: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired
+  change_step: PropTypes.func.isRequired
 }
 module.exports = Sign_In

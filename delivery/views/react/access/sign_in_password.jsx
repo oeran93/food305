@@ -1,5 +1,4 @@
 const React        = require('react')
-const Modal        = require('../modal.jsx')
 const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
@@ -10,14 +9,9 @@ class Sign_In_Password extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
       pwd: "",
       confirmation_pwd: ""
     }
-  }
-
-  close () {
-    this.setState({open: false})
   }
 
   handle_change (event) {
@@ -45,29 +39,41 @@ class Sign_In_Password extends React.Component {
   }
 
   render () {
-    let {pwd, confirmation_pwd, open} = this.state
-    let {close} = this.props
+    let {pwd, confirmation_pwd} = this.state
     return (
-      <Modal
-        open = {open}
-        close = {close}
-        title = "Create a password"
-        action = {this.check_pwd.bind(this)}
-        action_name = "Done"
-      >
-        <div className='row'>
-        <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
-          <div className="input-group input-group-lg">
-            <span className="input-group-addon">Password</span>
-            <input id="pwd" type="password" className="form-control" value={pwd} onChange={this.handle_change.bind(this)} />
-          </div>
-          <div className="input-group input-group-lg big-top-space">
-            <span className="input-group-addon">Confirmation</span>
-            <input id="confirmation_pwd" type="password" className="form-control" value={confirmation_pwd} onChange={this.handle_change.bind(this)} />
-          </div>
+      <div className='row access'>
+        <div className='col-xs-12 text-center text-uppercase'>
+          <h2>Create a password</h2>
         </div>
+        <div className="col-xs-12 input">
+            <input
+              autoFocus
+              id="pwd"
+              type="password"
+              className="basic-input"
+              placeholder="Password"
+              value={pwd}
+              onChange={this.handle_change.bind(this)}
+              onKeyPress={(t) => {if (t.charCode === 13) this.check_pwd.bind(this)()}}
+            />
         </div>
-      </Modal>
+        <div className="col-xs-12 input">
+            <input
+              id="confirmation_pwd"
+              type="password"
+              className="basic-input"
+              placeholder="Confirm Password"
+              value={confirmation_pwd}
+              onChange={this.handle_change.bind(this)}
+              onKeyPress={(t) => {if (t.charCode === 13) this.check_pwd.bind(this)()}}
+            />
+        </div>
+        <div className="col-xs-12">
+          <button className='btn red-btn pull-right' onClick={this.check_pwd.bind(this)}>
+            Done
+          </button>
+        </div>
+      </div>
     )
   }
 
@@ -76,8 +82,7 @@ class Sign_In_Password extends React.Component {
 
 Sign_In_Password.propTypes = {
   change_step: PropTypes.func.isRequired,
-  phone: PropTypes.string.isRequired,
-  close: PropTypes.func.isRequired
+  phone: PropTypes.string.isRequired
 }
 
 module.exports = Sign_In_Password
