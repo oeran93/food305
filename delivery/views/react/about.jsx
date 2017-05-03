@@ -80,7 +80,7 @@ module.exports = () => {
       <a id="signup"></a>
       <div className="row about-section section-5">
         <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <Access step={0} />
+          <Access step={0} autofocus={false}/>
         </div>
       </div>
 

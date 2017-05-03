@@ -40,6 +40,7 @@ class Sign_In_Password extends React.Component {
 
   render () {
     let {pwd, confirmation_pwd} = this.state
+    let {autofocus} = this.props
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
@@ -47,7 +48,7 @@ class Sign_In_Password extends React.Component {
         </div>
         <div className="col-xs-12 input">
             <input
-              autoFocus
+              autoFocus={autofocus}
               id="pwd"
               type="password"
               className="basic-input"
@@ -82,7 +83,8 @@ class Sign_In_Password extends React.Component {
 
 Sign_In_Password.propTypes = {
   change_step: PropTypes.func.isRequired,
-  phone: PropTypes.string.isRequired
+  phone: PropTypes.string.isRequired,
+  autofocus: PropTypes.bool
 }
 
 module.exports = Sign_In_Password

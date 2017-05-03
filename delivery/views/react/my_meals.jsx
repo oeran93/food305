@@ -42,7 +42,7 @@ class My_Meals extends React.Component {
     }
     return (
       <div className="row my-meals-page">
-        <div className="col-xs-12 col-md-9 col-md-offset-1 text-center">
+        <div className="col-xs-12 col-md-8 col-md-offset-2 text-center">
           {content}
         </div>
       </div>

@@ -123,11 +123,7 @@ html, body, #root {
 }
 
 .navigation-bar .logo {
-  margin: 20px 0 0 20px;
-}
-
-.navigation-bar .logo a {
-  font-size: 20px;
+  margin: 10px 0 0 20px;
 }
 
 /*BANNER*/
@@ -154,11 +150,6 @@ html, body, #root {
 .banner .subtitle {
   margin: 0 0 15px 0;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-}
-
-.about-banner {
-  background-image: url('../images/bg2.jpg');
-  height: 100vh;
 }
 
 /*FOOTER*/

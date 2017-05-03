@@ -36,6 +36,7 @@ class Sign_In_Phone extends React.Component {
 
   render () {
     let {phone} = this.state
+    let {autofocus} = this.props
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
@@ -43,7 +44,7 @@ class Sign_In_Phone extends React.Component {
         </div>
         <div className='col-xs-12 input'>
           <input
-            autoFocus
+            autoFocus={autofocus}
             id="phone"
             type="text"
             className="basic-input"
@@ -65,7 +66,8 @@ class Sign_In_Phone extends React.Component {
 }
 
 Sign_In_Phone.propTypes = {
-  change_step: PropTypes.func.isRequired
+  change_step: PropTypes.func.isRequired,
+  autofocus: PropTypes.bool
 }
 
 module.exports = Sign_In_Phone

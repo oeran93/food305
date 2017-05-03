@@ -27,6 +27,7 @@ class Nav_Bar extends React.Component {
       <div className="container-fluid navigation-bar">
         <div className="col-xs-12">
           <div className="logo pull-left">
+            <img src="./images/logo.png" height="50px"/>
           </div>
           <div className="pull-right">
             <Link className="btn red-btn margin-right-5" to="/">HOME</Link>

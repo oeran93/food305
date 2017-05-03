@@ -27,24 +27,28 @@ class Menu extends React.Component {
     let {user} = this.props
     return (
       <div className="row menu-page">
-        <div className="col-xs-12 col-md-9 col-md-offset-1">
-        {restaurants.map(restaurant => {
-            return (
-              <div className='row' key={restaurant._id}>
-                <div className='page-header text-uppercase text-center'>
-                  <h3>{restaurant.name}</h3>
-                </div>
-                {restaurant.meals.map(meal => {
-                  return (<Meal
-                           key={meal._id}
-                           meal={meal}
-                           action={user ? 'buy' : 'login'}
-                        />)
-                })}
-              </div>
-            )
-          })
-        }
+        <div className="col-xs-12 col-md-8 col-md-offset-2">
+          <div className="row">
+            <div className="col-xs-12">
+              {restaurants.map(restaurant => {
+                  return (
+                    <div className='row' key={restaurant._id}>
+                      <div className='page-header text-uppercase text-center'>
+                        <h3>{restaurant.name}</h3>
+                      </div>
+                      {restaurant.meals.map(meal => {
+                        return (<Meal
+                                 key={meal._id}
+                                 meal={meal}
+                                 action={user ? 'buy' : 'login'}
+                              />)
+                      })}
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     )
