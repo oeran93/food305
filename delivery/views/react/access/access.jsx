@@ -22,23 +22,24 @@ class Access extends React.Component {
   }
 
   render () {
+    let {autofocus} = this.props
     let {phone, step} = this.state
-    let {close} = this.props
-    if (step == 0) return <Sign_In_Phone change_step={this.change_step.bind(this)} close={close}/>
-    else if (step == 1) return <Sign_In_Code phone={phone} change_step={this.change_step.bind(this)} close={close}/>
-    else if (step == 2) return <Sign_In_Password phone={phone} change_step={this.change_step.bind(this)} close={close}/>
-    else if (step == 3) return <Sign_In change_step={this.change_step.bind(this)} close={close}/>
+    if (step == 0) return <Sign_In_Phone autofocus={autofocus} change_step={this.change_step.bind(this)}/>
+    else if (step == 1) return <Sign_In_Code autofocus={autofocus} phone={phone} change_step={this.change_step.bind(this)}/>
+    else if (step == 2) return <Sign_In_Password autofocus={autofocus} phone={phone} change_step={this.change_step.bind(this)}/>
+    else if (step == 3) return <Sign_In autofocus={autofocus} change_step={this.change_step.bind(this)}/>
   }
 
 }
 
 Access.propTypes = {
   step: PropTypes.number,
-  close: PropTypes.func.isRequired
+  autofocus: PropTypes.bool
 }
 
 Access.defaultProps = {
-  step: 3
+  step: 3,
+  autofocus: true
 }
 
 module.exports = Access

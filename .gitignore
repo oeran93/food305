@@ -38,3 +38,6 @@ jspm_packages
 
 # All bundle
 bundle.js*
+
+#DS_Store
+.DS_Store

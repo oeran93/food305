@@ -1,5 +1,4 @@
 const React        = require('react')
-const Modal        = require('../modal.jsx')
 const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
@@ -10,13 +9,8 @@ class Sign_In_Code extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
       code: ""
     }
-  }
-
-  close () {
-    this.setState({open: false})
   }
 
   handle_change (event) {
@@ -40,26 +34,34 @@ class Sign_In_Code extends React.Component {
   }
 
   render () {
-    let {code, open} = this.state
-    let {close, change_step}  = this.props
+    let {code} = this.state
+    let {change_step, autofocus}  = this.props
     return (
-      <Modal
-        open = {open}
-        close = {close}
-        title = "Verify your phone"
-        action = {this.check_code.bind(this)}
-        action_name = "Next"
-      >
-        <div className='row'>
-        <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
-          <div className="input-group input-group-lg big-bottom-space">
-            <span className="input-group-addon">Code</span>
-            <input id="code" type="text" className="form-control" value={code} onChange={this.handle_change.bind(this)} />
-          </div>
-          <a href='#' className='red-text text-centered' onClick={ () => change_step(0)}> Try again </a>
+      <div className='row access'>
+        <div className='col-xs-12 text-center text-uppercase'>
+          <h2>Verify your phone</h2>
         </div>
+        <div className='col-xs-12 input'>
+            <input
+              autoFocus={autofocus}
+              id="code"
+              type="text"
+              className="basic-input"
+              value={code}
+              placeholder="Verification Code"
+              onChange={this.handle_change.bind(this)}
+              onKeyPress={(t) => {if (t.charCode === 13) this.check_code.bind(this)()}}
+            />
         </div>
-      </Modal>
+        <div className='col-xs-12'>
+          <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
+            Try again
+          </button>
+          <button className='btn red-btn pull-right margin-right-5' onClick={this.check_code.bind(this)}>
+            Next
+          </button>
+        </div>
+      </div>
     )
   }
 
@@ -68,7 +70,7 @@ class Sign_In_Code extends React.Component {
 Sign_In_Code.propTypes = {
   change_step: PropTypes.func.isRequired,
   phone: PropTypes.string.isRequired,
-  close: PropTypes.func.isRequired
+  autofocus: PropTypes.bool
 }
 
 module.exports = Sign_In_Code
