@@ -39,8 +39,6 @@ class Nav_Bar extends React.Component {
           </div>
         </div>
         <Modal show={open} onHide={this.toggleModal.bind(this)}>
-          <Modal.Header closeButton>
-          </Modal.Header>
           <Modal.Body>
             <Access step={3} />
           </Modal.Body>

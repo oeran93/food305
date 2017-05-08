@@ -3,6 +3,7 @@ const date         = require('../../../../tools/date.js')()
 const confirmation = require('../../../../tools/confirmation.js')()
 const Modal        = require('../modal.jsx')
 const PropTypes    = require('prop-types')
+import Calendar	from "../calendar.jsx"
 
 class Buy_Button extends React.Component {
 
@@ -27,7 +28,7 @@ class Buy_Button extends React.Component {
       method: 'POST',
       url: '/post_order',
       data: {meal: this.props._id, date: delivery.format('MMM DD YYYY, hh')},
-      success: () => confirmation.success('Sit back and relax, your meal will be delivered on '+delivery.format('dddd Do, hh a')),
+      success: () => confirmation.success('Sit back and relax, your meal will come to you'),
       error: () => confirmation.failure('Something went wrong :(')
     })
     this.close_dialog()
@@ -52,8 +53,9 @@ class Buy_Button extends React.Component {
 	      	close={this.close_dialog.bind(this)}
 	      	action={this.buy_meal.bind(this)}
 	      	action_name="Buy Meal"
-	      	title={"Food will be delievered on " + delivery.format('dddd Do, hh a') + " in Lopata"}
+	      	title="Pick a Timeslot"
         >
+					<Calendar />
 	      </Modal>
 	  	</div>
 		)

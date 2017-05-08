@@ -97,8 +97,17 @@ html, body, #root {
 
 /*MODAL*/
 
-.modal-header, .modal-footer{
+.modal-header, .modal-footer, .modal-body{
   border: 0;
+  clear: both;
+}
+
+.modal-header {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  margin-top: 10px;
 }
 
 /*NAVBAR*/
