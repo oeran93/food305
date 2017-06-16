@@ -1,38 +1,32 @@
 const Restaurant = require('../../database/restaurant.js')
-const Meal       = require('../../database/meal.js')
-const date       = require('../../tools/date.js')()
-const _          = require('underscore')
+const Station    = require('../../database/station.js')
 
 module.exports = function () {
 
   let pub = {}
 
   /*
-  * Returns all meals of restaurants opened today
+  * Returns station menu for the day. Every day one restaurant and 5 meals.
+  * @param req.query.station {id} id of the station
+  * @param req.query.delivery_day {moment} date of next closest delivery
   */
-  pub.get_available_meals = function (req, res) {
-    Restaurant
-      .find()
-      .populate({
-        path:'meals'
+  pub.get_menu = function (req, res) {
+    let {station, delivery_day} = req.query
+    Station
+      .findOne({_id: station})
+      .exec((err, station) => {
+          Restaurant
+            .findOne({_id: station.schedule[delivery_day-1]})
+            .populate({
+              path: 'meals'
+            })
+            .exec((err, restaurant) => {
+              res.send({
+                restaurant: restaurant.name,
+                meals: restaurant.meals
+              })
+            })
       })
-      .exec((err, restaurants) => {
-        restaurants = restaurants.filter(r => !_.contains(r.closed,date.this_order_delivery().format('dddd').toLowerCase()))
-        res.send(restaurants)
-      })
-  }
-
-  pub.get_future_meals = function (req, res) {
-    Meal
-    .find()
-    .populate({
-      path: 'orders',
-      match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
-    })
-    .exec((err, meals) => {
-      meals = meals.filter( m => _.size(m.orders))
-      res.send(meals)
-    })
   }
 
   return pub

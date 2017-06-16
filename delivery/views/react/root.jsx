@@ -1,7 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import Menu from './menu.jsx'
-import My_Meals from './my_meals.jsx'
+import Home from './home.jsx'
 import Nav_Bar from './nav_bar.jsx'
 import Footer from './footer.jsx'
 import Access from './access/access.jsx'
@@ -42,9 +41,7 @@ class Root extends React.Component {
             <div className='container-fluid page-container'>
               <div className='row page-row'>
                <div className='col-xs-12 page'>
-                  <Route exact path='/' component={user ? Menu : About}/>
-                  <Route path='/my_meals' component={My_Meals}/>
-                  <Route path='/sign_in' component={Access}/>
+                  <Route exact path='/' component={user ? Home : About}/>
                </div>
               </div>
             </div>

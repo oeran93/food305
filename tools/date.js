@@ -8,13 +8,13 @@ module.exports = function () {
 	const pub = {}
 
 	const delivery_hours = {
-		'monday': [13],
-		'tuesday': [13],
-		'wednesday': [13],
-		'thursday': [13],
-		'friday': [13],
-		'saturday': [13],
-		'sunday': [13]
+		'monday': [12],
+		'tuesday': [12],
+		'wednesday': [12],
+		'thursday': [12],
+		'friday': [12],
+		'saturday': [],
+		'sunday': []
 	}
 
 	const time_to_deliver = 2
@@ -45,7 +45,7 @@ module.exports = function () {
 	*/
 	pub.this_delivery = function () {
 		let date = moment()
-		return available_delivery(date) 
+		return available_delivery(date)
 	}
 
 	/*

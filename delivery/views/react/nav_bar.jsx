@@ -31,7 +31,6 @@ class Nav_Bar extends React.Component {
           </div>
           <div className="pull-right">
             <Link className="btn red-btn margin-right-5" to="/">HOME</Link>
-            {user && <Link className="btn red-btn margin-right-5" to="/my_meals">MY MEALS</Link>}
             {user && <a className="btn red-btn margin-right-5" onClick={() => window.location.href = "/logout"}>LOGOUT</a>}
             {!user && <button className="btn red-btn margin-right-5" onClick={this.toggleModal.bind(this)}>
               SIGN IN

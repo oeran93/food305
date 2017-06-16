@@ -3,9 +3,12 @@ var Order = require('../../database/order.js')
 
 module.exports = function () {
 
-  var public = {}
+  let pub = {}
 
-  public.add_order = function (req,res) {
+  /*
+  * Adds an order for a user
+  */
+  pub.add_order = function (req,res) {
     var order = new Order({
       _meal: req.body.meal,
       _user: req.session.user._id,
@@ -22,6 +25,22 @@ module.exports = function () {
     })
   }
 
-  return public
+  /*
+  * Gets all upcoming orders for a user.
+  */
+  pub.get_future_orders = function (req, res) {
+    Meal
+    .find()
+    .populate({
+      path: 'orders',
+      match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
+    })
+    .exec((err, meals) => {
+      meals = meals.filter( m => m.orders.length)
+      res.send(meals)
+    })
+  }
+
+  return pub
 
 }

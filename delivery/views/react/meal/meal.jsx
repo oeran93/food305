@@ -19,12 +19,12 @@ const Meal = function(props) {
           <h4 title={name} className='meal-name text-uppercase text-center'>
             {format.dotdotdot(name,25)}
           </h4>
-          <Buy_Button _id={_id} />
           {delivery &&
-            <span className='meal-delivery label pull-left'>
-              {delivery.format('dddd Do, h a')}
+            <span className='meal-delivery label pull-left col-xs-12'>
+              {delivery.format('dddd Do, h a')} <br/> 5th Floor T. Rex
             </span>
           }
+          {!delivery && <Buy_Button _id={_id} />}
         </div>
       </div>
     </div>

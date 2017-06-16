@@ -9,6 +9,7 @@ var User = new Schema({
   email: {type: String, unique: true},
   pwd: String,
   salt: String,
+  station: {type: Schema.Types.ObjectId, ref: 'Station'},
   created_at: Date
 })
 
