@@ -67,6 +67,9 @@ class Sign_In extends React.Component {
           />
         </div>
         <div className="col-xs-12">
+          <button className='btn red-btn pull-left' onClick={() => change_step(4)}>
+            Forgot Password
+          </button>
           <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
             Create an account
           </button>

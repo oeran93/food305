@@ -13,12 +13,12 @@ describe('meal business logic', () => {
         station: "5942acf346dd0aaa411708fe",
         delivery_day: date.this_delivery().day()
       })
-    .end((err, res) => {
-      if (err) return
-      res.body.should.have.property("restaurant")
-      res.body.should.have.property("meals")
-      done()
-    })
+      .end((err, res) => {
+        if (err) return
+        res.body.should.have.property("restaurant")
+        res.body.should.have.property("meals")
+        done()
+      })
   })
 
 })

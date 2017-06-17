@@ -164,4 +164,24 @@ describe('local authentication', function () {
     })
   })
 
+  it('creates a recovery code and sends it to the user', done => {
+    supertest(app)
+      .get('/forgot_pwd')
+      .query({phone: 3143090319})
+      .end((err, res) => {
+        if (err) return
+        done()
+    })
+  })
+
+  it('does not recover if code does not match', done => {
+    supertest(app)
+      .post('/recover_pwd')
+      .send({code: 314})
+      .end((err, res) => {
+        if (err) return
+        done()
+    })
+  })
+
 })

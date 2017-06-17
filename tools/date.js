@@ -71,6 +71,19 @@ module.exports = function () {
 	}
 
 	/*
+	* Gets day of the week in name format.
+	* If the date is today or tomorrow it will return 'Today' or 'Tomorrow',
+	* otherwise it returns the day.
+	* @param date {moment}
+	* @return day of the week {String}
+	*/
+	pub.get_day_of_week = function (date) {
+		if (date.day() == moment().day()) return "Today"
+		else if (date.day() == moment().day()+1) return "Tomorrow"
+		else return date.format('dddd')
+	}
+
+	/*
 	* Calculate time between now and next order starts
 	* @return {moment}
 	*/

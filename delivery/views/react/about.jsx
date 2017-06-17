@@ -15,7 +15,7 @@ module.exports = () => {
     <div className="about-page">
 
       <div className="row banner about-banner">
-        <div className="content clearfix">
+        <div className="clearfix">
           <div className="col-xs-12">
             <h1 className="title text-uppercase text-center">{globals.app_name}</h1>
           </div>
@@ -54,7 +54,7 @@ module.exports = () => {
       <div className="row about-section section-3">
         <div className="col-xs-12 col-sm-2 col-sm-offset-3">
           <img src="/images/about/membership.png" alt="monthly membership" />
-          <h4 className="text-uppercase text-center"> $9.99 Monthly Membership </h4>
+          <h4 className="text-uppercase text-center"> $14.99 Monthly Membership </h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
           <img src="/images/about/money.png" alt="no money" />
@@ -65,7 +65,7 @@ module.exports = () => {
       <div className="row about-section section-4">
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
           <img src="/images/about/search.png" alt="We scout the best restaurants" />
-          <h4 className="text-uppercase text-center"> We Scout The Best Restaurants For You </h4>
+          <h4 className="text-uppercase text-center"> A different restaurant every day, 5 days a week</h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
           <img src="/images/about/change.png" alt="We change them monthly" />

@@ -5,9 +5,11 @@ const generics = require('../../tools/generics.js')
 const errors = require('../../tools/errors.js')
 const _ = require('underscore')
 
-module.exports = {
+module.exports = function () {
 
-  session: function (req, res, next) {
+  let pub = {}
+
+  pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
       User.findOne({phone: req.session.user.phone}, 'phone name email', (err, user) => {
         if (user) req.session.user = user
@@ -16,9 +18,9 @@ module.exports = {
     } else next()
   },
 
-  create_user: function (req, res) {
+  pub.create_user = function (req, res) {
     let phone = req.body.phone
-    let code = generics.rand_number(4)
+    let code = generics.rand_number(6)
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else if (user && user.activated) res.send({error: errors.user_exists})
@@ -45,7 +47,7 @@ module.exports = {
     })
   },
 
-  check_phone_code: function (req, res) {
+  pub.check_phone_code = function (req, res) {
     let {code, phone} = req.body
     User.findOne({phone, code}, (err, user) => {
       if (err) res.send({error: errors.generic})
@@ -60,7 +62,7 @@ module.exports = {
     })
   },
 
-  create_password: function (req, res) {
+  pub.create_password = function (req, res) {
     let {pwd, phone, old_pwd} = req.body
     old_pwd = old_pwd || ''
     if (pwd.length < 8) res.send({error: errors.short_pwd})
@@ -86,12 +88,46 @@ module.exports = {
     }
   },
 
-  logout: function (req, res) {
+  /*
+  * creates a new recovery code, sends it to the user and saves it in the DB
+  * @param req.query.phone {String} user phone number
+  */
+  pub.forgot_pwd = function (req, res) {
+    let code = generics.rand_number(10)
+    User.findOneAndUpdate({phone: req.query.phone}, {code}, {new: true}, (err, user) => {
+      if (!user) res.send({error: errors.invalid_phone})
+      else if (!user.code) res.send({error: errors.generic})
+      else {
+        twilio.send_sms(
+          req.query.phone,
+          `Your Vimi Password Recovery Code is ${code}`
+        )
+        res.send({success: true})
+      }
+    })
+  },
+
+  /*
+  * checks if the code is right and creates a new password for the user
+  * @param req.body.code {String} recovery code
+  * @param req.body.pwd {String} new password
+  * @param req.body.phone {String} phone number
+  */
+  pub.recover_pwd = function (req, res) {
+    let {code, pwd, phone} = req.body
+    User.findOneAndUpdate({code, phone}, {code: '', pwd: ''}, (err, user) => {
+      if (err) res.send({error: errors.generic})
+      if (!user) res.send({error: errors.invalid_code})
+      else pub.create_password(req, res)
+    })
+  },
+
+  pub.logout = function (req, res) {
     req.session.reset()
     res.redirect('/')
   },
 
-  login: function (req, res) {
+  pub.login = function (req, res) {
     let {phone, pwd} = req.body
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
@@ -103,5 +139,7 @@ module.exports = {
       } else res.send({error: errors.invalid_old_pwd})
     })
   }
+
+  return pub
 
 }
