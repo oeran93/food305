@@ -31,7 +31,7 @@ class Buy_Button extends React.Component {
       success: () => confirmation.success('Sit back and relax, your meal will come to you'),
       error: () => confirmation.failure('Something went wrong :(')
     })
-    this.close_dialog()
+    window.location.href = "/"
   }
 
 	render () {
