@@ -11,6 +11,7 @@ class Home extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     return (
       <div className="row home-page">
         <Home_Banner />
@@ -20,10 +21,6 @@ class Home extends React.Component {
     )
   }
 
-}
-
-Home.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
 }
 
 module.exports = Home

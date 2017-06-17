@@ -16,11 +16,12 @@ class Menu extends React.Component {
   }
 
   componentDidMount () {
+    let station = this.props.user.station
     $.ajax({
       method : 'GET',
       url    : '/get_menu',
       data: {
-        station: "5942acf346dd0aaa411708fe",
+        station: station,
         delivery_day: date.this_delivery().day()
       },
       success: menu => {

@@ -41,7 +41,10 @@ class Root extends React.Component {
             <div className='container-fluid page-container'>
               <div className='row page-row'>
                <div className='col-xs-12 page'>
-                  <Route exact path='/' component={user ? Home : About}/>
+                  <Route exact path='/' component={
+                      () => user ? <Home user={user} /> : <About/>
+                    }
+                  />
                </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 const User = require('../../database/user.js')
+const Station = require('../../database/station.js')
 const crypto = require('../../tools/crypto.js')()
 const twilio = require('../../tools/twilio.js')()
 const generics = require('../../tools/generics.js')
@@ -11,10 +12,13 @@ module.exports = function () {
 
   pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
-      User.findOne({phone: req.session.user.phone}, 'phone name email', (err, user) => {
-        if (user) req.session.user = user
-        next()
-      })
+      User
+        .findOne({phone: req.session.user.phone})
+        .select('phone station')
+        .exec((err, user) => {
+          if (user) req.session.user = user
+          next()
+        })
     } else next()
   },
 
@@ -25,24 +29,27 @@ module.exports = function () {
       if (err) res.send({error: errors.generic})
       else if (user && user.activated) res.send({error: errors.user_exists})
       else {
-        User.update(
-          {phone},
-          {
-            code,
-            created_at: new Date ()
-          },
-          {upsert: true},
-          err => {
-            twilio.send_sms(phone, `Your Vimi account code is ${code}`)
-            .then(() => res.send({success: true}))
-            .catch(err => {
-              User.remove({phone}, err => {
-                if (err) {console.log(err)} // what happens if there is an error deleting the user ?
-                res.send({error: errors.invalid_phone})
+        Station.findOne({}, (err, station) => {
+          User.update(
+            {phone},
+            {
+              code,
+              created_at: new Date (),
+              station: station._id
+            },
+            {upsert: true},
+            err => {
+              twilio.send_sms(phone, `Your Vimi account code is ${code}`)
+              .then(() => res.send({success: true}))
+              .catch(err => {
+                User.remove({phone}, err => {
+                  if (err) {console.log(err)} // what happens if there is an error deleting the user ?
+                  res.send({error: errors.invalid_phone})
+                })
               })
-            })
-          }
-        )
+            }
+          )
+        })
       }
     })
   },
