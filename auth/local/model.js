@@ -22,6 +22,11 @@ module.exports = function () {
     } else next()
   },
 
+  /*
+  * Creates a new not activated user in the db
+  * @param req.body.phone {String} user phone number
+  * will not create user if already present and active, if number is not right.
+  */
   pub.create_user = function (req, res) {
     let phone = req.body.phone
     let code = generics.rand_number(6)
@@ -32,21 +37,25 @@ module.exports = function () {
         Station.findOne({}, (err, station) => {
           User.update(
             {phone},
-            {
-              code,
-              created_at: new Date (),
-              station: station._id
+            { $set: {
+                code: code,
+                created_at: new Date (),
+                station: station._id
+              }
             },
             {upsert: true},
             err => {
-              twilio.send_sms(phone, `Your Vimi account code is ${code}`)
-              .then(() => res.send({success: true}))
-              .catch(err => {
-                User.remove({phone}, err => {
-                  if (err) {console.log(err)} // what happens if there is an error deleting the user ?
-                  res.send({error: errors.invalid_phone})
+              if (err) res.send({error: errors.generic})
+              else {
+                twilio.send_sms(phone, `Your Vimi account code is ${code}`)
+                .then(() => res.send({success: true}))
+                .catch(err => {
+                  User.remove({phone}, err => {
+                    if (err) {console.log(err)} // what happens if there is an error deleting the user ?
+                    res.send({error: errors.invalid_phone})
+                  })
                 })
-              })
+              }
             }
           )
         })

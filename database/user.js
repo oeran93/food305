@@ -6,7 +6,6 @@ var User = new Schema({
   code: String,
   activated: String,
   name: String,
-  email: {type: String, unique: true},
   pwd: String,
   salt: String,
   station: {type: Schema.Types.ObjectId, ref: 'Station'},
