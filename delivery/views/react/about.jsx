@@ -42,7 +42,7 @@ module.exports = () => {
           <h4 className="text-uppercase text-center"> Order Online </h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
-          <img src="/images/about/distributor.png" alt="we notify you when food arrives" />
+          <img src="/images/about/notification.png" alt="we notify you when food arrives" />
           <h4 className="text-uppercase text-center"> We Notify You When Your Food Arrives </h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
@@ -54,17 +54,17 @@ module.exports = () => {
       <div className="row about-section section-3">
         <div className="col-xs-12 col-sm-2 col-sm-offset-3">
           <img src="/images/about/membership.png" alt="monthly membership" />
-          <h4 className="text-uppercase text-center"> $14.99 Monthly Membership </h4>
+          <h4 className="text-uppercase text-center"> No Delivery Fees. $14.99 Monthly Membership </h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
-          <img src="/images/about/money.png" alt="no money" />
-          <h4 className="text-uppercase text-center"> No Delivery Fees </h4>
+          <img src="/images/about/calendar.png" alt="no money" />
+          <h4 className="text-uppercase text-center"> Free for 2 weeks. Then you make your choice. </h4>
         </div>
       </div>
 
       <div className="row about-section section-4">
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
-          <img src="/images/about/search.png" alt="We scout the best restaurants" />
+          <img src="/images/about/restaurant.png" alt="A different restaurant every day, 5 days a week" />
           <h4 className="text-uppercase text-center"> A different restaurant every day, 5 days a week</h4>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
