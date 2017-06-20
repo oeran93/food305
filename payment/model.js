@@ -1,4 +1,4 @@
-
+const errors = require('../tools/errors.js')
 
 module.exports = function (apikey, apisecret, merchant_token) {
 
@@ -6,7 +6,7 @@ module.exports = function (apikey, apisecret, merchant_token) {
   let payeezy = require('payeezy')(apikey, apisecret, merchant_token);
   payeezy.version = "v1";
   payeezy.host = "api-cert.payeezy.com"; // Sandbox Environment - Replace this value for Live Environment "api.payeezy.com"
-  console.log(payeezy)
+
   /*
   * Charge user's credit card
   * @param req.body.amount {String}
@@ -25,17 +25,20 @@ module.exports = function (apikey, apisecret, merchant_token) {
   */
   pub.charge_credit_card = function (req, res) {
     let {amount, credit_card, billing_address} = req.body
-    payeezy.transaction.authorize(
+    payeezy.transaction.purchase(
       {
           method: 'credit_card',
-          amount,
+          amount: amount * 100,
           currency_code: 'USD',
           credit_card,
           billing_address
       },
-        (err, res) => {
-          if (err) console.log('Authorize Transaction Failed\n' + error)
-          else if (res) console.log('Authorize Successful.\nTransaction Tag: ' + response.transaction_tag)
+        (err, response) => {
+          if (err) {
+            console.log('purchase error: ', err.Error.messages) /*LOGIT*/
+            res.send({errors: errors.failed_purchase})
+          }
+          else if (response) res.send({success: true})
         }
     )
   }

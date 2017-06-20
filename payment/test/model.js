@@ -23,10 +23,11 @@ describe('payment module', () => {
             zip_postal_code: '10281',
             country: 'US'
         },
-        amount: '0.50'
+        amount: "1075"
       })
       .end((err, res) => {
         if (err) return
+        res.body.should.have.property('success')
         done()
       })
   })

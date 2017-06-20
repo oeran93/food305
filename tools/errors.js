@@ -43,6 +43,11 @@ module.exports = {
   pwd_no_match: {
     number: 9,
     message: "Password do not match"
+  },
+
+  failed_purchase: {
+    number: 10,
+    message: "Something went wrong, we were not able to process your credit card"
   }
 
 }

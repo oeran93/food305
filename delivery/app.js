@@ -22,9 +22,20 @@ module.exports = function (db) {
       activeDuration: 2 * 24 * 60 * 1000
     }
   ))
+
+  /*Redirecting http to https*/
+  // app.all('*', (req, res, next) => {
+  //   if (req.secure) next()
+  //   else res.redirect('https://' + req.hostname + req.url)
+  // })
+
+  /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
+
+  /*Modules Router*/
   sharer_router(app)
   auth_router(app)
   payment_router(app)
+
   return app
 }

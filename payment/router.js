@@ -2,6 +2,6 @@ const model = require('./model.js')('9zrIGMePyV72z3gPAIBo0ohv4LWGQ12y', 'b3a7dbb
 
 module.exports = function (app) {
 
-  app.post('charge_credit_card', model.charge_credit_card)
+  app.post('/charge_credit_card', model.charge_credit_card)
 
 }

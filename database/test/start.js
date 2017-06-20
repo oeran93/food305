@@ -6,8 +6,8 @@ module.exports = function () {
   mongoose.connect(auth,
     (err, res) => {
       if (err) {
-        console.log(err.message);
+        console.log('db error: ', err.message);
       }
     }
-  ) 
+  )
 }
