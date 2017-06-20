@@ -24,10 +24,10 @@ module.exports = function (db) {
   ))
 
   /*Redirecting http to https*/
-  // app.all('*', (req, res, next) => {
-  //   if (req.secure) next()
-  //   else res.redirect('https://' + req.hostname + req.url)
-  // })
+  app.all('*', (req, res, next) => {
+    if (req.secure) next()
+    else res.redirect('https://' + req.hostname + req.url)
+  })
 
   /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
