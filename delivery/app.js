@@ -23,14 +23,14 @@ module.exports = function (db) {
     }
   ))
 
-  /*Redirecting http to https*/
-  app.all('*', (req, res, next) => {
-    if (req.header['x-forwarded-proto'] === 'https') next()
-    else res.redirect('https://' + req.hostname + req.url)
-  })
-
   /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
+
+  /*Redirecting http to https*/
+  app.all('*', (req, res, next) => {
+    if (req.headers['x-forwarded-proto'] === 'https') next()
+    else res.redirect('https://' + req.hostname + req.url)
+  })
 
   /*Modules Router*/
   sharer_router(app)
