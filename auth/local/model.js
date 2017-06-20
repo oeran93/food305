@@ -10,6 +10,10 @@ module.exports = function () {
 
   let pub = {}
 
+  /*
+  * if there is an active session in the request it sends some user info
+  * to the client
+  */
   pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
       User
@@ -25,7 +29,7 @@ module.exports = function () {
   /*
   * Creates a new not activated user in the db
   * @param req.body.phone {String} user phone number
-  * will not create user if already present and active, if number is not right.
+  * will not create user if already present and active or if number is not right.
   */
   pub.create_user = function (req, res) {
     let phone = req.body.phone
@@ -63,6 +67,11 @@ module.exports = function () {
     })
   },
 
+  /*
+  * Checks if entered code matches the one sent to user
+  * @param req.body.code {String} user code
+  * @param req.body.phone {String} user phone
+  */
   pub.check_phone_code = function (req, res) {
     let {code, phone} = req.body
     User.findOne({phone, code}, (err, user) => {
@@ -78,6 +87,12 @@ module.exports = function () {
     })
   },
 
+ /*
+ * Create a new password for the user
+ * @param req.body.pwd {String} new password
+ * @param req.body.phone {String} user phone
+ * @param req.body.old_pwd {String} this can be missing if current pwd is empty
+ */
   pub.create_password = function (req, res) {
     let {pwd, phone, old_pwd} = req.body
     old_pwd = old_pwd || ''
@@ -138,11 +153,19 @@ module.exports = function () {
     })
   },
 
+  /*
+  * logout user
+  */
   pub.logout = function (req, res) {
     req.session.reset()
     res.redirect('/')
   },
 
+  /*
+  * login user
+  * @param req.body.phone {String} user phone
+  * @param req.body.pwd {String} user pwd
+  */
   pub.login = function (req, res) {
     let {phone, pwd} = req.body
     User.findOne({phone}, (err, user) => {

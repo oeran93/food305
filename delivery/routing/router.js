@@ -1,6 +1,6 @@
-let Meal  = require('../business_logic/meal.js')()
-let Order = require('../business_logic/order.js')()
-let User  = require('../business_logic/user.js')()
+const Meal  = require('../business_logic/meal.js')()
+const Order = require('../business_logic/order.js')()
+const User  = require('../business_logic/user.js')()
 
 module.exports = function (app) {
   app.get('/profile', User.profile)

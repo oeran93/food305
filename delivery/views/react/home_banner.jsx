@@ -7,7 +7,7 @@ class Home_Banner extends React.Component {
     return (
       <div className="home-banner banner text-center text-uppercase">
         <div className="row">
-        <h2 className="title col-xs-12">Order now for <b>{date.get_day_of_week(date.this_delivery())}</b></h2>
+        <h2 className="title col-xs-12">Order now for {date.get_day_of_week(date.this_delivery())}</h2>
         </div>
       </div>
     )

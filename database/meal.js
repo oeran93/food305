@@ -1,5 +1,5 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 var Meal = new Schema({
   _restaurant: {type: Schema.Types.ObjectId, ref: 'Restaurant'},

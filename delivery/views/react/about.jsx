@@ -21,7 +21,7 @@ module.exports = () => {
           </div>
           <div className="col-xs-12">
             <h3 className="subtitle text-center text-uppercase">
-              Affordable variety, curated excellence, simply convenient
+              Keep working, your food is on its way
             </h3>
           </div>
           <div className="col-xs-12 text-center">

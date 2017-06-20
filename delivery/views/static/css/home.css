@@ -3,6 +3,7 @@
 }
 
 .home-banner {
-  padding: 20vh 0 20vh 0;
-  background-image: url('../images/home_bg.jpg');
+  padding: 10vh 0 10vh 0;
+  background-color: #262f36;
+  background-image: url('../images/home/home_bg.jpg');
 }
