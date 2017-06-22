@@ -12,7 +12,7 @@ module.exports = function () {
   pub.profile = function (req, res) {
     if (req.session && req.session.user) {
       res.send({user: req.session.user})
-    } else res.send({user: false})
+    } else res.send({error: errors.not_logged_in})
   }
 
   return pub

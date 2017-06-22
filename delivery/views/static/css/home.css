@@ -1,9 +1,11 @@
-.home-page {
-  height: 90vh;
+.menu {
+  overflow: scroll;
 }
 
-.home-banner {
-  padding: 10vh 0 10vh 0;
-  background-color: #262f36;
-  background-image: url('../images/home/home_bg.jpg');
+.restaurant-banner {
+  padding: 25vh;
+  height: 80vh;
+  background-image: url('../images/home/bg.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
 }

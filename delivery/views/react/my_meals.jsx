@@ -1,6 +1,6 @@
 const React = require('react')
 const $     = require('jquery')
-const Meal  = require('./meal/meal.jsx')
+const Meal  = require('./meal.jsx')
 const date  = require('../../../tools/date.js')()
 
 class My_Meals extends React.Component {
@@ -23,22 +23,20 @@ class My_Meals extends React.Component {
     let {future_meals} = this.state
     if (future_meals.length != 0) {
       return (
-        <div className="row">
-          <div className="col-xs-12 col-md-8 col-md-offset-2">
-            <div className="row">
-              <div className='page-header text-uppercase text-center'>
-                <h3>My Orders</h3>
-              </div>
-              {future_meals.map(meal => {
-                return (<Meal
-                         key={meal._id}
-                         meal={meal}
-                         delivery={date.this_delivery()}
-                         orders={meal.orders.length}
-                         />)
-               })}
-             </div>
+        <div className="row margin-bottom-15">
+          <div className="col-xs-12">
+            <div className='page-header text-center'>
+              <h3>My Orders</h3>
+            </div>
           </div>
+          {future_meals.map(meal => {
+            return (<Meal
+                     key={meal._id}
+                     meal={meal}
+                     delivery={date.this_delivery()}
+                     orders={meal.orders.length}
+                     />)
+           })}
         </div>
       )
     }

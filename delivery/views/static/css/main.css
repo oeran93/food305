@@ -9,21 +9,23 @@ failure color: #e74c3c;
 
 
 html, body, #root {
-  height: 100%;
 	font-family: 'Open Sans', sans-serif;
   color: #504f4f;
   background-color: #ffffff;
 }
 
-/*GENERAL*/
+.margin-right-5 {
+	margin-right: 5px;
+}
 
-.page, .page-row, .page-container{
-  height: 100%;
+.margin-bottom-15 {
+	margin-bottom: 15px;
 }
 
 .basic-input{
   display: block;
   width: 100%;
+  margin-bottom: 15px;
   padding: 15px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -41,10 +43,6 @@ html, body, #root {
 
 .page-header {
 	border: none;
-}
-
-.margin-right-5 {
-  margin-right: 5px;
 }
 
 .red-btn {
@@ -116,7 +114,6 @@ html, body, #root {
   position: absolute;
   top:0;
   left: 0;
-  height:10vh;
   width: 100%;
   z-index: 100;
   padding: 0 40px 0 40px;
@@ -127,18 +124,13 @@ html, body, #root {
   color: white;
 }
 
-.navigation-bar .btn {
-  margin-top: 20px;
-}
-
-.navigation-bar .logo {
-  margin: 10px 0 0 20px;
+.navigation-bar .btn, .navigation-bar .logo {
+  margin: 10px 5px 10px 0;
 }
 
 /*BANNER*/
 
 .banner {
-  padding-top: 25%;
   color: #262f36;
   font-weight: bold;
   background-repeat:no-repeat;

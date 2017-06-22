@@ -1,10 +1,13 @@
 import React from 'react'
 import $ from 'jquery'
+import _ from 'underscore'
 import Home from './home.jsx'
 import Nav_Bar from './nav_bar.jsx'
-import Footer from './footer.jsx'
 import Access from './access/access.jsx'
 import About from './about.jsx'
+import Payment from './payment/payment.jsx'
+import Footer from './footer.jsx'
+import {Modal} from 'react-bootstrap'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 class Root extends React.Component {
@@ -13,8 +16,16 @@ class Root extends React.Component {
     super(props)
     this.state = {
       render: false,
-      user: null
+      user: null,
+      access_modal: {open: false, step: 3},
+      payment_modal: {open: false}
     }
+  }
+
+  toggleModal (modal, info) {
+    let state = this.state
+    state[modal] = _.extend(state[modal],info)
+    this.setState(state)
   }
 
   componentWillMount () {
@@ -31,23 +42,32 @@ class Root extends React.Component {
   }
 
   render () {
-    let {render, user} = this.state
+    let {render, user, access_modal, payment_modal} = this.state
     if (!render) return null
     else {
       return (
         <Router>
           <div>
-            <Nav_Bar user={user}/>
-            <div className='container-fluid page-container'>
-              <div className='row page-row'>
-               <div className='col-xs-12 page'>
-                  <Route exact path='/' component={
-                      () => user ? <Home user={user} /> : <About/>
-                    }
-                  />
-               </div>
-              </div>
-            </div>
+            {/*Navigation Bar*/}
+            <Nav_Bar user={user} toggleModal={this.toggleModal.bind(this)}/>
+            {/*Main Content*/}
+            <Route exact path='/' component={
+                () => user ? <Home user={user} toggleModal={this.toggleModal.bind(this)}/> : <About toggleModal={this.toggleModal.bind(this)}/>
+              }
+            />
+            {/*Access Modal*/}
+            <Modal show={access_modal.open} onHide={() => this.toggleModal.bind(this)('access_modal', {open:false})}>
+              <Modal.Body>
+                <Access step={access_modal.step} />
+              </Modal.Body>
+            </Modal>
+            {/*Payment Modal*/}
+            <Modal show={payment_modal.open} onHide={() => this.toggleModal.bind(this)('payment_modal', {open:false})}>
+              <Modal.Body>
+                <Payment autofocus={true}/>
+              </Modal.Body>
+            </Modal>
+            {/*Footer*/}
             <Footer />
           </div>
         </Router>

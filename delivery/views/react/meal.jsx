@@ -1,11 +1,10 @@
 const React          = require('react')
-const Buy_Button     = require('./buy_button.jsx')
-const format         = require('../../../../tools/format.js')
-const globals        = require('../../../../tools/globals.js')
+const format         = require('../../../tools/format.js')
+const globals        = require('../../../tools/globals.js')
 const PropTypes      = require('prop-types')
 
 const Meal = function(props) {
-  let {meal, delivery, orders} = props
+  let {meal, delivery, orders, toggleModal} = props
   let {_id, name, price, image, tags} = meal
   return (
     <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
@@ -24,7 +23,11 @@ const Meal = function(props) {
               {delivery.format('dddd Do, h a')} <br/> 5th Floor T. Rex
             </span>
           }
-          {!delivery && <Buy_Button _id={_id} />}
+          {!delivery &&
+            <button className="btn red-btn meal-btn" onClick={() => toggleModal('payment_modal', {open: true})}>
+              Buy
+            </button>
+          }
         </div>
       </div>
     </div>
@@ -34,7 +37,8 @@ const Meal = function(props) {
 Meal.propTypes = {
   meal: PropTypes.object.isRequired,
   delivery: PropTypes.object,
-  orders: PropTypes.number
+  orders: PropTypes.number,
+  toggleModal: PropTypes.func
 }
 
 module.exports = Meal

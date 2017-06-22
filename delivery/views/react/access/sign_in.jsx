@@ -1,5 +1,4 @@
 const React        = require('react')
-const Modal        = require('../modal.jsx')
 const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')

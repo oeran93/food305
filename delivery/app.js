@@ -29,7 +29,7 @@ module.exports = function (db) {
   /*Redirecting http to https*/
   app.all('*', (req, res, next) => {
     if (req.headers['x-forwarded-proto'] === 'https') next()
-    else window.location = 'https://' + req.hostname + req.url
+    else next()
   })
 
   /*Modules Router*/

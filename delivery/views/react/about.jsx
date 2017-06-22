@@ -10,10 +10,9 @@ function scrollTo (id) {
     }, 1500);
 }
 
-module.exports = () => {
+module.exports = (props) => {
   return (
-    <div className="about-page">
-
+    <div className="about-page container-fluid">
       <div className="row banner about-banner">
         <div className="clearfix">
           <div className="col-xs-12">
@@ -28,7 +27,7 @@ module.exports = () => {
             <button className="btn red-btn margin-right-5" onClick={() => scrollTo("#about")}>
               Know More
             </button>
-            <button className="btn red-btn" onClick={() => scrollTo("#signup")}>
+            <button className="btn red-btn" onClick={() => props.toggleModal('access_modal', {open: true, step: 0})}>
               Sign Up
             </button>
           </div>
@@ -77,13 +76,13 @@ module.exports = () => {
         </div>
       </div>
 
-      <a id="signup"></a>
-      <div className="row about-section section-5">
-        <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-          <Access step={0} autofocus={false}/>
+      <div className="row section-5">
+        <div className="col-xs-4 col-xs-offset-4">
+          <button className="btn red-btn" onClick={() => props.toggleModal('access_modal', {open: true, step: 0})}>
+            Sign Up
+          </button>
         </div>
       </div>
-
     </div>
   )
 }
