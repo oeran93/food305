@@ -2,6 +2,7 @@ const React            = require('react')
 const PropTypes        = require('prop-types')
 const Pickup_Info      = require('./pickup_info.jsx')
 const Payment_Info     = require('./payment_info.jsx')
+const Pay = require('./pay.jsx')
 const date             = require('../../../../tools/date.js')()
 
 class Payment extends React.Component {
@@ -14,7 +15,7 @@ class Payment extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentWillMount () {
     $.ajax({
       method: "get",
       url: "/get_station",
@@ -29,7 +30,7 @@ class Payment extends React.Component {
   }
 
   render () {
-    let {autofocus, amount, meal} = this.props
+    let {autofocus, amount, meal, user} = this.props
     let {station, step} = this.state
     let delivery = date.this_order_delivery()
     if (step == 0) {
@@ -40,7 +41,7 @@ class Payment extends React.Component {
                 delivery_day={delivery.format('dddd')}
                 delivery_hour={delivery.format('hh a')}
               />)
-    } else if (step == 1) {
+    } else if (step == 1 && !user.last_4_digits) {
       return (<Payment_Info
                 autofocus={autofocus}
                 change_step={this.change_step.bind(this)}
@@ -48,16 +49,25 @@ class Payment extends React.Component {
                 meal={meal}
                 date={delivery.format('MM-DD-YYYY hh:mm a')}
               />)
+    } else if (step == 1 && user.last_4_digits) {
+      return (<Pay
+                change_step={this.change_step.bind(this)}
+                amount={amount}
+                meal={meal}
+                date={delivery.format('MM-DD-YYYY hh:mm a')}
+                last_4_digits={user.last_4_digits}
+              />)
     }
   }
 
 }
 
 Payment.propTypes = {
+  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   step: PropTypes.number,
   autofocus: PropTypes.bool,
   amount: PropTypes.string,
-  meal: PropTypes.string
+  meal: PropTypes.object
 }
 
 Payment.defaultProps = {

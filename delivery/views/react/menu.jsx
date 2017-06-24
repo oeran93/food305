@@ -2,6 +2,7 @@ const React     = require('react')
 const $         = require('jquery')
 const Meal      = require('./meal.jsx')
 const PropTypes = require('prop-types')
+const date = require('../../../tools/date.js')()
 
 class Menu extends React.Component {
 

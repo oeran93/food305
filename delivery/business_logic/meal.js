@@ -11,7 +11,7 @@ module.exports = function () {
   * @param req.query.delivery_day {moment} date of next closest delivery
   */
   pub.get_menu = function (req, res) {
-    let {station, delivery_day} = req.query
+    let {station, delivery_day, date} = req.query
     Station
       .findOne({_id: station})
       .exec((err, station) => {
@@ -22,7 +22,7 @@ module.exports = function () {
               select: "name price image tags orders",
               populate: {
                 path: "orders",
-                match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
+                match: {date: {'$gte': date}, _user: {'$eq': req.session.user._id}}
               }
             })
             .exec((err, restaurant) => {

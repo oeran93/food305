@@ -1,7 +1,7 @@
 const Meal  = require('../../database/meal.js')
 const Order = require('../../database/order.js')
 const twilio = require('../../tools/twilio.js')()
-const moment = require('moment')
+const date = require('../../tools/date.js')
 
 module.exports = function () {
 
@@ -22,8 +22,8 @@ module.exports = function () {
         {_id: req.body.meal},
         {$push: {'orders': order._id}},
         () => {
-          let day = moment(req.body.date).format("dddd")
-          let hour = moment(req.body.date).format("hh a")
+          let day = date.to_moment(req.body.date).format("dddd")
+          let hour = date.to_moment(req.body.date).format("hh a")
           twilio.send_sms(req.session.user.phone,
             `Your ${req.body.meal.name} is on its way. It will be delivered on ${day} at ${hour}`)
           res.sendStatus(200)

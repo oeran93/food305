@@ -84,6 +84,14 @@ module.exports = function () {
 	}
 
 	/*
+	* Turns a properly formatted date in string format and turns it into a moment object
+	* @param date {String}
+	*/
+	pub.to_moment = function (date) {
+		return moment(date)
+	}
+
+	/*
 	* Calculate time between now and next order starts
 	* @return {moment}
 	*/

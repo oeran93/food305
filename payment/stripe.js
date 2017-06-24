@@ -21,7 +21,7 @@ module.exports = function () {
       name {string} credit card holder name
   */
   pub.create_customer = function (req, res, next) {
-    let last_4_digits = req.body.credit_card.number.slice(-4,0)
+    let last_4_digits = req.body.credit_card.number.slice(-4)
     stripe.customers.create({
       source: _.extend({
         object: "card",
@@ -37,7 +37,7 @@ module.exports = function () {
         User.findOneAndUpdate(
             {phone: req.session.user.phone},
             {last_4_digits, stripe_id: customer.id},
-            {returnNewDocument: true},
+            {new: true},
             (err, user) => {
               if (err) res.send({error: errors.failed_purchase})
               else {

@@ -16,7 +16,10 @@ const Meal = function(props) {
           <h4 title={name} className='meal-name text-uppercase text-center'>
             {format.dotdotdot(name,25)}
           </h4>
-          <button className="btn red-btn meal-btn pull-left" onClick={() => toggleModal('payment_modal', {open: true, meal: meal, amount:real_price})}>
+          <button
+              className="btn red-btn meal-btn pull-left"
+              onClick={() => toggleModal('payment_modal', {open: true, meal: meal, amount:real_price})}
+          >
             Buy
           </button>
           <span className='green-label price pull-right'> {'$ '+real_price} </span>

@@ -123,11 +123,10 @@ Payment_Info.propTypes = {
   autofocus: PropTypes.bool,
   change_step: PropTypes.func.isRequired,
   amount: PropTypes.string,
-  meal: PropTypes.string
+  meal: PropTypes.object
 }
 
 Payment_Info.defaultProps = {
-  step: 0,
   autofocus: true
 }
 

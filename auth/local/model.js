@@ -18,7 +18,7 @@ module.exports = function () {
     if (req.session && req.session.user) {
       User
         .findOne({phone: req.session.user.phone})
-        .select('phone station last_4_digits')
+        .select('_id phone station last_4_digits')
         .exec((err, user) => {
           if (user) req.session.user = user
           next()

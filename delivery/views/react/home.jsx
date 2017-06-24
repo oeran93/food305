@@ -15,7 +15,7 @@ class Home extends React.Component {
   }
 
   componentWillMount () {
-    let closest_delivery = date.this_delivery().format('MMM DD YYYY, hh')
+    let closest_delivery = date.this_delivery().format('MM-DD-YYYY hh:mm a')
     let station = this.props.user.station
     let this_order_delivery = date.this_order_delivery().day()
     $.get(
@@ -31,10 +31,10 @@ class Home extends React.Component {
 
   render () {
     let {toggleModal} = this.props
-    let {future_meals, restaurant, meals} = this.state
+    let {restaurant, meals} = this.state
     return (
       <div className="home-page">
-        <Restaurant_Banner restaurant={restaurant}/>
+        <Restaurant_Banner meals={meals} restaurant={restaurant}/>
         <div className="container">
           <Menu toggleModal={toggleModal} meals={meals}/>
         </div>
