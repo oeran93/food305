@@ -18,11 +18,20 @@ module.exports = function () {
           Restaurant
             .findOne({_id: station.schedule[delivery_day-1]})
             .populate({
-              path: 'meals'
+              path: "meals",
+              select: "name price image tags orders",
+              populate: {
+                path: "orders",
+                match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
+              }
             })
             .exec((err, restaurant) => {
+              if (err) res.sendStatus(400)
               res.send({
-                restaurant: restaurant.name,
+                restaurant: {
+                  name: restaurant.name,
+                  catch_phrase: restaurant.catch_phrase
+                },
                 meals: restaurant.meals
               })
             })

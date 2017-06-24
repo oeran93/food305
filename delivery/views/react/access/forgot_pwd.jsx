@@ -39,7 +39,7 @@ class Forgot_Pwd extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h2>Enter your phone number</h2>
+          <h3>Enter your phone number</h3>
         </div>
         <div className='col-xs-12 input'>
             <input

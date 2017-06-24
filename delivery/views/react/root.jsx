@@ -18,7 +18,7 @@ class Root extends React.Component {
       render: false,
       user: null,
       access_modal: {open: false, step: 3},
-      payment_modal: {open: false}
+      payment_modal: {open: false, amount: "0", meal: "0"}
     }
   }
 
@@ -38,6 +38,15 @@ class Root extends React.Component {
           render: true
         })
       }
+    })
+  }
+
+  componentDidMount () {
+    $(document).ajaxStart(() => {
+      $('.loading-background').css('display','block')
+    })
+    $(document).ajaxComplete(() => {
+      $('.loading-background').css('display','none')
     })
   }
 
@@ -64,11 +73,18 @@ class Root extends React.Component {
             {/*Payment Modal*/}
             <Modal show={payment_modal.open} onHide={() => this.toggleModal.bind(this)('payment_modal', {open:false})}>
               <Modal.Body>
-                <Payment autofocus={true}/>
+                <Payment autofocus={true} amount={payment_modal.amount} meal={payment_modal.meal}/>
               </Modal.Body>
             </Modal>
-            {/*Footer*/}
-            <Footer />
+            {/*Loading*/}
+            <div className="loading-background">
+              <div className="loading">
+                <div className="lds-ripple">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </Router>
       )

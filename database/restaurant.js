@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 var Restaurant = new Schema({
   name: String,
+  catch_phrase: String,
   location: {'lat': Number, 'lng': Number},
   phone: String,
   closed: [String],

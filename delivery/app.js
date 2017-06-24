@@ -6,7 +6,6 @@ const env         = process.env
 
 const sharer_router = require('./routing/router.js')
 const auth_router   = require('../auth/local/router.js')
-const payment_router = require('../payment/router.js')
 
 module.exports = function (db) {
   //start DB
@@ -35,7 +34,6 @@ module.exports = function (db) {
   /*Modules Router*/
   sharer_router(app)
   auth_router(app)
-  payment_router(app)
 
   return app
 }

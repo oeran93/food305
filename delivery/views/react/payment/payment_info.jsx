@@ -1,27 +1,24 @@
 const React            = require('react')
 const PropTypes        = require('prop-types')
 const $ = require('jquery')
+const _ = require('underscore')
 const confirmation = require('../../../../tools/confirmation.js')()
+const date         = require('../../../../tools/date.js')()
 
 class Payment_Info extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      amount: "",
+      amount: props.amount,
+      meal: props.meal,
+      date: props.date,
       credit_card: {
-        card_number: "",
-        cvv: "",
-        type:"",
-        exp_date: "",
-        cardholder_name: ""
-      },
-      billing_address: {
-        street: "",
-        city: "",
-        state_province: "",
-        zip_postal_code: "",
-        country: ""
+        number: "",
+        cvc: "",
+        exp_month: "",
+        exp_year: "",
+        name: ""
       }
     }
   }
@@ -32,27 +29,22 @@ class Payment_Info extends React.Component {
     this.setState(state)
   }
 
-  billing_change (event) {
-    let state = this.state
-    state["billing_address"][event.target.id] = event.target.value
-    this.setState(state)
-  }
-
   pay () {
     $.ajax({
       method: "POST",
-      url: "/charge_credit_card",
+      url: "/create_customer_and_buy_meal",
       data: this.state,
       success: (res) => {
-        console.log(res)
         if (res.error) confirmation.failure(res.error.message)
+        else window.location.href = '/'
       }
     })
   }
 
   render () {
-    let {card_number, cvv, type, exp_date, cardholder_name} = this.state.credit_card
-    //let {country, zip_postal_code, street, city, state_province} = this.state.billing_address
+    let {number, cvc, type, exp_month, exp_year, name} = this.state.credit_card
+    let {amount, date, meal} = this.state
+    let {autofocus} = this.props
     return (
       <div className="row">
         <div className="col-xs-12 text-center text-uppercase">
@@ -64,10 +56,11 @@ class Payment_Info extends React.Component {
               <input className="basic-input"
                      placeholder="Full name"
                      type="text"
-                     id="cardholder_name"
-                     value={cardholder_name}
+                     id="name"
+                     value={name}
                      onChange={this.credit_card_change.bind(this)}
                      onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
+                     autoFocus={autofocus}
               />
             </div>
           </div>
@@ -76,50 +69,45 @@ class Payment_Info extends React.Component {
               <input className="basic-input"
                      placeholder="Card Number"
                      type="text"
-                     id="card_number"
-                     value={card_number}
+                     id="number"
+                     value={number}
                      onChange={this.credit_card_change.bind(this)}
                      onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
               />
             </div>
           </div>
           <div className="row">
-            <div className ="col-xs-12">
-              <select id="type" className="basic-input" value={type} onChange={this.credit_card_change.bind(this)}>
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
-                <option value="amex">American Express</option>
-                <option value="diners">Diners Club</option>
-                <option value="discover">Discover</option>
-                <option value="jcb">JCB</option>
-              </select>
-            </div>
-          </div>
-          <div className="row">
-            <div className ="col-xs-6">
+            <div className ="col-xs-4">
               <input className="basic-input"
-                     placeholder="MM/YY"
+                     placeholder="MM"
                      type="text"
-                     id="exp_date"
-                     value={exp_date}
+                     id="exp_month"
+                     value={exp_month}
                      onChange={this.credit_card_change.bind(this)}
                      onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
               />
             </div>
-            <div className ="col-xs-6">
+            <div className ="col-xs-4">
+              <input className="basic-input"
+                     placeholder="YY"
+                     type="text"
+                     id="exp_year"
+                     value={exp_year}
+                     onChange={this.credit_card_change.bind(this)}
+                     onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
+              />
+            </div>
+            <div className ="col-xs-4">
               <input className="basic-input"
                      placeholder="Security Code (CVC)"
                      type="text"
-                     id="cvv"
-                     value={cvv}
+                     id="cvc"
+                     value={cvc}
                      onChange={this.credit_card_change.bind(this)}
                      onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
               />
             </div>
           </div>
-        </div>
-        <div className="col-xs-12 text-center text-uppercase">
-          <h2>Billing Info</h2>
         </div>
         <div className='col-xs-12'>
           <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> Pay </button>
@@ -132,9 +120,10 @@ class Payment_Info extends React.Component {
 }
 
 Payment_Info.propTypes = {
-  step: PropTypes.number,
   autofocus: PropTypes.bool,
-  change_step: PropTypes.func.isRequired
+  change_step: PropTypes.func.isRequired,
+  amount: PropTypes.string,
+  meal: PropTypes.string
 }
 
 Payment_Info.defaultProps = {

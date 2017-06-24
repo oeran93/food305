@@ -41,7 +41,7 @@ class Sign_In extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h2>SIGN IN</h2>
+          <h3>SIGN IN</h3>
         </div>
         <div className='col-xs-12 input'>
           <input

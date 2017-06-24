@@ -40,7 +40,7 @@ class Sign_In_Phone extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h2>Welcome to our community</h2>
+          <h3>Welcome to our community</h3>
         </div>
         <div className='col-xs-12 input'>
           <input

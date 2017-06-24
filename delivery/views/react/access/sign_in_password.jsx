@@ -44,7 +44,7 @@ class Sign_In_Password extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h2>Create a password</h2>
+          <h3>Create a password</h3>
         </div>
         <div className="col-xs-12 input">
             <input

@@ -9,21 +9,6 @@
   border-top-left-radius: 3px;
 }
 
-.meal-name {
-	margin-top: 0;
-  margin-bottom: 15px;
-	font-size: 15px;
-	cursor: hand;
-	cursor: pointer;
-}
-
-.meal-delivery {
-  padding: 5px;
-  font-size: 13px;
-  background-color: #ea846d;
-  color: white;
-}
-
 .meal-orders {
   position: absolute;
   top: -10px;
@@ -33,27 +18,5 @@
   border: 3px solid #ecf0f1;
   color: white;
   font-weight: bold;
-  font: 18px;
   background-color: #c14820;
-}
-
-.price {
-  position: absolute;
-  top : 5px;
-  left : 20px;
-	color: white;
-	font-size:110%;
-	margin: 4px;
-	padding: 4px;
-	border-radius: 10px;
-  border: 1px solid white;
-}
-
-.no-meals {
-  padding:50px 0 50px 0;
-  font-size: 50px;
-}
-
-.no-meals a {
-  text-decoration: underline;
 }

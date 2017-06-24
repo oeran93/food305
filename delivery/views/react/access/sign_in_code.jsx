@@ -39,7 +39,7 @@ class Sign_In_Code extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h2>Verify your phone</h2>
+          <h3>Verify your phone</h3>
         </div>
         <div className='col-xs-12 input'>
             <input

@@ -10,6 +10,8 @@ module.exports = {
 
   twilio_authtoken: env.VIMI_TWILIO_AUTHTOKEN,
 
-  twilio_phone: '+19412571316'
+  twilio_phone: '+19412571316',
+
+  stripe_apikey: env.VIMI_STRIPE_APIKEY
 
 }

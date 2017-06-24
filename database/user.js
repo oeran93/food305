@@ -9,6 +9,8 @@ var User = new Schema({
   pwd: String,
   salt: String,
   station: {type: Schema.Types.ObjectId, ref: 'Station'},
+  last_4_digits: "",
+  stripe_id: "",
   created_at: Date
 })
 

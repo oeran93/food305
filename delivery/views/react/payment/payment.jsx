@@ -29,13 +29,14 @@ class Payment extends React.Component {
   }
 
   render () {
-    let {autofocus, delivery_hour, delivery_day} = this.props
+    let {autofocus, amount, meal} = this.props
     let {station, step} = this.state
     let delivery = date.this_order_delivery()
     if (step == 0) {
       return (<Pickup_Info
                 change_step={this.change_step.bind(this)}
                 station={station}
+                amount={amount}
                 delivery_day={delivery.format('dddd')}
                 delivery_hour={delivery.format('hh a')}
               />)
@@ -43,6 +44,9 @@ class Payment extends React.Component {
       return (<Payment_Info
                 autofocus={autofocus}
                 change_step={this.change_step.bind(this)}
+                amount={amount}
+                meal={meal}
+                date={delivery.format('MM-DD-YYYY hh:mm a')}
               />)
     }
   }
@@ -51,7 +55,9 @@ class Payment extends React.Component {
 
 Payment.propTypes = {
   step: PropTypes.number,
-  autofocus: PropTypes.bool
+  autofocus: PropTypes.bool,
+  amount: PropTypes.string,
+  meal: PropTypes.string
 }
 
 Payment.defaultProps = {
