@@ -13,7 +13,7 @@ const Meal = function(props) {
         <img src={'images/meals/' + image} alt={name} className='meal-picture'/>
         <div className='clearfix'>
           <h4 title={name} className='meal-name text-uppercase text-center'>
-            {format.dotdotdot(name,25)}
+            {format.dotdotdot(name,20)}
           </h4>
           <button
               className="btn red-btn meal-btn pull-left"
