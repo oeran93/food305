@@ -1,30 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-
 const date = require ('../../../tools/date.js')()
 
-const Schema = mongoose.Schema
+const Order = require('../../../database/order.js');
+const Meal = require('../../../database/meal.js');
+const User = require('../../../database/user.js');
 
-// const Order = require('../../../database/order.js');
-// const Meal = require('../../../database/meal.js');
-// const User = require('../../../database/user.js');
-
-const Order = require('./order.js');
-const Meal = require('./meal.js');
-const User = require('./user.js');
-
-//require('../../database/start.js')()
-//const Restaurant = require('../../database/restaurant.js');
-
-mongoose.connect('mongodb://localhost/test');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log("sucess");
-});
 
 function handleError(err){
 	console.log(err);
