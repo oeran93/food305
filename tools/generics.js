@@ -17,8 +17,8 @@ module.exports = {
   * Calculates price + taxes
   * @param price {number}
   */
-  get_price_with_taxes: function (price) {
-    return (price+globals.sale_tax*price).toFixed(2)
+  get_taxes_fees: function (price) {
+    return (globals.sale_tax*price+globals.credit_card_fixed_rate+price*globals.credit_card_percentage).toFixed(2)
   },
 
   /*

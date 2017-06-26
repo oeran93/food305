@@ -10,7 +10,7 @@ class Payment_Info extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      amount: props.amount,
+      total: props.total,
       meal: props.meal,
       date: props.date,
       credit_card: {
@@ -43,13 +43,9 @@ class Payment_Info extends React.Component {
 
   render () {
     let {number, cvc, type, exp_month, exp_year, name} = this.state.credit_card
-    let {amount, date, meal} = this.state
     let {autofocus} = this.props
     return (
       <div className="row">
-        <div className="col-xs-12 text-center text-uppercase">
-          <h2>Payment Info</h2>
-        </div>
         <div className="col-xs-12 credit-card-div">
           <div className="row">
             <div className ="col-xs-12">

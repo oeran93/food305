@@ -4,6 +4,10 @@ module.exports = {
 
   sale_tax: .1,
 
+  credit_card_fixed_rate: .30,
+
+  credit_card_percentage: .03,
+
   app_name: "Vimi",
 
   twilio_accountsid: env.VIMI_TWILIO_ACCOUNTSID,

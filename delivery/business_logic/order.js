@@ -1,7 +1,7 @@
 const Meal  = require('../../database/meal.js')
 const Order = require('../../database/order.js')
 const twilio = require('../../tools/twilio.js')()
-const date = require('../../tools/date.js')
+const date = require('../../tools/date.js')()
 
 module.exports = function () {
 

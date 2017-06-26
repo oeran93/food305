@@ -6,7 +6,6 @@ const PropTypes      = require('prop-types')
 const Meal = function(props) {
   let {meal, toggleModal} = props
   let {_id, name, price, image, tags, orders} = meal
-  let real_price = generics.get_price_with_taxes(price)
   return (
     <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
       <div className='thumbnail clearfix'>
@@ -18,11 +17,11 @@ const Meal = function(props) {
           </h4>
           <button
               className="btn red-btn meal-btn pull-left"
-              onClick={() => toggleModal('payment_modal', {open: true, meal: meal, amount:real_price})}
+              onClick={() => toggleModal('payment_modal', {open: true, meal: meal, price: price})}
           >
             Buy
           </button>
-          <span className='green-label price pull-right'> {'$ '+real_price} </span>
+          <span className='green-label price pull-right'> {'$ '+price} </span>
         </div>
       </div>
     </div>

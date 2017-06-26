@@ -1,17 +1,17 @@
 const React            = require('react')
 const PropTypes        = require('prop-types')
-const Pickup_Info      = require('./pickup_info.jsx')
 const Payment_Info     = require('./payment_info.jsx')
 const Pay = require('./pay.jsx')
+const Price_Info = require('./price_info.jsx')
 const date             = require('../../../../tools/date.js')()
+const generics = require('../../../../tools/generics.js')
 
 class Payment extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      station: "",
-      step: this.props.step
+      station: ""
     }
   }
 
@@ -30,48 +30,65 @@ class Payment extends React.Component {
   }
 
   render () {
-    let {autofocus, amount, meal, user} = this.props
+    let {autofocus, price, meal, user} = this.props
     let {station, step} = this.state
+    let taxes_fees =  generics.get_taxes_fees(price)
+    let total = Number(price) + Number(taxes_fees)
     let delivery = date.this_order_delivery()
-    if (step == 0) {
-      return (<Pickup_Info
+    return (
+      <div className="row">
+        <div className="col-xs-12 text-center text-uppercase">
+          <h3>Checkout</h3>
+        </div>
+        <div className="col-xs-12 alert alert-warning">
+          <h4>
+            <span className="fa fa-map-marker margin-right-5"></span> Pick up your food at {station}
+          </h4>
+          <h4>
+            <span className="fa fa-calendar-o margin-right-5"></span> Your food will be delivered at {delivery.format('hh a')} on {delivery.format('dddd')}
+          </h4>
+        </div>
+        <div className="col-xs-12 alert-success alert">
+          <Price_Info
+            price={price}
+            taxes_fees={taxes_fees}
+            total={total}
+          />
+        </div>
+        <div className="col-xs-12">
+          { user.last_4_digits
+              ?
+              <Pay
                 change_step={this.change_step.bind(this)}
-                station={station}
-                amount={amount}
-                delivery_day={delivery.format('dddd')}
-                delivery_hour={delivery.format('hh a')}
-              />)
-    } else if (step == 1 && !user.last_4_digits) {
-      return (<Payment_Info
-                autofocus={autofocus}
-                change_step={this.change_step.bind(this)}
-                amount={amount}
-                meal={meal}
-                date={delivery.format('MM-DD-YYYY hh:mm a')}
-              />)
-    } else if (step == 1 && user.last_4_digits) {
-      return (<Pay
-                change_step={this.change_step.bind(this)}
-                amount={amount}
+                total={total}
                 meal={meal}
                 date={delivery.format('MM-DD-YYYY hh:mm a')}
                 last_4_digits={user.last_4_digits}
-              />)
-    }
+              />
+              :
+              <Payment_Info
+                autofocus={autofocus}
+                change_step={this.change_step.bind(this)}
+                total={total}
+                meal={meal}
+                date={delivery.format('MM-DD-YYYY hh:mm a')}
+              />
+           }
+        </div>
+      </div>
+    )
   }
 
 }
 
 Payment.propTypes = {
   user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  step: PropTypes.number,
   autofocus: PropTypes.bool,
   amount: PropTypes.string,
   meal: PropTypes.object
 }
 
 Payment.defaultProps = {
-  step: 0,
   autofocus: true
 }
 

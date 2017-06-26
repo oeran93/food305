@@ -59,7 +59,7 @@ module.exports = function () {
       if (err) res.send({error: errors.failed_purchase})
       else {
         stripe.charges.create({
-          amount: generics.get_price_in_cents(req.body.amount),
+          amount: generics.get_price_in_cents(req.body.total),
           currency: "usd",
           customer: user.stripe_id
         }, (err, charge) => {

@@ -73,7 +73,7 @@ class Root extends React.Component {
             {/*Payment Modal*/}
             <Modal show={payment_modal.open} onHide={() => this.toggleModal.bind(this)('payment_modal', {open:false})}>
               <Modal.Body>
-                <Payment autofocus={true} amount={payment_modal.amount} meal={payment_modal.meal} user={user}/>
+                <Payment autofocus={true} price={payment_modal.price} meal={payment_modal.meal} user={user}/>
               </Modal.Body>
             </Modal>
             {/*Loading*/}

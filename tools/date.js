@@ -17,7 +17,7 @@ module.exports = function () {
 		'sunday': []
 	}
 
-	const time_to_deliver = 2
+	const time_to_deliver = 1
 
 	/*
 	* Calculates closest delivery date to a given date
