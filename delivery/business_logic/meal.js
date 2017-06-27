@@ -19,7 +19,7 @@ module.exports = function () {
             .findOne({_id: station.schedule[delivery_day-1]})
             .populate({
               path: "meals",
-              select: "name price image tags orders",
+              select: "name price image tags orders description",
               populate: {
                 path: "orders",
                 match: {date: {'$gte': date}, _user: {'$eq': req.session.user._id}}
