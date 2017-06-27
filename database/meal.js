@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 var Meal = new Schema({
   _restaurant: {type: Schema.Types.ObjectId, ref: 'Restaurant'},
   name: String,
+  description: String,
   price: Number,
   image: String,
   tags: [String], // hot, veggie
