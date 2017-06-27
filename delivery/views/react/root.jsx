@@ -7,6 +7,7 @@ import Access from './access/access.jsx'
 import About from './about.jsx'
 import Payment from './payment/payment.jsx'
 import Footer from './footer.jsx'
+import Redirect from './redirect.jsx'
 import {Modal} from 'react-bootstrap'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
@@ -64,14 +65,17 @@ class Root extends React.Component {
                 () => user ? <Home user={user} toggleModal={this.toggleModal.bind(this)}/> : <About toggleModal={this.toggleModal.bind(this)}/>
               }
             />
+            <Route exact path="/redirect" component={<Redirect />} />
             {/*Access Modal*/}
             <Modal show={access_modal.open} onHide={() => this.toggleModal.bind(this)('access_modal', {open:false})}>
+              <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
                 <Access step={access_modal.step} />
               </Modal.Body>
             </Modal>
             {/*Payment Modal*/}
             <Modal show={payment_modal.open} onHide={() => this.toggleModal.bind(this)('payment_modal', {open:false})}>
+              <Modal.Header closeButton></Modal.Header>
               <Modal.Body>
                 <Payment autofocus={true} price={payment_modal.price} meal={payment_modal.meal} user={user}/>
               </Modal.Body>

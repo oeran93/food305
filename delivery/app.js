@@ -27,7 +27,7 @@ module.exports = function (db) {
 
   /*Redirecting http to https*/
   app.all('*', (req, res, next) => {
-    if (req.headers['x-forwarded-proto'] === 'https') next()
+    if (req.headers['x-forwarded-proto'] === 'https' || req.url == '/redirect') next()
     else next()
   })
 

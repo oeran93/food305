@@ -55,7 +55,7 @@ class Sign_In_Code extends React.Component {
         </div>
         <div className='col-xs-12'>
           <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
-            Try again
+            Send Me Another Code
           </button>
           <button className='btn red-btn pull-right margin-right-5' onClick={this.check_code.bind(this)}>
             Next

@@ -38,7 +38,7 @@ class Payment extends React.Component {
     return (
       <div className="row">
         <div className="col-xs-12 text-center text-uppercase">
-          <h3>Checkout</h3>
+          <h3 className="margin-top-0">Checkout</h3>
         </div>
         <div className="col-xs-12 alert alert-warning">
           <h4>

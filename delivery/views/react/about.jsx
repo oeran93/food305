@@ -25,7 +25,7 @@ module.exports = (props) => {
           </div>
           <div className="col-xs-12 text-center">
             <button className="btn red-btn margin-right-5" onClick={() => scrollTo("#about")}>
-              Know More
+              Learn More
             </button>
             <button className="btn red-btn" onClick={() => props.toggleModal('access_modal', {open: true, step: 0})}>
               Sign Up

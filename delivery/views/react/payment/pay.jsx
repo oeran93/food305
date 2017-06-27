@@ -27,7 +27,6 @@ class Pay extends React.Component {
         </div>
         <div className='col-xs-12'>
           <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> Pay </button>
-          <button className='btn red-btn pull-left' onClick={ () => this.props.change_step({step: 0})}> Back </button>
         </div>
       </div>
     )
@@ -36,7 +35,6 @@ class Pay extends React.Component {
 
 Pay.propTypes = {
   autofocus: PropTypes.bool,
-  change_step: PropTypes.func.isRequired,
   amount: PropTypes.string,
   meal: PropTypes.object
 }

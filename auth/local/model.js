@@ -32,7 +32,7 @@ module.exports = function () {
   * will not create user if already present and active or if number is not right.
   */
   pub.create_user = function (req, res) {
-    let phone = req.body.phone
+    let phone = req.body.phone.replace(/[^0-9]/g,'')
     let code = generics.rand_number(6)
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
@@ -55,7 +55,7 @@ module.exports = function () {
                 .then(() => res.send({success: true}))
                 .catch(err => {
                   User.remove({phone}, err => {
-                    if (err) {console.log(err)} // what happens if there is an error deleting the user ?
+                    if (err) {console.log(err)}
                     res.send({error: errors.invalid_phone})
                   })
                 })
@@ -168,6 +168,7 @@ module.exports = function () {
   */
   pub.login = function (req, res) {
     let {phone, pwd} = req.body
+    phone = phone.replace(/[^0-9]/g,'')
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else if (!user) res.send({error: errors.user_does_not_exist})
