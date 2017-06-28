@@ -2,7 +2,7 @@ const env = process.env
 
 module.exports = {
 
-  sale_tax: .1,
+  sale_tax: .10679,
 
   credit_card_fixed_rate: .30,
 
