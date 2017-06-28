@@ -1,4 +1,4 @@
-const model = require('./model.js')()
+const model = require('./auth.js')()
 
 module.exports = function (app) {
 

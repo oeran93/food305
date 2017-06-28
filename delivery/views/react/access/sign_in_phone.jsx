@@ -28,8 +28,7 @@ class Sign_In_Phone extends React.Component {
       data :{phone},
       success: (res) => {
         if(res.success) change_step(1,phone)
-        else if (res.error.number == errors.user_exists.number) confirmation.failure(res.error.message)
-        else if (res.error.number == errors.invalid_phone.number) confirmation.failure(res.error.message)
+        else if (res.error) confirmation.failure(res.error.message)
       }
     })
   }

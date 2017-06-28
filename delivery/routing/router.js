@@ -2,7 +2,7 @@ const Meal  = require('../business_logic/meal.js')()
 const Order = require('../business_logic/order.js')()
 const User  = require('../business_logic/user.js')()
 const Station = require('../business_logic/station.js')()
-const Auth = require('../../auth/local/model.js')()
+const Auth = require('../../auth/local/auth.js')()
 const stripe = require('../../payment/stripe.js')()
 
 module.exports = function (app) {

@@ -11,7 +11,7 @@ module.exports = function () {
   let pub = {}
 
   /*
-  * if there is an active session in the request it sends some user info
+  * If there is an active session in the request it sends some user infos
   * to the client
   */
   pub.session = function (req, res, next) {
@@ -28,43 +28,38 @@ module.exports = function () {
 
   /*
   * Creates a new not activated user in the db
+  * It will not create a user if it is already present and active or
+  * if the number is not right.
   * @param req.body.phone {String} user phone number
-  * will not create user if already present and active or if number is not right.
   */
   pub.create_user = function (req, res) {
     let phone = req.body.phone.replace(/[^0-9]/g,'')
     let code = generics.rand_number(6)
-    User.findOne({phone}, (err, user) => {
-      if (err) res.send({error: errors.generic})
-      else if (user && user.activated) res.send({error: errors.user_exists})
-      else {
-        Station.findOne({}, (err, station) => {
-          User.update(
-            {phone},
-            { $set: {
-                code: code,
-                created_at: new Date (),
-                station: station._id
-              }
-            },
-            {upsert: true},
-            err => {
-              if (err) res.send({error: errors.generic})
-              else {
-                twilio.send_sms(phone, `Your Vimi account code is ${code}`)
-                .then(() => res.send({success: true}))
-                .catch(err => {
-                  User.remove({phone}, err => {
-                    if (err) {console.log(err)}
-                    res.send({error: errors.invalid_phone})
-                  })
-                })
-              }
-            }
-          )
+    twilio.send_sms(phone, `Your Vimi account code is ${code}`)
+      .then(() => {
+        User.findOne({phone}, (err, user) => {
+          if (err) res.send({error: errors.generic})
+          else if (user && user.activated) res.send({error: errors.user_exists})
+          else {
+            Station.findOne({}, (err, station) => {
+              User.update(
+                {phone},
+                {
+                  code: code,
+                  created_at: new Date (),
+                  station: station._id
+                },
+                {upsert: true},
+                err => {
+                  if (err) res.send({error: errors.generic})
+                  else res.send({success: true})
+                }
+              )
+            })
+          }
         })
-      }
-    })
+      })
+      .catch(() => res.send({error: errors.invalid_phone}))
   },
 
   /*
@@ -88,14 +83,13 @@ module.exports = function () {
   },
 
  /*
- * Create a new password for the user
+ * Creates a new password for the user
  * @param req.body.pwd {String} new password
  * @param req.body.phone {String} user phone
  * @param req.body.old_pwd {String} this can be missing if current pwd is empty
  */
   pub.create_password = function (req, res) {
-    let {pwd, phone, old_pwd} = req.body
-    old_pwd = old_pwd || ''
+    let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body}
     if (pwd.length < 8) res.send({error: errors.short_pwd})
     else {
       User.findOne({phone}, (err,user) => {
@@ -120,12 +114,13 @@ module.exports = function () {
   },
 
   /*
-  * creates a new recovery code, sends it to the user and saves it in the DB
+  * Creates a new recovery code, sends it to the user and saves it in the DB
   * @param req.query.phone {String} user phone number
   */
   pub.forgot_pwd = function (req, res) {
+    let {phone} = req.query
     let code = generics.rand_number(10)
-    User.findOneAndUpdate({phone: req.query.phone}, {code}, {new: true}, (err, user) => {
+    User.findOneAndUpdate({phone}, {code}, {new: true}, (err, user) => {
       if (!user) res.send({error: errors.invalid_phone})
       else if (!user.code) res.send({error: errors.generic})
       else {
@@ -139,7 +134,7 @@ module.exports = function () {
   },
 
   /*
-  * checks if the code is right and creates a new password for the user
+  * Checks if the code is right and creates a new password for the user
   * @param req.body.code {String} recovery code
   * @param req.body.pwd {String} new password
   * @param req.body.phone {String} phone number
@@ -154,7 +149,7 @@ module.exports = function () {
   },
 
   /*
-  * logout user
+  * Logs out user
   */
   pub.logout = function (req, res) {
     req.session.reset()
@@ -162,7 +157,7 @@ module.exports = function () {
   },
 
   /*
-  * login user
+  * Logs in user
   * @param req.body.phone {String} user phone
   * @param req.body.pwd {String} user pwd
   */
