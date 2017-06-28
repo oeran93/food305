@@ -89,7 +89,7 @@ module.exports = function () {
  * @param req.body.old_pwd {String} this can be missing if current pwd is empty
  */
   pub.create_password = function (req, res) {
-    let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body}
+    let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body)
     if (pwd.length < 8) res.send({error: errors.short_pwd})
     else {
       User.findOne({phone}, (err,user) => {
