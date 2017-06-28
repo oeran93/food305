@@ -39,7 +39,9 @@ class Restaurant_Banner extends React.Component {
             <div className="col-xs-12">
               <div className="row">
                 <div className="col-xs-12 text-center">
-                  <h3><span className="fa fa-map-marker margin-right-5"></span> Your order will be delivered at {station} </h3>
+                  <h3 className="order-location">
+                    <span className="fa fa-map-marker margin-right-5"></span> Your order will be delivered at {station}
+                  </h3>
                 </div>
               </div>
               <div className="row">

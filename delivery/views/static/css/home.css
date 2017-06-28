@@ -4,16 +4,10 @@
 }
 
 .restaurant-banner {
-  padding: 15vh;
+  padding-top: 15vh;
   height: 60vh;
   color: white;
   background-image: url('../images/home/bg.jpg');
   background-size:cover;
   background-repeat: no-repeat;
-}
-
-@media screen and (max-width: 480px) {
-    .restaurant-banner {
-      height: 100vh;
-    }
 }

@@ -1,0 +1,9 @@
+@media screen and (max-width: 480px) {
+
+    .restaurant-banner {
+      background-image: url('../images/home/phone_bg.jpg');
+      font-size: 90%;
+      height: 100vh;
+    }
+
+}

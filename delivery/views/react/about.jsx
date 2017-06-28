@@ -77,7 +77,7 @@ module.exports = (props) => {
       </div>
 
       <div className="row section-5">
-        <div className="col-xs-4 col-xs-offset-4">
+        <div className="col-xs-12 col-sm-2 col-sm-offset-5">
           <button className="btn red-btn" onClick={() => props.toggleModal('access_modal', {open: true, step: 0})}>
             Sign Up
           </button>
