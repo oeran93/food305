@@ -32,7 +32,7 @@ class Recover_Pwd extends React.Component {
         success: (res) => {
           if (res.success) {
             confirmation.success("Password successfully updated")
-            change_step(3)
+            change_step({step: 3})
           }
           else confirmation.failure(res.error.message)
         }
@@ -83,7 +83,7 @@ class Recover_Pwd extends React.Component {
             />
         </div>
         <div className='col-xs-12'>
-          <button className='btn red-btn pull-left' onClick={() => change_step(4)}>
+          <button className='btn red-btn pull-left' onClick={() => change_step({step: 4})}>
             Try again
           </button>
           <button className='btn red-btn pull-right margin-right-5' onClick={this.change_password.bind(this)}>

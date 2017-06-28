@@ -29,7 +29,7 @@ class Sign_In extends React.Component {
       data :{phone, pwd},
       success: (res) => {
         if (res.success) window.location.href = '/'
-        else if (res.error.number == errors.user_not_active.number) change_step(1)
+        else if (res.error.number == errors.user_not_active.number) change_step({step: 1})
         else confirmation.failure(res.error.message)
       }
     })
@@ -66,10 +66,10 @@ class Sign_In extends React.Component {
           />
         </div>
         <div className="col-xs-12">
-          <button className='btn red-btn pull-left' onClick={() => change_step(4)}>
+          <button className='btn red-btn pull-left' onClick={() => change_step({step: 4})}>
             Forgot Password
           </button>
-          <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
+          <button className='btn red-btn pull-left' onClick={() => change_step({step: 0})}>
             Create an account
           </button>
           <button className='btn red-btn pull-right' onClick={this.login.bind(this)}>

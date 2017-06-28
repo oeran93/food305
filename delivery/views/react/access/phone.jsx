@@ -27,10 +27,10 @@ class Phone extends React.Component {
       url: '/create_user',
       data :{phone},
       success: (res) => {
-        if(res.success) change_step(1,phone)
+        if(res.success) change_step({step: 1, phone})
         else if (res.error.number == errors.user_exists.number) {
           confirmation.failure(res.error.message)
-          change_step(3)
+          change_step({step: 3})
         }
       }
     })

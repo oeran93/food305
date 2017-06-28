@@ -18,9 +18,8 @@ class Access extends React.Component {
     }
   }
 
-  change_step (step, phone) {
-    this.setState({step})
-    if (phone) this.setState({phone})
+  change_step (change) {
+    this.setState(change)
   }
 
   render () {

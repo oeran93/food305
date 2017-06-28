@@ -27,7 +27,7 @@ class Forgot_Pwd extends React.Component {
       url: '/forgot_pwd',
       data: {phone},
       success: (res) => {
-        if (res.success) change_step(5, phone)
+        if (res.success) change_step({step: 5, phone})
         else confirmation.failure(res.error.message)
       }
     })

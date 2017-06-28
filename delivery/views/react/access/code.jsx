@@ -27,7 +27,7 @@ class Code extends React.Component {
       url: '/check_phone_code',
       data: {code, phone},
       success: (res) => {
-        if (res.success) change_step(2)
+        if (res.success) change_step({step: 2})
         else if (res.error.number == errors.invalid_code.number) confirmation.failure(res.error.message)
       }
     })
@@ -54,7 +54,7 @@ class Code extends React.Component {
             />
         </div>
         <div className='col-xs-12'>
-          <button className='btn red-btn pull-left' onClick={() => change_step(0)}>
+          <button className='btn red-btn pull-left' onClick={() => change_step({step: 0})}>
             Send Me Another Code
           </button>
           <button className='btn red-btn pull-right margin-right-5' onClick={this.check_code.bind(this)}>
