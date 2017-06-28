@@ -33,7 +33,7 @@ class Payment extends React.Component {
     let {autofocus, price, meal, user} = this.props
     let {station, step} = this.state
     let taxes_fees =  generics.get_taxes_fees(price)
-    let total = Number(price) + Number(taxes_fees)
+    let total = (Number(price) + Number(taxes_fees)).toFixed(2)
     let delivery = date.this_order_delivery()
     return (
       <div className="row">
