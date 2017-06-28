@@ -5,6 +5,7 @@ const Pay = require('./pay.jsx')
 const Price_Info = require('./price_info.jsx')
 const date             = require('../../../../tools/date.js')()
 const generics = require('../../../../tools/generics.js')
+const globals = require('../../../../tools/globals.js')
 
 class Payment extends React.Component {
 
@@ -62,7 +63,7 @@ class Payment extends React.Component {
                 change_step={this.change_step.bind(this)}
                 total={total}
                 meal={meal}
-                date={delivery.format('MM-DD-YYYY hh:mm a')}
+                date={delivery.format(globals.order_date_format)}
                 last_4_digits={user.last_4_digits}
               />
               :
@@ -71,7 +72,7 @@ class Payment extends React.Component {
                 change_step={this.change_step.bind(this)}
                 total={total}
                 meal={meal}
-                date={delivery.format('MM-DD-YYYY hh:mm a')}
+                date={delivery.format(globals.order_date_format)}
               />
            }
         </div>

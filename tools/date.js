@@ -1,7 +1,8 @@
-	/*
+/*
 * Functions to calculate delivery and order dates
 */
 var moment = require('moment')
+var globals = require('./globals')
 
 module.exports = function () {
 
@@ -88,7 +89,7 @@ module.exports = function () {
 	* @param date {String}
 	*/
 	pub.to_moment = function (date) {
-		return moment(date)
+		return moment(date, globals.order_date_format)
 	}
 
 	/*
