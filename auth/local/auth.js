@@ -118,7 +118,7 @@ module.exports = function () {
       else if (!user.code) res.send({error: errors.generic})
       else {
         twilio.send_sms(
-          req.query.phone,
+          phone,
           `Your Vimi Password Recovery Code is ${code}`
         )
         res.send({success: true})
