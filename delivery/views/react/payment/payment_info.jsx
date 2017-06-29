@@ -50,7 +50,7 @@ class Payment_Info extends React.Component {
           <div className="row">
             <div className ="col-xs-12">
               <input className="basic-input"
-                     placeholder="Full name"
+                     placeholder="Name on card"
                      type="text"
                      id="name"
                      value={name}

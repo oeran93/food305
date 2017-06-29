@@ -1,4 +1,5 @@
 const globals = require('./globals.js')
+const validator = require('./validator.js')
 
 module.exports = {
 
@@ -27,6 +28,6 @@ module.exports = {
   */
   get_price_in_cents: function (price) {
     return (price*100).toFixed(0)
-  }
+  }, 
 
 }
