@@ -24,43 +24,47 @@ module.exports = function () {
           next()
         })
     } else next()
-  },
+  }
 
   /*
   * Creates a new not activated user in the db
   * It will not create a user if it is already present and active or
   * if the number is not right.
-  * @param req.body.phone {String} user phone number
+  * @param req.body {object} user basic infos: phone, name, email
   */
   pub.create_user = function (req, res) {
     let phone = req.body.phone.replace(/[^0-9]/g,'')
+    let infos = _.pick(req.body, 'name', 'email')
     let code = generics.rand_number(6)
-    twilio.send_sms(phone, `Your Vimi account code is ${code}`)
-      .then(() => {
-        User.findOne({phone}, (err, user) => {
-          if (err) res.send({error: errors.generic})
-          else if (user && user.activated) res.send({error: errors.user_exists})
-          else {
-            Station.findOne({}, (err, station) => {
-              User.update(
-                {phone},
-                {
-                  code: code,
-                  created_at: new Date (),
-                  station: station._id
-                },
-                {upsert: true},
-                err => {
-                  if (err) res.send({error: errors.generic})
-                  else res.send({success: true})
-                }
-              )
-            })
-          }
+    User.findOne({phone}, (err, user) => {
+      if (err) res.send({error: errors.generic})
+      else if (user && user.activated) res.send({error: errors.user_exists})
+      else {
+        Station.findOne({}, (err, station) => {
+          User.update(
+            {phone},
+            _.extend({
+              code: code,
+              created_at: new Date (),
+              station: station._id
+            },infos),
+            {upsert: true},
+            err => {
+              if (err) res.send({error: errors.generic})
+              else {
+                twilio.send_sms(phone, `Your Vimi account code is ${code}`)
+                  .then(() => res.send({success: true}))
+                  .catch(() => {
+                    User.remove({phone})
+                    res.send({error: errors.invalid_phone})
+                  })
+              }
+            }
+          )
         })
-      })
-      .catch(() => res.send({error: errors.invalid_phone}))
-  },
+      }
+    })
+  }
 
   /*
   * Checks if entered code matches the one sent to user
@@ -72,15 +76,9 @@ module.exports = function () {
     User.findOne({phone, code}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else if (!user) res.send({error: errors.invalid_code})
-      else {
-        user.activated = 'yes'
-        user.save(err => {
-          if (err) res.send({error: errors.generic})
-          else res.send({success: true})
-        })
-      }
+      else res.send({success: true})
     })
-  },
+  }
 
  /*
  * Creates a new password for the user
@@ -90,28 +88,23 @@ module.exports = function () {
  */
   pub.create_password = function (req, res) {
     let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body)
-    if (pwd.length < 8) res.send({error: errors.short_pwd})
-    else {
-      User.findOne({phone}, (err,user) => {
-        if (err) res.send({error: errors.generic})
-        else if (!user) res.send({error: errors.user_does_not_exist})
-        else if (!user.activated) res.send({error: errors.user_not_active})
-        else if (user.pwd && crypto.sha512(old_pwd, user.salt) != user.pwd) {
-          res.send({error: errors.invalid_old_pwd})
-        }
-        else {
-          let {hash_pwd, salt} = crypto.hash_password(pwd)
-          req.session.user = user
-          user.pwd = hash_pwd
-          user.salt = salt
-          user.save(err => {
-            if (err) res.send({error: errors.generic})
-            else res.send({success: true})
-          })
-        }
-      })
-    }
-  },
+    User.findOne({phone}, (err,user) => {
+      if (err) res.send({error: errors.generic})
+      else if (!user) res.send({error: errors.user_does_not_exist})
+      else if (user.pwd && crypto.sha512(old_pwd, user.salt) != user.pwd) {
+        res.send({error: errors.invalid_old_pwd})
+      }
+      else {
+        let {hash_pwd, salt} = crypto.hash_password(pwd)
+        req.session.user = user
+        user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
+        user.save(err => {
+          if (err) res.send({error: errors.generic})
+          else res.send({success: true})
+        })
+      }
+    })
+  }
 
   /*
   * Creates a new recovery code, sends it to the user and saves it in the DB
@@ -131,7 +124,7 @@ module.exports = function () {
         res.send({success: true})
       }
     })
-  },
+  }
 
   /*
   * Checks if the code is right and creates a new password for the user
@@ -146,7 +139,7 @@ module.exports = function () {
       if (!user) res.send({error: errors.invalid_code})
       else pub.create_password(req, res)
     })
-  },
+  }
 
   /*
   * Logs out user
@@ -154,7 +147,7 @@ module.exports = function () {
   pub.logout = function (req, res) {
     req.session.reset()
     res.redirect('/')
-  },
+  }
 
   /*
   * Logs in user

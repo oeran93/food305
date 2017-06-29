@@ -1,5 +1,5 @@
 const React            = require('react')
-const Phone            = require('./phone.jsx')
+const Basic_Info       = require('./basic_info.jsx')
 const Code             = require('./code.jsx')
 const Password         = require('./password.jsx')
 const Sign_In          = require('./sign_in.jsx')
@@ -25,7 +25,7 @@ class Access extends React.Component {
   render () {
     let {autofocus} = this.props
     let {phone, step} = this.state
-    if (step == 0) return <Phone autofocus={autofocus} change_step={this.change_step.bind(this)}/>
+    if (step == 0) return <Basic_Info autofocus={autofocus} change_step={this.change_step.bind(this)}/>
     else if (step == 1) return <Code autofocus={autofocus} phone={phone} change_step={this.change_step.bind(this)}/>
     else if (step == 2) return <Password autofocus={autofocus} phone={phone} change_step={this.change_step.bind(this)}/>
     else if (step == 3) return <Sign_In autofocus={autofocus} change_step={this.change_step.bind(this)}/>
@@ -41,7 +41,7 @@ Access.propTypes = {
 }
 
 Access.defaultProps = {
-  step: 3,
+  step: 4,
   autofocus: true
 }
 

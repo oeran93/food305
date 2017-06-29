@@ -48,6 +48,16 @@ module.exports = {
   failed_purchase: {
     number: 10,
     message: "Something went wrong, we were not able to process your credit card"
+  },
+
+  invalid_name: {
+    number: 11,
+    message: "Name should be at least 1 character long"
+  },
+
+  invalid_email: {
+    number: 12,
+    message: "Looks like you entered a wrong email"
   }
 
 }
