@@ -111,7 +111,7 @@ module.exports = function () {
   * @param req.query.phone {String} user phone number
   */
   pub.forgot_pwd = function (req, res) {
-    let {phone} = req.query
+    let phone = req.body.phone.replace(/[^0-9]/g,'')
     let code = generics.rand_number(10)
     User.findOneAndUpdate({phone}, {code}, {new: true}, (err, user) => {
       if (!user) res.send({error: errors.invalid_phone})
