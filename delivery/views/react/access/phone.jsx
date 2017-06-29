@@ -28,9 +28,9 @@ class Phone extends React.Component {
       data :{phone},
       success: (res) => {
         if(res.success) change_step({step: 1, phone})
-        else if (res.error.number == errors.user_exists.number) {
+        else if (res.error) {
           confirmation.failure(res.error.message)
-          change_step({step: 3})
+          if (res.error.number == errors.user_exists.number) change_step({step: 3})
         }
       }
     })
