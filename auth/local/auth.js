@@ -133,7 +133,7 @@ module.exports = function () {
   * @param req.body.phone {String} phone number
   */
   pub.recover_pwd = function (req, res) {
-    let phone = req.query.phone.replace(/[^0-9]/g,'')
+    let phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd} = req.body
     User.findOneAndUpdate({code, phone}, {code: '', pwd: ''}, (err, user) => {
       if (err) res.send({error: errors.generic})
