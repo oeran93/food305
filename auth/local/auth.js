@@ -101,7 +101,6 @@ module.exports = function () {
         req.session.user = user
         user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
         user.save(err => {
-          console.log(err)
           if (err) res.send({error: errors.generic})
           else res.send({success: true})
         })
@@ -116,7 +115,7 @@ module.exports = function () {
   pub.forgot_pwd = function (req, res) {
     let phone = req.query.phone.replace(/[^0-9]/g,'')
     let code = generics.rand_number(10)
-    User.findOneAndUpdate({phone}, {code}, {new: true}, (err, user) => {
+    User.findOneAndUpdate({phone}, {code}, {new: true, upsert: false}, (err, user) => {
       if (!user) res.send({error: errors.invalid_phone})
       else if (!user.code) res.send({error: errors.generic})
       else {
