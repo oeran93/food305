@@ -39,7 +39,7 @@ class Code extends React.Component {
     return (
       <div className='row access'>
         <div className='col-xs-12 text-center text-uppercase'>
-          <h3>Verify your phone</h3>
+          <h3>We sent you a verification code</h3>
         </div>
         <div className='col-xs-12 input'>
             <input

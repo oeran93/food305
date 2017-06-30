@@ -84,7 +84,7 @@ class Recover_Pwd extends React.Component {
         </div>
         <div className='col-xs-12'>
           <button className='btn red-btn pull-left' onClick={() => change_step({step: 4})}>
-            Try again
+            Send me another code
           </button>
           <button className='btn red-btn pull-right margin-right-5' onClick={this.change_password.bind(this)}>
             Next

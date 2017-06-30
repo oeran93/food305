@@ -52,6 +52,7 @@ module.exports = function () {
             err => {
               if (err) res.send({error: errors.generic})
               else {
+                require('../../notification/sign_up_verification.js')(infos.email,code)
                 twilio.send_sms(phone, `Your Vimi account code is ${code}`)
                   .then(() => res.send({success: true}))
                   .catch(() => {

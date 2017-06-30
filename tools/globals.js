@@ -18,6 +18,8 @@ module.exports = {
 
   stripe_apikey: env.VIMI_STRIPE_APIKEY,
 
-  order_date_format: "MM-DD-YYYY hh:mm a"
+  order_date_format: "MM-DD-YYYY hh:mm a",
+
+  info_email: "info@vimifood.com"
 
 }
