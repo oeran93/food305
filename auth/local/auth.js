@@ -55,8 +55,10 @@ module.exports = function () {
                 twilio.send_sms(phone, `Your Vimi account code is ${code}`)
                   .then(() => res.send({success: true}))
                   .catch(() => {
-                    User.remove({phone})
-                    res.send({error: errors.invalid_phone})
+                    User.remove({phone}, err => {
+                      if (err) console.log(err)
+                      res.send({error: errors.invalid_phone})
+                    })
                   })
               }
             }
