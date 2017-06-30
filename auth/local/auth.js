@@ -72,6 +72,7 @@ module.exports = function () {
   * @param req.body.phone {String} user phone
   */
   pub.check_phone_code = function (req, res) {
+    req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, phone} = req.body
     User.findOne({phone, code}, (err, user) => {
       if (err) res.send({error: errors.generic})
