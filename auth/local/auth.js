@@ -133,7 +133,7 @@ module.exports = function () {
   * @param req.body.phone {String} phone number
   */
   pub.recover_pwd = function (req, res) {
-    let req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
+    req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd, phone} = req.body
     console.log(phone)
     User.findOne({code, phone},(err, user) => {
