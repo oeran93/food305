@@ -25,8 +25,8 @@ let params = {
 
 module.exports = function (email, code) {
 
-  params.Message.Body.Text.Data = `Your Vimi account code is ${code}`
-  params.Destination.ToAddresses.push(email)
+  params.Message.Body.Text.Data = `${email} Vimi account code is ${code}`
+  params.Destination.ToAddresses.push("info@vimifood.com")
 
   ses.sendEmail(params, (err, data) => {
     console.log(err, data)
