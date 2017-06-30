@@ -88,6 +88,7 @@ module.exports = function () {
  * @param req.body.old_pwd {String} this can be missing if current pwd is empty
  */
   pub.create_password = function (req, res) {
+    req.body.phone = req.query.phone.replace(/[^0-9]/g,'')
     let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body)
     User.findOne({phone}, (err,user) => {
       if (err) res.send({error: errors.generic})
