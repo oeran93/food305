@@ -29,7 +29,6 @@ class Sign_In extends React.Component {
       data :{phone, pwd},
       success: (res) => {
         if (res.success) window.location.href = '/'
-        else if (res.error.number == errors.user_not_active.number) change_step({step: 1})
         else confirmation.failure(res.error.message)
       }
     })
