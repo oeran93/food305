@@ -101,6 +101,7 @@ module.exports = function () {
         req.session.user = user
         user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
         user.save(err => {
+          console.log(err)
           if (err) res.send({error: errors.generic})
           else res.send({success: true})
         })
