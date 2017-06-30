@@ -136,7 +136,6 @@ module.exports = function () {
   pub.recover_pwd = function (req, res) {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd, phone} = req.body
-    console.log(phone)
     User.findOne({code, phone},(err, user) => {
       if (err) res.send({error: errors.generic})
       if (!user) res.send({error: errors.invalid_code})
