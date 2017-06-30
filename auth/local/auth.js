@@ -167,8 +167,7 @@ module.exports = function () {
     phone = phone.replace(/[^0-9]/g,'')
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
-      else if (!user) res.send({error: errors.user_does_not_exist})
-      else if (!user.activated) res.send({error: errors.user_not_active})
+      else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
         req.session.user = _.omit(user, ['password','salt'])
         res.send({success: true})
