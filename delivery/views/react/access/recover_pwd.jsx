@@ -41,7 +41,7 @@ class Recover_Pwd extends React.Component {
   }
 
   render () {
-    let {autofocus} = this.props
+    let {autofocus, change_step} = this.props
     let {code, pwd, confirmation_pwd} = this.state
     return (
       <div className='row access'>
