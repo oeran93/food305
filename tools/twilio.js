@@ -1,5 +1,7 @@
 const globals = require('./globals.js')
-var client = require('twilio')(globals.twilio_accountsid, globals.twilio_authtoken)
+const twilio = require('twilio')
+var sender = twilio(globals.twilio_accountsid, globals.twilio_authtoken)
+var lookup = new twilio.LookupsClient(globals.twilio_accountsid, globals.twilio_authtoken)
 
 module.exports = function (priv = {}) {
 
@@ -7,7 +9,7 @@ module.exports = function (priv = {}) {
 
     pub.send_sms = function (phone, message) {
         return new Promise((resolve, reject) => {
-            client.messages.create({
+            sender.messages.create({
                 to: phone,
                 from: globals.twilio_phone,
                 body: message,
@@ -16,6 +18,15 @@ module.exports = function (priv = {}) {
                 else resolve(message)
             })
         })
+    }
+
+    pub.lookup = function (phone) {
+      return new Promise((resolve, reject) => {
+        lookup.phoneNumbers(phone).get(err => {
+          if (err) reject()
+          else resolve()
+        })
+      })
     }
 
     return pub
