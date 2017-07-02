@@ -2,10 +2,11 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    bundle: __dirname + '/delivery/views/entry.js',
+    '/delivery/views/static/js/bundle': __dirname + '/delivery/views/entry.js',
+    '/delivery_admin/views/static/js/bundle': __dirname + '/delivery_admin/views/entry.js'
   },
   output: {
-    path: __dirname + '/delivery/views/static/js',
+    path: './',
     filename: '[name].js'
   },
   module: {

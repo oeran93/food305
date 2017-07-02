@@ -4,7 +4,7 @@
   "description": "Group food delivery",
   "main": "index.js",
   "scripts": {
-    "test": "webpack -d --watch"
+    "build": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
