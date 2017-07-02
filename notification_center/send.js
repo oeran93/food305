@@ -1,18 +1,20 @@
 const info_email = require('../tools/globals.js').info_email
 const amazon_ses = require('../tools/amazon_ses.js')
 const twilio = require('../tools/twilio.js')()
+const _ = require('underscore')
 
 module.exports = function (user) {
-
 
     return {
 
       user,
 
-      verification_code: function (code) {
-        this.subject = "Welcome to the Vimi community"
-        this.body = `Hello ${this.user.name}, \n your Vimi account code is ${code}`
-        this.from_email = info_email
+      from_email: "info@vimifood.com",
+
+      message: function (file, infos) {
+        let message = require('./'+file)(_.extend(this.user,infos))
+        this.body = message.body
+        this.subject = message.subject
         return this
       },
 

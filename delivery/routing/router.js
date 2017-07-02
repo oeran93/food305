@@ -8,10 +8,10 @@ const stripe = require('../../payment/stripe.js')()
 module.exports = function (app) {
   app.get('/profile', Auth.session, User.profile)
   app.get('/get_menu', Meal.get_menu)
-  // app.get('/get_future_meals', require_login, Order.get_future_orders)
   app.post('/create_customer_and_buy_meal', stripe.create_customer, stripe.charge_customer, Order.add)
   app.post('/buy_meal', stripe.charge_customer, Order.add)
-  app.get('/get_station', Station.info)
+  app.get('/get_station', require_login, Station.info)
+  app.get('/get_stations', Station.get_stations)
 }
 
 function require_login (req, res, next) {

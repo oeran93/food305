@@ -11,8 +11,15 @@ class Basic_Info extends React.Component {
     this.state = {
       phone: "",
       name: "",
-      email: ""
+      email: "",
+      station: ""
     }
+  }
+
+  componentWillMount () {
+    $.get('/get_stations', (data) => {
+      this.setState({station: data[0]})
+    })
   }
 
   handle_change (event) {

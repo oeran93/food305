@@ -9,11 +9,18 @@ module.exports = function () {
   * Returns station info
   */
   pub.info = function (req, res) {
-    if (req.session && req.session.user) {
-      Station.findOne({_id: req.session.user.station}, (err, station) => {
-        res.send(station)
-      })
-    } else res.send({error: errors.not_logged_in})
+    Station.findOne({_id: req.session.user.station}, (err, station) => {
+      res.send(station)
+    })
+  }
+
+  /*
+  * Returns all available stations
+  */
+  pub.get_stations = function (req, res) {
+    Station.find({}, (err, stations) => {
+      res.send(stations)
+    })
   }
 
   return pub

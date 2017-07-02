@@ -1,6 +1,7 @@
 const User = require('../../database/user.js')
 const Station = require('../../database/station.js')
 const crypto = require('../../tools/crypto.js')()
+const send = require('../../notification_center/send.js')
 const twilio = require('../../tools/twilio.js')()
 const generics = require('../../tools/generics.js')
 const errors = require('../../tools/errors.js')
@@ -18,7 +19,7 @@ module.exports = function () {
     if (req.session && req.session.user) {
       User
         .findOne({phone: req.session.user.phone})
-        .select('_id phone station last_4_digits')
+        .select('_id phone email name station last_4_digits')
         .exec((err, user) => {
           if (user) req.session.user = user
           next()
@@ -34,40 +35,31 @@ module.exports = function () {
   */
   pub.create_user = function (req, res) {
     let phone = req.body.phone.replace(/[^0-9]/g,'')
-    let infos = _.pick(req.body, 'name', 'email')
+    let infos = _.pick(req.body, 'name', 'email', 'station')
     let code = generics.rand_number(6)
-    User.findOne({phone}, (err, user) => {
-      if (err) res.send({error: errors.generic})
-      else if (user && user.activated) res.send({error: errors.user_exists})
-      else {
-        Station.findOne({}, (err, station) => {
-          User.update(
-            {phone},
-            _.extend({
-              code: code,
-              created_at: new Date (),
-              station: station._id
-            },infos),
-            {upsert: true},
-            err => {
-              if (err) res.send({error: errors.generic})
-              else {
-                require('../../notification/sign_up_verification.js')(infos.email,code)
-                twilio.send_sms(phone, `Your Vimi account code is ${code}`)
-                  .then(() => res.send({success: true}))
-                  .catch(() => {
-                    User.remove({phone}, err => {
-                      if (err) console.log(err)
-                      res.send({error: errors.invalid_phone})
-                    })
-                  })
+    twilio.lookup(phone)
+      .catch(() => res.send({error: errors.invalid_phone}))
+      .then(() => {
+        User.findOne({phone}, (err, user) => {
+          if (err) res.send({error: errors.generic})
+          else if (user && user.activated) res.send({error: errors.user_exists})
+          else {
+            User.findOneAndUpdate(
+              {phone},
+              _.extend({code},infos),
+              {upsert: true, new: true},
+              (err, user) => {
+                if (err) res.send({error: errors.generic})
+                else {
+                  send(user).message('sign_up_verification',{code}).text_and_email()
+                  res.send({success: true})
+                }
               }
-            }
-          )
+            )
+          }
         })
-      }
-    })
-  }
+      })
+    }
 
   /*
   * Checks if entered code matches the one sent to user
@@ -122,10 +114,7 @@ module.exports = function () {
       if (!user) res.send({error: errors.invalid_phone})
       else if (!user.code) res.send({error: errors.generic})
       else {
-        twilio.send_sms(
-          phone,
-          `Your Vimi Password Recovery Code is ${code}`
-        )
+        send(user).message('recovery_code',{code}).text_and_email()
         res.send({success: true})
       }
     })

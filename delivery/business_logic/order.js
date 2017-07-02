@@ -32,22 +32,6 @@ module.exports = function () {
     })
   }
 
-  /*
-  * Gets all upcoming orders for a user.
-  */
-  // pub.get_future_orders = function (req, res) {
-  //   Meal
-  //   .find()
-  //   .populate({
-  //     path: 'orders',
-  //     match: {date: {'$gte': req.query.date}, _user: {'$eq': req.session.user._id}}
-  //   })
-  //   .exec((err, meals) => {
-  //     meals = meals.filter( m => m.orders.length)
-  //     res.send(meals)
-  //   })
-  // }
-
   return pub
 
 }
