@@ -12,7 +12,7 @@ var User = new Schema({
   station: {type: Schema.Types.ObjectId, ref: 'Station'},
   last_4_digits: "",
   stripe_id: "",
-  created_at: Date
+  created_at: { type: Date, default: Date.now }
 })
 
 module.exports = mongoose.model('User', User, 'User')
