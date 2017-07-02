@@ -1,11 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
+const date = require ('../../../tools/date.js')()
+
 const Schema = mongoose.Schema
 
-const Order = require('../../../../database/order.js');
-const Meal = require('../../../../database/meal.js');
-const User = require('../../../../database/user.js');
+// const Order = require('../../../database/order.js');
+// const Meal = require('../../../database/meal.js');
+// const User = require('../../../database/user.js');
+
+const Order = require('./order.js');
+const Meal = require('./meal.js');
+const User = require('./user.js');
+
 //require('../../database/start.js')()
 //const Restaurant = require('../../database/restaurant.js');
 
@@ -24,9 +32,12 @@ function handleError(err){
 
 var todayOrder = [];
 
+
+console.log(date.this_delivery().format('MM-DD-YYYY hh:mm a'));
+
 Order.
   find().
-  where('date').equals('06-27-2017 12:00 pm').
+  where('date').equals(date.this_delivery().format('MM-DD-YYYY hh:mm a')).
   select('_meal _user')
   .populate(
 	[{path:'_meal'}, 
