@@ -1,6 +1,6 @@
 const Meal  = require('../../database/meal.js')
 const Order = require('../../database/order.js')
-const twilio = require('../../tools/twilio.js')()
+const send = require('../../notification_center/send.js')
 const date = require('../../tools/date.js')()
 
 module.exports = function () {
@@ -24,8 +24,8 @@ module.exports = function () {
         () => {
           let day = date.to_moment(req.body.date).format("dddd")
           let hour = date.to_moment(req.body.date).format("hh a")
-          twilio.send_sms(req.session.user.phone,
-            `Your ${req.body.meal.name} is on its way. It will be delivered on ${day} at ${hour}`)
+          let meal_name = req.body.meal.name
+          send(req.session.user).message('successful_order', {meal_name,day,hour}).text_and_email()
           res.sendStatus(200)
         }
       )
