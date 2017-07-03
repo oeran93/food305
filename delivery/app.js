@@ -25,12 +25,6 @@ module.exports = function (db) {
   /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
 
-  /*Redirecting http to https*/
-  app.all('*', (req, res, next) => {
-    if (req.headers['x-forwarded-proto'] === 'https' || req.url == '/redirect') next()
-    else next()
-  })
-
   /*Modules Router*/
   sharer_router(app)
   auth_router(app)
