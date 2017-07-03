@@ -70,7 +70,7 @@ class Basic_Info extends React.Component {
             type="text"
             className="basic-input"
             value={name}
-            placeholder="What should we call you?"
+            placeholder="What's your name?"
             onChange={this.handle_change.bind(this)}
             onKeyPress={(t) => {if (t.charCode === 13) this.send_info.bind(this)()}}
           />
