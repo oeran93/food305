@@ -10,7 +10,7 @@ module.exports = function () {
 
 	const delivery_hours = {
 		'monday': [12],
-		'tuesday': [12],
+		'tuesday': [],
 		'wednesday': [12],
 		'thursday': [12],
 		'friday': [12],
