@@ -20,6 +20,7 @@ module.exports = function () {
             .populate({
               path: "meals",
               select: "name price image tags orders description",
+              match: {hidden: {$exists: false}},
               populate: {
                 path: "orders",
                 match: {date: {'$gte': date}, _user: {'$eq': req.session.user._id}}
