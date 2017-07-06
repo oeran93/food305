@@ -5,11 +5,11 @@ const confirmation = require('../../../../tools/confirmation.js')()
 class Pay extends React.Component {
 
   pay () {
-    let {total, meal, date} = this.props
+    let {meal, date} = this.props
     $.ajax({
       method: "POST",
       url: "/buy_meal",
-      data: {total, meal, date},
+      data: {meal, date},
       success: (res) => {
         if (res.error) confirmation.failure(res.error.message)
         else window.location.href = '/'
@@ -35,7 +35,6 @@ class Pay extends React.Component {
 
 Pay.propTypes = {
   autofocus: PropTypes.bool,
-  amount: PropTypes.string,
   meal: PropTypes.object
 }
 
