@@ -16,7 +16,6 @@ module.exports = function () {
   * to the client
   */
   pub.session = function (req, res, next) {
-    console.log(req.session)
     if (req.session && req.session.user) {
       User
         .findOne({phone: req.session.user.phone})
