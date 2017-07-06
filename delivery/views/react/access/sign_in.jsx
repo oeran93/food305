@@ -25,7 +25,7 @@ class Sign_In extends React.Component {
     let {phone, pwd} = this.state
     $.ajax({
       method: 'POST',
-      url: '/login',
+      url: '/sign_in',
       data :{phone, pwd},
       success: (res) => {
         if (res.success) window.location.href = '/'
@@ -72,7 +72,7 @@ class Sign_In extends React.Component {
             Create an account
           </button>
           <button className='btn red-btn pull-right' onClick={this.login.bind(this)}>
-            Login
+            Sign In
           </button>
         </div>
       </div>

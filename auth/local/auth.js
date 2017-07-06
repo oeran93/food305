@@ -145,7 +145,7 @@ module.exports = function () {
   /*
   * Logs out user
   */
-  pub.logout = function (req, res) {
+  pub.sign_out = function (req, res) {
     req.session.reset()
     res.redirect('/')
   }
@@ -155,15 +155,14 @@ module.exports = function () {
   * @param req.body.phone {String} user phone
   * @param req.body.pwd {String} user pwd
   */
-  pub.login = function (req, res) {
+  pub.sign_in = function (req, res) {
     let {phone, pwd} = req.body
     phone = phone.replace(/[^0-9]/g,'')
     User.findOne({phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
-        req.session.user = _.omit(user, ['password','salt'])
-        console.log(req.session)
+        req.session.user = _.pick(user, '_id','phone','email','name','station','last_4_digits')
         res.send({success: true})
       } else res.send({error: errors.invalid_old_pwd})
     })

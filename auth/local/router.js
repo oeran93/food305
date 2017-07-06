@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.post('/create_password', validator.validate_router('pwd') , auth.create_password)
   app.get('/forgot_pwd', auth.forgot_pwd)
   app.post('/recover_pwd', auth.recover_pwd)
-  app.get('/logout', auth.logout)
-  app.post('/login', auth.login)
+  app.get('/sign_out', auth.sign_out)
+  app.post('/sign_in', auth.sign_in)
 
 }
