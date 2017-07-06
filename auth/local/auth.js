@@ -163,6 +163,7 @@ module.exports = function () {
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
         req.session.user = _.omit(user, ['password','salt'])
+        console.log(req.session)
         res.send({success: true})
       } else res.send({error: errors.invalid_old_pwd})
     })
