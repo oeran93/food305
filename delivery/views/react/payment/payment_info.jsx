@@ -10,7 +10,6 @@ class Payment_Info extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      total: props.total,
       meal: props.meal,
       date: props.date,
       credit_card: {
@@ -116,7 +115,6 @@ class Payment_Info extends React.Component {
 
 Payment_Info.propTypes = {
   autofocus: PropTypes.bool,
-  amount: PropTypes.string,
   meal: PropTypes.object
 }
 
