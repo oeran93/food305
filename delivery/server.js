@@ -1,6 +1,6 @@
 const database = require('../database/start.js')
 const app      = require('./app.js')(database)
-const port     = 3000
+const port     = require('../tools/globals.js').delivery_port
 
 /*Start the server*/
 app.listen(port, () => {
