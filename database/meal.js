@@ -7,7 +7,7 @@ var Meal = new Schema({
   description: String,
   price: Number,
   image: String,
-  hidden: boolean,
+  hidden: Boolean,
   tags: [String], // hot, veggie
   orders: [{type: Schema.Types.ObjectId, ref: 'Order'}]
 })
