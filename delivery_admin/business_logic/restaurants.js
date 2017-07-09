@@ -17,7 +17,7 @@ module.exports = function () {
         if (err) res.send({error: errors.generic})
         else {
           restaurants.forEach((r,i) => {
-            restaurants[i].orders = r.meals.reduce((sum,meal) => sum + meal.orders ? meal.orders.length : 0, 0)
+            restaurants[i].orders = r.meals.reduce((sum,meal) => sum + (meal.orders ? meal.orders.length : 0), 0)
           })
           res.send(restaurants)
         }
