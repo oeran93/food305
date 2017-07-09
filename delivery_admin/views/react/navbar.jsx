@@ -9,7 +9,8 @@ module.exports = function (props) {
         <div className="navbar-header">
           <a className="navbar-brand" href="#">Vimi Admin</a>
           <Link className="btn btn-default navbar-btn" to="/">Orders</Link>
-          <Link className="btn btn-default navbar-btn" to="/meals_stats">Meals Stats</Link>
+          <Link className="btn btn-default navbar-btn" to="/meals">Meals</Link>
+          <Link className="btn btn-default navbar-btn" to="/restaurants">Restaurants</Link>
         </div>
       </div>
     </nav>

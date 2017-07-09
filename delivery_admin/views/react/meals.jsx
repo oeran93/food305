@@ -1,9 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-const date = require('../../../tools/date.js')()
-const globals = require('../../../tools/globals.js')
 
-class Meals_Stats extends React.Component {
+class Meals extends React.Component {
 
   constructor (props) {
     super(props)
@@ -22,7 +20,7 @@ class Meals_Stats extends React.Component {
     let {meals} = this.state
     return (
       <div>
-        <h1>Meals Stats</h1>
+        <h1>Meals</h1>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -50,4 +48,4 @@ class Meals_Stats extends React.Component {
   }
 
 }
-module.exports = Meals_Stats
+module.exports = Meals
