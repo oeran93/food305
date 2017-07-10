@@ -100,6 +100,14 @@ module.exports = function () {
 		return moment.duration(this.this_delivery().diff(moment()))
 	}
 
+	/*
+	* Returns a properly formatted date of the current time
+	* @return {String}
+	*/
+	pub.now = function () {
+		return moment().format(globals.order_date_format)
+	}
+
 	return pub
 
 }

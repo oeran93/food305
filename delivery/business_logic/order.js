@@ -14,7 +14,8 @@ module.exports = function () {
     var order = new Order({
       _meal: req.body.meal._id,
       _user: req.session.user._id,
-      date: req.body.date
+      date: req.body.date,
+      purchase_time: date.now()
     })
     order.save((err) => {
       if (err) { throw err}
