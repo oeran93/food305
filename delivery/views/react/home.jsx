@@ -35,8 +35,8 @@ class Home extends React.Component {
     let {restaurant, meals} = this.state
     return (
       <div className="home-page">
-        <Rating />
         <Restaurant_Banner meals={meals} restaurant={restaurant}/>
+        <Rating />
         <div className="container">
           <Menu toggleModal={toggleModal} meals={meals}/>
         </div>

@@ -41,7 +41,7 @@ module.exports = function () {
   pub.get_latest_user_order = function (req, res) {
     Order.findOne({_user: req.session.user._id, date: {$lte: date.now()}})
       .populate({
-        path: "_meal", select: {name: 1, image: 1, _restaurant: 1},
+        path: "_meal", select: {name: 1, _restaurant: 1},
         populate: {path: '_restaurant', select: {name: 1}}
       })
       .sort({date: -1})

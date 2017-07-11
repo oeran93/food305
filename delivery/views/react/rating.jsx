@@ -19,6 +19,16 @@ class Rating extends React.Component {
     })
   }
 
+  uncolor_stars () {
+    $('.star').css('color','#ff9933')
+  }
+
+  color_stars (e) {
+    for (let i = 0; i < parseInt(e.target.getAttribute('value')); i++ ) {
+      $('.star-'+i).css('color', '#c14820')
+    }
+  }
+
   send_rating (e) {
     let {order} = this.state
     $.post('/rate_order', {order: order._id, rating: e.target.getAttribute('value')}, (res) => {
@@ -33,7 +43,7 @@ class Rating extends React.Component {
   render () {
     let {order} = this.state
     if (_.size(order) == 0) return null
-    let {image, name, _restaurant} = order._meal
+    let {name, _restaurant} = order._meal
     return (
       <div className="container-fluid">
       {!order.rating
@@ -41,19 +51,14 @@ class Rating extends React.Component {
           <div className="row rating-container">
             <div className="col-xs-12">
               <h2 className="title text-center">How was your last meal at {_restaurant.name} ? </h2>
-              <div className="row">
-                <div className='col-xs-12 col-md-offset-3 col-md-2 meal'>
-                  <div className='thumbnail clearfix'>
-                    <img className="meal-picture" src={'images/meals/' + image} alt={name}/>
-                  </div>
-                </div>
-                <div className="col-xs-12 col-md-6">
+              <div className="row text-center" onMouseOut={this.uncolor_stars}>
+                <div className="col-xs-12 col-md-12">
                   <h3 title={name} className='meal-name'>{name}</h3>
-        					<i className="star fa fa-star fa-3x" aria-hidden="true" value="1" onClick={this.send_rating.bind(this)}></i>
-                  <i className="star fa fa-star fa-3x" aria-hidden="true" value="2" onClick={this.send_rating.bind(this)}></i>
-                  <i className="star fa fa-star fa-3x" aria-hidden="true" value="3" onClick={this.send_rating.bind(this)}></i>
-                  <i className="star fa fa-star fa-3x" aria-hidden="true" value="4" onClick={this.send_rating.bind(this)}></i>
-                  <i className="star fa fa-star fa-3x" aria-hidden="true" value="5" onClick={this.send_rating.bind(this)}></i>
+        					<i className="star star-0 fa fa-star fa-3x" aria-hidden="true" value="1" onMouseOver={this.color_stars} onClick={this.send_rating.bind(this)}></i>
+                  <i className="star star-1 fa fa-star fa-3x" aria-hidden="true" value="2" onMouseOver={this.color_stars} onClick={this.send_rating.bind(this)}></i>
+                  <i className="star star-2 fa fa-star fa-3x" aria-hidden="true" value="3" onMouseOver={this.color_stars} onClick={this.send_rating.bind(this)}></i>
+                  <i className="star star-3 fa fa-star fa-3x" aria-hidden="true" value="4" onMouseOver={this.color_stars} onClick={this.send_rating.bind(this)}></i>
+                  <i className="star star-4 fa fa-star fa-3x" aria-hidden="true" value="5" onMouseOver={this.color_stars} onClick={this.send_rating.bind(this)}></i>
                 </div>
               </div>
             </div>
