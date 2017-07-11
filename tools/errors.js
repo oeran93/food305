@@ -58,6 +58,16 @@ module.exports = {
   invalid_email: {
     number: 12,
     message: "Looks like you entered a wrong email"
+  },
+
+  order_does_not_exist: {
+    number: 13,
+    message: "This order does not exist"
+  },
+
+  invalid_rating: {
+    number: 14,
+    message: "The rating you provided is out of range"
   }
 
 }

@@ -1,5 +1,5 @@
 .menu {
-  padding-top: 5vh;
+  margin-top: 5vh;
   height: 40vh;
 }
 
@@ -10,4 +10,21 @@
   background-image: url('../images/home/bg.jpg');
   background-size:cover;
   background-repeat: no-repeat;
+}
+
+.rating-container {
+  padding: 2vh;
+  color: white;
+  background-color: #262f36;
+  border-bottom: 2px solid #c14820;
+}
+
+.star {
+  margin-right: 5px;
+}
+
+.star:hover {
+  color: #c14820;
+  cursor: hand;
+  cursor: pointer;
 }
