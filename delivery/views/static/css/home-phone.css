@@ -6,4 +6,8 @@
       height: 100vh;
     }
 
+    .rating-container {
+      padding-top: 8vh;
+    }
+
 }

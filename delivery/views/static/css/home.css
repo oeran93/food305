@@ -1,5 +1,5 @@
 .menu {
-  padding-top: 5vh;
+  margin-top: 5vh;
   height: 40vh;
 }
 
@@ -10,4 +10,27 @@
   background-image: url('../images/home/bg.jpg');
   background-size:cover;
   background-repeat: no-repeat;
+}
+
+.rating-container {
+  padding: 2vh;
+}
+
+.rating-container .meal-picture {
+  border-radius: 3px;
+}
+
+.rating-container .meal-name {
+  margin-top: 0;
+}
+
+.star {
+  color: #ff9933;
+  margin-right: 10px;
+}
+
+.star:hover {
+  color: #c14820;
+  cursor: hand;
+  cursor: pointer;
 }
