@@ -40,7 +40,10 @@ module.exports = function () {
   */
   pub.get_latest_user_order = function (req, res) {
     Order.findOne({_user: req.session.user._id, date: {$lte: date.now()}})
-      .populate({path: "_meal", select: {name: 1, image: 1}})
+      .populate({
+        path: "_meal", select: {name: 1, image: 1, _restaurant: 1},
+        populate: {path: '_restaurant', select: {name: 1}}
+      })
       .sort({date: -1})
       .exec((err, order) => {
         if (err) res.send({error: errors.generic})
