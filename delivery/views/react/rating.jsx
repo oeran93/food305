@@ -35,10 +35,10 @@ class Rating extends React.Component {
     if (_.size(order) == 0) return null
     let {image, name} = order._meal
     return (
-      <div className="container-fluid rating-container">
+      <div className="container-fluid">
       {!order.rating
         &&
-          <div className="row">
+          <div className="row rating-container">
             <div className="col-xs-12">
               <h3 className="text-center">Review your last meal</h3>
               <div className="row">
