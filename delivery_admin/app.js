@@ -26,5 +26,7 @@ module.exports = function (db) {
   /*Other routers*/
   router(app)
 
+  app.use('/*', (req, res) => res.redirect('/'))
+
   return app
 }
