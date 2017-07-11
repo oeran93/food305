@@ -3,7 +3,7 @@ import $ from 'jquery'
 const date = require('../../../tools/date.js')()
 const globals = require('../../../tools/globals.js')
 
-export class Orders extends React.Component {
+class Orders extends React.Component {
 
   constructor (props) {
     super(props)
@@ -20,7 +20,7 @@ export class Orders extends React.Component {
 
   count_orders (orders){
     let count = {}
-    for(var i in orders){
+    for(let i in orders){
       let meal = orders[i].meal
       count[meal] = count[meal] ? count[meal]+1 : 1
     }
@@ -29,6 +29,7 @@ export class Orders extends React.Component {
 
   render () {
     let {orders} = this.state
+    console.log(orders)
     let count = this.count_orders(orders)
     return (
       <div>
@@ -94,3 +95,5 @@ export class Orders extends React.Component {
     )
   }
 }
+
+module.exports = Orders
