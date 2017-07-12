@@ -8,7 +8,7 @@ export class Orders extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      orders: [],
+      orders: []
     }
   }
 
@@ -18,7 +18,7 @@ export class Orders extends React.Component {
     })
   }
 
-  count_orders(orders){
+  count_orders (orders){
     let count = {}
     for(var i in orders){
       let meal = orders[i].meal
