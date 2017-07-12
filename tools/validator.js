@@ -28,6 +28,13 @@ const valid = {
       return pwd.length > 7
     },
     error: errors.short_pwd
+  },
+
+  rating: {
+    func: (rating) => {
+      return !isNaN(rating) && rating > 0 && rating < 6
+    },
+    error: errors.invalid_rating
   }
 
 }

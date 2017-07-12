@@ -1,6 +1,7 @@
 const React     = require('react')
 const PropTypes = require('prop-types')
 const Menu = require('./menu.jsx')
+const Rating = require('./rating.jsx')
 const Restaurant_Banner = require('./restaurant_banner.jsx')
 const date  = require('../../../tools/date.js')()
 
@@ -35,6 +36,7 @@ class Home extends React.Component {
     return (
       <div className="home-page">
         <Restaurant_Banner meals={meals} restaurant={restaurant}/>
+        <Rating />
         <div className="container">
           <Menu toggleModal={toggleModal} meals={meals}/>
         </div>
