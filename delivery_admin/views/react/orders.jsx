@@ -19,48 +19,44 @@ export class Orders extends React.Component {
   }
 
   count_orders(orders){
-    var count = {}
+    let count = {}
     for(var i in orders){
-      var meal = orders[i].meal
+      let meal = orders[i].meal
       count[meal] = count[meal] ? count[meal]+1 : 1
     }
     return count
   }
 
   render () {
-
     let {orders} = this.state
     let count = this.count_orders(orders)
-
     return (
       <div>
         <h2>Orders per Meal Type</h2>
-
         <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Meal</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                    Object.keys(count).map((meal,i) => {
-                      return (
-                        <tr key={i}>
-                          <td>
-                            <p>{meal}</p>
-                          </td>
-                          <td>
-                            <p>{count[meal]}</p>
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-                  </tbody>
-                </table>
-
+          <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            Object.keys(count).map((meal,i) => {
+              return (
+                <tr key={i}>
+                  <td>
+                    <p>{meal}</p>
+                  </td>
+                  <td>
+                    <p>{count[meal]}</p>
+                  </td>
+                </tr>
+              )
+            })
+          }
+         </tbody>
+        </table>
         <h2>Orders per User</h2>
         <table className="table table-bordered">
           <thead>
@@ -97,6 +93,4 @@ export class Orders extends React.Component {
       </div>
     )
   }
-
 }
-module.exports = Orders
