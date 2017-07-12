@@ -2,65 +2,64 @@ import React from 'react'
 import $ from 'jquery'
 const date = require('../../../tools/date.js')()
 const globals = require('../../../tools/globals.js')
+const _ = require('underscore')
 
-export class Orders extends React.Component {
+class Orders extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      orders: [],
+      orders: []
     }
   }
 
   componentWillMount () {
-    $.get("/delivery_orders?date="+date.this_delivery().format(globals.order_date_format), (data) => {
-      this.setState({orders:data})
+    $.get("/delivery_orders?date=" + date.this_delivery().format(globals.order_date_format), (data) => {
+      this.setState({orders: data})
     })
   }
 
-  count_orders(orders){
-    var count = {}
-    for(var i in orders){
-      var meal = orders[i].meal
-      count[meal] = count[meal] ? count[meal]+1 : 1
-    }
+  count_orders (orders) {
+    let count = {}
+    _.each(orders, (order) => {
+      let meal = order.meal
+      count[meal] = count[meal]
+        ? count[meal] + 1
+        : 1
+    })
     return count
   }
 
   render () {
-
     let {orders} = this.state
     let count = this.count_orders(orders)
-
     return (
       <div>
         <h2>Orders per Meal Type</h2>
-
         <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Meal</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                    Object.keys(count).map((meal,i) => {
-                      return (
-                        <tr key={i}>
-                          <td>
-                            <p>{meal}</p>
-                          </td>
-                          <td>
-                            <p>{count[meal]}</p>
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-                  </tbody>
-                </table>
-
+          <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+             Object.keys(count).map((meal, i) => {
+              return (
+                <tr key={i}>
+                  <td>
+                    <p>{meal}</p>
+                  </td>
+                  <td>
+                    <p>{count[meal]}</p>
+                  </td>
+                </tr>
+              )
+            })
+           }
+          </tbody>
+        </table>
         <h2>Orders per User</h2>
         <table className="table table-bordered">
           <thead>
@@ -72,8 +71,8 @@ export class Orders extends React.Component {
             </tr>
           </thead>
           <tbody>
-          {
-            orders.map((order,i) => {
+            {
+             _.map(orders, (order, i) => {
               return (
                 <tr key={i}>
                   <td>
