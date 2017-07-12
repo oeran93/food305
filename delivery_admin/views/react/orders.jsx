@@ -8,16 +8,14 @@ class Orders extends React.Component {
 
   constructor (props) {
     super(props)
-    let default_date = date.this_delivery().format(globals.order_date_format)
     this.state = {
-      orders: [],
-      chosen_date: default_date
+      orders: []
     }
     this.handle_date_change = this.handle_date_change.bind(this)
   }
 
   componentWillMount () {
-    $.get("/delivery_orders?date=" + this.state.chosen_date, (data) => {
+    $.get("/delivery_orders?date=" + date.this_delivery().format(globals.order_date_format), (data) => {
       this.setState({orders: data})
     })
   }
@@ -34,13 +32,14 @@ class Orders extends React.Component {
   }
 
   handle_date_change(){
-    let new_date = document.getElementById("chosen_date").value + " 12:00"
-    this.setState({chosen_date: new_date})
-    console.log("set " + new_date)
+    let chosen_date = document.getElementById("chosen_date").value + " 12:00"
+    $.get("/delivery_orders?date=" + chosen_date, (data) => {
+      this.setState({orders: data})
+    })
   }
 
   render () {
-    let orders = this.state.orders
+    let {orders} = this.state
     let count = this.count_orders(orders)
     return (
       <div>
