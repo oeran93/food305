@@ -45,14 +45,14 @@ class Orders extends React.Component {
           </thead>
           <tbody>
             {
-             Object.keys(count).map((meal, i) => {
+             _.map(count, (amount, meal) => {
               return (
-                <tr key={i}>
+                <tr key={meal}>
                   <td>
                     <p>{meal}</p>
                   </td>
                   <td>
-                    <p>{count[meal]}</p>
+                    <p>{amount}</p>
                   </td>
                 </tr>
               )
