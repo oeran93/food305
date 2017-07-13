@@ -8,14 +8,16 @@ class Orders extends React.Component {
 
   constructor (props) {
     super(props)
+    let current_date = date.this_delivery().format(globals.order_date_format).slice(0,-6)
     this.state = {
-      orders: []
+      orders: [],
+      shown_date: current_date
     }
     this.handle_date_change = this.handle_date_change.bind(this)
   }
 
   componentWillMount () {
-    $.get("/delivery_orders?date=" + date.this_delivery().format(globals.order_date_format), (data) => {
+    $.get("/delivery_orders?date=" + this.state.shown_date, (data) => {
       this.setState({orders: data})
     })
   }
@@ -43,11 +45,9 @@ class Orders extends React.Component {
     let count = this.count_orders(orders)
     return (
       <div>
-        <div className="col-lg-6">
           <div className="input-group">
-            <input id="chosen_date" type="text" className="form-control" defaultValue='07-12-2017' onChange={this.handle_date_change} />
+            <input id="chosen_date" type="text" className="form-control" defaultValue={this.state.shown_date} onChange={this.handle_date_change} />
           </div>
-        </div>
         <h2>Orders per Meal Type</h2>
         <table className="table table-bordered">
           <thead>
