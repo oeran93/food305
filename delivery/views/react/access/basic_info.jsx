@@ -35,11 +35,11 @@ class Basic_Info extends React.Component {
       url: '/create_user',
       data : this.state,
       success: (res) => {
-        if(res.success) change_step({step: 1, phone: this.state.phone})
-        else if (res.error) {
+        if(res.error) {
           confirmation.failure(res.error.message)
           if (res.error.number == errors.user_exists.number) change_step({step: 3})
         }
+        else change_step({step: 1, phone: this.state.phone})
       }
     })
   }

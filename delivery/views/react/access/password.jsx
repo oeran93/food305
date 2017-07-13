@@ -31,8 +31,8 @@ class Password extends React.Component {
         url: '/create_password',
         data :{phone, pwd},
         success: (res) => {
-          if (res.success) window.location.href = '/'
-          else if (res.error) confirmation.failure(res.error.message)
+          if (res.error) confirmation.failure(res.error.message)
+          else window.location.href = '/'
         }
       })
     }

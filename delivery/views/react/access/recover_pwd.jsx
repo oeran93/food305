@@ -30,11 +30,11 @@ class Recover_Pwd extends React.Component {
         url: '/recover_pwd',
         data: {code, pwd, phone},
         success: (res) => {
-          if (res.success) {
+          if (res.error) confirmation.failure(res.error.message)
+          else {
             confirmation.success("Password successfully updated")
             change_step({step: 3})
           }
-          else confirmation.failure(res.error.message)
         }
       })
     }

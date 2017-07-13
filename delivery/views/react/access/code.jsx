@@ -27,8 +27,8 @@ class Code extends React.Component {
       url: '/check_phone_code',
       data: {code, phone},
       success: (res) => {
-        if (res.success) change_step({step: 2})
-        else if (res.error.number == errors.invalid_code.number) confirmation.failure(res.error.message)
+        if (res.error) confirmation.failure(res.error.message)
+        else change_step({step: 2})
       }
     })
   }

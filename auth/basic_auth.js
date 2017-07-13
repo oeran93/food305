@@ -1,10 +1,10 @@
-const User = require('../../database/user.js')
-const Station = require('../../database/station.js')
-const crypto = require('../../tools/crypto.js')()
-const send = require('../../notification_center/send.js')
-const twilio = require('../../tools/twilio.js')()
-const generics = require('../../tools/generics.js')
-const errors = require('../../tools/errors.js')
+const User = require('../database/user.js')
+const Station = require('../database/station.js')
+const crypto = require('../tools/crypto.js')()
+const send = require('../notification_center/send.js')
+const twilio = require('../tools/twilio.js')()
+const generics = require('../tools/generics.js')
+const errors = require('../tools/errors.js')
 const _ = require('underscore')
 
 module.exports = function () {
@@ -33,7 +33,7 @@ module.exports = function () {
   * if the number is not right.
   * @param req.body {object} user basic infos: phone, name, email
   */
-  pub.create_user = function (req, res) {
+  pub.create_user = function (req, res, next) {
     let phone = req.body.phone.replace(/[^0-9]/g,'')
     let infos = _.pick(req.body, 'name', 'email', 'station')
     let code = generics.rand_number(6)
@@ -52,7 +52,7 @@ module.exports = function () {
                 if (err) res.send({error: errors.generic})
                 else {
                   send(user).message('sign_up_verification',{code}).text_and_email()
-                  res.send({success: true})
+                  next()
                 }
               }
             )
@@ -66,13 +66,13 @@ module.exports = function () {
   * @param req.body.code {String} user code
   * @param req.body.phone {String} user phone
   */
-  pub.check_phone_code = function (req, res) {
+  pub.check_phone_code = function (req, res, next) {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, phone} = req.body
     User.findOne({phone, code}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else if (!user) res.send({error: errors.invalid_code})
-      else res.send({success: true})
+      else next()
     })
   }
 
@@ -82,7 +82,7 @@ module.exports = function () {
  * @param req.body.phone {String} user phone
  * @param req.body.old_pwd {String} this can be missing if current pwd is empty
  */
-  pub.create_password = function (req, res) {
+  pub.create_password = function (req, res, next) {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {pwd, phone, old_pwd} = _.extend({old_pwd: ''},req.body)
     User.findOne({phone}, (err,user) => {
@@ -97,7 +97,7 @@ module.exports = function () {
         user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
         user.save(err => {
           if (err) res.send({error: errors.generic})
-          else res.send({success: true})
+          else next()
         })
       }
     })
@@ -107,7 +107,7 @@ module.exports = function () {
   * Creates a new recovery code, sends it to the user and saves it in the DB
   * @param req.query.phone {String} user phone number
   */
-  pub.forgot_pwd = function (req, res) {
+  pub.forgot_pwd = function (req, res, next) {
     let phone = req.query.phone.replace(/[^0-9]/g,'')
     let code = generics.rand_number(10)
     User.findOneAndUpdate({phone}, {code}, {new: true, upsert: false}, (err, user) => {
@@ -115,7 +115,7 @@ module.exports = function () {
       else if (!user.code) res.send({error: errors.generic})
       else {
         send(user).message('recovery_code',{code}).text_and_email()
-        res.send({success: true})
+        next()
       }
     })
   }
@@ -126,7 +126,7 @@ module.exports = function () {
   * @param req.body.pwd {String} new password
   * @param req.body.phone {String} phone number
   */
-  pub.recover_pwd = function (req, res) {
+  pub.recover_pwd = function (req, res, next) {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd, phone} = req.body
     User.findOne({code, phone},(err, user) => {
@@ -135,7 +135,7 @@ module.exports = function () {
       else {
         User.update({phone, code},{code: '', pwd: ''}, (err, user) => {
           if (err) res.send({error: errors.generic})
-          else pub.create_password(req, res)
+          else pub.create_password(req, res, next)
         })
       }
     })
@@ -154,7 +154,7 @@ module.exports = function () {
   * @param req.body.phone {String} user phone
   * @param req.body.pwd {String} user pwd
   */
-  pub.sign_in = function (req, res) {
+  pub.sign_in = function (req, res, next) {
     let {phone, pwd} = req.body
     phone = phone.replace(/[^0-9]/g,'')
     User.findOne({phone}, (err, user) => {
@@ -162,8 +162,9 @@ module.exports = function () {
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
         req.session.user = _.pick(user, '_id','phone','email','name','station','last_4_digits')
-        res.send({success: true})
-      } else res.send({error: errors.invalid_old_pwd})
+        next()
+      }
+      else res.send({error: errors.invalid_old_pwd})
     })
   }
 
