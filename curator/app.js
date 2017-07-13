@@ -4,8 +4,7 @@ const body_parser = require('body-parser')
 const session     = require('client-sessions')
 const env         = process.env
 
-const delivery_router = require('./router.js')
-const auth_router   = require('../auth/routing/user.js')
+const auth_router   = require('../auth/routing/curator.js')
 
 module.exports = function (db) {
   //start DB
@@ -26,7 +25,6 @@ module.exports = function (db) {
   app.use(express.static(__dirname + '/views/static'))
 
   /*Modules Router*/
-  delivery_router(app)
   auth_router(app)
 
   return app

@@ -68,6 +68,11 @@ module.exports = {
   invalid_rating: {
     number: 14,
     message: "The rating you provided is out of range"
+  },
+
+  wrong_permissions: {
+    number: 15,
+    message: "You do not have the right permissions"
   }
 
 }

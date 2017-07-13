@@ -15,6 +15,7 @@
 * DELIVERY_PORT
 * DELIVERY_ADMIN_PORT
 * TEST_PORT
+* CURATOR_PORT
 
 
 ## Coding Style Guide

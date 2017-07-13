@@ -20,12 +20,12 @@ class Rating extends React.Component {
   }
 
   uncolor_stars () {
-    $('.star').css('color','#ff9933')
+    $('.star').css('color','inherit')
   }
 
   color_stars (e) {
     for (let i = 0; i < parseInt(e.target.getAttribute('value')); i++ ) {
-      $('.star-'+i).css('color', '#c14820')
+      $('.star-'+i).css('color', '#ff9933')
     }
   }
 

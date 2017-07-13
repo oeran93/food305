@@ -28,8 +28,8 @@ class Sign_In extends React.Component {
       url: '/sign_in',
       data :{phone, pwd},
       success: (res) => {
-        if (res.success) window.location.href = '/'
-        else confirmation.failure(res.error.message)
+        if (res.error) confirmation.failure(res.error.message)
+        else window.location.href = '/'
       }
     })
   }

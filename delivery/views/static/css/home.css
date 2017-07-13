@@ -25,12 +25,11 @@
 }
 
 .star {
-  color: #ff9933;
   margin-right: 10px;
 }
 
 .star:hover {
-  color: #c14820;
+  color: #ff9933;
   cursor: hand;
   cursor: pointer;
 }
