@@ -13,7 +13,6 @@ class Orders extends React.Component {
       orders: [],
       shown_date: current_date
     }
-    this.handle_date_change = this.handle_date_change.bind(this)
   }
 
   componentWillMount () {
@@ -33,8 +32,8 @@ class Orders extends React.Component {
     return count
   }
 
-  handle_date_change(){
-    let chosen_date = document.getElementById("chosen_date").value + " 12:00"
+  handle_date_change(event){
+    let chosen_date = event.target.value + " 12:00"
     $.get("/delivery_orders?date=" + chosen_date, (data) => {
       this.setState({orders: data})
     })
@@ -46,7 +45,7 @@ class Orders extends React.Component {
     return (
       <div>
           <div className="input-group">
-            <input id="chosen_date" type="text" className="form-control" defaultValue={this.state.shown_date} onChange={this.handle_date_change} />
+            <input type="text" className="form-control" defaultValue={this.state.shown_date} onChange={this.handle_date_change.bind(this)} />
           </div>
         <h2>Orders per Meal Type</h2>
         <table className="table table-bordered">
