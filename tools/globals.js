@@ -26,6 +26,8 @@ module.exports = {
 
   delivery_admin_port: env.DELIVERY_ADMIN_PORT,
 
+  curator_port: env.CURATOR_PORT,
+
   test_port: env.TEST_PORT
 
 }
