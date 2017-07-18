@@ -2,8 +2,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    '/delivery/views/static/js/bundle': __dirname + '/delivery/views/entry.js',
-    '/delivery_admin/views/static/js/bundle': __dirname + '/delivery_admin/views/entry.js'
+    '/user/views/static/js/bundle': __dirname + '/user/views/entry.js',
+    '/admin/views/static/js/bundle': __dirname + '/admin/views/entry.js'
   },
   output: {
     path: './',
