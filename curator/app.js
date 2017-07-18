@@ -24,7 +24,7 @@ module.exports = function (db) {
   /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
 
-  /*Modules Router*/
+  /*Modules Router */
   auth_router(app)
 
   return app
