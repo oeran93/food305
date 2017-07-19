@@ -3,6 +3,7 @@ const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Sign_In extends React.Component {
 
@@ -23,14 +24,13 @@ class Sign_In extends React.Component {
   login () {
     let {change_step} = this.props
     let {phone, pwd} = this.state
-    $.ajax({
-      method: 'POST',
+    ajx.call({
+      method: "POST",
       url: '/sign_in',
-      data :{phone, pwd},
-      success: (res) => {
-        if (res.error) confirmation.failure(res.error.message)
-        else window.location.href = '/'
-      }
+      data: {phone, pwd},
+      success: (res) => window.location.href = '/',
+      show_messages: true,
+      show_loading: true
     })
   }
 

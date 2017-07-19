@@ -3,6 +3,7 @@ const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Basic_Info extends React.Component {
 
@@ -17,8 +18,11 @@ class Basic_Info extends React.Component {
   }
 
   componentWillMount () {
-    $.get('/get_stations', (data) => {
-      this.setState({station: data[0]})
+    ajx.call({
+      method: 'GET',
+      success: (data) => {
+        this.setState({station: data[0]})
+      }
     })
   }
 
