@@ -5,7 +5,7 @@ var Station = new Schema({
   location: String,
   lat: Number,
   lng: Number,
-  schedule: []
+  schedule: [{type: Schema.Types.ObjectId, ref: 'Restaurant'}]
 })
 
 module.exports = mongoose.model('Station', Station, 'Station')

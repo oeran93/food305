@@ -1,8 +1,6 @@
 import React from 'react'
-import Meals from './meals.jsx'
-import Orders from './orders.jsx'
-import Restaurants from './restaurants.jsx'
 import Navbar from './navbar.jsx'
+import Stations_today from './stations_today.jsx'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 class Root extends React.Component {
@@ -17,9 +15,7 @@ class Root extends React.Component {
           <div>
             <Navbar />
             <div className="container-fluid">
-              <Route exact path='/' component={Orders} />
-              <Route exact path='/meals' component={Meals} />
-              <Route exact path='/restaurants' component={Restaurants} />
+              <Route exact path='/' component={Stations_today} />
             </div>
           </div>
         </Router>
