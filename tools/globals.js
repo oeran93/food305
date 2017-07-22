@@ -22,9 +22,9 @@ module.exports = {
 
   info_email: "info@vimifood.com",
 
-  delivery_port: env.DELIVERY_PORT,
+  user_port: env.USER_PORT,
 
-  delivery_admin_port: env.DELIVERY_ADMIN_PORT,
+  admin_port: env.ADMIN_PORT,
 
   test_port: env.TEST_PORT
 
