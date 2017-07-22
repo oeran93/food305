@@ -8,7 +8,7 @@ var Restaurant = new Schema({
   phone: String,
   closed: [String],
   max_meals: Number,
-  meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}],
+  meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}]
 })
 
 module.exports = mongoose.model('Restaurant', Restaurant, 'Restaurant')
