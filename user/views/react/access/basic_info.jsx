@@ -20,6 +20,7 @@ class Basic_Info extends React.Component {
   componentWillMount () {
     ajx.call({
       method: 'GET',
+      url:'/get_stations',
       success: (data) => {
         this.setState({station: data[0]})
       }
