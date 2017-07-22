@@ -7,9 +7,9 @@ import Access from './access/access.jsx'
 import About from './about.jsx'
 import Payment from './payment/payment.jsx'
 import Footer from './footer.jsx'
-import Redirect from './redirect.jsx'
 import {Modal} from 'react-bootstrap'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+const ajx = require('../../../tools/ajax.js')()
 
 class Root extends React.Component {
 
@@ -30,7 +30,7 @@ class Root extends React.Component {
   }
 
   componentWillMount () {
-    $.ajax({
+    ajx.call({
       method: 'GET',
       url: '/profile',
       success: data => {
@@ -39,15 +39,6 @@ class Root extends React.Component {
           render: true
         })
       }
-    })
-  }
-
-  componentDidMount () {
-    $(document).ajaxStart(() => {
-      $('.loading-background').css('display','block')
-    })
-    $(document).ajaxComplete(() => {
-      $('.loading-background').css('display','none')
     })
   }
 
@@ -65,7 +56,6 @@ class Root extends React.Component {
                 () => user ? <Home user={user} toggleModal={this.toggleModal.bind(this)}/> : <About toggleModal={this.toggleModal.bind(this)}/>
               }
             />
-            <Route exact path="/redirect" component={<Redirect />} />
             {/*Access Modal*/}
             <Modal show={access_modal.open} onHide={() => this.toggleModal.bind(this)('access_modal', {open:false})}>
               <Modal.Header closeButton></Modal.Header>

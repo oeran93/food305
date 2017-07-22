@@ -1,19 +1,20 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 const confirmation = require('../../../../tools/confirmation.js')()
+const $ = require('jquery')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Pay extends React.Component {
 
   pay () {
     let {meal, date} = this.props
-    $.ajax({
+    ajx.call({
       method: "POST",
       url: "/buy_meal",
       data: {meal, date},
-      success: (res) => {
-        if (res.error) confirmation.failure(res.error.message)
-        else window.location.href = '/'
-      }
+      success: (res) => window.location.href = '/',
+      show_messages: true,
+      show_loading: true
     })
   }
 

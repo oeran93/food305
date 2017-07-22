@@ -1,11 +1,13 @@
 /*
 * Functions to calculate delivery and order dates
 */
-var moment = require('moment')
+var moment = require('moment-timezone')
 var globals = require('./globals')
 
-module.exports = function () {
+module.exports = function (timezone="US/Central") {
 
+	moment.tz.setDefault(timezone)
+	
 	const pub = {}
 
 	const delivery_hours = {
