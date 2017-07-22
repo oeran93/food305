@@ -19,7 +19,7 @@ module.exports = function () {
   *   show_messages {bool}
   *   
   */
-  pub.call = function ({method, url, data, success, error, success_message, error_message, show_loading, show_messages}) {
+  pub.call = function ({method, url, data, success = () => {}, error = () => {}, success_message, error_message, show_loading, show_messages}) {
     if (show_loading) $('.loading-background').css('display','block')
     $.ajax({
       method,
@@ -37,7 +37,7 @@ module.exports = function () {
       error: (res) => {
         confirmation.failure('Something went wrong, are you connected to the internet?')
       },
-      done: () => {if (show_loading) $('.loading-background').css('display','none')}
+      complete: () => {if (show_loading) $('.loading-background').css('display','none')}
     })
   }
 
