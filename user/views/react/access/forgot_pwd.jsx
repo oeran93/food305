@@ -1,8 +1,6 @@
 const React        = require('react')
-const $            = require('jquery')
-const confirmation = require('../../../../tools/confirmation.js')()
-const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Forgot_Pwd extends React.Component {
 
@@ -22,14 +20,13 @@ class Forgot_Pwd extends React.Component {
   check_phone () {
     let change_step = this.props.change_step
     let phone = this.state.phone
-    $.ajax({
+    ajx.call({
       method: 'GET',
       url: '/forgot_pwd',
       data: {phone},
-      success: (res) => {
-        if (res.error) confirmation.failure(res.error.message)
-        else change_step({step: 5, phone})
-      }
+      success: (res) => change_step({step: 5, phone}),
+      show_messages: true,
+      show_loading: true
     })
   }
 
