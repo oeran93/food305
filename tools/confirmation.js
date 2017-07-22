@@ -18,6 +18,7 @@ module.exports = function () {
   * @param message {string} message to display
   */
   pub.success = function (message) {
+    if (!message) return
     $('.confirmation.success').html(message)
     confirmation('success')
   }
@@ -27,6 +28,7 @@ module.exports = function () {
   * @param message {string} message to display
   */
   pub.failure = function (message) {
+    if (!message) return
     $('.confirmation.failure').html(message)
     confirmation('failure')
   }
