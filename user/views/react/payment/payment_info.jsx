@@ -11,7 +11,6 @@ class Payment_Info extends React.Component {
     super(props)
     this.state = {
       meal: props.meal,
-      date: props.date,
       credit_card: {
         number: "",
         cvc: "",

@@ -7,11 +7,11 @@ const ajx = require('../../../../tools/ajax.js')()
 class Pay extends React.Component {
 
   pay () {
-    let {meal, date} = this.props
+    let {meal} = this.props
     ajx.call({
       method: "POST",
       url: "/buy_meal",
-      data: {meal, date},
+      data: {meal},
       success: (res) => window.location.href = '/',
       show_messages: true,
       show_loading: true

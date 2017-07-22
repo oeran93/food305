@@ -1,7 +1,7 @@
 const Meal  = require('../../database/meal.js')
 const Order = require('../../database/order.js')
 const send = require('../../notification_center/send.js')
-const date = require('../../tools/date.js')()
+const globals = require('../../tools/globals.js')
 const errors = require('../../tools/errors.js')
 const mongoose = require('mongoose')
 
@@ -13,10 +13,13 @@ module.exports = function () {
   * Adds an order for a user
   */
   pub.add = function (req,res) {
+    let station_time_zone = req.session.user.station.time_zone
+    let date = require('../../tools/date.js')(station_time_zone)
+    let delivery_date = date.this_order_delivery().format(globals.order_date_format)
     var order = new Order({
       _meal: req.body.meal._id,
       _user: req.session.user._id,
-      date: req.body.date,
+      date: delivery_date,
       purchase_time: date.now()
     })
     order.save((err) => {
@@ -25,8 +28,8 @@ module.exports = function () {
         {_id: req.body.meal},
         {$push: {'orders': order._id}},
         () => {
-          let day = date.to_moment(req.body.date).format("dddd")
-          let hour = date.to_moment(req.body.date).format("hh a")
+          let day = date.to_moment(delivery_date).format("dddd")
+          let hour = date.to_moment(delivery_date).format("hh a")
           let meal_name = req.body.meal.name
           send(req.session.user).message('successful_order', {meal_name,day,hour}).text_and_email()
           res.sendStatus(200)
@@ -39,6 +42,8 @@ module.exports = function () {
   * Returns the most recent order of a user
   */
   pub.get_latest_user_order = function (req, res) {
+    let station_time_zone = req.session.user.station.time_zone
+    let date = require('../../tools/date.js')(station_time_zone)
     Order.findOne({_user: req.session.user._id, date: {$lte: date.now()}})
       .populate({
         path: "_meal", select: {name: 1, _restaurant: 1},
