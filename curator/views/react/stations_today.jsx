@@ -3,6 +3,7 @@ import $ from 'jquery'
 const date = require('../../../tools/date.js')()
 const globals = require('../../../tools/globals.js')
 const _ = require('underscore')
+const ajx = require('../../../tools/ajax.js')()
 
 class Stations_today extends React.Component {
 
@@ -14,14 +15,16 @@ class Stations_today extends React.Component {
   }
 
   componentWillMount() {
-    $.get("/stations_today", (stations) => {
-      this.setState({stations})
+    ajx.call({
+      method: "GET",
+      url: '/stations_today',
+      success: (stations) => this.setState({stations})
     })
   }
 
   render() {
     let {stations} = this.state
-    const delivery_date = date.this_delivery().format(globals.order_date_format).slice(0, -6)
+    const delivery_date = date.this_delivery().format(globals.day_date_format)
     const day_of_week = date.this_delivery().day() - 1
     return (
       <div>

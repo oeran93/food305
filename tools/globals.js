@@ -20,6 +20,8 @@ module.exports = {
 
   order_date_format: "MM-DD-YYYY HH:mm",
 
+  day_date_format: "MM-DD-YYYY",
+
   info_email: "info@vimifood.com",
 
   user_port: env.USER_PORT,
