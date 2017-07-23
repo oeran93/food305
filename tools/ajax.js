@@ -7,7 +7,7 @@ module.exports = function () {
 
   /*
   * takes care of ajax calls
-  * @param object 
+  * @param object
   *   method {String} GET or POST
   *   url    {String}
   *   data   {Object}
@@ -17,7 +17,7 @@ module.exports = function () {
   *   error_message {String} message to display on error. if empty and show_messages is true the messager coming from the server will be displayed
   *   show_loading {bool}
   *   show_messages {bool}
-  *   
+  *
   */
   pub.call = function ({method, url, data, success = () => {}, error = () => {}, success_message, error_message, show_loading, show_messages}) {
     if (show_loading) $('.loading-background').css('display','block')
