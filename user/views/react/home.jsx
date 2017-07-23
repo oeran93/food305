@@ -3,8 +3,7 @@ const PropTypes = require('prop-types')
 const Menu = require('./menu.jsx')
 const Rating = require('./rating.jsx')
 const Restaurant_Banner = require('./restaurant_banner.jsx')
-const date  = require('../../../tools/date.js')()
-const globals = require('../../../tools/globals.js')
+const ajx = require('../../../tools/ajax.js')()
 
 class Home extends React.Component {
 
@@ -17,18 +16,12 @@ class Home extends React.Component {
   }
 
   componentWillMount () {
-    let closest_delivery = date.this_delivery().format(globals.order_date_format)
-    let station = this.props.user.station
-    let this_order_delivery = date.this_order_delivery().day()
-    $.get(
-      '/get_menu',
-          {
-            station,
-            date: closest_delivery,
-            delivery_day: this_order_delivery
-          },
-      menu => this.setState({restaurant: menu.restaurant, meals: menu.meals})
-    )
+    ajx.call({
+        method: "GET",
+        url: "/get_menu",
+        success: (menu) => this.setState({restaurant: menu.restaurant, meals: menu.meals}),
+        show_loading: true
+    })
   }
 
   render () {

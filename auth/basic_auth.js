@@ -10,27 +10,36 @@ const _ = require('underscore')
 module.exports = function () {
 
   let pub = {}
+  
+  /*
+  * Sets the sessin for the user
+  * @param phone {String} User's phone number
+  * @param req {object} express request object
+  */
+  function set_user_session (phone, req, next) {
+    User
+      .findOne({phone: phone})
+      .populate({path: "station"})
+      .select('_id phone email name station last_4_digits time_zone')
+      .exec((err, user) => {
+        if (user) req.session.user = user
+        next()
+      })
+  }
 
   /*
-  * If there is an active session in the request it sends some user infos
-  * to the client
+  * If there is an active session in the request it refreshes it
   */
   pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
-      User
-        .findOne({phone: req.session.user.phone})
-        .select('_id phone email name station last_4_digits')
-        .exec((err, user) => {
-          if (user) req.session.user = user
-          next()
-        })
+      set_user_session(req.session.user.phone, req, next)
     } else next()
   }
 
   /*
   * Creates a new not activated user in the db
   * It will not create a user if it is already present and active or
-  * if the number is not right.
+  * if the phone number is not right.
   * @param req.body {object} user basic infos: phone, name, email
   */
   pub.create_user = function (req, res, next) {
@@ -93,11 +102,12 @@ module.exports = function () {
       }
       else {
         let {hash_pwd, salt} = crypto.hash_password(pwd)
-        req.session.user = user
-        user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
-        user.save(err => {
-          if (err) res.send({error: errors.generic})
-          else next()
+        set_user_session(user.phone, req, () => {
+          user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
+          user.save(err => {
+            if (err) res.send({error: errors.generic})
+            else next()
+          })
         })
       }
     })
@@ -161,8 +171,7 @@ module.exports = function () {
       if (err) res.send({error: errors.generic})
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
-        req.session.user = _.pick(user, '_id','phone','email','name','station','last_4_digits')
-        next()
+        set_user_session(user.phone, req, next)
       }
       else res.send({error: errors.invalid_old_pwd})
     })

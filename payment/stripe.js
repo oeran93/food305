@@ -33,21 +33,17 @@ module.exports = function () {
         name: ""
       }, req.body.credit_card)
     }, (err, customer) => {
-      if (err) res.send({error: errors.failed_purchase})
-      else {
-        User.findOneAndUpdate(
-            {phone: req.session.user.phone},
-            {last_4_digits, stripe_id: customer.id},
-            {new: true},
-            (err, user) => {
-              if (err) res.send({error: errors.failed_purchase})
-              else {
-                req.session.user.last_4_digits = last_4_digits
-                next()
-              }
-            }
-          )
-      }
+      if (err) return res.send({error: errors.failed_purchase})
+      User.findOneAndUpdate(
+        {phone: req.session.user.phone},
+        {$set: {last_4_digits, 'stripe.id': customer.id}},
+        {new: true},
+        (err, user) => {
+          if (err) return res.send({error: errors.failed_purchase})
+          req.session.user.last_4_digits = last_4_digits
+          next()
+        }
+      )
     })
   }
 
@@ -57,23 +53,57 @@ module.exports = function () {
   */
   pub.charge_customer = function (req, res, next) {
     User.findOne({phone: req.session.user.phone}, (err, user) => {
-      if (err) res.send({error: errors.failed_purchase})
+      if (err) res.send({error: errors.generic})
       else {
         Meal.findOne({_id: req.body.meal}, (err, meal) => {
-            if (err) res.send({error: errors.failed_purchase})
-            else {
-              let amount = (Number(generics.get_taxes_fees(meal.price)) + Number(meal.price)).toFixed(2)
-              stripe.charges.create({
-                amount: generics.get_price_in_cents(amount),
-                currency: "usd",
-                customer: user.stripe_id
-              }, (err, charge) => {
-                if (err) res.send({error: _.extend(errors.failed_purchase,{message: err.message})})
-                else next()
-              })
-            }
+            if (err) return res.send({error: errors.failed_purchase})
+            let amount = (Number(generics.get_taxes_fees(meal.price)) + Number(meal.price)).toFixed(2)
+            stripe.charges.create({
+              amount: generics.get_price_in_cents(amount),
+              currency: "usd",
+              customer: user.stripe.id
+            }, (err, charge) => {
+              if (err) return res.send({error: _.extend(errors.failed_purchase,{message: err.message})})
+              next()
+            })
         })
       }
+    })
+  }
+  
+  /*
+  * Subscribe a user to our basic plan
+  */
+  pub.subscribe = function (req, res, next) {
+    User.findOne({phone: req.session.user.phone}, (err, user) => {
+      if (err) res.send({error: errors.generic})
+      stripe.subscriptions.create({
+        customer: user.stripe.id,
+        plan: "basic-delivery-plan"
+      }, (err, subscription) => {
+          if (err) return res.send({error: errors.failed_subscription})
+          user.stripe.subscription_id = subscription.id
+          user.save((err) => next())
+        }
+      )
+    })
+  }
+  
+  /*
+  * Unsubscribe a user to our basic plan
+  */
+  pub.unsubscribe = function (req, res, next) {
+    User.findOne({phone: req.session.user.phone}, (err, user) => {
+      if (err) res.send({error: errors.generic})
+      stripe.subscriptions.del(
+        user.stripe.subscription_id,
+        (err, confirmation) => {
+          if (err) return res.send({error: errors.failed_unsubscribe})
+          user.stripe.subscription_id = ""
+          user.save((err) => next())
+          next()
+        }
+      )
     })
   }
 

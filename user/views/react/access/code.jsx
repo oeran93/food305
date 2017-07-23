@@ -1,8 +1,6 @@
 const React        = require('react')
-const $            = require('jquery')
-const confirmation = require('../../../../tools/confirmation.js')()
-const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Code extends React.Component {
 
@@ -22,14 +20,13 @@ class Code extends React.Component {
   check_code () {
     let {change_step,phone} = this.props
     let {code} = this.state
-    $.ajax({
+    ajx.call({
       method: 'POST',
       url: '/check_phone_code',
       data: {code, phone},
-      success: (res) => {
-        if (res.error) confirmation.failure(res.error.message)
-        else change_step({step: 2})
-      }
+      success: (res) => change_step({step: 2}),
+      show_messages: true,
+      show_loading: true
     })
   }
 

@@ -1,6 +1,4 @@
 const React        = require('react')
-const $            = require('jquery')
-const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
 const ajx = require('../../../../tools/ajax.js')()
@@ -20,6 +18,7 @@ class Basic_Info extends React.Component {
   componentWillMount () {
     ajx.call({
       method: 'GET',
+      url:'/get_stations',
       success: (data) => {
         this.setState({station: data[0]})
       }
@@ -34,17 +33,14 @@ class Basic_Info extends React.Component {
 
   send_info () {
     let {change_step} = this.props
-    $.ajax({
+    ajx.call({
       method: 'POST',
       url: '/create_user',
       data : this.state,
-      success: (res) => {
-        if(res.error) {
-          confirmation.failure(res.error.message)
-          if (res.error.number == errors.user_exists.number) change_step({step: 3})
-        }
-        else change_step({step: 1, phone: this.state.phone})
-      }
+      success: (res) => change_step({step: 1, phone: this.state.phone}),
+      error: (res) => {if (res.error.number == errors.user_exists.number) change_step({step: 3})},
+      show_messages: true,
+      show_loading: true
     })
   }
 

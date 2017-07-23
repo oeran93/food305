@@ -1,5 +1,4 @@
 const React        = require('react')
-const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')

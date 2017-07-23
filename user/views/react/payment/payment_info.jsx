@@ -2,8 +2,8 @@ const React            = require('react')
 const PropTypes        = require('prop-types')
 const $ = require('jquery')
 const _ = require('underscore')
-const confirmation = require('../../../../tools/confirmation.js')()
 const date         = require('../../../../tools/date.js')()
+const ajx = require('../../../../tools/ajax.js')()
 
 class Payment_Info extends React.Component {
 
@@ -11,7 +11,6 @@ class Payment_Info extends React.Component {
     super(props)
     this.state = {
       meal: props.meal,
-      date: props.date,
       credit_card: {
         number: "",
         cvc: "",
@@ -29,14 +28,13 @@ class Payment_Info extends React.Component {
   }
 
   pay () {
-    $.ajax({
+    ajx.call({
       method: "POST",
       url: "/create_customer_and_buy_meal",
       data: this.state,
-      success: (res) => {
-        if (res.error) confirmation.failure(res.error.message)
-        else window.location.href = '/'
-      }
+      success: (res) => window.location.href = '/',
+      show_messages: true,
+      show_loading: true
     })
   }
 

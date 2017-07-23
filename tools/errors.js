@@ -73,6 +73,16 @@ module.exports = {
   wrong_permissions: {
     number: 15,
     message: "You do not have the right permissions"
+  },
+  
+  failed_subscription: {
+    number: 16,
+    message: "Something went wrong while trying to subscribe you"
+  },
+  
+  failed_unsubscribe: {
+    number: 17,
+    message: "Somthing went wrong while trying to unsubscribe you. Please try again"
   }
 
 }

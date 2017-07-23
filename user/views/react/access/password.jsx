@@ -1,8 +1,8 @@
 const React        = require('react')
-const $            = require('jquery')
 const confirmation = require('../../../../tools/confirmation.js')()
 const errors       = require('../../../../tools/errors.js')
 const PropTypes    = require('prop-types')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Password extends React.Component {
 
@@ -26,14 +26,13 @@ class Password extends React.Component {
     if (pwd.length < 8) confirmation.failure(errors.short_pwd.message)
     else if (pwd != confirmation_pwd) confirmation.failure(errors.pwd_no_match.message)
     else {
-      $.ajax({
+      ajx.call({
         method: 'POST',
         url: '/create_password',
         data :{phone, pwd},
-        success: (res) => {
-          if (res.error) confirmation.failure(res.error.message)
-          else window.location.href = '/'
-        }
+        success: (res) => window.location.href = '/',
+        show_messages: true,
+        show_loading: true
       })
     }
   }

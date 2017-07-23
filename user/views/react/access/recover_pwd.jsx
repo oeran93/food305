@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import errors from '../../../../tools/errors'
 const confirmation = require('../../../../tools/confirmation.js')()
+const ajx = require('../../../../tools/ajax.js')()
 
 class Recover_Pwd extends React.Component {
 
@@ -25,17 +26,14 @@ class Recover_Pwd extends React.Component {
     if (pwd.length < 8) confirmation.failure(errors.short_pwd.message)
     else if (pwd != confirmation_pwd) confirmation.failure(errors.pwd_no_match.message)
     else {
-      $.ajax({
+      ajx.call({
         method: 'POST',
         url: '/recover_pwd',
         data: {code, pwd, phone},
-        success: (res) => {
-          if (res.error) confirmation.failure(res.error.message)
-          else {
-            confirmation.success("Password successfully updated")
-            change_step({step: 3})
-          }
-        }
+        success: (res) => change_step({step: 3}),
+        success_message: "Password successfully updated",
+        show_messages: true,
+        show_loading: true
       })
     }
   }

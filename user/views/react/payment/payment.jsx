@@ -6,6 +6,7 @@ const Price_Info = require('./price_info.jsx')
 const date             = require('../../../../tools/date.js')()
 const generics = require('../../../../tools/generics.js')
 const globals = require('../../../../tools/globals.js')
+const ajx = require('../../../../tools/ajax.js')()
 
 class Payment extends React.Component {
 
@@ -17,12 +18,11 @@ class Payment extends React.Component {
   }
 
   componentWillMount () {
-    $.ajax({
+    ajx.call({
       method: "get",
       url: "/get_station",
-      success: ({location}) => {
-        this.setState({station: location})
-      }
+      success: ({location}) => this.setState({station: location}),
+      show_loading: true
     })
   }
 
@@ -62,7 +62,6 @@ class Payment extends React.Component {
               <Pay
                 change_step={this.change_step.bind(this)}
                 meal={meal}
-                date={delivery.format(globals.order_date_format)}
                 last_4_digits={user.last_4_digits}
               />
               :
@@ -70,7 +69,6 @@ class Payment extends React.Component {
                 autofocus={autofocus}
                 change_step={this.change_step.bind(this)}
                 meal={meal}
-                date={delivery.format(globals.order_date_format)}
               />
            }
         </div>

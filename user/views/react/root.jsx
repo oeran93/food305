@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from 'jquery'
 import _ from 'underscore'
 import Home from './home.jsx'
 import Nav_Bar from './nav_bar.jsx'

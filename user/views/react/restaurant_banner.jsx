@@ -1,6 +1,7 @@
 const React = require('react')
 const date = require('../../../tools/date.js')()
 const PropTypes = require('prop-types')
+const ajx = require('../../../tools/ajax.js')()
 
 class Restaurant_Banner extends React.Component {
 
@@ -12,12 +13,10 @@ class Restaurant_Banner extends React.Component {
     }
 
     componentWillMount () {
-      $.ajax({
+      ajx.call({
         method: "get",
         url: "/get_station",
-        success: ({location}) => {
-          this.setState({station: location})
-        }
+        success: ({location}) => this.setState({station: location})
       })
     }
 

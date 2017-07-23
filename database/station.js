@@ -5,6 +5,7 @@ var Station = new Schema({
   location: String,
   lat: Number,
   lng: Number,
+  time_zone: String,
   schedule: [{type: Schema.Types.ObjectId, ref: 'Restaurant'}]
 })
 

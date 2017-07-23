@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 const $ = require('jquery')
 const _ = require('underscore')
-const confirmation  = require('../../../tools/confirmation.js')()
+const ajx = require('../../../tools/ajax.js')()
 
 class Rating extends React.Component {
 
@@ -14,8 +14,10 @@ class Rating extends React.Component {
   }
 
   componentWillMount () {
-    $.get('/get_latest_user_order', (order) => {
-      this.setState({order})
+    ajx.call({
+      method: "GET",
+      url: '/get_latest_user_order',
+      success: (order) => this.setState({order})
     })
   }
 
@@ -31,12 +33,13 @@ class Rating extends React.Component {
 
   send_rating (e) {
     let {order} = this.state
-    $.post('/rate_order', {order: order._id, rating: e.target.getAttribute('value')}, (res) => {
-      if (res.error) confirmation.failure(res.error.message)
-      else {
-        confirmation.success('Thank you!')
-        this.setState({order: {}})
-      }
+    ajx.call({
+      method: "POST",
+      url: "/rate_order",
+      data: {order: order._id, rating: e.target.getAttribute('value')},
+      success: this.setState({order: {}}),
+      success_message: "Thank you, every rating helps us improve your experience!",
+      show_messages: true
     })
   }
 
