@@ -14,6 +14,8 @@ module.exports = function (app) {
   app.get('/get_stations', Station.get_stations)
   app.post('/rate_order', require_login, validator.validate_router('rating'), Order.rate)
   app.get('/get_latest_user_order', Order.get_latest_user_order)
+  app.post('/start_membership', stripe.subscribe)
+  app.post('/end_membership', stripe.unsubscribe)
 }
 
 function require_login (req, res, next) {
