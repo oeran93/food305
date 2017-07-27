@@ -49,7 +49,7 @@ class Restaurant_Banner extends React.Component {
                     <div key={m._id} className="col-xs-12 text-center">
                       <h4>
                         <span className="fa fa-car margin-right-5"></span>
-                        You have {m.orders.length} {m.name} coming {date.get_day_of_week(date.to_moment(m.orders[0].date))}
+                        You have {m.orders.length} {m.name} coming {date.get_day_of_week(date.order_date_to_moment(m.orders[0].date))}
                       </h4>
                     </div>
                   )
