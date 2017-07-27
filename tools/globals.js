@@ -19,6 +19,8 @@ module.exports = {
   stripe_apikey: env.VIMI_STRIPE_APIKEY,
 
   order_date_format: "MM-DD-YYYY HH:mm",
+  
+  iso_date_format: "YYYY-MM-DDTHH:mm:ssZ",
 
   info_email: "info@vimifood.com",
 
