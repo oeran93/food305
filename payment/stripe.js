@@ -4,6 +4,7 @@ const Meal = require('../database/meal.js')
 const generics = require('../tools/generics.js')
 const globals = require('../tools/globals.js')
 const stripe = require("stripe")(globals.stripe_apikey)
+const date = require("../tools/date.js")()
 const _ = require('underscore')
 
 module.exports = function () {
@@ -81,7 +82,7 @@ module.exports = function () {
         customer: user.stripe.id,
         plan: "basic-delivery-plan"
       }, (err, subscription) => {
-          if (err) return res.send({error: errors.failed_subscription})
+          if (err) return res.send({error: errors.failed_subscribe})
           user.stripe.subscription_id = subscription.id
           user.save((err) => next())
         }
@@ -106,6 +107,20 @@ module.exports = function () {
       )
     })
   }
+  
+  /*
+  * Checks if a user is either on a free trial or subscribed
+  */
+  pub.is_financially_ok = function (req,res,next) {
+    User
+      .findOne({phone: "3147935176"}, (err, user) => {
+        if (user.stripe.subscription_id) next()
+        let sign_up_time = date.iso_date_to_moment(user.created_at)
+        let time_since_sign_up = date.how_long_ago(sign_up_time)
+        console.log(time_since_sign_up.days())
+      })
+  }
+  
 
   return pub
 
