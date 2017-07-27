@@ -75,7 +75,7 @@ module.exports = {
     message: "You do not have the right permissions"
   },
   
-  failed_subscription: {
+  failed_subscribe: {
     number: 16,
     message: "Something went wrong while trying to subscribe you"
   },
@@ -83,6 +83,13 @@ module.exports = {
   failed_unsubscribe: {
     number: 17,
     message: "Somthing went wrong while trying to unsubscribe you. Please try again"
+  },
+  
+  not_subscribed: {
+    number: 18,
+    message: "You need to be a member to perform this operation"
   }
+
+
 
 }
