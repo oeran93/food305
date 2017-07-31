@@ -12,7 +12,7 @@ module.exports = function () {
   let pub = {}
   
   /*
-  * Sets the sessin for the user
+  * Sets the session for the user
   * @param phone {String} User's phone number
   * @param req {object} express request object
   */
@@ -20,7 +20,7 @@ module.exports = function () {
     User
       .findOne({phone: phone})
       .populate({path: "station"})
-      .select('_id phone email name station last_4_digits time_zone')
+      .select('_id phone email name station last_4_digits time_zone stripe.status')
       .exec((err, user) => {
         if (user) req.session.user = user
         next()
@@ -56,7 +56,7 @@ module.exports = function () {
             User.findOneAndUpdate(
               {phone},
               _.extend({code},infos),
-              {upsert: true, new: true},
+              {upsert: true, new: true, setDefaultsOnInsert: true},
               (err, user) => {
                 if (err) res.send({error: errors.generic})
                 else {
