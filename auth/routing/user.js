@@ -10,5 +10,4 @@ module.exports = function (app) {
   app.post('/recover_pwd', auth.recover_pwd, (req,res) => res.send())
   app.get('/sign_out', auth.sign_out, (req,res) => res.send())
   app.post('/sign_in', auth.sign_in, (req,res) => res.send())
-
 }
