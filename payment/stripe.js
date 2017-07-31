@@ -109,15 +109,40 @@ module.exports = function () {
   }
   
   /*
+  * Updates the subscription status of a user
+  */
+  pub.update_financial_status = function (req, res, next) {
+    if (!req.session || !req.session.user) return next()
+    User.findOne({phone: req.session.user.phone}, (err, user) => {
+      if (err || !user) return next()
+      if (!user.stripe.subscription_id) {
+        if (date.older_than(date.iso_date_to_moment(user.created_at), globals.trial_days)) {
+          user.stripe.status = 'past_due'
+        }
+        else user.stripe.status = 'trialing'
+        user.markModified('stripe')
+        user.save(() => next())
+      } else {
+        stripe.subscription.retrieve(
+          user.stripe.subscription_id,
+          (err, subscription) => {
+            if (err) next()
+            else user.subscription.status = subscription.status
+            user.save(() => next())
+          }
+        )
+      }
+    })
+  }
+  
+  /*
   * Checks if a user is either on a free trial or subscribed
   */
-  pub.is_financially_ok = function (req,res,next) {
+  pub.financially_ok = function (req,res,next) {
     User
-      .findOne({phone: "3147935176"}, (err, user) => {
-        if (user.stripe.subscription_id) next()
-        let sign_up_time = date.iso_date_to_moment(user.created_at)
-        let time_since_sign_up = date.how_long_ago(sign_up_time)
-        console.log(time_since_sign_up.days())
+      .findOne({phone: req.session.user.phone}, (err, user) => {
+        if (_.contains(globals.ok_financial_statuses, user.stripe.status)) next()
+        else res.send({error: errors.failed_billing})
       })
   }
   
