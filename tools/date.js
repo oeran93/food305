@@ -121,12 +121,22 @@
   /*
   * Calculates the difference between a date in the past and the current time
   * @param past {moment} past date
-  * @return {moment}
+  * @param time_unit {string} what unit of time should be returned? days, months etc.
+  * @return {Number} number of units ago; days by default
   */
-  pub.how_long_ago = function (past) {
-    return moment.duration(moment().diff(past))
+  pub.how_long_ago = function (past, time_unit='days') {
+    return moment().diff(past,time_unit)
   }
-
+  
+  /*
+  * Checks if the provided date has happened more than the specified days ago
+  * @param date {moment} 
+  * @param days {Number} 
+  */
+  pub.older_than = function (date, days) {
+    return pub.how_long_ago(date) > days
+  }
+  
   return pub
 
   }
