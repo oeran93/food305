@@ -7,6 +7,8 @@ module.exports = {
   credit_card_fixed_rate: .30,
 
   credit_card_percentage: .03,
+  
+  trial_days: 14,
 
   app_name: "Vimi",
 
@@ -28,6 +30,10 @@ module.exports = {
 
   admin_port: env.ADMIN_PORT,
 
-  test_port: env.TEST_PORT
+  test_port: env.TEST_PORT,
+  
+  ok_financial_statuses: ['active', 'trialing'],
+  
+  failed_financial_statuses: ['past_due']
 
 }
