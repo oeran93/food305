@@ -88,8 +88,11 @@ module.exports = {
   not_subscribed: {
     number: 18,
     message: "You need to be a member to perform this operation"
+  },
+
+  failed_billing: {
+    number: 19,
+    message: "There was a problem with your subscription payment. Please contact our staff for more information"
   }
-
-
 
 }
