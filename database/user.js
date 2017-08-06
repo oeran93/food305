@@ -10,8 +10,8 @@ var User = new Schema({
   pwd: String,
   salt: String,
   station: {type: Schema.Types.ObjectId, ref: 'Station'},
-  last_4_digits: "",
-  stripe: {type: Schema.Types.Mixed, default: {status: 'trialing'}},
+  last_4_digits: String,
+  stripe: {type: Schema.Types.Mixed, default: {id: ""}},
   created_at: { type: Date, default: Date.now }
 })
 

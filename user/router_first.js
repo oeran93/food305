@@ -6,6 +6,5 @@ const auth = require('../auth/basic_auth.js')()
 */
 
 module.exports = function (app) {
-  app.use(stripe.update_financial_status)
   app.use(auth.session)
 }

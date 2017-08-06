@@ -11,12 +11,12 @@ class Menu extends React.Component {
   }
 
   render () {
-    let {meals,toggleModal} = this.props
+    let {meals,user} = this.props
     return (
       <div className="menu">
         <div className="row">
         {meals.map(meal => {
-          return <Meal key={meal._id} meal={meal} toggleModal={toggleModal} />
+          return <Meal key={meal._id} meal={meal} user={user} />
         })}
         </div>
       </div>
@@ -27,7 +27,7 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
   meals: PropTypes.array.isRequired,
-  toggleModal: PropTypes.func.isRequired
+  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
 }
 
 module.exports = Menu

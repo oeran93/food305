@@ -20,7 +20,7 @@ module.exports = function () {
     User
       .findOne({phone: phone})
       .populate({path: "station"})
-      .select('_id phone email name station last_4_digits time_zone stripe.status')
+      .select('_id phone email name station last_4_digits time_zone')
       .exec((err, user) => {
         if (user) req.session.user = user
         next()

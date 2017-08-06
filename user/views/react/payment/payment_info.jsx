@@ -9,8 +9,7 @@ class Payment_Info extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      meal: props.meal,
+    this.state = _.extend({
       credit_card: {
         number: "",
         cvc: "",
@@ -18,7 +17,7 @@ class Payment_Info extends React.Component {
         exp_year: "",
         name: ""
       }
-    }
+    }, props.product_info)
   }
 
   credit_card_change (event) {
@@ -30,7 +29,7 @@ class Payment_Info extends React.Component {
   pay () {
     ajx.call({
       method: "POST",
-      url: "/create_customer_and_buy_meal",
+      url: this.props.url,
       data: this.state,
       success: (res) => window.location.href = '/',
       show_messages: true,
@@ -113,7 +112,8 @@ class Payment_Info extends React.Component {
 
 Payment_Info.propTypes = {
   autofocus: PropTypes.bool,
-  meal: PropTypes.object
+  product_info: PropTypes.object,
+  url: PropTypes.string.isRequired
 }
 
 Payment_Info.defaultProps = {

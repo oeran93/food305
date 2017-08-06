@@ -4,10 +4,10 @@ import Home from './home.jsx'
 import Nav_Bar from './nav_bar.jsx'
 import Access from './access/access.jsx'
 import About from './about.jsx'
-import Payment from './payment/payment.jsx'
-import Footer from './footer.jsx'
+import Subscribe from './subscribe.jsx'
+import Failed_Billing from './failed_billing.jsx'
 import {Modal} from 'react-bootstrap'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {HashRouter as Router, Route,} from 'react-router-dom'
 const ajx = require('../../../tools/ajax.js')()
 
 class Root extends React.Component {
@@ -17,12 +17,11 @@ class Root extends React.Component {
     this.state = {
       render: false,
       user: null,
-      access_modal: {open: false, step: 3},
-      payment_modal: {open: false, amount: "0", meal: {}}
+      access_modal: {open: false, step: 3}
     }
   }
 
-  toggleModal (modal, info) {
+  toggle_modal (modal, info) {
     let state = this.state
     state[modal] = _.extend(state[modal],info)
     this.setState(state)
@@ -42,46 +41,36 @@ class Root extends React.Component {
   }
 
   render () {
-    let {render, user, access_modal, payment_modal} = this.state
+    let {render, user, access_modal} = this.state
     if (!render) return null
-    else {
-      return (
-        <Router>
-          <div>
-            {/*Navigation Bar*/}
-            <Nav_Bar user={user} toggleModal={this.toggleModal.bind(this)}/>
-            {/*Main Content*/}
-            <Route exact path='/' component={
-                () => user ? <Home user={user} toggleModal={this.toggleModal.bind(this)}/> : <About toggleModal={this.toggleModal.bind(this)}/>
-              }
-            />
-            {/*Access Modal*/}
-            <Modal show={access_modal.open} onHide={() => this.toggleModal.bind(this)('access_modal', {open:false})}>
-              <Modal.Header closeButton></Modal.Header>
-              <Modal.Body>
-                <Access step={access_modal.step} />
-              </Modal.Body>
-            </Modal>
-            {/*Payment Modal*/}
-            <Modal show={payment_modal.open} onHide={() => this.toggleModal.bind(this)('payment_modal', {open:false})}>
-              <Modal.Header closeButton></Modal.Header>
-              <Modal.Body>
-                <Payment autofocus={true} price={payment_modal.price} meal={payment_modal.meal} user={user}/>
-              </Modal.Body>
-            </Modal>
-            {/*Loading*/}
-            <div className="loading-background">
-              <div className="loading">
-                <div className="lds-ripple">
-                  <div></div>
-                  <div></div>
-                </div>
+    return (
+      <Router>
+        <div>
+          {/*Navigation Bar*/}
+          <Nav_Bar user={user} toggleModal={this.toggle_modal.bind(this)}/>
+          {/*Main Content*/}
+          <Route exact path='/' component={() => user ? <Home user={user}/> : <About toggleModal={this.toggle_modal.bind(this)}/>}/>
+          <Route path="/subscribe" component={Subscribe} />
+          <Route path="/failed_billing" component={Failed_Billing} />
+          {/*Access Modal*/}
+          <Modal show={access_modal.open} onHide={() => this.toggle_modal.bind(this)('access_modal', {open:false})}>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+              <Access step={access_modal.step} />
+            </Modal.Body>
+          </Modal>
+          {/*Loading*/}
+          <div className="loading-background">
+            <div className="loading">
+              <div className="lds-ripple">
+                <div></div>
+                <div></div>
               </div>
             </div>
           </div>
-        </Router>
-      )
-    }
+        </div>
+      </Router>
+    )
   }
 
 }

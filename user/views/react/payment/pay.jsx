@@ -1,17 +1,15 @@
 const React = require('react')
 const PropTypes = require('prop-types')
-const confirmation = require('../../../../tools/confirmation.js')()
-const $ = require('jquery')
 const ajx = require('../../../../tools/ajax.js')()
 
 class Pay extends React.Component {
 
   pay () {
-    let {meal} = this.props
+    let {product_info, url} = this.props
     ajx.call({
       method: "POST",
-      url: "/buy_meal",
-      data: {meal},
+      url: url,
+      data: product_info,
       success: (res) => window.location.href = '/',
       show_messages: true,
       show_loading: true
@@ -36,7 +34,9 @@ class Pay extends React.Component {
 
 Pay.propTypes = {
   autofocus: PropTypes.bool,
-  meal: PropTypes.object
+  product_info: PropTypes.object,
+  url: PropTypes.string.isRequired,
+  last_4_digits: PropTypes.string.isRequired
 }
 
 module.exports = Pay
