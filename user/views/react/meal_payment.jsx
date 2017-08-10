@@ -68,7 +68,7 @@ class MealPayment extends React.Component {
         </div>
         <div className="col-xs-12">
           <Payment 
-              url={user.last_4_digits ? "/buy_meal" : "/create_customer_and_buy_meal"}
+              url="/buy_meal"
               product_info={{meal:meal}}
               last_4_digits={user.last_4_digits}
           />

@@ -10,6 +10,7 @@ class Payment_Info extends React.Component {
   constructor (props) {
     super(props)
     this.state = _.extend({
+      save_info: true,
       credit_card: {
         number: "",
         cvc: "",
@@ -25,8 +26,15 @@ class Payment_Info extends React.Component {
     state["credit_card"][event.target.id] = event.target.value
     this.setState(state)
   }
+  
+  handle_change (event) {
+    this.setState((prevState) => ({
+      save_info: !prevState.save_info
+    }))
+  }
 
   pay () {
+    if (this.state.save_info) this.create_customer.bind(this)()
     ajx.call({
       method: "POST",
       url: this.props.url,
@@ -36,9 +44,20 @@ class Payment_Info extends React.Component {
       show_loading: true
     })
   }
+  
+  create_customer () {
+    ajx.call({
+      method: "POST",
+      url: '/create_customer',
+      data: this.state,
+      show_messages: true,
+      show_loading: true
+    })
+  }
 
   render () {
     let {number, cvc, type, exp_month, exp_year, name} = this.state.credit_card
+    let {save_info} = this.state
     let {autofocus} = this.props
     return (
       <div className="row">
@@ -98,6 +117,11 @@ class Payment_Info extends React.Component {
                      onChange={this.credit_card_change.bind(this)}
                      onKeyPress={(t) => {if (t.charCode === 13) this.pay.bind(this)()}}
               />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12">
+              <h5><input type="checkbox" onChange={this.handle_change.bind(this)} checked={save_info}/> Save my credit card for fast checkout</h5>
             </div>
           </div>
         </div>

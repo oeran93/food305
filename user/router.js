@@ -9,7 +9,7 @@ const validator = require('../tools/validator.js')()
 module.exports = function (app) {
   app.get('/profile', user.profile)
   app.get('/get_menu', require_login, stripe.financially_ok, meal.get_menu)
-  app.post('/create_customer_and_buy_meal', require_login, stripe.financially_ok, stripe.create_customer, stripe.charge_customer, order.add)
+  app.post('/create_customer', require_login, stripe.financially_ok, stripe.create_customer, (req,res) => res.send({}))
   app.post('/buy_meal', require_login, stripe.financially_ok, stripe.charge_customer, order.add)
   app.get('/get_station', require_login, station.info)
   app.get('/get_stations', station.get_stations)

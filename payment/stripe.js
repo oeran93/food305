@@ -51,6 +51,7 @@ module.exports = function () {
   /*
   * Charges a customer
   * @param req.body.meal {String} meal's id
+  * @param req.body.credit_card {object} optional if the user has saved their credit card
   */
   pub.charge_customer = function (req, res, next) {
     User.findOne({phone: req.session.user.phone}, (err, user) => {
@@ -59,11 +60,14 @@ module.exports = function () {
         Meal.findOne({_id: req.body.meal}, (err, meal) => {
             if (err) return res.send({error: errors.failed_purchase})
             let amount = (Number(generics.get_taxes_fees(meal.price)) + Number(meal.price)).toFixed(2)
-            stripe.charges.create({
-              amount: generics.get_price_in_cents(amount),
-              currency: "usd",
-              customer: user.stripe.id
-            }, (err, charge) => {
+            stripe.charges.create(
+              _.extend({
+                  amount: generics.get_price_in_cents(amount),
+                  currency: "usd"
+                }, 
+                user.stripe.id ? {customer:  user.stripe.id} : {source: req.body.credit_card}
+              ), 
+            (err, charge) => {
               if (err) return res.send({error: _.extend(errors.failed_purchase,{message: err.message})})
               next()
             })
