@@ -21,7 +21,7 @@ class Meal extends React.Component {
   }
   
   render () {
-    let {meal, user} = this.props
+    let {meal} = this.props
     let {_id, name, price, image, tags, orders, description} = meal
     let {modal} = this.state
     return (
@@ -43,7 +43,7 @@ class Meal extends React.Component {
         <Modal show={modal.open} onHide={this.toggle_modal.bind(this)}>
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
-            <Meal_Payment autofocus={true} meal={meal} user={user}/>
+            <Meal_Payment autofocus={true} meal={meal}/>
           </Modal.Body>
         </Modal>
       </div>
@@ -52,8 +52,7 @@ class Meal extends React.Component {
 }
 
 Meal.propTypes = {
-  meal: PropTypes.object.isRequired,
-  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+  meal: PropTypes.object.isRequired
 }
 
 module.exports = Meal

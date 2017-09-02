@@ -15,7 +15,6 @@ describe('orders business logic', () => {
       })
       .end((err, res) => {
         if (err) return
-        console.log(res.body)
         done()
       })
   })

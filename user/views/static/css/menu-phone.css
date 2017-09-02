@@ -1,9 +1,9 @@
 @media screen and (max-width: 480px) {
 
-    .restaurant-banner {
-      background-image: url('../images/home/phone_bg.jpg');
+    .menu-banner {
+      background-image: url('../images/banners/phone_menu.jpg');
       font-size: 90%;
-      height: 100vh;
+      padding: 5vh;
     }
 
     .rating-container {

@@ -26,7 +26,10 @@ module.exports = function () {
       url,
       data,
       success: (res) => {
-        if (res.redirect) return redirect.push(res.redirect)
+        if (res.redirect) {
+          console.log(arguments)
+          return redirect.push(res.redirect)
+        }
         if (res.error) {
           if (show_messages) confirmation.failure(error_message || res.error.message)
           error(res)

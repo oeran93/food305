@@ -1,13 +1,11 @@
 .menu {
   margin-top: 5vh;
-  height: 40vh;
 }
 
-.restaurant-banner {
-  padding-top: 15vh;
-  height: 60vh;
+.menu-banner {
+  padding: 15vh;
   color: white;
-  background-image: url('../images/home/bg.jpg');
+  background-image: url('../images/banners/menu.jpg');
   background-size:cover;
   background-repeat: no-repeat;
 }

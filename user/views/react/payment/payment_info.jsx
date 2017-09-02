@@ -27,28 +27,33 @@ class Payment_Info extends React.Component {
     this.setState(state)
   }
   
-  handle_change (event) {
+  save_info (event) {
     this.setState((prevState) => ({
       save_info: !prevState.save_info
     }))
   }
 
   pay () {
-    if (this.state.save_info) this.create_customer.bind(this)()
-    ajx.call({
-      method: "POST",
-      url: this.props.url,
-      data: this.state,
-      success: (res) => window.location.href = '/',
-      show_messages: true,
-      show_loading: true
-    })
+    const {save_info} = this.state
+    const {always_save, url} = this.props
+    if (save_info || always_save) this.add_card.bind(this)()
+    if (url) {
+      ajx.call({
+        method: "POST",
+        url: url,
+        data: this.state,
+        success: (res) => window.location.href = '/',
+        show_messages: true,
+        show_loading: true
+      })
+    }
+    this.props.handle_change(this.state.credit_card)
   }
   
-  create_customer () {
+  add_card () {
     ajx.call({
       method: "POST",
-      url: '/create_customer',
+      url: '/add_card',
       data: this.state,
       show_messages: true,
       show_loading: true
@@ -58,7 +63,7 @@ class Payment_Info extends React.Component {
   render () {
     let {number, cvc, type, exp_month, exp_year, name} = this.state.credit_card
     let {save_info} = this.state
-    let {autofocus} = this.props
+    let {autofocus, btn_text, always_save} = this.props
     return (
       <div className="row">
         <div className="col-xs-12 credit-card-div">
@@ -119,14 +124,16 @@ class Payment_Info extends React.Component {
               />
             </div>
           </div>
-          <div className="row">
-            <div className="col-xs-12">
-              <h5><input type="checkbox" onChange={this.handle_change.bind(this)} checked={save_info}/> Save my credit card for fast checkout</h5>
+          {!always_save &&
+            <div className="row">
+              <div className="col-xs-12">
+                <h5><input type="checkbox" onChange={this.save_info.bind(this)} checked={save_info}/> Save my credit card for fast checkout</h5>
+              </div>
             </div>
-          </div>
+          }
         </div>
         <div className='col-xs-12'>
-          <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> Pay </button>
+          <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> {btn_text} </button>
         </div>
       </div>
     )
@@ -137,11 +144,16 @@ class Payment_Info extends React.Component {
 Payment_Info.propTypes = {
   autofocus: PropTypes.bool,
   product_info: PropTypes.object,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string,
+  btn_text: PropTypes.string,
+  always_save: PropTypes.bool,
+  handle_change: PropTypes.func
 }
 
 Payment_Info.defaultProps = {
-  autofocus: true
+  autofocus: true,
+  btn_text: "Pay",
+  handle_change: () => {}
 }
 
 module.exports = Payment_Info

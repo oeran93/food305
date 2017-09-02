@@ -16,13 +16,22 @@ module.exports = function () {
   * @param phone {String} User's phone number
   * @param req {object} express request object
   */
-  function set_user_session (phone, req, next) {
+  function set_user_session (id, req, next) {
     User
-      .findOne({phone: phone})
+      .findOne({_id: id})
       .populate({path: "station"})
-      .select('_id phone email name station last_4_digits time_zone')
+      .select('_id phone email name station last_4_digits stripe.subscription_id')
       .exec((err, user) => {
-        if (user) req.session.user = user
+        if (err || !user) return res.send({error: errors.generic})
+        req.session.user = {
+          _id: user._id,
+          phone: user.phone,
+          email: user.email,
+          name: user.name,
+          station: user.station,
+          last_4_digits: user.last_4_digits,
+          subscribed: user.stripe.subscription_id ? true : false
+        }
         next()
       })
   }
@@ -32,7 +41,7 @@ module.exports = function () {
   */
   pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
-      set_user_session(req.session.user.phone, req, next)
+      set_user_session(req.session.user._id, req, next)
     } else next()
   }
 
@@ -102,7 +111,7 @@ module.exports = function () {
       }
       else {
         let {hash_pwd, salt} = crypto.hash_password(pwd)
-        set_user_session(user.phone, req, () => {
+        set_user_session(user._id, req, () => {
           user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
           user.save(err => {
             if (err) res.send({error: errors.generic})
@@ -171,7 +180,7 @@ module.exports = function () {
       if (err) res.send({error: errors.generic})
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
-        set_user_session(user.phone, req, next)
+        set_user_session(user._id, req, next)
       }
       else res.send({error: errors.invalid_old_pwd})
     })

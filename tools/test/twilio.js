@@ -8,7 +8,6 @@ describe('twilio tool', function () {
     .then(sms => {
       done()
     }).catch(err => {
-      console.log(err)
       throw err
     })
   })

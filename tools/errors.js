@@ -93,6 +93,11 @@ module.exports = {
   failed_billing: {
     number: 19,
     message: "There was a problem with your subscription payment. Please contact our staff for more information"
+  },
+  
+  cant_delete_card: {
+    number: 20,
+    message: "Something went wrong while trying to delete your credit card"
   }
 
 }

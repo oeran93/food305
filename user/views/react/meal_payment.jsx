@@ -25,11 +25,12 @@ class MealPayment extends React.Component {
   }
 
   render () {
-    let {autofocus, meal, user} = this.props
+    let {autofocus, meal} = this.props
     let {station} = this.state
     let taxes_fees =  generics.get_taxes_fees(meal.price)
     let total = (Number(meal.price) + Number(taxes_fees)).toFixed(2)
     let delivery = date.this_order_delivery()
+    let user = window.store.get('user')
     return (
       <div className="row">
         <div className="col-xs-12 text-center text-uppercase">
@@ -80,7 +81,6 @@ class MealPayment extends React.Component {
 }
 
 MealPayment.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   autofocus: PropTypes.bool,
   meal: PropTypes.object,
 }

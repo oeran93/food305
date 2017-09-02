@@ -9,17 +9,25 @@ class Nav_Bar extends React.Component {
   }
 
   render () {
-    let {user, toggleModal} = this.props
+    let {toggleModal} = this.props
+    let user = window.store.get('user')
     return (
       <div className="navigation-bar clearfix">
         <div className="logo pull-left">
           <img src="./images/logo.png" height="35px"/>
         </div>
         <div className="pull-right">
-          {user && <a className="btn red-btn" onClick={() => window.location.href = "/sign_out"}>SIGN OUT</a>}
-          {!user && <button className="btn red-btn" onClick={() => toggleModal('access_modal', {open:true, step:3})}>
-            SIGN IN
-          </button>}
+          <div className="hidden-xs">
+            {user && <Link className="btn red-btn" to="/">MENU</Link>}
+            {user && <Link className="btn red-btn" to="/profile">PROFILE</Link>}
+            {user && <a className="btn red-btn" onClick={() => window.location.href = "/sign_out"}>SIGN OUT</a>}
+          </div>
+          <div className="visible-xs">
+            {user && <Link className="btn red-btn" to="/"><span className="fa fa-bars"></span></Link>}
+            {user && <Link className="btn red-btn" to="/profile"><span className="fa fa-user"></span></Link>}
+            {user && <a className="btn red-btn" onClick={() => window.location.href = "/sign_out"}><span className="fa fa-sign-out"></span></a>}
+          </div>
+          {!user && <button className="btn red-btn" onClick={() => toggleModal('access_modal', {open:true, step:3})}> SIGN IN </button>}
         </div>
       </div>
     )
@@ -28,7 +36,6 @@ class Nav_Bar extends React.Component {
 }
 
 Nav_Bar.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   toggleModal: PropTypes.func.isRequired
 }
 

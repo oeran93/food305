@@ -3,7 +3,7 @@ const date = require('../../../tools/date.js')()
 const PropTypes = require('prop-types')
 const ajx = require('../../../tools/ajax.js')()
 
-class Restaurant_Banner extends React.Component {
+class Menu_Banner extends React.Component {
 
     constructor (props) {
       super(props)
@@ -16,7 +16,9 @@ class Restaurant_Banner extends React.Component {
       ajx.call({
         method: "get",
         url: "/get_station",
-        success: ({location}) => this.setState({station: location})
+        success: ({location}) => {
+          this.setState({station: location})
+        }
       })
     }
 
@@ -25,7 +27,7 @@ class Restaurant_Banner extends React.Component {
       let {station} = this.state
       let meals_ordered = meals.filter(m => m.orders.length)
       return (
-        <div className="container-fluid restaurant-banner banner">
+        <div className="container-fluid menu-banner banner">
           <div className="row">
             <div className="col-xs-12">
               <h1 className="title text-uppercase text-center">{restaurant.name}</h1>
@@ -62,9 +64,9 @@ class Restaurant_Banner extends React.Component {
     }
 }
 
-Restaurant_Banner.propTypes = {
+Menu_Banner.propTypes = {
   restaurant: PropTypes.object.isRequired,
   meals: PropTypes.array.isRequired
 }
 
-module.exports = Restaurant_Banner
+module.exports = Menu_Banner

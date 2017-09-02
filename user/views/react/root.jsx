@@ -1,11 +1,13 @@
 import React from 'react'
 import _ from 'underscore'
-import Home from './home.jsx'
+import Menu from './menu.jsx'
 import Nav_Bar from './nav_bar.jsx'
 import Access from './access/access.jsx'
 import About from './about.jsx'
 import Subscribe from './subscribe.jsx'
+import Profile from './profile.jsx'
 import Failed_Billing from './failed_billing.jsx'
+import Footer from './footer.jsx'
 import {Modal} from 'react-bootstrap'
 import {HashRouter as Router, Route,} from 'react-router-dom'
 const ajx = require('../../../tools/ajax.js')()
@@ -16,9 +18,9 @@ class Root extends React.Component {
     super(props)
     this.state = {
       render: false,
-      user: null,
       access_modal: {open: false, step: 3}
     }
+    window.store.setAppRoot(this)
   }
 
   toggle_modal (modal, info) {
@@ -32,26 +34,35 @@ class Root extends React.Component {
       method: 'GET',
       url: '/profile',
       success: data => {
-        this.setState({
-          user: data.user,
-          render: true
-        })
+        window.store.set('user', data.user)
+        this.setState({render: true})
       }
     })
   }
 
   render () {
-    let {render, user, access_modal} = this.state
+    const {render, access_modal} = this.state
+    const user = window.store.get('user')
     if (!render) return null
     return (
       <Router>
         <div>
           {/*Navigation Bar*/}
-          <Nav_Bar user={user} toggleModal={this.toggle_modal.bind(this)}/>
+          <Nav_Bar toggleModal={this.toggle_modal.bind(this)}/>
           {/*Main Content*/}
-          <Route exact path='/' component={() => user ? <Home user={user}/> : <About toggleModal={this.toggle_modal.bind(this)}/>}/>
-          <Route path="/subscribe" component={Subscribe} />
-          <Route path="/failed_billing" component={Failed_Billing} />
+          {user 
+            ?
+              <div>
+                <Route exact path='/' component={() => <Menu/>}/>
+                <Route path="/subscribe" component={Subscribe} />
+                <Route path="/failed_billing" component={Failed_Billing} />
+                <Route path="/profile" component={() => <Profile/>} />
+              </div>
+            :
+              <div>
+                <Route exact path='/' component={() => <About toggleModal={this.toggle_modal.bind(this)}/>}/>
+              </div>
+          }
           {/*Access Modal*/}
           <Modal show={access_modal.open} onHide={() => this.toggle_modal.bind(this)('access_modal', {open:false})}>
             <Modal.Header closeButton></Modal.Header>
@@ -68,6 +79,7 @@ class Root extends React.Component {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </Router>
     )
