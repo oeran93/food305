@@ -31,8 +31,7 @@ class Stations_schedule extends React.Component {
           <thead>
             <tr>
               <th>Station</th>
-              <th>Meals
-              </th>
+              <th>Schedule</th>
             </tr>
           </thead>
           <tbody>
@@ -44,11 +43,25 @@ class Stations_schedule extends React.Component {
                     <p>{station.location}</p>
                   </td>
                   {_.map(restaurants, (restaurant, j) => {
-                      return (
-                        <td className="col-xs-2" key={j}>
-                          <p>{restaurant.name}</p>
-                        </td>
-                      )
+                    return (
+                      <td className="col-xs-2" key={j}>
+                        <div className="dropdown">
+                          <a href="#" data-toggle="dropdown" className="dropdown-toggle">
+                            {restaurant.name}
+                            <b className="caret"></b>
+                          </a>
+                          <ul className="dropdown-menu">
+                            {_.map(restaurants, (restaurant, j) => {
+                              return (
+                                <li key={j}>
+                                  <a href="#">{restaurant.name}</a>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </div>
+                      </td>
+                    )
                   })}
                 </tr>
               )

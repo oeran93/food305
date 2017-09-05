@@ -33,13 +33,13 @@ class Stations_today extends React.Component {
           <thead>
             <tr>
               <th>Station</th>
-              <th>Meals
-              </th>
+              <th>Meals</th>
             </tr>
           </thead>
           <tbody>
             {_.map(stations, (station, i) => {
               const meals = station.schedule[day_of_week].meals
+              console.log(meals)
               return (
                 <tr key={i}>
                   <td>
