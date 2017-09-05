@@ -10,6 +10,7 @@ module.exports = function (props) {
           <a className="navbar-brand" href="#">Vimi Curator</a>
           <Link className="btn btn-default navbar-btn" to="/">Today</Link>
           <Link className="btn btn-default navbar-btn" to="/stations_schedule"> Stations Schedule</Link>
+          <Link className="btn btn-default navbar-btn" to="/add_meal"> Add Meal</Link>
         </div>
       </div>
     </nav>
