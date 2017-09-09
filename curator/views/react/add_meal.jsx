@@ -29,7 +29,6 @@ class Add_meal extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.restaurant + ' name '+this.state.name+ ' '+ this.state.price + ' '+ this.state.description)
     const new_meal = {
       restaurant: this.state.restaurant,
       name: this.state.name,
@@ -41,7 +40,7 @@ class Add_meal extends React.Component {
       method: "POST",
       url: '/add_meal',
       data: new_meal,
-      success: (data) => {alert(data)}
+      success: (data) => {alert("Successfully inserted " + data)}
     })
     event.preventDefault()
   }
@@ -52,9 +51,9 @@ class Add_meal extends React.Component {
         <label>
           Restaurant:
           <select value={this.state.restaurant} onChange={this.handleChange} name="restaurant">
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
+            <option value="Gyro Grill">Gyro Grill</option>
+            <option value="Corner 17">Corner 17</option>
+            <option value="Seoul Taco">Seoul Taco</option>
             <option value="mango">Mango</option>
           </select>
         </label>
