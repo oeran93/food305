@@ -9,22 +9,27 @@ class Add_meal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      restaurant: 'coconut',
       name: '',
       price: 0,
       image: '',
       description: ''
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    ajx.call({
+      method: "GET",
+      url: '/get_restaurants',
+      success: (restaurants) => this.setState({restaurants})
+    })
   }
 
   handleChange(event) {
     const target = event.target
     const value = target.value
     const name = target.name
-
     this.setState({[name]: value})
   }
 
@@ -50,11 +55,12 @@ class Add_meal extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Restaurant:
-          <select value={this.state.restaurant} onChange={this.handleChange} name="restaurant">
-            <option value="Gyro Grill">Gyro Grill</option>
-            <option value="Corner 17">Corner 17</option>
-            <option value="Seoul Taco">Seoul Taco</option>
-            <option value="mango">Mango</option>
+          <select onChange={this.handleChange} name="restaurant">
+            {_.map(this.state.restaurants, (restaurant, j) => {
+              return (
+                <option value={restaurant.name} key={j}>{restaurant.name}</option>
+              )
+            })}
           </select>
         </label>
         <br/>
