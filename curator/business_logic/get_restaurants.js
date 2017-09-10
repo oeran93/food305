@@ -13,7 +13,6 @@ module.exports = function () {
       .exec((err, restaurants) => {
         if (err) res.send({error: errors.generic})
         else {
-          console.log(restaurants)
           res.send(restaurants)
         }
       })

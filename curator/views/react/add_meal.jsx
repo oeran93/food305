@@ -53,38 +53,23 @@ class Add_meal extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Restaurant:
-          <select onChange={this.handleChange} name="restaurant">
-            {_.map(this.state.restaurants, (restaurant, j) => {
-              return (
-                <option value={restaurant.name} key={j}>{restaurant.name}</option>
-              )
-            })}
-          </select>
-        </label>
-        <br/>
-        <label>
-          Name:
-          <input type="text" onChange={this.handleChange} name="name"/>
-        </label>
-        <br/>
-        <label>
-          Price:
-          <input type="number" onChange={this.handleChange} name="price" />
-        </label>
-        <br/>
-        <label>
-          Image url:
-          <input type="text" onChange={this.handleChange} name="image"/>
-        </label>
-        <br/>
-        <label>
-          Description:
-          <textarea onChange={this.handleChange} name="description"/>
-        </label>
-        <br/>
-        <input type="submit" value="Submit"/>
+        <label> Restaurant: </label>
+        <select onChange={this.handleChange} name="restaurant" className="form-control">
+          {_.map(this.state.restaurants, (restaurant, j) => {
+            return (
+              <option value={restaurant.name} key={j}>{restaurant.name}</option>
+            )
+          })}
+        </select>
+        <label> Name:</label>
+        <input type="text" onChange={this.handleChange} name="name" className="form-control"/>
+        <label> Price: </label>
+        <input type="number" onChange={this.handleChange} name="price" className="form-control"/>
+        <label> Image url: </label>
+        <input type="text" onChange={this.handleChange} name="image" className="form-control"/>
+        <label> Description: </label>
+        <textarea onChange={this.handleChange} name="description" className="form-control"/>
+        <input type="submit" value="Submit" className="form-control"/>
       </form>
     )
   }

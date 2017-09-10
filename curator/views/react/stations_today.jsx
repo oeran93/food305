@@ -39,7 +39,6 @@ class Stations_today extends React.Component {
           <tbody>
             {_.map(stations, (station, i) => {
               const meals = station.schedule[day_of_week].meals
-              console.log(meals)
               return (
                 <tr key={i}>
                   <td>

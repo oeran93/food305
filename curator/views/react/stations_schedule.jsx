@@ -10,8 +10,15 @@ class Stations_schedule extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      stations: []
     }
+  }
+
+  handleChange(event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+    this.state.stations[0].schedule[name] = this.state.all_restaurants[value]
+    this.forceUpdate()
   }
 
   componentWillMount() {
@@ -19,6 +26,12 @@ class Stations_schedule extends React.Component {
       method: "GET",
       url: '/stations_today',
       success: (stations) => this.setState({stations})
+    })
+
+    ajx.call({
+      method: "GET",
+      url: '/get_restaurants',
+      success: (all_restaurants) => this.setState({all_restaurants})
     })
   }
 
@@ -45,21 +58,16 @@ class Stations_schedule extends React.Component {
                   {_.map(restaurants, (restaurant, j) => {
                     return (
                       <td className="col-xs-2" key={j}>
-                        <div className="dropdown">
-                          <a href="#" data-toggle="dropdown" className="dropdown-toggle">
-                            {restaurant.name}
-                            <b className="caret"></b>
-                          </a>
-                          <ul className="dropdown-menu">
-                            {_.map(restaurants, (restaurant, j) => {
+                        <label>{restaurant.name}</label>
+                        <select onChange={this.handleChange.bind(this)} name={j}>
+                          <option>select</option>
+                          {_.map(this.state.all_restaurants, (restaurant, j) => {
                               return (
-                                <li key={j}>
-                                  <a href="#">{restaurant.name}</a>
-                                </li>
+                                <option value={j} key={j}>{restaurant.name}</option>
                               )
                             })}
-                          </ul>
-                        </div>
+                        </select>
+
                       </td>
                     )
                   })}
