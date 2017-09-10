@@ -16,9 +16,18 @@ class Stations_schedule extends React.Component {
   handleChange(event) {
     const target = event.target
     const value = target.value
-    const name = target.name
-    this.state.stations[0].schedule[name] = this.state.all_restaurants[value]
+    const station = target.name[0]
+    const restaurant = target.name[2]
+    this.state.stations[station].schedule[restaurant] = this.state.all_restaurants[value]
     this.forceUpdate()
+
+    ajx.call({
+      method: "POST",
+      url: '/change_schedule',
+      data: this.state.stations[station],
+      success: (data) => {console.log(data)}
+    })
+
   }
 
   componentWillMount() {
@@ -59,7 +68,7 @@ class Stations_schedule extends React.Component {
                     return (
                       <td className="col-xs-2" key={j}>
                         <label>{restaurant.name}</label>
-                        <select onChange={this.handleChange.bind(this)} name={j}>
+                        <select onChange={this.handleChange.bind(this)} name={[i,j]}>
                           <option>select</option>
                           {_.map(this.state.all_restaurants, (restaurant, j) => {
                               return (
