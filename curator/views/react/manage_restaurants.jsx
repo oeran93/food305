@@ -46,7 +46,7 @@ class Stations_schedule extends React.Component {
           <thead>
             <tr>
               <th>Restaurant</th>
-              <th>Schedule</th>
+              <th>Meals</th>
             </tr>
           </thead>
           <tbody>
