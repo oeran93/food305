@@ -8,7 +8,7 @@ module.exports = function () {
   let pub = {}
 
   pub.manage_restaurants = function (req, res) {
-    const updated_meal = req.body
+    const meal = req.body
     Meal.update(
       { _id: meal._id }
       ,{ $set: { hidden: meal.hidden }}

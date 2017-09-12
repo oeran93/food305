@@ -17,13 +17,14 @@ class Stations_schedule extends React.Component {
     const target = event.target
     const res = target.name[0]
     const meal = target.name[2]
-    this.state.restaurants[res].meals[meal].hidden = !this.state.restaurants[res].meals[meal].hidden
-    this.forceUpdate()
+    const restaurants = this.state.restaurants
+    restaurants[res].meals[meal].hidden = !restaurants[res].meals[meal].hidden
+    this.setState({restaurants})
 
     ajx.call({
       method: "POST",
       url: '/manage_restaurants',
-      data: this.state.restaurants[res].meals[meal],
+      data: restaurants[res].meals[meal],
       success: (data) => {console.log(data)}
     })
 
@@ -72,7 +73,7 @@ class Stations_schedule extends React.Component {
                           name={[i,j]}
                           type="checkbox"
                           checked={!this.state.restaurants[i].meals[j].hidden}
-                          onChange={this.handleChange} />
+                          onChange={this.handleChange.bind(this)} />
                         <p>{meal.name}</p>
                         <label>{avg_rating}</label>
                       </td>
