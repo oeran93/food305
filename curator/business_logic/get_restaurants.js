@@ -3,6 +3,7 @@ const Meal = require('../../database/meal.js')
 const Order = require('../../database/order.js')
 const Restaurant = require('../../database/restaurant.js')
 const errors = require('../../tools/errors.js')
+const _ = require('underscore')
 
 module.exports = function () {
 
@@ -17,6 +18,23 @@ module.exports = function () {
       .exec((err, restaurants) => {
         if (err) res.send({error: errors.generic})
         else {
+
+          restaurants.forEach( (res, index) => {
+            var count = 0
+            var sum = 0
+            _.map(res.meals, (meal) =>{
+              _.map(meal.orders, (order) => {
+                if (order.rating){
+                  count++
+                  sum += order.rating
+                }
+              })
+            })
+            const avg_rating = isNaN(sum/count) ? "" : sum/count
+            restaurants[index]["rating"] = avg_rating
+            console.log(avg_rating)
+          })
+
           res.send(restaurants)
         }
       })

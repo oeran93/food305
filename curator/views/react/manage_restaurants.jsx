@@ -75,7 +75,7 @@ class Stations_schedule extends React.Component {
                           checked={!this.state.restaurants[i].meals[j].hidden}
                           onChange={this.handleChange.bind(this)} />
                         <p>{meal.name}</p>
-                        <label>{avg_rating}</label>
+                        <label>Rating: {avg_rating}</label>
                       </td>
                     )
                   })}

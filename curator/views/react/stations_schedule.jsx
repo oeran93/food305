@@ -48,6 +48,7 @@ class Stations_schedule extends React.Component {
 
   render() {
     let {stations, all_restaurants} = this.state
+    console.log(all_restaurants);
     return (
       <div>
         <h1>Schedule of stations</h1>
@@ -73,7 +74,7 @@ class Stations_schedule extends React.Component {
                         <select onChange={this.handleChange.bind(this)} value={this.state.stations[i].schedule[j]} name={[i,j]}>
                           {_.map(all_restaurants, (restaurant, j) => {
                               return (
-                                <option value={restaurant._id} key={j}>{restaurant.name}</option>
+                                <option value={restaurant._id} key={j}>{restaurant.name} {restaurant.rating}</option>
                               )
                             })}
                         </select>
