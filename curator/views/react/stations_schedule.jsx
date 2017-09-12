@@ -10,30 +10,32 @@ class Stations_schedule extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      stations: [],
+      all_restaurants: []
     }
   }
 
   handleChange(event) {
     const target = event.target
-    const value = target.value
+    const res_id = target.value
     const station = target.name[0]
     const restaurant = target.name[2]
-    this.state.stations[station].schedule[restaurant] = this.state.all_restaurants[value]
-    this.forceUpdate()
+    const stations = this.state.stations
+    stations[station].schedule[restaurant] = res_id
+    this.setState({stations})
 
     ajx.call({
       method: "POST",
       url: '/change_schedule',
-      data: this.state.stations[station],
+      data: stations[station],
       success: (data) => {console.log(data)}
     })
-
   }
 
   componentWillMount() {
     ajx.call({
       method: "GET",
-      url: '/stations_today',
+      url: '/stations_schedule',
       success: (stations) => this.setState({stations})
     })
 
@@ -45,7 +47,7 @@ class Stations_schedule extends React.Component {
   }
 
   render() {
-    let {stations} = this.state
+    let {stations, all_restaurants} = this.state
     return (
       <div>
         <h1>Schedule of stations</h1>
@@ -68,11 +70,10 @@ class Stations_schedule extends React.Component {
                     return (
                       <td className="col-xs-2" key={j}>
                         <label>{restaurant.name}</label>
-                        <select onChange={this.handleChange.bind(this)} name={[i,j]}>
-                          <option>select</option>
-                          {_.map(this.state.all_restaurants, (restaurant, j) => {
+                        <select onChange={this.handleChange.bind(this)} value={this.state.stations[i].schedule[j]} name={[i,j]}>
+                          {_.map(all_restaurants, (restaurant, j) => {
                               return (
-                                <option value={j} key={j}>{restaurant.name}</option>
+                                <option value={restaurant._id} key={j}>{restaurant.name}</option>
                               )
                             })}
                         </select>
@@ -88,6 +89,5 @@ class Stations_schedule extends React.Component {
       </div>
     )
   }
-
 }
 module.exports = Stations_schedule

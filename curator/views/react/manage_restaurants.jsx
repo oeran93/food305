@@ -15,16 +15,15 @@ class Stations_schedule extends React.Component {
 
   handleChange(event) {
     const target = event.target
-    const value = target.value
-    const station = target.name[0]
-    const restaurant = target.name[2]
-    this.state.stations[station].schedule[restaurant] = this.state.all_restaurants[value]
+    const res = target.name[0]
+    const meal = target.name[2]
+    this.state.restaurants[res].meals[meal].hidden = !this.state.restaurants[res].meals[meal].hidden
     this.forceUpdate()
 
     ajx.call({
       method: "POST",
-      url: '/change_schedule',
-      data: this.state.stations[station],
+      url: '/manage_restaurants',
+      data: this.state.restaurants[res].meals[meal],
       success: (data) => {console.log(data)}
     })
 
@@ -61,7 +60,6 @@ class Stations_schedule extends React.Component {
                     var count = 0
                     var sum = 0
                     _.map(meal.orders, (order) => {
-                      console.log(order)
                       if (order.rating){
                         count++
                         sum += order.rating
@@ -70,13 +68,13 @@ class Stations_schedule extends React.Component {
                     const avg_rating = isNaN(sum/count) ? "" : sum/count
                     return (
                       <td className="col-xs-2" key={j}>
+                        <input
+                          name={[i,j]}
+                          type="checkbox"
+                          checked={!this.state.restaurants[i].meals[j].hidden}
+                          onChange={this.handleChange} />
                         <p>{meal.name}</p>
                         <label>{avg_rating}</label>
-                          <input
-                            name={meal.name}
-                            type="checkbox"
-                            checked={meal.hidden}
-                            onChange={this.handleChange} />
                       </td>
                     )
                   })}

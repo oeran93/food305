@@ -7,12 +7,16 @@ module.exports = function () {
 
   let pub = {}
 
-  pub.get_stations_schedule = function (req, res) {
-    Station.find({})
-      .exec((err, stations) => {
-        if (err) res.send({error: errors.generic})
-        else res.send(stations)
-      })
+  pub.manage_restaurants = function (req, res) {
+    const updated_meal = req.body
+    Meal.update(
+      { _id: meal._id }
+      ,{ $set: { hidden: meal.hidden }}
+      ,(err) => {
+        if (err) throw error
+        else res.send("success")
+      }
+    )
   }
 
   return pub
