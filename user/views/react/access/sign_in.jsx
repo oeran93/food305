@@ -5,7 +5,7 @@ const PropTypes    = require('prop-types')
 const ajx = require('../../../../tools/ajax.js')()
 
 class Sign_In extends React.Component {
-
+  
   constructor (props) {
     super(props)
     this.state = {
@@ -84,4 +84,5 @@ Sign_In.propTypes = {
   change_step: PropTypes.func.isRequired,
   autofocus: PropTypes.bool
 }
+
 module.exports = Sign_In

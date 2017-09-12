@@ -30,4 +30,13 @@ module.exports = {
     return (price*100).toFixed(0)
   }, 
 
+  /*
+  * scrolls the page to the specifiec id
+  * @param id {String}
+  */
+  scrollTo: function (id) {
+      $('html, body').animate({
+          scrollTop: $(id).offset().top
+      }, 1500);
+  }
 }

@@ -2,13 +2,7 @@ import React from 'react'
 import Link from 'react-router-dom'
 import globals from '../../../tools/globals.js'
 import Access from './access/access.jsx'
-import $ from 'jquery'
-
-function scrollTo (id) {
-    $('html, body').animate({
-        scrollTop: $(id).offset().top
-    }, 1500);
-}
+import generics from '../../../tools/generics.js'
 
 module.exports = (props) => {
   return (
@@ -24,7 +18,7 @@ module.exports = (props) => {
             </h3>
           </div>
           <div className="col-xs-12 text-center">
-            <button className="btn red-btn margin-right-5" onClick={() => scrollTo("#about")}>
+            <button className="btn red-btn margin-right-5" onClick={() => generics.scrollTo("#about")}>
               Learn More
             </button>
             <button className="btn red-btn" onClick={() => props.toggleModal('access_modal', {open: true, step: 0})}>
@@ -53,7 +47,7 @@ module.exports = (props) => {
       <div className="row about-section section-3">
         <div className="col-xs-12 col-sm-2 col-sm-offset-3">
           <div className="img"><img src="/images/about/membership.png" alt="monthly membership" /></div>
-          <div className="about-text text-center text-uppercase"><h4> No Delivery Fees <br /> $14.99 Monthly Membership </h4></div>
+          <div className="about-text text-center text-uppercase"><h4> No Delivery Fees <br /> $9.99 Monthly Membership </h4></div>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
           <div className="img"><img src="/images/about/calendar.png" alt="no money" /></div>
@@ -68,11 +62,11 @@ module.exports = (props) => {
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
           <div className="img"><img src="/images/about/change.png" alt="We change them monthly" /></div>
-          <div className="about-text text-center text-uppercase"><h4> We Change Them Every Month </h4></div>
+          <div className="about-text text-center text-uppercase"><h4> We introduce new restaurants every week </h4></div>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
           <div className="img"><img src="/images/about/user.png" alt="You decide which stay" /></div>
-          <div className="about-text text-center text-uppercase"><h4> You Decide Which Stay </h4></div>
+          <div className="about-text text-center text-uppercase"><h4> You Decide Which restaurants Stay </h4></div>
         </div>
       </div>
 

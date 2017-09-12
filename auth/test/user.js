@@ -1,5 +1,5 @@
 // const db        = require('../../database/start.js')
-// const app       = require('../../delivery/app.js')(db)
+// const app       = require('../../user/app.js')(db)
 // const supertest = require('supertest')
 // const should = require('should')
 //

@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.post('/create_password', validator.validate_router('pwd') , auth.create_password, (req,res) => res.send())
   app.get('/forgot_pwd', auth.forgot_pwd, (req,res) => res.send())
   app.post('/recover_pwd', auth.recover_pwd, (req,res) => res.send())
+  app.post('/change_pwd', auth.change_pwd, (req,res) => res.send())
   app.get('/sign_out', auth.sign_out, (req,res) => res.send())
   app.post('/sign_in', auth.sign_in, (req,res) => res.send())
-
 }

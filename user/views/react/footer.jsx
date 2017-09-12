@@ -4,10 +4,14 @@ module.exports = function (props) {
   return (<footer>
     <div className="container">
       <div className='row'>
-        <div className='col-xs- col-xs-offset-9'>
-          <a href=''><span className="red-text fa fa-facebook-square fa-2x" aria-hidden="true"></span></a>
-          <a href=''><span className="red-text fa fa-linkedin-square fa-2x" aria-hidden="true"></span></a>
-          <a href=''><span className="red-text fa fa-google-plus-square fa-2x" aria-hidden="true"></span></a>
+        <div className='col-xs-4'>
+          <h4><a href="mailto:info@vimifood.com">Contact Us</a></h4>
+        </div>
+        <div className='col-xs-4'>
+          <h4><a href="/terms_and_conditions.pdf">Terms and Conditions</a></h4>
+        </div>
+        <div className='col-xs-4'>
+          <h4><a href="#">About Us</a></h4>
         </div>
       </div>
     </div>

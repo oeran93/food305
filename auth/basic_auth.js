@@ -12,17 +12,26 @@ module.exports = function () {
   let pub = {}
   
   /*
-  * Sets the sessin for the user
+  * Sets the session for the user
   * @param phone {String} User's phone number
   * @param req {object} express request object
   */
-  function set_user_session (phone, req, next) {
+  function set_user_session (id, req, next) {
     User
-      .findOne({phone: phone})
+      .findOne({_id: id})
       .populate({path: "station"})
-      .select('_id phone email name station last_4_digits time_zone')
+      .select('_id phone email name station last_4_digits stripe.subscription_id')
       .exec((err, user) => {
-        if (user) req.session.user = user
+        if (err || !user) return res.send({error: errors.generic})
+        req.session.user = {
+          _id: user._id,
+          phone: user.phone,
+          email: user.email,
+          name: user.name,
+          station: user.station,
+          last_4_digits: user.last_4_digits,
+          subscribed: user.stripe.subscription_id ? true : false
+        }
         next()
       })
   }
@@ -32,7 +41,7 @@ module.exports = function () {
   */
   pub.session = function (req, res, next) {
     if (req.session && req.session.user) {
-      set_user_session(req.session.user.phone, req, next)
+      set_user_session(req.session.user._id, req, next)
     } else next()
   }
 
@@ -56,7 +65,7 @@ module.exports = function () {
             User.findOneAndUpdate(
               {phone},
               _.extend({code},infos),
-              {upsert: true, new: true},
+              {upsert: true, new: true, setDefaultsOnInsert: true},
               (err, user) => {
                 if (err) res.send({error: errors.generic})
                 else {
@@ -102,7 +111,7 @@ module.exports = function () {
       }
       else {
         let {hash_pwd, salt} = crypto.hash_password(pwd)
-        set_user_session(user.phone, req, () => {
+        set_user_session(user._id, req, () => {
           user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
           user.save(err => {
             if (err) res.send({error: errors.generic})
@@ -140,15 +149,24 @@ module.exports = function () {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd, phone} = req.body
     User.findOne({code, phone},(err, user) => {
-      if (err) res.send({error: errors.generic})
-      if (!user) res.send({error: errors.invalid_code})
-      else {
-        User.update({phone, code},{code: '', pwd: ''}, (err, user) => {
-          if (err) res.send({error: errors.generic})
-          else pub.create_password(req, res, next)
-        })
-      }
+      if (err) return res.send({error: errors.generic})
+      if (!user) return res.send({error: errors.invalid_code})
+      User.update({phone, code},{code: '', pwd: ''}, (err, user) => {
+        if (err) res.send({error: errors.generic})
+        else pub.create_password(req, res, next)
+      })
     })
+  }
+  
+  /*
+  * Changes user's password
+  * @param req.body.old_pwd {String} old password
+  * @param req.body.pwd {String} new password
+  */
+  pub.change_pwd = function (req, res, next) {
+    req.body.phone = req.session.user.phone
+    let {old_pwd, pwd} = req.body
+    pub.create_password(req, res, next)
   }
 
   /*
@@ -171,7 +189,7 @@ module.exports = function () {
       if (err) res.send({error: errors.generic})
       else if (!user || !user.activated) res.send({error: errors.user_does_not_exist})
       else if (crypto.sha512(pwd, user.salt) == user.pwd) {
-        set_user_session(user.phone, req, next)
+        set_user_session(user._id, req, next)
       }
       else res.send({error: errors.invalid_old_pwd})
     })

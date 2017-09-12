@@ -1,0 +1,13 @@
+@media screen and (max-width: 480px) {
+
+    .menu-banner {
+      background-image: url('../images/banners/phone_menu.jpg');
+      font-size: 70%;
+      padding: 10vh 5vh 5vh 5vh;
+    }
+
+    .rating-container {
+      padding-top: 8vh;
+    }
+
+}

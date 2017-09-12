@@ -75,7 +75,7 @@ module.exports = {
     message: "You do not have the right permissions"
   },
   
-  failed_subscription: {
+  failed_subscribe: {
     number: 16,
     message: "Something went wrong while trying to subscribe you"
   },
@@ -83,6 +83,26 @@ module.exports = {
   failed_unsubscribe: {
     number: 17,
     message: "Somthing went wrong while trying to unsubscribe you. Please try again"
+  },
+  
+  not_subscribed: {
+    number: 18,
+    message: "You need to be a member to perform this operation"
+  },
+
+  failed_billing: {
+    number: 19,
+    message: "There was a problem with your subscription payment. Please contact our staff for more information"
+  },
+  
+  cant_delete_card: {
+    number: 20,
+    message: "Something went wrong while trying to delete your credit card"
+  },
+  
+  must_be_signed_in: {
+    number: 21,
+    message: "User should be signed to perform this action"
   }
 
 }

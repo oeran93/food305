@@ -1,0 +1,12 @@
+.profile {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.profile-banner {
+  padding: 15vh;
+  color: white;
+  background-image: url('../images/banners/profile.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+}

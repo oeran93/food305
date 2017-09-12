@@ -9,8 +9,8 @@ class Payment_Info extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      meal: props.meal,
+    this.state = _.extend({
+      save_info: true,
       credit_card: {
         number: "",
         cvc: "",
@@ -18,7 +18,7 @@ class Payment_Info extends React.Component {
         exp_year: "",
         name: ""
       }
-    }
+    }, props.product_info)
   }
 
   credit_card_change (event) {
@@ -26,13 +26,37 @@ class Payment_Info extends React.Component {
     state["credit_card"][event.target.id] = event.target.value
     this.setState(state)
   }
+  
+  save_info (event) {
+    this.setState((prevState) => ({
+      save_info: !prevState.save_info
+    }))
+  }
 
   pay () {
+    const {save_info} = this.state
+    const {always_save, url} = this.props
+    let {router} = this.context
+    if (save_info || always_save) this.add_card.bind(this)()
+    if (url) {
+      ajx.call({
+        method: "POST",
+        url: url,
+        data: this.state,
+        success: (res) => window.location.href = '/',
+        redirect: router.history,
+        show_messages: true,
+        show_loading: true
+      })
+    }
+    this.props.handle_change(this.state.credit_card)
+  }
+  
+  add_card () {
     ajx.call({
       method: "POST",
-      url: "/create_customer_and_buy_meal",
+      url: '/add_card',
       data: this.state,
-      success: (res) => window.location.href = '/',
       show_messages: true,
       show_loading: true
     })
@@ -40,7 +64,8 @@ class Payment_Info extends React.Component {
 
   render () {
     let {number, cvc, type, exp_month, exp_year, name} = this.state.credit_card
-    let {autofocus} = this.props
+    let {save_info} = this.state
+    let {autofocus, btn_text, always_save} = this.props
     return (
       <div className="row">
         <div className="col-xs-12 credit-card-div">
@@ -101,9 +126,16 @@ class Payment_Info extends React.Component {
               />
             </div>
           </div>
+          {!always_save &&
+            <div className="row">
+              <div className="col-xs-12">
+                <h5><input type="checkbox" onChange={this.save_info.bind(this)} checked={save_info}/> Save my credit card for fast checkout</h5>
+              </div>
+            </div>
+          }
         </div>
         <div className='col-xs-12'>
-          <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> Pay </button>
+          <button className='btn red-btn pull-right' onClick={this.pay.bind(this)}> {btn_text} </button>
         </div>
       </div>
     )
@@ -111,13 +143,25 @@ class Payment_Info extends React.Component {
 
 }
 
+Payment_Info.contextTypes = {
+  router: React.PropTypes.shape({
+    history: React.PropTypes.object.isRequired,
+  })
+}
+
 Payment_Info.propTypes = {
   autofocus: PropTypes.bool,
-  meal: PropTypes.object
+  product_info: PropTypes.object,
+  url: PropTypes.string,
+  btn_text: PropTypes.string,
+  always_save: PropTypes.bool,
+  handle_change: PropTypes.func
 }
 
 Payment_Info.defaultProps = {
-  autofocus: true
+  autofocus: true,
+  btn_text: "Pay",
+  handle_change: () => {}
 }
 
 module.exports = Payment_Info

@@ -19,13 +19,16 @@ module.exports = function () {
   *   show_messages {bool}
   *
   */
-  pub.call = function ({method, url, data, success = () => {}, error = () => {}, success_message, error_message, show_loading, show_messages}) {
+  pub.call = function ({method, url, data, success = () => {}, error = () => {}, success_message, error_message, show_loading, show_messages, redirect}) {
     if (show_loading) $('.loading-background').css('display','block')
     $.ajax({
       method,
       url,
       data,
       success: (res) => {
+        if (res.redirect) {
+          return redirect.push(res.redirect)
+        }
         if (res.error) {
           if (show_messages) confirmation.failure(error_message || res.error.message)
           error(res)
@@ -37,7 +40,9 @@ module.exports = function () {
       error: (res) => {
         confirmation.failure('Something went wrong, are you connected to the internet?')
       },
-      complete: () => {if (show_loading) $('.loading-background').css('display','none')}
+      complete: (res) => {
+        if (show_loading) $('.loading-background').css('display','none')
+      }
     })
   }
 

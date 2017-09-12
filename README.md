@@ -62,4 +62,8 @@ x => {console.log(x)}
 ```
 ### 5 use destructuring when possible
 [learn more](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-### 6 [airbnb javascript style guide](https://github.com/airbnb/javascript)
+### 6 Capitalization
+only Mongoose models variables should be capitalized.
+### 7 Indentation
+Set your IDE to use 2 soft tabs for indentation.
+### 8 [airbnb javascript style guide](https://github.com/airbnb/javascript)

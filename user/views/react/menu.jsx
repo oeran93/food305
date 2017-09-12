@@ -1,33 +1,49 @@
-const React     = require('react')
-const $         = require('jquery')
-const Meal      = require('./meal.jsx')
-const PropTypes = require('prop-types')
-const date = require('../../../tools/date.js')()
+const React       = require('react')
+const PropTypes   = require('prop-types')
+const Rating      = require('./rating.jsx')
+const Menu_Banner = require('./menu_banner.jsx')
+import Meal from './meal.jsx'
+import Info_Bar from './info_bar.jsx'
+const ajx         = require('../../../tools/ajax.js')()
+const globals     = require('../../../tools/globals.js')
 
 class Menu extends React.Component {
 
   constructor (props) {
     super(props)
+    this.state = {
+      restaurant: {},
+      meals: []
+    }
+  }
+
+  componentWillMount () {
+    ajx.call({
+        method: "GET",
+        url: "/get_menu",
+        success: (menu) => this.setState({restaurant: menu.restaurant, meals: menu.meals}),
+        show_loading: true
+    })
   }
 
   render () {
-    let {meals,toggleModal} = this.props
+    let {restaurant, meals} = this.state
     return (
-      <div className="menu">
-        <div className="row">
-        {meals.map(meal => {
-          return <Meal key={meal._id} meal={meal} toggleModal={toggleModal} />
-        })}
+      <div>
+        <Menu_Banner restaurant={restaurant} />
+        <Info_Bar meals={meals} restaurant={restaurant} />
+        <Rating />
+        <div id="menu" className="container menu">
+          <div className="row">
+            {meals.map(meal => {
+              return <Meal key={meal._id} meal={meal}/>
+            })}
+          </div>
         </div>
       </div>
     )
   }
 
-}
-
-Menu.propTypes = {
-  meals: PropTypes.array.isRequired,
-  toggleModal: PropTypes.func.isRequired
 }
 
 module.exports = Menu

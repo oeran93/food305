@@ -5,7 +5,7 @@ module.exports = {
 	* @param text {sting}
 	* @param size {number} length of text before ellipses
 	*/
-	dotdotdot: function(text,size){
+	ellipses: function(text,size){
 		if(text.length > size){
 			return text.substring(0,size)+"...";
 		}return text;

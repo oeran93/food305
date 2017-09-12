@@ -1,8 +1,8 @@
 .about-banner {
-  padding-top: 25%;
+  padding-top: 20vh;
   color: white;
-  background-image: url('../images/about/hamburger.jpg');
-  height: 100vh;
+  background-image: url('../images/banners/about.jpg');
+  height: 60vh;
 }
 
 .about-text {
@@ -10,6 +10,7 @@
 }
 
 .about-section {
+  height 40vh;
   padding-top: 40px;
   padding-bottom: 40px;
 }
