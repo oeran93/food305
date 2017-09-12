@@ -1,13 +1,37 @@
 .menu {
-  margin-top: 5vh;
+  margin-top: 7vh;
+  margin-bottom: 7vh;
 }
 
 .menu-banner {
-  padding: 15vh;
+  height: 88vh;
   color: white;
   background-image: url('../images/banners/menu.jpg');
   background-size:cover;
   background-repeat: no-repeat;
+}
+
+.menu-banner .title {
+  margin-top: 30vh;
+}
+
+.info-bar {
+  width: 100%;
+  height: 12vh;
+}
+
+.info-bar .center-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.info-bar .text {
+  font-size: 18px;
+}
+
+.info-bar .component {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .rating-container {

@@ -3,6 +3,7 @@ const PropTypes   = require('prop-types')
 const Rating      = require('./rating.jsx')
 const Menu_Banner = require('./menu_banner.jsx')
 import Meal from './meal.jsx'
+import Info_Bar from './info_bar.jsx'
 const ajx         = require('../../../tools/ajax.js')()
 const globals     = require('../../../tools/globals.js')
 
@@ -17,12 +18,10 @@ class Menu extends React.Component {
   }
 
   componentWillMount () {
-    let {router} = this.context
     ajx.call({
         method: "GET",
         url: "/get_menu",
         success: (menu) => this.setState({restaurant: menu.restaurant, meals: menu.meals}),
-        redirect: router.history,
         show_loading: true
     })
   }
@@ -31,9 +30,10 @@ class Menu extends React.Component {
     let {restaurant, meals} = this.state
     return (
       <div>
-        <Menu_Banner meals={meals} restaurant={restaurant}/>
+        <Menu_Banner restaurant={restaurant} />
+        <Info_Bar meals={meals} restaurant={restaurant} />
         <Rating />
-        <div className="container menu">
+        <div id="menu" className="container menu">
           <div className="row">
             {meals.map(meal => {
               return <Meal key={meal._id} meal={meal}/>
@@ -44,12 +44,6 @@ class Menu extends React.Component {
     )
   }
 
-}
-
-Menu.contextTypes = {
-  router: React.PropTypes.shape({
-    history: React.PropTypes.object.isRequired,
-  })
 }
 
 module.exports = Menu

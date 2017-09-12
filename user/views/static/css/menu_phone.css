@@ -2,8 +2,8 @@
 
     .menu-banner {
       background-image: url('../images/banners/phone_menu.jpg');
-      font-size: 90%;
-      padding: 5vh;
+      font-size: 70%;
+      padding: 10vh 5vh 5vh 5vh;
     }
 
     .rating-container {

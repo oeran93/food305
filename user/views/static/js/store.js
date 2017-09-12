@@ -31,9 +31,15 @@ window.store = {
   * @param key {string} propery name where data is saved
   * @return {Anything stored} null if key was not found
   */
-  get: (key, from) => {
-      if (!local_storage[key]) return null
-      return local_storage[key]
+  get: (key) => {
+      const keys = key.split('.')
+      let obj = local_storage
+      let last_prop = keys.pop()
+      keys.forEach(key => {
+        if (obj) obj = obj[key]
+        else throw "store: trying to get data from undefined container"
+      })
+      return obj ? obj[last_prop] : null
   },
   
   /*

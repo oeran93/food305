@@ -47,9 +47,11 @@ class Root extends React.Component {
     return (
       <Router>
         <div>
-          {/*Navigation Bar*/}
+          <div className="confirmation-wrapper">
+            <div className='confirmation success'></div>
+            <div className='confirmation failure'></div>
+          </div>
           <Nav_Bar toggleModal={this.toggle_modal.bind(this)}/>
-          {/*Main Content*/}
           {user 
             ?
               <div>

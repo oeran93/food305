@@ -98,6 +98,11 @@ module.exports = {
   cant_delete_card: {
     number: 20,
     message: "Something went wrong while trying to delete your credit card"
+  },
+  
+  must_be_signed_in: {
+    number: 21,
+    message: "User should be signed to perform this action"
   }
 
 }

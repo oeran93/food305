@@ -5,6 +5,8 @@ import Editable_Text from './editable_text.jsx'
 import Uneditable_Text from './uneditable_text.jsx'
 import Editable_Select from './editable_select.jsx'
 import Editable_Credit_Card from './editable_credit_card.jsx'
+import Editable_Pwd from './editable_pwd.jsx'
+import Change_Pwd from './access/change_pwd.jsx'
 import _ from 'underscore'
 const ajx = require('../../../tools/ajax.js')()
 
@@ -50,6 +52,8 @@ class Profile extends React.Component {
       <div>
         <Profile_Banner/>
         <div className="container profile">
+            <Uneditable_Text name="Phone" icon="phone" value={phone} />
+            <Uneditable_Text name="Email" icon="envelope" value={email} />
             <Editable_Text prop_name="name" icon="user" name="Name" value={name} handleChange={this.on_change.bind(this)}/>
             <Editable_Select 
               icon="map-marker"
@@ -62,8 +66,6 @@ class Profile extends React.Component {
               handleChange={this.on_change.bind(this)}
             />
             <Editable_Credit_Card prop_name="card" name="Card on file" last_4_digits={last_4_digits}/>
-            <Uneditable_Text name="Phone" icon="phone" value={phone} />
-            <Uneditable_Text name="Email" icon="envelope" value={phone} />
             {subscribed 
               &&
               <h3 className="row">
@@ -75,6 +77,7 @@ class Profile extends React.Component {
                 </div>
               </h3>
             }
+            <Editable_Pwd />
         </div>
       </div>
     )

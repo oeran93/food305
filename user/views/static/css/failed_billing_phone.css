@@ -1,0 +1,9 @@
+@media screen and (max-width: 480px) {
+
+    .failed-billing-banner {
+      background-image: url('../images/banners/phone_failed_billing.jpg');
+      font-size: 90%;
+      padding: 5vh;
+    }
+
+}

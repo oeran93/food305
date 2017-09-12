@@ -11,7 +11,6 @@ module.exports = function () {
   */
   pub.get_menu = function (req, res) {
     let station = req.session.user.station
-    console.log(station)
     let date = require('../../tools/date.js')(req.session.user.station.time_zone).this_order_delivery()
     let delivery_date = date.format(globals.order_date_format)
     let delivery_day = date.day()

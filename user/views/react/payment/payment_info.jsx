@@ -36,6 +36,7 @@ class Payment_Info extends React.Component {
   pay () {
     const {save_info} = this.state
     const {always_save, url} = this.props
+    let {router} = this.context
     if (save_info || always_save) this.add_card.bind(this)()
     if (url) {
       ajx.call({
@@ -43,6 +44,7 @@ class Payment_Info extends React.Component {
         url: url,
         data: this.state,
         success: (res) => window.location.href = '/',
+        redirect: router.history,
         show_messages: true,
         show_loading: true
       })
@@ -139,6 +141,12 @@ class Payment_Info extends React.Component {
     )
   }
 
+}
+
+Payment_Info.contextTypes = {
+  router: React.PropTypes.shape({
+    history: React.PropTypes.object.isRequired,
+  })
 }
 
 Payment_Info.propTypes = {

@@ -1,0 +1,9 @@
+@media screen and (max-width: 480px) {
+
+    .profile-banner {
+      background-image: url('../images/banners/phone_profile.jpg');
+      font-size: 70%;
+      padding: 10vh 5vh 5vh 5vh;
+    }
+
+}

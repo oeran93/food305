@@ -27,7 +27,6 @@ module.exports = function () {
       data,
       success: (res) => {
         if (res.redirect) {
-          console.log(arguments)
           return redirect.push(res.redirect)
         }
         if (res.error) {

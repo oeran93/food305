@@ -1,0 +1,6 @@
+.failed-billing-banner{
+  padding-top: 15%;
+  color: white;
+  height: 100vh;
+  background-image: url('../images/banners/failed_billing.jpg');
+}

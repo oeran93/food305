@@ -5,13 +5,13 @@ module.exports = function (props) {
     <div className="container">
       <div className='row'>
         <div className='col-xs-4'>
-          <h3><a href="mailto:info@vimifood.com">Contact Us</a></h3>
+          <h4><a href="mailto:info@vimifood.com">Contact Us</a></h4>
         </div>
         <div className='col-xs-4'>
-          <h3><a href="#">Terms and Conditions</a></h3>
+          <h4><a href="/terms_and_conditions.pdf">Terms and Conditions</a></h4>
         </div>
         <div className='col-xs-4'>
-          <h3><a href="#">About Us</a></h3>
+          <h4><a href="#">About Us</a></h4>
         </div>
       </div>
     </div>

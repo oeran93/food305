@@ -10,7 +10,7 @@ module.exports = function () {
   */
   function confirmation (type) {
     $('.confirmation.'+type).slideToggle('fast')
-    setTimeout(() => $('.confirmation.'+type).slideToggle('fast'),5000)
+    setTimeout(() => $('.confirmation.'+type).slideToggle('fast'),2000)
   }
 
   /*

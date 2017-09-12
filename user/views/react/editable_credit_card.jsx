@@ -42,7 +42,7 @@ class Editable_Credit_Card extends React.Component {
           }
           {!editing && !last_4_digits &&
             <h3 className="col-xs-12">
-              <div className="pull-left"><span className="fa fa-credit-card"></span> No Card Saved</div>
+              <div className="pull-left"><span className="label label-default"><span className="fa fa-credit-card"></span> {name}</span> No Card Saved</div>
               <div className="pull-right" onClick={() => this.setState.bind(this)({editing: true})}><span className="btn btn-info"> Add credit card </span></div>
             </h3>
           }

@@ -12,7 +12,7 @@ class Nav_Bar extends React.Component {
     let {toggleModal} = this.props
     let user = window.store.get('user')
     return (
-      <div className="navigation-bar clearfix">
+      <div className="navigation-bar">
         <div className="logo pull-left">
           <img src="./images/logo.png" height="35px"/>
         </div>

@@ -59,7 +59,7 @@ class Editable_Text extends React.Component {
             </span>
           :
             <h3 className="col-xs-12">
-              <div className="pull-left"><span className="label label-default"><span className={"fa fa-"+icon}></span> {name}</span> {value}</div>
+              <div className="pull-left ellipsis"><span className="label label-default"><span className={"fa fa-"+icon}></span> {name}</span> {value}</div>
               <div className="pull-right">
                 <span className="btn btn-info" onClick={() => this.setState.bind(this)({editing: true})}>Edit {name}</span>
               </div>

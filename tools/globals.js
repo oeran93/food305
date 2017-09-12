@@ -8,7 +8,7 @@ module.exports = {
 
   credit_card_percentage: .03,
   
-  trial_days: 14,
+  trial_days: 30,
 
   app_name: "Vimi",
 

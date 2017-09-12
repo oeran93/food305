@@ -2,6 +2,8 @@
 red color: #9c231c;
 orange color: #c14820;
 light orange: #ea846d;
+light grey: #dedede;
+dark grey: #777676;
 dark blue: #262f36;
 success color: #2ecc71;
 failure color: #e74c3c;
@@ -28,16 +30,11 @@ html, body, #root {
 }
 
 .margin-top-0 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
-.green-label {
-	padding:5px 11px 5px 11px;
-  border-radius: 3px;
-  border: 1px solid #ecf0f1;
-  color: white !important;
-  font-weight: bold;
-  background-color: #2ecc71;
+.ellipsis {
+  white-space: nowrap;
 }
 
 .basic-input{
@@ -83,11 +80,11 @@ html, body, #root {
 
 .confirmation {
 	display: none;
-	position:fixed;
-  padding: 20px;
-	width: 100%;
+  position: fixed;
+  width: 100%;
+  padding: 15px;
 	text-align: center;
-	font-size: 18px;
+	font-size: 15px;
 	z-index:10000;
   color: white;
 }
@@ -127,7 +124,7 @@ html, body, #root {
   left: 0;
   width: 100%;
   z-index: 100;
-  padding: 0 40px 0 40px;
+  padding: 0 20px 0 20px;
 }
 
 .navigation-bar .btn a, .navigation-bar .btn a:hover {
@@ -142,7 +139,7 @@ html, body, #root {
 /*BANNER*/
 
 .banner {
-	position: relative;
+  position: relative;
   font-weight: bold;
   background-repeat:no-repeat;
   background-size: cover;
@@ -159,18 +156,19 @@ html, body, #root {
 
 /*FOOTER*/
 footer{
-  background-color: #262f36;
-  color: white;
+  border-top: 1px solid #dedede;
+  color: #777676;
   width: 100%;
-  padding: 40px 0 40px 0;
+  padding: 25px 0 25px 0;
   text-align: center;
 }
 
 footer a {
-  color: white;
+  color: #777676;
+  font-size: 15px;
 }
 
 footer a:hover, footer a:active, footer a:focus {
-  color: white;
+  color: #777676;
   text-decoration: none;
 }

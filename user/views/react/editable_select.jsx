@@ -73,12 +73,14 @@ class Editable_Select extends React.Component {
               </div>
             </span>
           :
-            <h3 className="col-xs-12">
-              <div className="pull-left"><span className="label label-default"><span className={"fa fa-"+icon}></span> {name}</span> {option.text}</div>
-              <div className="pull-right">
-                <span className="btn btn-info" onClick={() => this.setState.bind(this)({editing: true})}>Edit {name}</span>
-              </div>
-            </h3>
+            <span>
+              <h3 className="col-xs-8 ellipsis">
+                <div className="pull-left"><span className="label label-default"><span className={"fa fa-"+icon}></span> {name}</span> {option.text} </div>
+              </h3>
+              <h3 className="col-xs-4">
+                <span className="btn btn-info pull-right" onClick={() => this.setState.bind(this)({editing: true})}>Edit {name}</span>
+              </h3>
+            </span>
         }
       </div>
     )

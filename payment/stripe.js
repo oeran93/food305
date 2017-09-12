@@ -152,6 +152,7 @@ module.exports = function () {
       if (err) res.send({error: errors.generic})
       stripe.subscriptions.del(
         user.stripe.subscription_id,
+        {at_period_end: true},
         (err, confirmation) => {
           if (err) return res.send({error: errors.failed_unsubscribe})
           user.stripe.subscription_id = ""

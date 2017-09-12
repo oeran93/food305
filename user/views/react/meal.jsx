@@ -28,16 +28,16 @@ class Meal extends React.Component {
       <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
         <div className='thumbnail clearfix'>
           {orders.length > 0 && <span className='meal-orders'> {orders.length} </span>}
+          <span className='label label-default meal-price'> {'$ '+price} </span>
           <img src={'images/meals/' + image} alt={name} className='meal-picture'/>
           <div className='clearfix'>
-            <h5 title={name} className='meal-name text-uppercase text-center'>
+            <h5 title={name} className='meal-name text-center'>
               {name}
             </h5>
-            <p>{description}</p>
-            <button className="btn red-btn meal-btn pull-left" onClick={this.toggle_modal.bind(this)}>
+            <p className="meal-description">{description}</p>
+            <button className="btn red-btn meal-btn pull-right" onClick={this.toggle_modal.bind(this)}>
               Buy
             </button>
-            <span className='green-label price pull-right'> {'$ '+price} </span>
           </div>
         </div>
         <Modal show={modal.open} onHide={this.toggle_modal.bind(this)}>

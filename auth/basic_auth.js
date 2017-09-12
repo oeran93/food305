@@ -149,15 +149,24 @@ module.exports = function () {
     req.body.phone = req.body.phone.replace(/[^0-9]/g,'')
     let {code, pwd, phone} = req.body
     User.findOne({code, phone},(err, user) => {
-      if (err) res.send({error: errors.generic})
-      if (!user) res.send({error: errors.invalid_code})
-      else {
-        User.update({phone, code},{code: '', pwd: ''}, (err, user) => {
-          if (err) res.send({error: errors.generic})
-          else pub.create_password(req, res, next)
-        })
-      }
+      if (err) return res.send({error: errors.generic})
+      if (!user) return res.send({error: errors.invalid_code})
+      User.update({phone, code},{code: '', pwd: ''}, (err, user) => {
+        if (err) res.send({error: errors.generic})
+        else pub.create_password(req, res, next)
+      })
     })
+  }
+  
+  /*
+  * Changes user's password
+  * @param req.body.old_pwd {String} old password
+  * @param req.body.pwd {String} new password
+  */
+  pub.change_pwd = function (req, res, next) {
+    req.body.phone = req.session.user.phone
+    let {old_pwd, pwd} = req.body
+    pub.create_password(req, res, next)
   }
 
   /*
