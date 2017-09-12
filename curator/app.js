@@ -3,8 +3,7 @@ const app         = express()
 const body_parser = require('body-parser')
 const session     = require('client-sessions')
 const env         = process.env
-
-const auth_router   = require('../auth/routing/curator.js')
+const router = require('./router.js')
 
 module.exports = function (db) {
   //start DB
@@ -24,8 +23,10 @@ module.exports = function (db) {
   /*Serving static content*/
   app.use(express.static(__dirname + '/views/static'))
 
-  /*Modules Router*/
-  auth_router(app)
+  /*Other routers*/
+  router(app)
+
+  app.use('/*', (req, res) => res.redirect('/'))
 
   return app
 }

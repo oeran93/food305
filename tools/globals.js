@@ -7,7 +7,7 @@ module.exports = {
   credit_card_fixed_rate: .30,
 
   credit_card_percentage: .03,
-  
+
   trial_days: 30,
 
   app_name: "Vimi",
@@ -21,8 +21,10 @@ module.exports = {
   stripe_apikey: env.VIMI_STRIPE_APIKEY,
 
   order_date_format: "MM-DD-YYYY HH:mm",
-  
+
   iso_date_format: "YYYY-MM-DDTHH:mm:ssZ",
+
+  day_date_format: "MM-DD-YYYY",
 
   info_email: "info@vimifood.com",
 
@@ -30,10 +32,12 @@ module.exports = {
 
   admin_port: env.ADMIN_PORT,
 
+  curator_port: env.CURATOR_PORT,
+
   test_port: env.TEST_PORT,
-  
+
   ok_financial_statuses: ['active', 'trialing'],
-  
+
   failed_financial_statuses: ['past_due']
 
 }
