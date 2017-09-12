@@ -34,7 +34,7 @@ module.exports = function () {
             // console.log(JSON.stringify(restaurants))
             restaurants[index] = restaurants[index].toObject()
             // console.log(JSON.stringify(restaurants))
-            restaurants[index]["rating"] = avg_rating
+            restaurants[index]["rating"] = isNaN(sum/count) ? "" : avg_rating.toFixed(2)
           })
 
           res.send(restaurants)
