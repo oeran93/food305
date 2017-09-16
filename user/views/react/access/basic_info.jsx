@@ -100,7 +100,7 @@ class Basic_Info extends React.Component {
           />
         </div>
         <div className="col-xs-12 input">
-          <h5> <input type="checkbox" onChange={this.terms_and_conditions.bind(this)} checked={terms_and_conditions}/> <a href="/terms_and_conditions.pdf"> I Accept the terms and conditions</a></h5>
+          <h5> <input type="checkbox" onChange={this.terms_and_conditions.bind(this)} checked={terms_and_conditions}/> <a target="_blank" href="/terms_and_conditions.pdf"> I Accept the terms and conditions</a></h5>
         </div>
         <div className='col-xs-12'>
           <button className='btn red-btn pull-right' onClick={this.send_info.bind(this)}>

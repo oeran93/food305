@@ -4,6 +4,7 @@ import Menu from './menu.jsx'
 import Nav_Bar from './nav_bar.jsx'
 import Access from './access/access.jsx'
 import About from './about.jsx'
+import Welcome from './welcome.jsx'
 import Subscribe from './subscribe.jsx'
 import Profile from './profile.jsx'
 import Failed_Billing from './failed_billing.jsx'
@@ -55,14 +56,15 @@ class Root extends React.Component {
           {user 
             ?
               <div>
-                <Route exact path='/' component={() => <Menu/>}/>
+                <Route exact path='/' component={() => <Menu />} />
+                <Route exact path='/about' component={() => <About/>} />
                 <Route path="/subscribe" component={Subscribe} />
                 <Route path="/failed_billing" component={Failed_Billing} />
-                <Route path="/profile" component={() => <Profile/>} />
+                <Route path="/profile" component={Profile} />
               </div>
             :
               <div>
-                <Route exact path='/' component={() => <About toggleModal={this.toggle_modal.bind(this)}/>}/>
+                <Route exact path='/' component={() => <Welcome toggle_modal={this.toggle_modal.bind(this)}/>}/>
               </div>
           }
           {/*Access Modal*/}
