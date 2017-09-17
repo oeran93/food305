@@ -8,7 +8,7 @@ module.exports = function () {
   let pub = {}
 
   pub.get_stations_today = function (req, res) {
-    Station.find({})
+    Station.find({hidden: false})
       .populate({
         path: 'schedule',
         populate: { path: 'meals' }

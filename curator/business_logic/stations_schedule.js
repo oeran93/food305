@@ -8,7 +8,7 @@ module.exports = function () {
   let pub = {}
 
   pub.get_stations_schedule = function (req, res) {
-    Station.find({})
+    Station.find({hidden: false})
       .exec((err, stations) => {
         if (err) res.send({error: errors.generic})
         else res.send(stations)

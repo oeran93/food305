@@ -16,7 +16,6 @@ module.exports = function () {
       max_meals: 30,
       meals: []
     })
-
     restaurant.save( (err, saved_res) => {
       if (err) throw error
       else {
