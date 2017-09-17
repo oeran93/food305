@@ -18,7 +18,8 @@ module.exports = function () {
           price: new_meal.price,
           _restaurant: restaurant._id,
           image: new_meal.image,
-          description: new_meal.description
+          description: new_meal.description,
+          hidden: true
         })
         meal.save( (err, saved_meal) => {
           if (err) throw error
