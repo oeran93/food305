@@ -13,7 +13,7 @@ module.exports = function () {
   * @param req.query.date {String} delivery date
   */
   pub.get_delivery_orders = function (req, res) {
-    Order.find({date: req.query.date})
+    Order.find({date: {$regex: req.query.date+".*"}})
       .populate('_meal _user')
       .exec((err, orders) => {
         if (err) res.send({error: errors.generic})
