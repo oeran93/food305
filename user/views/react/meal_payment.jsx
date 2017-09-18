@@ -36,36 +36,28 @@ class MealPayment extends React.Component {
         <div className="col-xs-12 text-center text-uppercase">
           <h3 className="margin-top-0">Checkout</h3>
         </div>
-        <div className="col-xs-12 alert alert-warning">
-          <h4><span className="fa fa-map-marker margin-right-5"></span> Pick up your food at {station}</h4>
-          <h4><span className="fa fa-calendar-o margin-right-5"></span> Your food will be delivered at {delivery.format('hh a')} on {delivery.format('dddd')}</h4>
-        </div>
         <div className="col-xs-12 alert-success alert">
-          <div>
             <div className="row">
               <div className="col-xs-12">
-                <h4>Price: $ {meal.price} </h4>
+                <h4>Price: $ {meal.price} - Same price as the restautant</h4>
               </div>
             </div>
             <div className="row">
               <div className="col-xs-12">
-                <h4>Taxes & Fees: $ {taxes_fees} <Tooltip tooltip="Restaurant Sales taxes (about 10%). Credit Card fees, 2.9% + $ 0.30">
-                      <span className="fa fa-question-circle-o"></span>
-                  </Tooltip>
+                <h4>Taxes & Fees: $ {taxes_fees} - Sales taxes and credit card transaction charges
                 </h4>
               </div>
             </div>
             <div className="row">
               <div className="col-xs-12">
-                <h4>Delivery Fees: Free and always will be </h4>
+                <h4 className="green-label">Delivery: FREE </h4>
               </div>
             </div>
             <div className="row">
               <div className="col-xs-12">
-                <h4 className="green-label">Total: $ {total}</h4>
+                <h4 className="green-label">Total: <b> $ {total} </b> </h4>
               </div>
             </div>
-          </div>
         </div>
         <div className="col-xs-12">
           <Payment 
