@@ -3,6 +3,7 @@ const Order = require('../../database/order.js')
 const Meal = require('../../database/meal.js')
 const User = require('../../database/user.js')
 const errors = require('../../tools/errors.js')
+const send = require('../../notification_center/send.js')
 
 module.exports = function () {
 
@@ -30,9 +31,23 @@ module.exports = function () {
         }
           , [])
         )
-
       })
-
+  }
+  
+  /*
+  * Sends a notification to all people who ordered that their food has arrived
+  * @param req.body.date {String} delivery date
+  */
+  pub.order_arrived = function (req, res) {
+    Order.find({date: {$regex: req.body.date+".*"}})
+      .populate('_meal _user')
+      .exec((err, orders) => {
+        if (err) res.send({error: errors.generic})
+        orders.forEach(order => {
+          send(order._user).message('order_arrived', {meal: order._meal.name}).text_and_email()
+        })
+        res.sendStatus(200)
+      })
   }
 
   return pub

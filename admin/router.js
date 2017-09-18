@@ -6,5 +6,5 @@ module.exports = function (app) {
   app.get('/delivery_orders', Orders.get_delivery_orders)
   app.get('/num_orders_by_meal', Meals.get_num_orders_by_meal)
   app.get('/num_orders_by_restaurant', Restaurants.get_num_orders_by_restaurant)
-
+  app.post('/order_arrived', Orders.order_arrived)
 }

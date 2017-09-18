@@ -33,10 +33,16 @@ class Orders extends React.Component {
   }
 
   handle_date_change(event){
-    let chosen_date = event.target.value + " 12:00"
-    $.get("/delivery_orders?date=" + chosen_date, (data) => {
+    this.setState({shown_date: event.target.value})
+    $.get("/delivery_orders?date=" + event.target.value, (data) => {
       this.setState({orders: data})
     })
+  }
+  
+  order_arrived () {
+    if (window.confirm('Did you finish setting up the station? Notify users only when you are ready.')) {
+      $.post("/order_arrived", {date: this.state.shown_date})
+    }
   }
 
   render () {
@@ -105,6 +111,7 @@ class Orders extends React.Component {
           }
           </tbody>
         </table>
+        <button className="btn btn-success" onClick={this.order_arrived.bind(this)}> Alert users the food is here </button>
       </div>
     )
   }
