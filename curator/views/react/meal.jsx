@@ -5,7 +5,7 @@ const globals = require('../../../tools/globals.js')
 const _ = require('underscore')
 const ajx = require('../../../tools/ajax.js')()
 
-class Add_meal extends React.Component {
+class Meal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -64,7 +64,7 @@ class Add_meal extends React.Component {
         <label> Name:</label>
         <input type="text" onChange={this.handleChange} name="name" className="form-control"/>
         <label> Price: </label>
-        <input type="number" onChange={this.handleChange} name="price" className="form-control"/>
+        <input type="text" onChange={this.handleChange} name="price" className="form-control"/>
         <label> Image url: </label>
         <input type="text" onChange={this.handleChange} name="image" className="form-control"/>
         <label> Description: </label>
@@ -74,4 +74,4 @@ class Add_meal extends React.Component {
     )
   }
 }
-module.exports = Add_meal
+module.exports = Meal
