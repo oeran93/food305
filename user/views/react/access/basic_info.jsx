@@ -36,7 +36,6 @@ class Basic_Info extends React.Component {
   handle_change (event) {
     let state = this.state
     state[event.target.id] = event.target.value
-    console.log(state)
     this.setState(state)
   }
 
