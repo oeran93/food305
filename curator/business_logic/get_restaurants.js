@@ -31,9 +31,7 @@ module.exports = function () {
               })
             })
             const avg_rating = isNaN(sum/count) ? "" : sum/count
-            // console.log(JSON.stringify(restaurants))
             restaurants[index] = restaurants[index].toObject()
-            // console.log(JSON.stringify(restaurants))
             restaurants[index]["rating"] = isNaN(sum/count) ? "" : avg_rating.toFixed(2)
           })
 
