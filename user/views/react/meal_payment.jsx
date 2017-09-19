@@ -39,7 +39,7 @@ class MealPayment extends React.Component {
         <div className="col-xs-12 alert-success alert">
             <div className="row">
               <div className="col-xs-12">
-                <h4>Price: $ {meal.price} - Same price as the restautant</h4>
+                <h4>Price: $ {meal.price} - Same price as the restaurant</h4>
               </div>
             </div>
             <div className="row">
