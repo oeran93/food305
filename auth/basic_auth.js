@@ -53,31 +53,27 @@ module.exports = function () {
   */
   pub.create_user = function (req, res, next) {
     let phone = req.body.phone.replace(/[^0-9]/g,'')
+    let email = req.body.email
     let infos = _.pick(req.body, 'name', 'email', 'station')
     let code = generics.rand_number(6)
     twilio.lookup(phone)
       .catch(() => res.send({error: errors.invalid_phone}))
       .then(() => {
-        User.findOne({phone}, (err, user) => {
-          if (err) res.send({error: errors.generic})
-          else if (user && user.activated) res.send({error: errors.user_exists})
-          else {
-            User.findOneAndUpdate(
-              {phone},
-              _.extend({code},infos),
-              {upsert: true, new: true, setDefaultsOnInsert: true},
-              (err, user) => {
-                if (err) res.send({error: errors.generic})
-                else {
-                  send(user).message('sign_up_verification',{code}).text_and_email()
-                  next()
-                }
-              }
-            )
-          }
+        User.findOne({$or: [{phone}, {email}]}, (err, user) => {
+          if (err) return res.send({error: errors.generic})
+          else if (user && user.activated) return res.send({error: errors.user_exists})
+          User.remove({_id: user ? user._id : null}, (err) => {
+            if (err) return res.send({error: errors.generic})
+            const new_user = new User(_.extend({},infos,{phone, email, code}))
+            new_user.save((err,user) => {
+              if (err) return res.send({error: errors.generic})
+              send(user).message('sign_up_verification',{code}).text_and_email()
+              next()
+            })
+          })
         })
-      })
-    }
+    })
+  }
 
   /*
   * Checks if entered code matches the one sent to user
