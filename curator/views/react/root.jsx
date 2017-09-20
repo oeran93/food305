@@ -22,8 +22,6 @@ class Root extends React.Component {
               <Route exact path='/' component={Stations_today} />
               <Route exact path='/stations_schedule' component={Stations_schedule} />
               <Route exact path='/manage_restaurants' component={Manage_restaurants} />
-              <Route exact path='/add_meal' component={Meal} />
-              <Route exact path='/edit_meal' component={Meal} />
               <Route exact path='/add_restaurant' component={Add_restaurant} />
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import $ from 'jquery'
 const date = require('../../../tools/date.js')()
 const globals = require('../../../tools/globals.js')
@@ -6,16 +7,18 @@ const _ = require('underscore')
 const ajx = require('../../../tools/ajax.js')()
 
 class Meal extends React.Component {
+  
   constructor(props) {
     super(props)
+    const {meal} = this.props
     this.state = {
-      name: '',
-      price: 0,
-      image: '',
-      description: ''
+      meal: _.extend({
+        name: '',
+        price: 0,
+        image: '',
+        description: ''
+      },meal)
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount() {
@@ -30,48 +33,45 @@ class Meal extends React.Component {
     const target = event.target
     const value = target.value
     const name = target.name
-    this.setState({[name]: value})
+    const meal = this.state.meal
+    meal[name] = value
+    this.setState({meal})
   }
 
-  handleSubmit(event) {
-    const new_meal = {
-      restaurant: this.state.restaurant,
-      name: this.state.name,
-      price: this.state.price,
-      image: this.state.image,
-      description: this.state.description
-    }
+  handleSubmit() {
+    // console.log(this.state.meal, this.props.meal)
     ajx.call({
       method: "POST",
-      url: '/add_meal',
-      data: new_meal,
+      url: this.props.meal ? '/edit_meal' : '/add_meal',
+      data: this.state.meal,
       success: (data) => {alert("Successfully inserted " + data)}
     })
-    event.preventDefault()
   }
 
   render() {
+    let {name, price, image, description, _restaurant} = this.state.meal
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
         <label> Restaurant: </label>
-        <select onChange={this.handleChange} name="restaurant" className="form-control">
-          {_.map(this.state.restaurants, (restaurant, j) => {
-            return (
-              <option value={restaurant.name} key={j}>{restaurant.name}</option>
-            )
-          })}
+        <select onChange={this.handleChange.bind(this)} name="_restaurant" className="form-control" value={_restaurant}>
+          {_.map(this.state.restaurants, (restaurant, j) => <option value={restaurant._id} key={j}>{restaurant.name}</option>)}
         </select>
         <label> Name:</label>
-        <input type="text" onChange={this.handleChange} name="name" className="form-control"/>
+        <input value={name} type="text" onChange={this.handleChange.bind(this)} name="name" className="form-control"/>
         <label> Price: </label>
-        <input type="text" onChange={this.handleChange} name="price" className="form-control"/>
+        <input value={price} type="text" onChange={this.handleChange.bind(this)} name="price" className="form-control"/>
         <label> Image url: </label>
-        <input type="text" onChange={this.handleChange} name="image" className="form-control"/>
+        <input value={image} type="text" onChange={this.handleChange.bind(this)} name="image" className="form-control"/>
         <label> Description: </label>
-        <textarea onChange={this.handleChange} name="description" className="form-control"/>
-        <input type="submit" value="Submit" className="form-control"/>
-      </form>
+        <textarea value={description} onChange={this.handleChange.bind(this)} name="description" className="form-control"/>
+        <input type="submit" value="Submit" className="form-control" onClick={this.handleSubmit.bind(this)}/>
+      </div>
     )
   }
 }
+
+Meal.propTypes = {
+    meal: PropTypes.object
+}
+
 module.exports = Meal
