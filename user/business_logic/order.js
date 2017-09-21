@@ -29,7 +29,7 @@ module.exports = function () {
         {$push: {'orders': order._id}},
         () => {
           let day = date.order_date_to_moment(delivery_date).format("dddd")
-          let hour = date.order_date_to_moment(delivery_date).format("hh a")
+          let hour = date.order_date_to_moment(delivery_date).format("hh:mm a")
           let meal_name = req.body.meal.name
           send(req.session.user).message('successful_order', {meal_name,day,hour}).text_and_email()
           res.sendStatus(200)

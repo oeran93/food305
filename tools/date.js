@@ -11,16 +11,16 @@
   const pub = {}
 
   const delivery_hours = {
-  	'monday': [12],
-  	'tuesday': [12],
-  	'wednesday': [12],
-  	'thursday': [12],
-  	'friday': [12],
+  	'monday': [12.15],
+  	'tuesday': [12.15],
+  	'wednesday': [12.15],
+  	'thursday': [12.15],
+  	'friday': [12.15],
   	'saturday': [],
   	'sunday': []
   }
 
-  const time_to_deliver = 1
+  const time_to_deliver = 75 //minutes
 
   /*
   * Calculates closest delivery date to a given date
@@ -32,8 +32,9 @@
   	let hour_now = parseInt(date.format('H'))
   	let hour_delivery = delivery_hours[day_delivery].find(h => h > hour_now)
   	if (hour_delivery) {
-  		date.hour(hour_delivery)
-  		date.minutes(0)
+		let time = (hour_delivery + "").split(".")
+  		date.hour(time[0])
+  		date.minutes(time[1])
   		date.seconds(0)
   		return date
   	}
@@ -66,8 +67,8 @@
   * @return {moment} this order delivery
   */
   pub.this_order_delivery = function () {
-  	let hours_to_delivery = this.this_delivery().diff(moment(), 'hours')
-  	if (hours_to_delivery < time_to_deliver) {
+  	let minutes_to_delivery = this.this_delivery().diff(moment(), 'minutes')
+  	if (minutes_to_delivery < time_to_deliver) {
   		return this.next_delivery()
   	}
   	return this.this_delivery()
