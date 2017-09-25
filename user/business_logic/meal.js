@@ -10,12 +10,11 @@ module.exports = function () {
   * Returns station current menu.
   */
   pub.get_menu = function (req, res) {
-    let station = req.session.user.station
-    let date = require('../../tools/date.js')(req.session.user.station.time_zone).this_order_delivery()
+    let station = req.session.user.station 
+    let date = require('../../tools/date.js')(station.time_zone).this_order_delivery()
     let delivery_date = date.format(globals.order_date_time_format)
-    let delivery_day = date.day()
     Restaurant
-      .findOne({_id: station.schedule[delivery_day-1]})
+      .findOne({_id: station.schedule[date.day()-1]})
       .populate({
         path: "meals",
         select: "name price image tags orders description",
@@ -35,6 +34,29 @@ module.exports = function () {
           meals: restaurant.meals
         })
       })
+  }
+  
+  /*
+  * Menu from a random station for the about page
+  */
+  pub.get_about_menu = function (req,res,next) {
+    Station.findOne({}, (err, station) => {
+      let date = require('../../tools/date.js')(station.time_zone).this_order_delivery()
+      Restaurant
+        .findOne({_id: station.schedule[date.day()-1]})
+        .populate({
+          path: "meals",
+          select: "name price image tags",
+          match: {hidden: false}
+        })
+        .exec((err, restaurant) => {
+          if (err) res.sendStatus(400)
+          res.send({
+            station,
+            meals: restaurant.meals
+          })
+        })
+    })
   }
 
   return pub

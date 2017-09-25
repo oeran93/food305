@@ -17,8 +17,8 @@
 
 .meal-price {
   position: absolute;
-  top: -15px;
-  left: -5px;
+  top: 10px;
+  left: 10px;
   font-size: 15px;
   background-color: #2ecc71;
 }
