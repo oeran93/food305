@@ -40,7 +40,7 @@ module.exports = function () {
   * Menu from a random station for the about page
   */
   pub.get_about_menu = function (req,res,next) {
-    Station.findOne({}, (err, station) => {
+    Station.findOne({hidden: false}, (err, station) => {
       let date = require('../../tools/date.js')(station.time_zone).this_order_delivery()
       Restaurant
         .findOne({_id: station.schedule[date.day()-1]})
