@@ -53,10 +53,12 @@ class Welcome extends React.Component {
           </div>
         </div>
         <div className="container">
-          <div className="row about section">
+          <div className="row">
             {station &&<div className='col-xs-12 text-center'>
               <h2>Today at {station.location}</h2>
             </div>}
+          </div>
+          <div className="row about-section">
             {meals.map(meal => {
               return (
                 <div key={meal._id} className='col-sm-6 col-md-4 col-lg-3 meal'>

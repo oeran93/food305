@@ -26,7 +26,7 @@ class Meal extends React.Component {
     let {modal} = this.state
     return (
       <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
-        <div className='thumbnail clearfix'>
+        <div className='thumbnail clearfix meal-thumbnail'>
           {orders.length > 0 && <span className='meal-orders'> {orders.length} </span>}
           <span className='label label-default meal-price'> {'$ '+price} </span>
           <img src={'images/meals/' + image} alt={name} className='meal-picture'/>
