@@ -8,7 +8,7 @@ class Orders extends React.Component {
 
   constructor (props) {
     super(props)
-    let current_date = date.this_delivery().format(globals.order_date_format).slice(0,-6)
+    let current_date = date.now()
     this.state = {
       orders: [],
       shown_date: current_date

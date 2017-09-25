@@ -92,7 +92,7 @@
   * @param date {String}
   */
   pub.order_date_to_moment = function (date) {
-  	return moment(date, globals.order_date_format)
+  	return moment(date, globals.order_date_time_format)
   }
   
   /*

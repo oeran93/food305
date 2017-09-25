@@ -15,7 +15,7 @@ module.exports = function () {
   pub.add = function (req,res) {
     let station_time_zone = req.session.user.station.time_zone
     let date = require('../../tools/date.js')(station_time_zone)
-    let delivery_date = date.this_order_delivery().format(globals.order_date_format)
+    let delivery_date = date.this_order_delivery().format(globals.order_date_time_format)
     var order = new Order({
       _meal: req.body.meal._id,
       _user: req.session.user._id,

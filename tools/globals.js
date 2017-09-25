@@ -19,8 +19,10 @@ module.exports = {
   twilio_phone: '+19412571316',
 
   stripe_apikey: env.VIMI_STRIPE_APIKEY,
+  
+  order_date_format: "MM-DD-YYYY",
 
-  order_date_format: "MM-DD-YYYY HH:mm",
+  order_date_time_format: "MM-DD-YYYY HH:mm",
 
   iso_date_format: "YYYY-MM-DDTHH:mm:ssZ",
 

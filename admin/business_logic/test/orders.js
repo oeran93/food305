@@ -11,7 +11,7 @@ describe('orders business logic', () => {
     supertest(app)
       .get('/delivery_orders')
       .query({
-        date: date.this_delivery().format(globals.order_date_format)
+        date: date.this_delivery().format(globals.order_date_time_format)
       })
       .end((err, res) => {
         if (err) return

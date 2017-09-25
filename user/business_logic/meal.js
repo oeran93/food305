@@ -12,7 +12,7 @@ module.exports = function () {
   pub.get_menu = function (req, res) {
     let station = req.session.user.station
     let date = require('../../tools/date.js')(req.session.user.station.time_zone).this_order_delivery()
-    let delivery_date = date.format(globals.order_date_format)
+    let delivery_date = date.format(globals.order_date_time_format)
     let delivery_day = date.day()
     Restaurant
       .findOne({_id: station.schedule[delivery_day-1]})
