@@ -28,8 +28,8 @@ class Info_Bar extends React.Component {
     const {restaurant, meals} = this.props
     const {station} = this.state
     const meals_ordered = meals.filter(m => m.orders.length)
-    const todaysrestaurant = `Today's food comes from ${restaurant.name}`
-    const deliverytime = `If you order now your food will be delivered ${date.get_day_of_week(date.this_order_delivery())}`
+    const todaysrestaurant = `${date.get_day_of_week(date.this_order_delivery())}'s food comes from ${restaurant.name}`
+    const deliverytime = `If you order now your food will be delivered ${date.get_day_of_week(date.this_order_delivery())} at ${date.this_order_delivery().format('hh:mm a')}`
     const deliverystation = `Your order will be delivered to ${station}`
     const orderssummary = meals_ordered.reduce( (orders, m) => {
         return orders + `- You have ${m.orders.length} ${m.name} coming ${date.get_day_of_week(date.order_date_to_moment(m.orders[0].date))} \n\n`
@@ -62,7 +62,7 @@ class Info_Bar extends React.Component {
                 <div className="row component" style={orderssummary ? {color: "#2ecc71"} : {}}>
                     <div className="col-xs-2"><span className="fa fa-flag fa-3x"></span></div>
                     <div className="col-xs-10"><span className="text"> 
-                      {orderssummary ? "You have " + num_meal + " orders awayting delivery. Hover to see them" : "We did not receive your order yet" } 
+                      {orderssummary ? "You have " + num_meal + " orders awaiting delivery. Hover to see them" : "We did not receive your order yet" } 
                     </span></div>
                 </div>
               </Tooltip>
