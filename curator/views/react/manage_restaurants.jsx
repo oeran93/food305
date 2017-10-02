@@ -25,13 +25,12 @@ class Stations_schedule extends React.Component {
   }
 
   handleChange (event) {
-    const target = event.target
-    const res = target.name[0]
-    const meal = target.name[2]
+    const target = event.target.name.split(',')
+    const res = target[0]
+    const meal = target[1]
     const restaurants = this.state.restaurants
     restaurants[res].meals[meal].hidden = !restaurants[res].meals[meal].hidden
     this.setState({restaurants})
-
     ajx.call({
       method: "POST",
       url: '/manage_restaurants',

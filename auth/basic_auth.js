@@ -5,6 +5,7 @@ const send = require('../notification_center/send.js')
 const twilio = require('../tools/twilio.js')()
 const generics = require('../tools/generics.js')
 const errors = require('../tools/errors.js')
+const mailchimp = require('../tools/mailchimp.js')()
 const _ = require('underscore')
 
 module.exports = function () {
@@ -68,6 +69,7 @@ module.exports = function () {
             new_user.save((err,user) => {
               if (err) return res.send({error: errors.generic})
               send(user).message('sign_up_verification',{code}).text_and_email()
+              mailchimp.add_user_to_daily_menu(email)
               next()
             })
           })

@@ -40,6 +40,8 @@ module.exports = {
 
   ok_financial_statuses: ['active', 'trialing'],
 
-  failed_financial_statuses: ['past_due']
+  failed_financial_statuses: ['past_due'],
+  
+  mailchimp_apikey: env.VIMI_MAILCHIMP_APIKEY
 
 }
