@@ -67,26 +67,30 @@ class Stations_schedule extends React.Component {
               </div>
               {_.map(rest.meals, (meal,j) => {
                 const sum_ratings = _.reduce(meal.orders, (sum, o) => sum + (o.rating ? o.rating : 0), 0)
-                const avg_rating = meal.orders.length ?  sum_ratings / meal.orders.length : 'N/A'
+                const num_ratings = _.reduce(meal.orders, (sum, o) => o.rating ? sum+1 : sum, 0)
+                const avg_rating = num_ratings ?  sum_ratings / num_ratings : 'N/A'
                 return (
                   <div key={j} className="col-xs-12 meal-row">
                     <div className="row">
-                      <div className="col-xs-4 col-sm-3">
+                      <div className="col-xs-12 col-sm-3">
                         <input
                           name={[i,j]}
                           type="checkbox"
                           checked={!this.state.restaurants[i].meals[j].hidden}
                           onChange={this.handleChange.bind(this)} /> {meal.name}
                       </div>
-                      <div className="col-xs-2">
+                      <div className="col-xs-12 col-sm-1">
                         <button className="btn btn-warning" onClick={() => {
                           const state = this.state
                           state[meal._id] = true
                           this.setState(state)
                         }} >Edit</button>
                       </div>
-                      <div className="col-xs-3 col-sm-2">
+                      <div className="col-xs-12 col-sm-2">
                         <label>Rating: {avg_rating ? avg_rating : 'N/A'}</label>
+                      </div>
+                      <div className="col-xs-12 col-sm-2">
+                        <label>Num Ratings: {num_ratings} </label>
                       </div>
                     </div>
                     <Modal show={this.state[meal._id]} onHide={() => {
