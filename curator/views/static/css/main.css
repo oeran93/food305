@@ -1,0 +1,33 @@
+/*ADD A MEAL*/
+.tag {
+  padding: 3px;
+  border-radius: 2px;
+  color: white;
+  cursor: hand;
+  cursor: pointer;
+}
+
+.margin-left-5 {
+  margin-left: 5px;
+}
+
+.margin-10 {
+  margin: 10px;
+}
+
+.select-input .tags-to-select {
+  padding: 5px;
+  background-color: #ccc;
+  border: 1px solid #ddd;
+}
+
+.select-input .selected-tags {
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+
+/*MANAGE RESTAURANT*/
+.meal-row {
+  padding: 5px 0 5px 0;
+  border-bottom: 1px solid #ddd;
+}
