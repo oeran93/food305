@@ -59,66 +59,59 @@ class Stations_schedule extends React.Component {
             <Meal />
           </Modal.Body>
         </Modal>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Restaurant</th>
-              <th>Meals</th>
-            </tr>
-          </thead>
-          <tbody>
-            {_.map(restaurants, (restaurant, i) => {
-              const meals = restaurant.meals
-              return (
-                <tr key={i}>
-                  <td>
-                    <p>{restaurant.name}</p>
-                  </td>
-                  {_.map(meals, (meal, j) => {
-                    var count = 0
-                    var sum = 0
-                    _.map(meal.orders, (order) => {
-                      if (order.rating){
-                        count++
-                        sum += order.rating
-                      }
-                    })
-                    const avg_rating = isNaN(sum/count) ? "" : sum/count
-                    return (
-                      <td className="col-xs-2" key={j}>
+        {_.map(restaurants, (rest, i) => {
+          return (
+            <div key={rest.name}>
+              <div className="col-xs-12">
+                <h1>{rest.name}</h1>
+              </div>
+              {_.map(rest.meals, (meal,j) => {
+                const sum_ratings = _.reduce(meal.orders, (sum, o) => sum + (o.rating ? o.rating : 0), 0)
+                const num_ratings = _.reduce(meal.orders, (sum, o) => o.rating ? sum+1 : sum, 0)
+                const avg_rating = num_ratings ?  sum_ratings / num_ratings : 'N/A'
+                return (
+                  <div key={j} className="col-xs-12 meal-row">
+                    <div className="row">
+                      <div className="col-xs-12 col-sm-3">
                         <input
                           name={[i,j]}
                           type="checkbox"
                           checked={!this.state.restaurants[i].meals[j].hidden}
-                          onChange={this.handleChange.bind(this)} />
-                        <p>{meal.name}</p>
+                          onChange={this.handleChange.bind(this)} /> {meal.name}
+                      </div>
+                      <div className="col-xs-12 col-sm-1">
                         <button className="btn btn-warning" onClick={() => {
                           const state = this.state
                           state[meal._id] = true
                           this.setState(state)
                         }} >Edit</button>
-                        <Modal show={this.state[meal._id]} onHide={() => {
-                          const state = this.state
-                          state[meal._id] = false
-                          this.setState(state)
-                        }}>
-                          <Modal.Header closeButton></Modal.Header>
-                          <Modal.Body>
-                            <Meal meal={meal}/>
-                          </Modal.Body>
-                        </Modal>
-                        <label>Rating: {avg_rating}</label>
-                      </td>
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+                      </div>
+                      <div className="col-xs-12 col-sm-2">
+                        <label>Rating: {avg_rating ? avg_rating : 'N/A'}</label>
+                      </div>
+                      <div className="col-xs-12 col-sm-2">
+                        <label>Num Ratings: {num_ratings} </label>
+                      </div>
+                    </div>
+                    <Modal show={this.state[meal._id]} onHide={() => {
+                      const state = this.state
+                      state[meal._id] = false
+                      this.setState(state)
+                    }}>
+                      <Modal.Header closeButton></Modal.Header>
+                      <Modal.Body>
+                        <Meal meal={meal}/>
+                      </Modal.Body>
+                    </Modal>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })}
       </div>
     )
   }
-
 }
+
 module.exports = Stations_schedule

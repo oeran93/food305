@@ -29,37 +29,13 @@ class Stations_today extends React.Component {
     return (
       <div>
         <h1>Menu on {delivery_date}</h1>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Station</th>
-              <th>Meals</th>
-            </tr>
-          </thead>
-          <tbody>
-            {_.map(stations, (station, i) => {
-              const meals = station.schedule[day_of_week].meals
-              return (
-                <tr key={i}>
-                  <td>
-                    <p>{station.location}</p>
-                  </td>
-                  {_.map(meals, (meal, j) => {
-                    const img_url = "../../../shared/images/meals/" + meal.image
-                    if (!meal.hidden) {
-                      return (
-                        <td className="col-xs-2" key={j}>
-                          <img src={img_url}/>
-                          <p>{meal.name}</p>
-                        </td>
-                      )
-                    }
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+        {_.map(stations, station => {
+          const meals = station.schedule[day_of_week].meals
+          return (<ul key={station._id}>
+            <h2>{station.location}</h2>
+            {_.map(meals, meal => (<li key={meal._id}> {meal.name} </li>))}
+          </ul>)
+        })}
       </div>
     )
   }

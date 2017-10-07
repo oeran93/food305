@@ -9,6 +9,7 @@ var Meal = new Schema({
   image: String,
   hidden: Boolean,
   tags: [String], // hot, veggie
+  allergens: [String], // peanuts, tree nuts, fish, shellfish, milk, egg, soy, wheat
   orders: [{type: Schema.Types.ObjectId, ref: 'Order'}]
 })
 
