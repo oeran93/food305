@@ -91,3 +91,11 @@
   padding: 5px 0 5px 0;
   border-bottom: 1px solid #ddd;
 }
+
+.rest-row {
+  padding: 10px 0 10px 0;
+}
+
+.section-title {
+  margin-bottom: 30px;
+}

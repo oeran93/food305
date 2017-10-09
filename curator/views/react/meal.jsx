@@ -52,7 +52,7 @@ class Meal extends React.Component {
       method: "POST",
       url: this.props.meal ? '/edit_meal' : '/add_meal',
       data: this.state.meal,
-      success: (data) => {alert("Successfully inserted " + data)}
+      success: window.location.reload()
     })
   }
 

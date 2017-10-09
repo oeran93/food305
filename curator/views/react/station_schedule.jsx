@@ -48,19 +48,20 @@ class Station_schedule extends React.Component {
   render() {
     let {schedule, all_restaurants} = this.state
     return (
-      <div>
-        <div className="row">
-          <h2 className="col-xs-12 col-md-2"> Monday </h2>
-          <h2 className="col-xs-12 col-md-2"> Tuesday </h2>
-          <h2 className="col-xs-12 col-md-2"> Wednesday </h2>
-          <h2 className="col-xs-12 col-md-2"> Thursday </h2>
-          <h2 className="col-xs-12 col-md-2"> Friday </h2>
+      <div className="row">
+        <div className="col-xs-12 text-center section-title">
+          <h1> Weekly Schedule </h1>
         </div>
         {_.map(schedule, (restaurant, day) => {
           return (
-            <div className="col-xs-12 col-md-2" key={day}>
-              <select onChange={this.handleChange.bind(this)} value={`${restaurant},${day}`}>
-                {_.map(all_restaurants, (r) => <option value={`${r._id},${day}`} key={r._id}> {r.name} {r.rating} </option>)}
+            <div className="form-group col-xs-12 col-md-6">
+              <label className="col-form-label margin-right-5"> {date.int_to_weekday(day+1)} </label>
+              <select className="margin-left-5" onChange={this.handleChange.bind(this)} value={`${restaurant},${day}`}>
+                {_.map(all_restaurants, 
+                  (r) => {
+                    if (!r.closed.includes(date.int_to_weekday(day+1))) return <option value={`${r._id},${day}`} key={r._id}> {r.name} {r.rating} </option>
+                  }
+                )}
               </select>
             </div>
           )

@@ -9,7 +9,7 @@ module.exports = function () {
 
   let pub = {}
   
-  pub.get_restaurants = function (req, res) {
+  pub.get_all = function (req, res) {
     Restaurant.find({})
       .sort({created_at: -1})
       .populate({
@@ -39,17 +39,37 @@ module.exports = function () {
       })
   }
 
-  pub.add_restaurant = function (req, res) {
+  pub.add = function (req, res) {
     const restaurant = new Restaurant({
       name: req.body.name,
       phone: req.body.phone,
-      closed: req.body.price,
-      max_meals: 20,
-      meals: []
+      closed: req.body.closed,
+      max_meals: 20
     })
     restaurant.save((err, saved_res) => {
       if (err) throw error
-      else res.send(saved_res.name)
+      res.send({})
+    })
+  }
+  
+  pub.edit = function (req, res) {
+    Restaurant.findOneAndUpdate({_id: req.body._id}, {
+      name: req.body.name,
+      phone: req.body.phone,
+      closed: req.body.closed
+    })
+    .exec((err, update) => {
+      if (err) throw err
+      res.send({})
+    })
+  }
+  
+  pub.delete = function (req,res) {
+    Restaurant.remove({_id: req.body.id}, err => {
+      if (err) throw err
+      Meal.remove({_restaurant: req.body.id}, err => {
+        res.send({})
+      })
     })
   }
 

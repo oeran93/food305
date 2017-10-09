@@ -19,6 +19,8 @@
   	'saturday': [],
   	'sunday': []
   }
+  
+  const weekdays = ['Sunday','Monday','Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday']
 
   const time_to_deliver = 75 //minutes
 
@@ -136,6 +138,21 @@
   */
   pub.older_than = function (date, days) {
     return pub.how_long_ago(date) > days
+  }
+  
+  /*
+  * returns an array of weekdays as strings: ["Sunday", "Monday" ...]
+  */
+  pub.get_weekdays = function () {
+    return weekdays
+  }
+  
+  /*
+  * return weekday string for a given integer 0 - 6 
+  * 0 will return `Sunday`, 6 will return `Saturday`
+  */
+  pub.int_to_weekday = function (day) {
+    return weekdays[day]
   }
   
   return pub
