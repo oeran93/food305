@@ -30,6 +30,17 @@ module.exports = function () {
       else res.send(meal.name)
     })
   }
+  
+  pub.change_visibility = function (req, res) { 
+    Meal.update(
+      { _id: req.body._id }
+      ,{ $set: { hidden: req.body.hidden }}
+      ,(err) => {
+        if (err) throw error
+        else res.send("success")
+      }
+    )
+  }
 
   return pub
 }

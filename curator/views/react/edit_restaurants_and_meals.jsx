@@ -7,21 +7,13 @@ const ajx = require('../../../tools/ajax.js')()
 const {Modal} = require('react-bootstrap')
 const Meal = require('./meal.jsx')
 
-class Stations_schedule extends React.Component {
+class Edit_Restaurants_And_Meals extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
       restaurants: [],
-      adding_meal: false,
-      adding_restaurant: false
     }
-  }
-  
-  toggle_modal (modal) {
-    const state = this.state
-    state[modal] = !this.state[modal]
-    this.setState(state)
   }
 
   handleChange (event) {
@@ -33,7 +25,7 @@ class Stations_schedule extends React.Component {
     this.setState({restaurants})
     ajx.call({
       method: "POST",
-      url: '/manage_restaurants',
+      url: '/change_meal_visibility',
       data: restaurants[res].meals[meal],
       success: (data) => {console.log(data)}
     })
@@ -49,16 +41,9 @@ class Stations_schedule extends React.Component {
   }
 
   render() {
-    let {restaurants,adding_meal} = this.state
+    let {restaurants} = this.state
     return (
       <div>
-        <button className="btn btn-success" onClick={() => this.toggle_modal.bind(this)('adding_meal')}>Add Meal</button>
-        <Modal show={adding_meal} onHide={() => this.toggle_modal.bind(this)('adding_meal')}>
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body>
-            <Meal />
-          </Modal.Body>
-        </Modal>
         {_.map(restaurants, (rest, i) => {
           return (
             <div key={rest.name}>
@@ -114,4 +99,4 @@ class Stations_schedule extends React.Component {
   }
 }
 
-module.exports = Stations_schedule
+module.exports = Edit_Restaurants_And_Meals
