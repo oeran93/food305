@@ -33,7 +33,9 @@ class Manage extends React.Component {
     return (
       <div>
         <h1>Menu at {station.location} on {delivery_date}</h1>
-        {_.map(meals, meal => (<li key={meal._id}> {meal.name} </li>))}
+        {_.map(meals, meal => {
+          if (!meal.hidden) return <li key={meal._id}> {meal.name} </li>)
+        })}
         <hr />
         <Station_Schedule />
         <br/><hr />
