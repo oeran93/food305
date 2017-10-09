@@ -20,6 +20,13 @@ class Meal extends React.Component {
     }))
   }
   
+  getIcon (tag) {
+    return ({
+      Vegetarian: 'leaf',
+      Spicy: 'fire'
+    })[tag]
+  }
+  
   render () {
     let {meal} = this.props
     let {_id, name, price, image, tags, orders, description} = meal
@@ -32,7 +39,7 @@ class Meal extends React.Component {
           <img src={'images/meals/' + image} alt={name} className='meal-picture'/>
           <div className='clearfix'>
             <h5 title={name} className='meal-name text-center'>
-              {name}
+              {name} {tags.map(tag => <span title={tag} className={`fa fa-${this.getIcon(tag)}`}></span>)}
             </h5>
             <p className="meal-description">{description}</p>
             <button className="btn red-btn meal-btn pull-right" onClick={this.toggle_modal.bind(this)}>
