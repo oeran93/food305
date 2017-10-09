@@ -39,7 +39,7 @@ class Meal extends React.Component {
           <img src={'images/meals/' + image} alt={name} className='meal-picture'/>
           <div className='clearfix'>
             <h5 title={name} className='meal-name text-center'>
-              {name} {tags.map(tag => <span title={tag} className={`fa fa-${this.getIcon(tag)}`}></span>)}
+              {name} {tags.map(tag => <span title={tag} className={`fa fa-${this.getIcon(tag)} margin-right-5`}></span>)}
             </h5>
             <p className="meal-description">{description}</p>
             <button className="btn red-btn meal-btn pull-right" onClick={this.toggle_modal.bind(this)}>
