@@ -35,9 +35,8 @@ class Subscribe extends React.Component {
             {step == 0 && 
               <div className="col-xs-12 col-sm-8 col-sm-offset-2 text-center join-our-community">
                 <h1>Your {globals.trial_days} days trial is over </h1>
-                {orders.length <= 3 && <h3>But our 9.99/month subscription is really convenient!</h3>}
-                {orders.length > 3 && <h3 className="alert alert-success"> You ordered {orders.length} times. With Vimi's 9.99/month subscription
-                you would have paid $ {(10/orders.length).toFixed(2)} for each delivery. </h3> }
+                {orders.length <= 2 && <h3>But our 9.99/month subscription is really convenient!</h3>}
+                {orders.length > 2 && <h3 className="alert alert-success"> This month you ordered {orders.length} times and saved an average of ${4*orders.length} on delivery fees </h3> }
                   <button className="btn red-btn margin-top-10" onClick={() => this.change_step.bind(this)(1)}>
                     Yes, keep bringing me lunch
                   </button>
