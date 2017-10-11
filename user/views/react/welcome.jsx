@@ -4,6 +4,7 @@ import globals from '../../../tools/globals.js'
 import Access from './access/access.jsx'
 import generics from '../../../tools/generics.js'
 import About from './about.jsx'
+const date = require('./../../../tools/date')()
 const ajx = require('../../../tools/ajax.js')()
 
 class Welcome extends React.Component {
@@ -27,7 +28,9 @@ class Welcome extends React.Component {
   
   render () {
     let {station, meals} = this.state
-    let {toggle_modal} = this.props
+    const {toggle_modal} = this.props
+	const delivery_date = date.this_order_delivery().format(globals.order_date_time_format)
+	const day = date.get_day_of_week(date.order_date_to_moment(delivery_date))
     return (
       <div>
         <div className="about-page container-fluid">
@@ -55,7 +58,7 @@ class Welcome extends React.Component {
         <div className="container">
           <div className="row">
             {station &&<div className='col-xs-12 text-center'>
-              <h2>Today at {station.location}</h2>
+              <h2>{day} at {station.location}</h2>
             </div>}
           </div>
           <div className="row about-section">
