@@ -118,7 +118,7 @@
   * @return {String}
   */
   pub.now = function () {
-    return moment().format(globals.order_date_format)
+    return moment().format(globals.order_date_time_format)
   }
   
   /*
