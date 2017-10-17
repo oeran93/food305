@@ -8,7 +8,7 @@ module.exports = function () {
 
   let pub = {}
 
-  pub.add_meal = function (req, res) {
+  pub.add = function (req, res) {
     const meal = new Meal(_.extend({},req.body,{hidden: true}))
     meal.save((err, saved_meal) => {
       if (err) throw err
@@ -23,11 +23,29 @@ module.exports = function () {
     })
   }
   
-  pub.edit_meal = function (req, res) {
+  pub.edit = function (req, res) {
     const _id = req.body._id
     Meal.findOneAndUpdate({_id}, req.body, (err, meal) => {
       if (err, !meal) throw err
       else res.send(meal.name)
+    })
+  }
+  
+  pub.change_visibility = function (req, res) { 
+    Meal.update(
+      { _id: req.body._id }
+      ,{ $set: { hidden: req.body.hidden }}
+      ,(err) => {
+        if (err) throw error
+        else res.send("success")
+      }
+    )
+  }
+  
+  pub.delete = function (req,res) {
+    Meal.remove({_id: req.body.id}, err => {
+      if (err) throw err
+      res.send({})
     })
   }
 

@@ -69,6 +69,16 @@ module.exports = function () {
       else res.send({success: true})
     })
   }
+  
+  /*
+  * returns all orders made by the user
+  */
+  pub.get_user_orders = function (req, res) {
+    Order.find({_user: req.session.user._id}, (err, orders) => {
+      if (err) res.send({error: errors.generic})
+      else res.send(orders)
+    })
+  }
 
   return pub
 

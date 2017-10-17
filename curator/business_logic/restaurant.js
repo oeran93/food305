@@ -8,9 +8,10 @@ const _ = require('underscore')
 module.exports = function () {
 
   let pub = {}
-
-  pub.get_restaurants = function (req, res) {
+  
+  pub.get_all = function (req, res) {
     Restaurant.find({})
+      .sort({created_at: -1})
       .populate({
         path: 'meals',
         populate: { path: 'orders' }
@@ -18,7 +19,6 @@ module.exports = function () {
       .exec((err, restaurants) => {
         if (err) res.send({error: errors.generic})
         else {
-
           restaurants.forEach( (res, index) => {
             var count = 0
             var sum = 0
@@ -34,10 +34,43 @@ module.exports = function () {
             restaurants[index] = restaurants[index].toObject()
             restaurants[index]["rating"] = isNaN(sum/count) ? "" : avg_rating.toFixed(2)
           })
-
           res.send(restaurants)
         }
       })
+  }
+
+  pub.add = function (req, res) {
+    const restaurant = new Restaurant({
+      name: req.body.name,
+      phone: req.body.phone,
+      closed: req.body.closed,
+      max_meals: 20
+    })
+    restaurant.save((err, saved_res) => {
+      if (err) throw error
+      res.send({})
+    })
+  }
+  
+  pub.edit = function (req, res) {
+    Restaurant.findOneAndUpdate({_id: req.body._id}, {
+      name: req.body.name,
+      phone: req.body.phone,
+      closed: req.body.closed
+    })
+    .exec((err, update) => {
+      if (err) throw err
+      res.send({})
+    })
+  }
+  
+  pub.delete = function (req,res) {
+    Restaurant.remove({_id: req.body.id}, err => {
+      if (err) throw err
+      Meal.remove({_restaurant: req.body.id}, err => {
+        res.send({})
+      })
+    })
   }
 
   return pub

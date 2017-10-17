@@ -1,3 +1,63 @@
+.basic-input{
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.red-btn {
+	color: white;
+	border-color: white;
+	background-color: #c14820;
+	transition: all .5s;
+  padding-left: 20px;
+  padding-right: 20px;
+	text-transform: uppercase;
+}
+
+.red-btn:hover {
+  color: white;
+	background-color: #ea846d;
+}
+
+.red-btn:focus {
+  color: white;
+	border-color: white;
+	background-color: #c14820;
+	outline: none;
+}
+
+.confirmation {
+	display: none;
+  position: fixed;
+  width: 100%;
+  padding: 15px;
+	text-align: center;
+	font-size: 15px;
+	z-index:10000;
+  color: white;
+}
+
+.failure {
+	background-color: #e74c3c;
+}
+
+.success {
+	background-color: #2ecc71;
+}
+
 /*ADD A MEAL*/
 .tag {
   padding: 3px;
@@ -30,4 +90,12 @@
 .meal-row {
   padding: 5px 0 5px 0;
   border-bottom: 1px solid #ddd;
+}
+
+.rest-row {
+  padding: 10px 0 10px 0;
+}
+
+.section-title {
+  margin-bottom: 30px;
 }

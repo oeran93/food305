@@ -6,12 +6,23 @@ const errors = require('../../tools/errors.js')
 module.exports = function () {
 
   let pub = {}
-
+  
+  pub.get_station = function (req, res) {
+    Station.findOne({_id: req.session.user.station})
+      .populate({
+        path: "schedule",
+        populate: {path: "meals"}
+      })
+      .exec((err, station) => {
+        if (err) res.send({error: errors.generic})
+        else res.send(station)
+      })
+  }
+  
   pub.change_schedule = function (req, res) {
-    const station = req.body
     Station.update(
-      { _id: station._id }
-      ,{ $set: { schedule: station.schedule }}
+      { _id: req.session.user.station }
+      ,{ $set: { schedule: req.body.schedule }}
       ,(err) => {
         if (err) throw error
         else res.send("success")
