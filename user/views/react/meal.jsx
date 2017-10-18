@@ -32,7 +32,7 @@ class Meal extends React.Component {
     let {_id, name, price, image, tags, orders, description} = meal
     let {modal} = this.state
     return (
-      <div name={_id} className='col-sm-6 col-md-4 col-lg-3 meal'>
+      <div name={_id} className='col-xs-12 col-sm-4 meal'>
         <div className='thumbnail clearfix meal-thumbnail'>
           {orders.length > 0 && <span className='meal-orders'> {orders.length} </span>}
           <span className='label label-default meal-price'> {'$ '+price} </span>

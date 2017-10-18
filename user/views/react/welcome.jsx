@@ -64,7 +64,7 @@ class Welcome extends React.Component {
           <div className="row about-section">
             {meals.map(meal => {
               return (
-                <div key={meal._id} className='col-sm-6 col-md-4 col-lg-3 meal'>
+                <div key={meal._id} className='col-sm-3 col-md-2 meal'>
                   <div className='thumbnail clearfix'>
                     <span className='label label-default meal-price'> {'$ '+meal.price} </span>
                     <img src={'images/meals/' + meal.image} alt={meal.name} className='meal-picture'/>
