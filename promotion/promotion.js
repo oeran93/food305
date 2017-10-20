@@ -37,7 +37,6 @@ module.exports = function () {
       name: "referral",
       discount: .25,
       activated: false,
-      used: false,
       type: 'meal',
       referred_email
     })
@@ -64,8 +63,7 @@ module.exports = function () {
             name: "referral",
             discount: .25,
             activated: true,
-            type: 'meal',
-            used: false
+            type: 'meal'
           })
           referral.save(err => {
             if (err) throw error

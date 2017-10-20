@@ -6,7 +6,7 @@ var Promotion = new Schema({
   name: String,
   discount: Number,
   activated: Boolean,
-  used: {Type: Boolean, default: false},
+  used: {type: Boolean, default: false},
   type: String,
   referred_email: String
 })
