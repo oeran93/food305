@@ -28,11 +28,11 @@ class Meal extends React.Component {
   }
   
   render () {
-    let {meal} = this.props
+    let {meal, index} = this.props
     let {_id, name, price, image, tags, orders, description} = meal
     let {modal} = this.state
     return (
-      <div name={_id} className='col-xs-12 col-sm-4 meal'>
+      <div name={_id} className={'col-xs-12 col-sm-4 meal'}>
         <div className='thumbnail clearfix meal-thumbnail'>
           {orders.length > 0 && <span className='meal-orders'> {orders.length} </span>}
           <span className='label label-default meal-price'> {'$ '+price} </span>
@@ -59,7 +59,8 @@ class Meal extends React.Component {
 }
 
 Meal.propTypes = {
-  meal: PropTypes.object.isRequired
+  meal: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 }
 
 module.exports = Meal

@@ -101,12 +101,15 @@ module.exports = function () {
   * @param req.body.credit_card {object} optional if the user has saved their credit card
   */
   pub.charge_customer = function (req, res, next) {
+    let {promotion} = res.locals
     User.findOne({phone: req.session.user.phone}, (err, user) => {
       if (err) res.send({error: errors.generic})
       else {
         Meal.findOne({_id: req.body.meal}, (err, meal) => {
             if (err) return res.send({error: errors.failed_purchase})
-            let amount = (Number(generics.get_taxes_fees(meal.price)) + Number(meal.price)).toFixed(2)
+            let price = meal.price
+            let discounted_price = promotion ? meal.price - (meal.price*promotion.discount) : null
+            let amount = (Number(generics.get_taxes_fees(price)) + Number(discounted_price || price)).toFixed(2)
             stripe.charges.create(
               _.extend({
                   amount: generics.get_price_in_cents(amount),

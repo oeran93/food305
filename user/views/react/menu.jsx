@@ -6,6 +6,7 @@ import Meal from './meal.jsx'
 import Info_Bar from './info_bar.jsx'
 const ajx         = require('../../../tools/ajax.js')()
 const globals     = require('../../../tools/globals.js')
+const _ = require('underscore')
 
 class Menu extends React.Component {
 
@@ -34,11 +35,13 @@ class Menu extends React.Component {
         <Info_Bar meals={meals} restaurant={restaurant} />
         <Rating />
         <div id="menu" className="container menu">
-          <div className="row">
-            {meals.map(meal => {
-              return <Meal key={meal._id} meal={meal}/>
-            })}
-          </div>
+          {_.range(meals.length+1).filter(num => num % 3 == 0 && num != 0).map(num => {
+            return (
+              <div key={num} className="row">
+                {meals.slice(num-3,num).map((meal,i) => <Meal index={i} key={meal._id} meal={meal}/>)}
+              </div>
+            )
+          })}
         </div>
       </div>
     )
