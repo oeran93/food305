@@ -30,7 +30,7 @@ class Referral extends React.Component {
           <div className="row">
             {step == 0 && 
               <div className="col-xs-12 col-sm-8 col-sm-offset-2 text-center join-our-community">
-                <h1> Refer a friend and you both get 25% off when he signs up. </h1>
+                <h1> Invite a friend to sign up today, and you both get 25% off your first meal! </h1>
                 <input 
                   type="text" 
                   className="basic-input" 
