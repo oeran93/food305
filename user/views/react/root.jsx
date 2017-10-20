@@ -66,7 +66,7 @@ class Root extends React.Component {
               </div>
             :
               <div>
-                <Route exact path='/' component={() => <Welcome toggle_modal={this.toggle_modal.bind(this)}/>}/>
+                <Route path='/' component={() => <Welcome toggle_modal={this.toggle_modal.bind(this)}/>}/>
               </div>
           }
           {/*Access Modal*/}
