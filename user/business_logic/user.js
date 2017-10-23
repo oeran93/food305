@@ -1,4 +1,5 @@
 const User  = require('../../database/user.js')
+const Promotion = require('../../database/promotion.js')
 const errors = require('../../tools/errors.js')
 const twilio = require('../../tools/twilio.js')()
 const _ = require('underscore')

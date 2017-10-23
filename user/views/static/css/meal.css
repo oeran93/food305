@@ -7,12 +7,7 @@
 
 .meal-name {
   color: #262f36;
-  min-height: 30px;
   font-size: 18px;
-}
-
-.meal-description {
-  min-height: 80px;
 }
 
 .meal-price {

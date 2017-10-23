@@ -9,6 +9,7 @@ import Subscribe from './subscribe.jsx'
 import Profile from './profile.jsx'
 import Failed_Billing from './failed_billing.jsx'
 import Footer from './footer.jsx'
+import Referral from './referral.jsx'
 import {Modal} from 'react-bootstrap'
 import {HashRouter as Router, Route,} from 'react-router-dom'
 const ajx = require('../../../tools/ajax.js')()
@@ -56,15 +57,16 @@ class Root extends React.Component {
           {user 
             ?
               <div>
-                <Route exact path='/' component={() => <Menu />} />
-                <Route exact path='/about' component={() => <About/>} />
+                <Route exact path='/' component={Menu} />
+                <Route exact path='/about' component={About} />
                 <Route path="/subscribe" component={Subscribe} />
+                <Route path="/referral" component={Referral} />
                 <Route path="/failed_billing" component={Failed_Billing} />
                 <Route path="/profile" component={Profile} />
               </div>
             :
               <div>
-                <Route exact path='/' component={() => <Welcome toggle_modal={this.toggle_modal.bind(this)}/>}/>
+                <Route path='/' component={() => <Welcome toggle_modal={this.toggle_modal.bind(this)}/>}/>
               </div>
           }
           {/*Access Modal*/}

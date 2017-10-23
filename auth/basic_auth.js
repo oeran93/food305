@@ -6,6 +6,7 @@ const twilio = require('../tools/twilio.js')()
 const generics = require('../tools/generics.js')
 const errors = require('../tools/errors.js')
 const mailchimp = require('../tools/mailchimp.js')()
+const promotion = require('../promotion/promotion.js')()
 const _ = require('underscore')
 
 module.exports = function () {
@@ -110,10 +111,12 @@ module.exports = function () {
       else {
         let {hash_pwd, salt} = crypto.hash_password(pwd)
         set_user_session(user._id, req, () => {
-          user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
-          user.save(err => {
-            if (err) res.send({error: errors.generic})
-            else next()
+          promotion.add_referred({body:{email:user.email, id: user._id}},res,() => {
+            user = _.extend(user, {pwd: hash_pwd, salt, activated: "yes"})
+            user.save(err => {
+              if (err) res.send({error: errors.generic})
+              else next()
+            })
           })
         })
       }

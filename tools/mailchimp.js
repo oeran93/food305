@@ -15,7 +15,7 @@ module.exports = function () {
         email_address,
         status: 'subscribed'
       }
-    }).catch(err => console.log("error:", err))
+    }).catch(() => {})
   }
   
   return pub

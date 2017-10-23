@@ -32,7 +32,7 @@ module.exports = {
 
   invalid_old_pwd: {
     number: 6,
-    message: "Invalid password"
+    message: "Invalid old password"
   },
 
   short_pwd: {

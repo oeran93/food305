@@ -1,0 +1,9 @@
+@media screen and (max-width: 480px) {
+
+    .referral-banner {
+      background-image: url('../images/banners/phone_referral.jpg');
+      font-size: 90%;
+      padding: 10vh 5vh 5vh 5vh;
+    }
+
+}
