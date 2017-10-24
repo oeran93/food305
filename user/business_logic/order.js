@@ -19,6 +19,7 @@ module.exports = function () {
     var order = new Order({
       _meal: req.body.meal._id,
       _user: req.session.user._id,
+      _station: req.session.user.station._id,
       date: delivery_date,
       purchase_time: date.now()
     })
