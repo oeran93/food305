@@ -6,7 +6,7 @@ const globals = require('../../../tools/globals.js')
 const _ = require('underscore')
 const ajx = require('../../../tools/ajax.js')()
 
-class Add_Restaurant extends React.Component {
+class Restaurant extends React.Component {
   
   constructor(props) {
     super(props)
@@ -32,7 +32,6 @@ class Add_Restaurant extends React.Component {
   }
 
   handle_submit() {
-    console.log(this.state)
     ajx.call({
       method: "POST",
       url: this.props.restaurant ? '/edit_restaurant' : '/add_restaurant',
@@ -79,8 +78,8 @@ class Add_Restaurant extends React.Component {
   }
 }
 
-Add_Restaurant.propTypes = {
+Restaurant.propTypes = {
   restaurant: PropTypes.object
 }
 
-module.exports = Add_Restaurant
+module.exports = Restaurant

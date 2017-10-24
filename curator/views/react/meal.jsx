@@ -28,7 +28,11 @@ class Meal extends React.Component {
     ajx.call({
       method: "GET",
       url: '/get_restaurants',
-      success: (restaurants) => this.setState({restaurants})
+      success: (restaurants) => {
+        if (!this.state.meal._restaurant) this.setState({meal: _.extend(this.state.meal,{_restaurant: restaurants[0]._id})})
+        this.setState({restaurants})
+        console.log(this.state, restaurants[0].name)
+      }
     })
   }
 
