@@ -2,6 +2,7 @@ const User  = require('../../database/user.js')
 const Promotion = require('../../database/promotion.js')
 const errors = require('../../tools/errors.js')
 const twilio = require('../../tools/twilio.js')()
+const send = require('../../notification_center/send.js')
 const _ = require('underscore')
 
 module.exports = function () {
@@ -35,6 +36,16 @@ module.exports = function () {
         else res.send({})
       })
     })
+  }
+  
+  pub.send_feedback = function (req, res) {
+    send({email: "info@vimifood.com"}).message('feedback', {
+      email: req.session.user.email,
+      name: req.session.user.name,
+      feedback: req.body.feedback,
+      response: req.body.response
+    }).email()
+    res.send()
   }
 
   return pub

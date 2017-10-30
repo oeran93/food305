@@ -4,6 +4,7 @@ const generics        = require('../../../tools/generics.js')
 const PropTypes      = require('prop-types')
 import {Modal} from 'react-bootstrap'
 import Meal_Payment from './meal_payment.jsx'
+const cookies       = require('../../../tools/cookies.js')
 
 class Meal extends React.Component {
   
@@ -31,6 +32,7 @@ class Meal extends React.Component {
     let {meal, index} = this.props
     let {_id, name, price, image, tags, orders, description} = meal
     let {modal} = this.state
+    let feedback = cookies.get_cookie("feedback")
     return (
       <div name={_id} className={'col-xs-12 col-sm-4 meal'}>
         <div className='thumbnail clearfix meal-thumbnail'>
@@ -50,7 +52,7 @@ class Meal extends React.Component {
         <Modal show={modal.open} onHide={this.toggle_modal.bind(this)}>
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
-            <Meal_Payment autofocus={true} meal={meal}/>
+            <Meal_Payment autofocus={true} meal={meal} step={feedback ? 1 : 0}/>
           </Modal.Body>
         </Modal>
       </div>
