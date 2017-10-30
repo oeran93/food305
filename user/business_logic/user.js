@@ -40,8 +40,7 @@ module.exports = function () {
   
   pub.send_feedback = function (req, res) {
     send({email: "info@vimifood.com"}).message('feedback', {
-      email: req.session.user.email,
-      name: req.session.user.name,
+      user: req.session.user,
       feedback: req.body.feedback,
       response: req.body.response
     }).email()

@@ -33,6 +33,7 @@ class Meal extends React.Component {
     let {_id, name, price, image, tags, orders, description} = meal
     let {modal} = this.state
     let feedback = cookies.get_cookie("feedback")
+    
     return (
       <div name={_id} className={'col-xs-12 col-sm-4 meal'}>
         <div className='thumbnail clearfix meal-thumbnail'>
