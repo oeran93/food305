@@ -7,7 +7,7 @@ module.exports = (props) => {
       <div className="row about-section">
         <div className="col-xs-12 col-sm-2 col-sm-offset-2">
           <div className="img"><img src="/images/about/membership.png" alt="monthly membership" /></div>
-          <div className="about-text text-center"><h4> $9.99 monthly membership </h4></div>
+          <div className="about-text text-center"><h4> Monthly membership </h4></div>
         </div>
         <div className="col-xs-12 col-sm-2 col-sm-offset-1">
           <div className="img"><img src="/images/about/free.png" alt="monthly membership" /></div>
